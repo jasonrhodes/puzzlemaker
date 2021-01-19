@@ -4,7 +4,9 @@ const ReactDOM = require('react-dom');
 // const BrowserRouter = require('react-router-dom').BrowserRouter;
 // const hashHistory = require('react-router-dom').hashHistory;
 
-ReactDOM.render(<h1>OGWER</h1>);
+console.log("why is this suck");
+
+// ReactDOM.render((<h1>OGWER</h1>), document.getElementById('main'));
 
 /* Import Components */
 // const Builder = require('./components/Builderd');
