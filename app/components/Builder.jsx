@@ -34,6 +34,7 @@ const PuzzleRow = (props) => {
 }
 
 const Puzzle = (props) => {
+  console.log("Puzzle props", props);
   return (
     <div class="puzzle-grid">
       {props.grid.forEach(row => <PuzzleRow row={row} />)}
