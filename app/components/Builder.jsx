@@ -26,6 +26,7 @@ const PuzzleCell = (props) => {
 }
 
 const PuzzleRow = (props) => {
+  console.log("Row props", props.row)
   return (
     <div class="puzzle-row">
       {props.row.forEach(cell => <PuzzleCell value={cell} />)}
@@ -34,7 +35,7 @@ const PuzzleRow = (props) => {
 }
 
 const Puzzle = (props) => {
-  console.log("Puzzle props", props);
+  console.log("Puzzle props", props.grid);
   return (
     <div class="puzzle-grid">
       {props.grid.forEach(row => <PuzzleRow row={row} />)}
