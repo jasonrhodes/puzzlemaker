@@ -1,7 +1,7 @@
 const React = require("react");
 const DEFAULT_SIZE = 15;
 
-const createBlankGrid = (size = DEFAULT_GRID) => {
+const createBlankGrid = (size = DEFAULT_SIZE) => {
   const grid = [];
   for (let i = 0; i <= size; i++) {
     let row = [];
@@ -46,6 +46,7 @@ const Builder = function() {
     <div>
       <h1>Puzzle Builder ABC</h1>
       <h2>Title by Author</h2>
+      <Puzzle grid={createBlankGrid()} />
     </div>
   );
 };
