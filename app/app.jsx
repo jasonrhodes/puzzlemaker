@@ -6,10 +6,10 @@ const ReactDOM = require('react-dom');
 
 console.log("why is this suck");
 
-// ReactDOM.render((<h1>OGWER</h1>), document.getElementById('main'));
-
 /* Import Components */
-// const Builder = require('./components/Builderd');
+const Builder = require('./components/Builder');
+
+ReactDOM.render((<Builder />), document.getElementById('main'));
 
 // ReactDOM.render((
 //   <BrowserRouter>
