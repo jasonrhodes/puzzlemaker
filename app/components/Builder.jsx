@@ -13,24 +13,24 @@ const createBlankGrid = (size = DEFAULT_SIZE) => {
   return grid;
 }
 
-// const PuzzleCell = (props) => {
-//   let classes = ["puzzle-cell"];
-//   if (!props.value) {
-//     classes.push("puzzle-cell-x");
-//   }
-//   return (
-//     <div class={classes.join(" ")}>
-//       {props.value}
-//     </div>
-//   )
-// }
+const PuzzleCell = (props) => {
+  let classes = ["puzzle-cell"];
+  if (!props.value) {
+    classes.push("puzzle-cell-x");
+  }
+  return (
+    <div class={classes.join(" ")}>
+      {props.value}
+    </div>
+  )
+}
 //{props.row.map(cell => <PuzzleCell value={cell} />)}
 
 const PuzzleRow = (props) => {
   console.log("Row props", props.row)
   return (
     <div class="puzzle-row">
-      {props.row.map((cell, i) => <PuzzleCell key={`cell-${i}`} value={cell} />)}
+      {props.row.map((cell, i) => <PuzzleCell key={`cell-${props.row_id}--${i}`} value={cell} />)}
     </div>
   );
 }
@@ -39,8 +39,7 @@ const Puzzle = (props) => {
   console.log("Puzzle props", props.grid);
   return (
     <div class="puzzle-grid">
-      <div>Test</div>
-      {props.grid.map((row, i) => <PuzzleRow key={`row-${i}`} row={row} />)}
+      {props.grid.map((row, i) => <PuzzleRow key={`row-${i}`} row_id={i} row={row} />)}
     </div>
   );
 }
