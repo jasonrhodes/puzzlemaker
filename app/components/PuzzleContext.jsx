@@ -1,6 +1,10 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
 
+function findAcross(row, startColumn) {
+  return row.reduce((cell, ))
+}
+
 const PuzzleContextProvider = ({ grid, children }) => {
   const [puzzleState, setPuzzleState] = React.useState({
     activeCell: [],
