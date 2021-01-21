@@ -21,9 +21,9 @@ const applyBlocks = (_grid, blocks) => {
     const size = grid[0].length;
     grid[size - (row + 1)][size - (column + 1)] = false;
   });
-  
+
   return grid;
-}
+};
 
 const initGrid = ({ size = DEFAULT_SIZE, blocks = DEFAULT_BLOCKS }) => {
   const grid = [];
@@ -35,7 +35,7 @@ const initGrid = ({ size = DEFAULT_SIZE, blocks = DEFAULT_BLOCKS }) => {
     grid.push(row);
   }
   return applyBlocks(grid, blocks);
-}
+};
 
 const getCellLabel = ({ row, column }) => {
   if (row === 0) {
@@ -45,40 +45,50 @@ const getCellLabel = ({ row, column }) => {
     return row + 1;
   }
   return false;
-}
+};
 
-const PuzzleCell = (props) => {
+const PuzzleCell = ({ value, row, column }) => {
   let classes = ["puzzle-cell"];
-  if (!props.value) {
+  if (!value) {
     classes.push("puzzle-cell-x");
   }
+  const label = getCellLabel({ row, column });
   return (
     <div class={classes.join(" ")}>
-      {props.value}
-      {props.value && props.label ? <div class="label">{props.label}</div> : null}
+      {value}
+      {value && label ? (
+        <div class="label">{label}</div>
+      ) : null}
     </div>
-  )
-}
+  );
+};
 
-const PuzzleRow = (props) => {
-  console.log("Row props", props.row)
+const PuzzleRow = props => {
   return (
     <div class="puzzle-row">
-      {props.row.map((cell, i) => <PuzzleCell label={getCellLabel({ row: props.row_id, column: i })} value={cell} />)}
+      {props.row.map((cell, i) => (
+        <PuzzleCell
+          row={props.row_id}
+          column={i}
+          value={cell}
+        />
+      ))}
     </div>
   );
-}
+};
 
-const Puzzle = (props) => {
-  console.log("Puzzle props", props.grid);
+const Puzzle = props => {
   return (
     <div class="puzzle-grid">
-      {props.grid.map((row, i) => <PuzzleRow key={`row-${i}`} row_id={i} row={row} />)}
+      {props.grid.map((row, i) => (
+        <PuzzleRow key={`row-${i}`} row_id={i} row={row} />
+      ))}
     </div>
   );
-}
+};
 
 const Builder = function() {
+  const [puzzle, setPuzzle] = React.setState({});
   const grid = initGrid();
   return (
     <div>
