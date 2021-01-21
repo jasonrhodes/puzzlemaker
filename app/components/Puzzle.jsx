@@ -8,7 +8,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
     activeCell: [],
     direction: "across",
     word: [],
-    grid: props.grid
+    grid
   });
   const setActiveCell = (row, column) => setPuzzleState({ ...puzzleState, activeCell: [row, column] });
   let clue = 0;
@@ -16,23 +16,32 @@ const PuzzleContextProvider = ({ grid, children }) => {
     return clue += 1;
   };
   
+  const value = {
+    ...puzzleState,
+    setActiveCell,
+    getNextClueNumber
+  }
+  
   return (
-    <Puzzle
+    <PuzzleContext.Provider value={value}>
+      {children}
+    </PuzzleContext.Provider>
   )
 }
 
 const Puzzle = ({ grid }) => {
   return (
-    <PuzzleContextProvider grid={grid}></PuzzleContextProvider>
-    <div class="puzzle-grid">
-      {props.grid.map((columns, i) => (
-        <PuzzleRow
-          key={`row-${i}`}
-          row={i}
-          columns={columns}
-        />
-      ))}
-    </div>
+    <PuzzleContextProvider grid={grid}>
+      <div class="puzzle-grid">
+        {grid.map((columns, i) => (
+          <PuzzleRow
+            key={`row-${i}`}
+            row={i}
+            columns={columns}
+          />
+        ))}
+      </div>
+    </PuzzleContextProvider>
   );
 };
 

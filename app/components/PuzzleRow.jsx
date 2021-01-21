@@ -3,11 +3,7 @@ const PuzzleCell = require("./PuzzleCell");
 
 const PuzzleRow = ({
   row,
-  columns,
-  getNextClueNumber,
-  puzzleState,
-  setPuzzleState,
-  setActiveCell
+  columns
 }) => {
   return (
     <div class="puzzle-row">
@@ -16,10 +12,6 @@ const PuzzleRow = ({
           row={row}
           column={i}
           value={cell}
-          getNextClueNumber={getNextClueNumber}
-          puzzleState={puzzleState}
-          setPuzzleState={setPuzzleState}
-          setActiveCell={setActiveCell}
         />
       ))}
     </div>
