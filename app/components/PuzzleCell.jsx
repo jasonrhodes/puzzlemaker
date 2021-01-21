@@ -21,6 +21,7 @@ const getCellLabel = ({ grid, row, column, getNextClueNumber }) => {
 };
 
 const PuzzleCell = ({ value, row, column, grid, getNextClueNumber }) => {
+  const [cellState, setCellState] = React.useState(false);
   let classes = ["puzzle-cell"];
   if (!value) {
     classes.push("puzzle-cell-x");
