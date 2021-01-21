@@ -2,11 +2,14 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
 }
 
+.puzzle-grid {
+  border: 1px solid black;
+  display: inline-grid;
+}
+
 .puzzle-cell {
   font-size: 20px;
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid black;
   width: 40px;
   height: 20px;
   line-height: 1;
