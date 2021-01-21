@@ -6,9 +6,9 @@ const PuzzleContextProvider = ({ grid, children }) => {
     activeCell: [],
     direction: "across",
     words: {
-      across: [], // range of columns
-      down: []
-    }
+      across: [], // range of columns for the currently active across word
+      down: [] // range of rows for the currently active down word
+    },
     grid
   });
 
@@ -20,6 +20,19 @@ const PuzzleContextProvider = ({ grid, children }) => {
       ...puzzleState,
       direction: puzzleState.direction === "across" ? "down" : "across"
     });
+  
+  const calculateWords = () => {
+    const [row, column] = puzzleState.activeCell;
+    if (!row || !column) {
+      return { across: [], down: [] };
+    }
+    
+    if (!puzzleState.grid[row][column]) {
+      return { across: [], down: [] };
+    }
+    
+    
+  }
 
   let clue = 0;
   const getNextClueNumber = () => {
