@@ -1,16 +1,17 @@
 const React = require("react");
 const PuzzleCell = require("./PuzzleCell");
 
-const PuzzleRow = props => {
+const PuzzleRow = ({ row, columns, puzzleState, setPuzzleState, getNextClueNumber }) => {
   return (
     <div class="puzzle-row">
-      {props.row.map((cell, i) => (
+      {columns.map((cell, i) => (
         <PuzzleCell
-          row={props.row_id}
+          row={row}
           column={i}
           value={cell}
-          grid={props.grid}
-          getNextClueNumber={props.getNextClueNumber}
+          getNextClueNumber={getNextClueNumber}
+          puzzleState={puzzleState}
+          setPuzzleState={setPuzzleState}
         />
       ))}
     </div>

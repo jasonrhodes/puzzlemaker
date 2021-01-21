@@ -3,7 +3,8 @@ const PuzzleRow = require("./PuzzleRow");
 
 const Puzzle = props => {
   const [puzzleState, setPuzzleState] = {
-    activeCell: false
+    activeCell: false,
+    grid: props.grid
   }; // set via local storage at some point, for saved puzzles?
   let clue = 0;
   const getNextClueNumber = () => {
@@ -11,13 +12,14 @@ const Puzzle = props => {
   };
   return (
     <div class="puzzle-grid">
-      {props.grid.map((row, i) => (
+      {props.grid.map((columns, i) => (
         <PuzzleRow
           key={`row-${i}`}
-          row_id={i}
-          row={row}
-          grid={props.grid}
+          row={i}
+          columns={columns}
           getNextClueNumber={getNextClueNumber}
+          puzzleState={puzzleState}
+          setPuzzleState={setPuzzleState}
         />
       ))}
     </div>

@@ -20,11 +20,16 @@ const getCellLabel = ({ grid, row, column, getNextClueNumber }) => {
   return false;
 };
 
-const PuzzleCell = ({ value, row, column, grid, getNextClueNumber }) => {
-  const [cellState, setCellState] = React.useState(false);
+// onClick={(e) => setPuzzleState({ ...puzzleState, activeCell: [row, column] })}
+
+const PuzzleCell = ({ value, row, column, grid, getNextClueNumber, puzzleState, setPuzzleState }) => {
   let classes = ["puzzle-cell"];
   if (!value) {
     classes.push("puzzle-cell-x");
+  }
+  const [activeRow, activeColumn] = puzzleState.activeCell;
+  if (activeRow === row && activeColumn === column) {
+    classes.push("active");
   }
   const label = getCellLabel({ row, column, grid, getNextClueNumber });
   return (
