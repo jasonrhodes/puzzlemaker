@@ -1,0 +1,26 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
+}
+
+.puzzle-cell {
+  font-size: 20px;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  width: 40px;
+  height: 20px;
+  line-height: 1;
+  padding: 0.5em 0;
+  text-align: center;
+  display: inline-block;
+  margin-left: -1px;
+}
+
+.puzzle-cell:first-child {
+  margin-left: 0;
+}
+
+.puzzle-row {
+  display: block;
+  margin-bottom: -4px;
+}
