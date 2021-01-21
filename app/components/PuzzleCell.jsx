@@ -1,5 +1,5 @@
 const React = require("react");
-// const classnames = require("classnames");
+const classnames = require("classnames");
                       
 const getCellLabel = ({ puzzleState, row, column, getNextClueNumber }) => {
   const { grid } = puzzleState;
@@ -24,13 +24,12 @@ const getCellLabel = ({ puzzleState, row, column, getNextClueNumber }) => {
 
 const PuzzleCell = ({ value, row, column, getNextClueNumber, puzzleState, setActiveCell }) => {
   const [activeRow, activeColumn] = puzzleState.activeCell;
-  // const classes = classnames({
-  //   "puzzle-cell": true,
-  //   "puzzle-cell-x": !value,
-  //   "active": (activeRow === row && activeColumn === column)
-  // });
+  const classes = classnames({
+    "puzzle-cell": true,
+    "puzzle-cell-x": !value,
+    "active": (activeRow === row && activeColumn === column)
+  });
   
-  const classes = "yoyo";
   const label = getCellLabel({ row, column, puzzleState, getNextClueNumber });
   
   // const handleClick = (e) => {
