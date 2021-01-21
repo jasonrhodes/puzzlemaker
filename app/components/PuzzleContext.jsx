@@ -2,7 +2,11 @@ const React = require("react");
 const PuzzleContext = React.createContext();
 
 function findAcross(row, startColumn) {
-  return row.reduce((cell, ))
+  return row.reduce((range, column) => {
+    if (!row[column] && !found) {
+      range.end = column - 1;
+    }
+  }, { start: false, end: false, found: false })
 }
 
 const PuzzleContextProvider = ({ grid, children }) => {
