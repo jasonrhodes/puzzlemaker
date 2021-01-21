@@ -2,10 +2,10 @@ const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
 
 const Puzzle = props => {
-  const [puzzleState, setPuzzleState] = {
-    activeCell: false,
+  const [puzzleState, setPuzzleState] = React.useState({
+    activeCell: [],
     grid: props.grid
-  }; // set via local storage at some point, for saved puzzles?
+  }); // set via local storage at some point, for saved puzzles?
   let clue = 0;
   const getNextClueNumber = () => {
     return clue += 1;

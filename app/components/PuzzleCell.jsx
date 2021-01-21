@@ -22,7 +22,7 @@ const getCellLabel = ({ grid, row, column, getNextClueNumber }) => {
 
 // onClick={(e) => setPuzzleState({ ...puzzleState, activeCell: [row, column] })}
 
-const PuzzleCell = ({ value, row, column, grid, getNextClueNumber, puzzleState, setPuzzleState }) => {
+const PuzzleCell = ({ value, row, column, getNextClueNumber, puzzleState, setPuzzleState }) => {
   let classes = ["puzzle-cell"];
   if (!value) {
     classes.push("puzzle-cell-x");
