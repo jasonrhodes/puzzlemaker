@@ -44,6 +44,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
     });
   
   const calculateWords = (row, column) => {
+    console.log('words!!');
     if (!row || !column) {
       return { across: [], down: [] };
     }
@@ -52,13 +53,14 @@ const PuzzleContextProvider = ({ grid, children }) => {
       return { across: [], down: [] };
     }
     
-    console.log('calculated some werds', )
+    const across = findAcross(puzzleState.grid[row], column);
+    const down = [];
     
-    return { across: findAcross(row, puzzleState.grid[row]), down: [] }
+    console.log('calculated some werds', { across, down });
+    
+    return { across, down };
   }
   
-  console.log('words', puzzleState.words);
-
   let clue = 0;
   const getNextClueNumber = () => {
     return (clue += 1);
