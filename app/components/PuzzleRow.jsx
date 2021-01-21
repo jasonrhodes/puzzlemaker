@@ -1,5 +1,6 @@
 const React = require("react");
 const PuzzleCell = require("./PuzzleCell");
+const { PuzzleContext } = require("./PuzzleContext");
 
 const PuzzleRow = ({
   row,
@@ -7,13 +8,17 @@ const PuzzleRow = ({
 }) => {
   return (
     <div class="puzzle-row">
-      {columns.map((cell, i) => (
-        <PuzzleCell
-          row={row}
-          column={i}
-          value={cell}
-        />
-      ))}
+      <PuzzleContext.Consumer>
+        {puzzle => columns.map((cell, i) => (
+          <PuzzleCell
+            key={`cell-${row}-${i}`}
+            row={row}
+            column={i}
+            value={cell}
+            puzzle={puzzle}
+          />
+        ))}
+      </PuzzleContext.Consumer>
     </div>
   );
 };

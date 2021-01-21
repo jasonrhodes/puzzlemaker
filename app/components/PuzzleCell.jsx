@@ -1,8 +1,8 @@
 const React = require("react");
 const classnames = require("classnames");
                       
-const getCellLabel = ({ puzzleState, row, column, getNextClueNumber }) => {
-  const { grid } = puzzleState;
+const getCellLabel = ({ puzzle, row, column }) => {
+  const { grid, getNextClueNumber } = puzzle;
   const currentCell = grid[row][column];
   if (!currentCell) {
     return false;
@@ -22,19 +22,19 @@ const getCellLabel = ({ puzzleState, row, column, getNextClueNumber }) => {
   return false;
 };
 
-const PuzzleCell = ({ value, row, column, getNextClueNumber, puzzleState, setActiveCell }) => {
-  const [activeRow, activeColumn] = puzzleState.activeCell;
+const PuzzleCell = ({ value, row, column, puzzle }) => {
+  const [activeRow, activeColumn] = puzzle.activeCell;
   const classes = classnames({
     "puzzle-cell": true,
     "puzzle-cell-x": !value,
     "active": (activeRow === row && activeColumn === column)
   });
   
-  const label = getCellLabel({ row, column, puzzleState, getNextClueNumber });
+  const label = getCellLabel({ row, column, puzzle });
   
   const handleClick = (e) => {
     console.log("I got clicked!", e);
-    setActiveCell(row, column);
+    puzzle.setActiveCell(row, column);
   }
   return (
     <div class={classes} onClick={handleClick}>
