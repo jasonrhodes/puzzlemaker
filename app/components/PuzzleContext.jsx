@@ -18,6 +18,7 @@ function findAcross(row, activeColumn) {
     if (!row[column] && !range.found) {
       range.start = false;
     }
+    return range;
   }, { start: false, end: false, found: false });
   
   return [range.start, range.end];
