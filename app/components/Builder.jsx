@@ -54,11 +54,17 @@ const Puzzle = (props) => {
   );
 }
 
-const 
+const applyBlocks = (_grid, blocks) => {
+  const grid = [..._grid];
+  blocks.forEach(([row, column]) => {
+    grid[row][column] = false;
+    grid[grid[row].length - row][grid[row].length - column] = false;
+  });
+  
+  return grid;
+}
 
 const Builder = function() {
-  const grid = createBlankGrid();
-  
   const blocks = [
     [0, 4],
     [1, 4],
@@ -68,16 +74,7 @@ const Builder = function() {
     [1, 10],
     [2, 10]
   ];
-  grid[0][3] = false;
-  grid[1][3] = false;
-  grid[2][3] = false;
-  grid[0][8] = false;
-  grid[1][8] = false;
-  grid[2][8] = false;
-  grid[3][8] = false;
-  
-  console.log(grid);
-  
+  const grid = applyBlocks(createBlankGrid(), blocks);
   return (
     <div>
       <h1>p u z z l e m a k e r</h1>
