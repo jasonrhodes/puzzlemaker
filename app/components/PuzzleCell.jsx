@@ -1,4 +1,5 @@
 const React = require("react");
+const classnames = require("classnames");
                       
 const getCellLabel = ({ puzzleState, row, column, getNextClueNumber }) => {
   const { grid } = puzzleState;

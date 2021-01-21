@@ -17,7 +17,8 @@
     "react-dom": "^16.8.6",
     "webpack": "^4.30.0",
     "react-router-dom": "^5.0.0",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.0",
+    "classnames": "^2.2.6"
   },
   "engines": {
     "node": "8.x"
