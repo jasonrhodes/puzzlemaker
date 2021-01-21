@@ -6,6 +6,8 @@ const Puzzle = props => {
     activeCell: [],
     grid: props.grid
   }); // set via local storage at some point, for saved puzzles?
+  
+  const setActiveCell = (row, column) => setPuzzleState({ ...puzzleState, activeCell: [row, column] });
   let clue = 0;
   const getNextClueNumber = () => {
     return clue += 1;
@@ -20,6 +22,7 @@ const Puzzle = props => {
           getNextClueNumber={getNextClueNumber}
           puzzleState={puzzleState}
           setPuzzleState={setPuzzleState}
+          setActiveCell={setActiveCell}
         />
       ))}
     </div>

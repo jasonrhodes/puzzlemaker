@@ -22,20 +22,15 @@ const getCellLabel = ({ puzzleState, row, column, getNextClueNumber }) => {
   return false;
 };
 
-// onClick={(e) => setPuzzleState({ ...puzzleState, activeCell: [row, column] })}
-
-const PuzzleCell = ({ value, row, column, getNextClueNumber, puzzleState, setPuzzleState }) => {
-  let classes = ["puzzle-cell"];
-  if (!value) {
-    classes.push("puzzle-cell-x");
-  }
+const PuzzleCell = ({ value, row, column, getNextClueNumber, puzzleState, setActiveCell }) => {
   const [activeRow, activeColumn] = puzzleState.activeCell;
-  if (activeRow === row && activeColumn === column) {
-    classes.push("active");
-  }
+  const classes = ["puzzle-cell", {
+    "puzzle-cell-x": !value,
+    active: (activeRow === row && activeColumn === column)
+  }];
   const label = getCellLabel({ row, column, puzzleState, getNextClueNumber });
   return (
-    <div class={classes.join(" ")}>
+    <div class={classes} onClick={e => setActiveCell(row, column)}>
       {value}
       {value && label ? <div class="label">{label}</div> : null}
     </div>
