@@ -1,7 +1,31 @@
 const React = require("react");
 const DEFAULT_SIZE = 15;
+const DEFAULT_BLOCKS = [
+  [0, 4], // should trigger 14, 10 (if size is 15) -- for rotational symmetry
+  [1, 4],
+  [2, 4],
+  [3, 4],
+  [0, 10],
+  [1, 10],
+  [2, 10],
+  [6, 0],
+  [6, 1],
+  [6, 2],
+  [6, 3]
+];
 
-const createBlankGrid = (size = DEFAULT_SIZE) => {
+const applyBlocks = (_grid, blocks) => {
+  const grid = [..._grid];
+  blocks.forEach(([row, column]) => {
+    grid[row][column] = false;
+    const size = grid[0].length;
+    grid[size - (row + 1)][size - (column + 1)] = false;
+  });
+  
+  return grid;
+}
+
+const initGrid = ({ size = DEFAULT_SIZE, blocks = DEFAULT_BLOCKS }) => {
   const grid = [];
   for (let i = 0; i < size; i++) {
     let row = [];
@@ -10,7 +34,7 @@ const createBlankGrid = (size = DEFAULT_SIZE) => {
     }
     grid.push(row);
   }
-  return grid;
+  return applyBlocks(grid, blocks);
 }
 
 const getCellLabel = ({ row, column }) => {
@@ -54,32 +78,8 @@ const Puzzle = (props) => {
   );
 }
 
-const applyBlocks = (_grid, blocks) => {
-  const grid = [..._grid];
-  blocks.forEach(([row, column]) => {
-    grid[row][column] = false;
-    const size = grid[0].length;
-    grid[size - (row + 1)][size - (column + 1)] = false;
-  });
-  
-  return grid;
-}
-
 const Builder = function() {
-  const blocks = [
-    [0, 4], // 14, 10 (if size is 15)
-    [1, 4],
-    [2, 4],
-    [3, 4],
-    [0, 10],
-    [1, 10],
-    [2, 10],
-    [6, 0],
-    [6, 1],
-    [6, 2],
-    [6, 3]
-  ];
-  const grid = applyBlocks(createBlankGrid(), blocks);
+  const grid = initGrid();
   return (
     <div>
       <h1>p u z z l e m a k e r</h1>
