@@ -58,7 +58,7 @@ const applyBlocks = (_grid, blocks) => {
   const grid = [..._grid];
   blocks.forEach(([row, column]) => {
     grid[row][column] = false;
-    grid[grid[row].length - row][grid[row].length - column] = false;
+    grid[grid[0].length - row][grid[0].length - column] = false;
   });
   
   return grid;
