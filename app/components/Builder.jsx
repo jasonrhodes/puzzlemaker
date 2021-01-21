@@ -37,7 +37,7 @@ const initGrid = ({ size = DEFAULT_SIZE, blocks = DEFAULT_BLOCKS }) => {
   return applyBlocks(grid, blocks);
 };
 
-const getCellLabel = ({ row, column }) => {
+const getCellLabel = ({ grid, row, column, getNextClueNumberr }) => {
   if (row === 0) {
     return column + 1;
   }
@@ -47,18 +47,16 @@ const getCellLabel = ({ row, column }) => {
   return false;
 };
 
-const PuzzleCell = ({ value, row, column }) => {
+const PuzzleCell = ({ value, row, column, grid, getNextClueNumberr }) => {
   let classes = ["puzzle-cell"];
   if (!value) {
     classes.push("puzzle-cell-x");
   }
-  const label = getCellLabel({ row, column });
+  const label = getCellLabel({ row, column, grid, getNextClueNumber });
   return (
     <div class={classes.join(" ")}>
       {value}
-      {value && label ? (
-        <div class="label">{label}</div>
-      ) : null}
+      {value && label ? <div class="label">{label}</div> : null}
     </div>
   );
 };
@@ -71,6 +69,8 @@ const PuzzleRow = props => {
           row={props.row_id}
           column={i}
           value={cell}
+          grid={props.grid}
+          getNextClueNumber={props.getNextClueNumber}
         />
       ))}
     </div>
@@ -78,23 +78,32 @@ const PuzzleRow = props => {
 };
 
 const Puzzle = props => {
+  let clue = 0;
+  const getNextClueNumber = () => {
+    return clue += 1;
+  };
   return (
     <div class="puzzle-grid">
-      {props.grid.map((row, i) => (
-        <PuzzleRow key={`row-${i}`} row_id={i} row={row} />
+      {props.puzzle.grid.map((row, i) => (
+        <PuzzleRow
+          key={`row-${i}`}
+          row_id={i}
+          row={row}
+          grid={props.grid}
+          getNextClueNumber={getNextClueNumber}
+        />
       ))}
     </div>
   );
 };
 
 const Builder = function() {
-  const [puzzle, setPuzzle] = React.setState({});
-  const grid = initGrid();
+  const [grid, setGrid] = React.useState(initGrid());
   return (
     <div>
       <h1>p u z z l e m a k e r</h1>
       <p>[Title] by [Author]</p>
-      <Puzzle grid={grid} />
+      <Puzzle grid={grid} setGrid={setGrid} />
     </div>
   );
 };
