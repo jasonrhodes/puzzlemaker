@@ -55,11 +55,22 @@ const Puzzle = (props) => {
 }
 
 const Builder = function() {
+  const grid = createBlankGrid();
+  grid[0][3] = false;
+  grid[1][3] = false;
+  grid[2][3] = false;
+  grid[0][8] = false;
+  grid[1][8] = false;
+  grid[2][8] = false;
+  grid[3][8] = false;
+  
+  console.log(grid);
+  
   return (
     <div>
-      <h1>Puzzle Builder ABC</h1>
-      <h2>Title by Author</h2>
-      <Puzzle grid={createBlankGrid()} />
+      <h1>p u z z l e m a k e r</h1>
+      <p>Title by Author</p>
+      <Puzzle grid={grid} />
     </div>
   );
 };
