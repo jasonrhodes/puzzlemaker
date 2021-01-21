@@ -58,7 +58,8 @@ const applyBlocks = (_grid, blocks) => {
   const grid = [..._grid];
   blocks.forEach(([row, column]) => {
     grid[row][column] = false;
-    grid[grid[0].length - row][grid[0].length - column] = false;
+    const size = grid[0].length;
+    grid[size - (row + 1)][size - (column + 1)] = false;
   });
   
   return grid;
@@ -66,13 +67,17 @@ const applyBlocks = (_grid, blocks) => {
 
 const Builder = function() {
   const blocks = [
-    [0, 4],
+    [0, 4], // 14, 10 (if size is 15)
     [1, 4],
     [2, 4],
     [3, 4],
     [0, 10],
     [1, 10],
-    [2, 10]
+    [2, 10],
+    [6, 0],
+    [6, 1],
+    [6, 2],
+    [6, 3]
   ];
   const grid = applyBlocks(createBlankGrid(), blocks);
   return (
