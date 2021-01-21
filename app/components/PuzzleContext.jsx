@@ -1,12 +1,26 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
 
-function findAcross(row, startColumn) {
-  return row.reduce((range, column) => {
-    if (!row[column] && !found) {
+function findAcross(row, activeColumn) {
+  const range = row.reduce((range, column) => {
+    if (range.start !== false && range.end && range.found) {
+      return range;
+    }
+    if (!range.found && !range.start) {
+      range.start = column;
+    }
+    if (column === activeColumn) {
+      range.found = true;
+    }
+    if (!row[column] && range.found) {
       range.end = column - 1;
     }
-  }, { start: false, end: false, found: false })
+    if (!row[column] && !range.found) {
+      range.start = false;
+    }
+  }, { start: false, end: false, found: false });
+  
+  return [range.start, range.end];
 }
 
 const PuzzleContextProvider = ({ grid, children }) => {
@@ -21,7 +35,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
   });
 
   const setActiveCell = (row, column) =>
-    setPuzzleState({ ...puzzleState, activeCell: [row, column] });
+    setPuzzleState({ ...puzzleState, activeCell: [row, column], words: calculateWords(row, column) });
 
   const toggleDirection = () =>
     setPuzzleState({
@@ -29,8 +43,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
       direction: puzzleState.direction === "across" ? "down" : "across"
     });
   
-  const calculateWords = () => {
-    const [row, column] = puzzleState.activeCell;
+  const calculateWords = (row, column) => {
     if (!row || !column) {
       return { across: [], down: [] };
     }
@@ -39,8 +52,12 @@ const PuzzleContextProvider = ({ grid, children }) => {
       return { across: [], down: [] };
     }
     
+    console.log('calculated some werds', )
     
+    return { across: findAcross(row, puzzleState.grid[row]), down: [] }
   }
+  
+  console.log('words', puzzleState.words);
 
   let clue = 0;
   const getNextClueNumber = () => {
