@@ -13,6 +13,16 @@ const createBlankGrid = (size = DEFAULT_SIZE) => {
   return grid;
 }
 
+const getCellLabel = ({ row, column }) => {
+  if (row === 0) {
+    return column + 1;
+  }
+  if (column === 0) {
+    return row + 1;
+  }
+  return false;
+}
+
 const PuzzleCell = (props) => {
   let classes = ["puzzle-cell"];
   if (!props.value) {
@@ -21,7 +31,7 @@ const PuzzleCell = (props) => {
   return (
     <div class={classes.join(" ")}>
       {props.value}
-      <div class="puzzle-cell-label"></div>
+      {props.label ? <div class="label">{props.label}</div> : null}
     </div>
   )
 }
@@ -30,7 +40,7 @@ const PuzzleRow = (props) => {
   console.log("Row props", props.row)
   return (
     <div class="puzzle-row">
-      {props.row.map((cell, i) => <PuzzleCell key={`cell-${props.row_id}--${i}`} column={i} row={props.row_id} value={cell} />)}
+      {props.row.map((cell, i) => <PuzzleCell label={getCellLabel({ row: props.row_id, column: i })} value={cell} />)}
     </div>
   );
 }
