@@ -30,6 +30,10 @@ body {
   margin-left: 0;
 }
 
+.puzzle-cell-x {
+  background-color: black;
+}
+
 .puzzle-cell .label {
   font-size: 10px;
   border: 0;

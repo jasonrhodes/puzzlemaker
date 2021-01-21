@@ -31,7 +31,7 @@ const PuzzleCell = (props) => {
   return (
     <div class={classes.join(" ")}>
       {props.value}
-      {props.label ? <div class="label">{props.label}</div> : null}
+      {props.value && props.label ? <div class="label">{props.label}</div> : null}
     </div>
   )
 }
@@ -54,8 +54,20 @@ const Puzzle = (props) => {
   );
 }
 
+const 
+
 const Builder = function() {
   const grid = createBlankGrid();
+  
+  const blocks = [
+    [0, 4],
+    [1, 4],
+    [2, 4],
+    [3, 4],
+    [0, 10],
+    [1, 10],
+    [2, 10]
+  ];
   grid[0][3] = false;
   grid[1][3] = false;
   grid[2][3] = false;
@@ -69,7 +81,7 @@ const Builder = function() {
   return (
     <div>
       <h1>p u z z l e m a k e r</h1>
-      <p>Title by Author</p>
+      <p>[Title] by [Author]</p>
       <Puzzle grid={grid} />
     </div>
   );
