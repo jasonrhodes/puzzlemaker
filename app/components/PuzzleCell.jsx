@@ -32,12 +32,12 @@ const PuzzleCell = ({ value, row, column, getNextClueNumber, puzzleState, setAct
   
   const label = getCellLabel({ row, column, puzzleState, getNextClueNumber });
   
-  // const handleClick = (e) => {
-  //   console.log("I got clicked!", e);
-  //   setActiveCell(row, column);
-  // }
+  const handleClick = (e) => {
+    console.log("I got clicked!", e);
+    setActiveCell(row, column);
+  }
   return (
-    <div class={classes}>
+    <div class={classes} onClick={handleClick}>
       {value}
       {value && label ? <div class="label">{label}</div> : null}
     </div>

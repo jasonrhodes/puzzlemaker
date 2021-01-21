@@ -15,6 +15,7 @@ const PuzzleRow = ({
         <PuzzleCell
           row={row}
           column={i}
+          value={cell}
           getNextClueNumber={getNextClueNumber}
           puzzleState={puzzleState}
           setPuzzleState={setPuzzleState}
