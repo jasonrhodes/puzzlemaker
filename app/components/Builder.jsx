@@ -37,17 +37,27 @@ const initGrid = ({ size = DEFAULT_SIZE, blocks = DEFAULT_BLOCKS }) => {
   return applyBlocks(grid, blocks);
 };
 
-const getCellLabel = ({ grid, row, column, getNextClueNumberr }) => {
+const getCellLabel = ({ grid, row, column, getNextClueNumber }) => {
+  const currentCell = grid[row][column];
+  if (!currentCell) {
+    return false;
+  }
   if (row === 0) {
-    return column + 1;
+    return getNextClueNumber();
   }
   if (column === 0) {
-    return row + 1;
+    return getNextClueNumber();
+  }
+  if (grid[row][column - 1] === false) {
+    return getNextClueNumber();
+  }
+  if (grid[row - 1][column] === false) {
+    return getNextClueNumber();
   }
   return false;
 };
 
-const PuzzleCell = ({ value, row, column, grid, getNextClueNumberr }) => {
+const PuzzleCell = ({ value, row, column, grid, getNextClueNumber }) => {
   let classes = ["puzzle-cell"];
   if (!value) {
     classes.push("puzzle-cell-x");
