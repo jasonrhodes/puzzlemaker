@@ -21,16 +21,16 @@ const PuzzleCell = (props) => {
   return (
     <div class={classes.join(" ")}>
       {props.value}
+      <div class="puzzle-cell-label"></div>
     </div>
   )
 }
-//{props.row.map(cell => <PuzzleCell value={cell} />)}
 
 const PuzzleRow = (props) => {
   console.log("Row props", props.row)
   return (
     <div class="puzzle-row">
-      {props.row.map((cell, i) => <PuzzleCell key={`cell-${props.row_id}--${i}`} value={cell} />)}
+      {props.row.map((cell, i) => <PuzzleCell key={`cell-${props.row_id}--${i}`} column={i} row={props.row_id} value={cell} />)}
     </div>
   );
 }
