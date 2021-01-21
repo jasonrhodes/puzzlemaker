@@ -1,9 +1,13 @@
 const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
 
+
+
 const Puzzle = props => {
   const [puzzleState, setPuzzleState] = React.useState({
     activeCell: [],
+    direction: "across",
+    word: [],
     grid: props.grid
   }); // set via local storage at some point, for saved puzzles?
   

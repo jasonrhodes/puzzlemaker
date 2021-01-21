@@ -24,6 +24,7 @@ body {
   display: inline-block;
   margin-left: -1px;
   position: relative;
+  z-index: 50;
 }
 
 .puzzle-cell:first-child {
@@ -36,7 +37,8 @@ body {
 
 .puzzle-cell.active {
   border-color: lightBlue;
-  box-shadow: 
+  box-shadow: 0 0 2px 2px lightBlue;
+  z-index: 100;
 }
 
 .puzzle-cell .label {
