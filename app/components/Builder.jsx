@@ -17,6 +17,7 @@ const DEFAULT_BLOCKS = [
 
 const Builder = function() {
   const [grid, setGrid] = React.useState(initGrid({ size: 15, blocks: DEFAULT_BLOCKS }));
+  
   return (
     <div>
       <h1>p u z z l e m a k e r</h1>

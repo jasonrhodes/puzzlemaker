@@ -42,12 +42,8 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
     }
   };
   
-  const handleKeyDown = e => {
-    console.log("Key down: ", e)
-  };
-  
   return (
-    <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown}>
+    <div class={classes} onClick={handleClick}>
       <div class="input">{value}</div>
       {value && label ? <div class="label">{label}</div> : null}
     </div>
