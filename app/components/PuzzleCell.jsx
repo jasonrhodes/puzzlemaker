@@ -44,13 +44,14 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   };
   
   let keysDown = [];
-  window.keysDown = keysDown;
   
   const handleKeyUp = e => {
+    console.log('KeyUp', e.key);
     keysDown = keysDown.filter(key => key !== e.key);
   }
   
   const handleKeyDown = e => {
+    console.log('KeyDown', e.key);
     keysDown.push(e.key);
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
