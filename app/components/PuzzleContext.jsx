@@ -111,7 +111,7 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     toggleCell,
     getNextClueNumber,
     isCellInActiveWord,
-    set
+    updateCellValue
   };
 
   return (

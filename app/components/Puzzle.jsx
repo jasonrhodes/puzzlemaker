@@ -1,10 +1,12 @@
 const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
-const { PuzzleContextProvider } = require("./PuzzleContext");
+const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 
-const Puzzle = ({ grid, editMode }) => {
+const Puzzle = ({ initialGrid, editMode }) => {
   return (
-    <PuzzleContextProvider grid={grid} editMode={editMode}>
+    <PuzzleContextProvider initialGrid={grid} editMode={editMode}>
+      <PuzzleContext.Consumer>
+        {value => }
       <div class="puzzle-grid">
         {grid.map((columns, i) => (
           <PuzzleRow
@@ -14,6 +16,7 @@ const Puzzle = ({ grid, editMode }) => {
           />
         ))}
       </div>
+      </PuzzleContext.Consumer>
     </PuzzleContextProvider>
   );
 };

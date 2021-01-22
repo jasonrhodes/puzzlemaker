@@ -36,20 +36,24 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
 
   const handleClick = e => {
     const [currentRow, currentColumn] = puzzle.activeCell;
-    console.log("mode: ",puzzle.editMode)
-    if (!puzzle.editMode) {
+    // console.log("mode: ",puzzle.editMode)
+    // if (!puzzle.editMode) {
       if (row === currentRow && column === currentColumn) {
         puzzle.toggleDirection();
       } else {
         puzzle.setActiveCell(row, column);
       }
-    } else {
-      puzzle.toggleCell(row, column);
-    }
+    // } else {
+      // puzzle.toggleCell(row, column);
+    // }
   };
   
+  const handleKeyDown = e => {
+    console.log('press', e.key);
+  }
+  
   return (
-    <div class={classes} onClick={handleClick}>
+    <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown}>
       <div class="input">{value}</div>
       {value && label ? <div class="label">{label}</div> : null}
     </div>
