@@ -8,7 +8,7 @@ const hashHistory = require('react-router-dom').hashHistory;
 const Builder = require('./components/Builder');
 
 ReactDOM.render((
-  <BrowserRouter onKeyDown={(event) => console.log("a")}>
+  <BrowserRouter>
     <div>
       <Route exact path="/" component={Builder}/>
     </div>

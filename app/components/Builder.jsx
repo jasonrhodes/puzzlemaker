@@ -17,12 +17,21 @@ const DEFAULT_BLOCKS = [
 
 const Builder = function() {
   const [grid, setGrid] = React.useState(initGrid({ size: 15, blocks: DEFAULT_BLOCKS }));
+  const [editMode, setEditMode] = React.useState(false);
+  
+  const toggleEdit = e => {
+    console.log(editMode)
+    if (!editMode){
+      editMode = true;
+    }
+  }
   
   return (
     <div>
       <h1>p u z z l e m a k e r</h1>
       <p>[Title] by [Author]</p>
-      <Puzzle grid={grid} setGrid={setGrid} />
+      <button onClick={toggleEdit}>Edit Mode</button>
+      <Puzzle grid={grid} setGrid={setGrid} mode={editMode}/>
     </div>
   );
 };
