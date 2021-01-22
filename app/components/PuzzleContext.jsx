@@ -92,11 +92,14 @@ const PuzzleContextProvider = ({ grid, children }) => {
 
   const setActiveCell = (row, column) => {
     console.log("Clicked on:", { row, column });
-    setPuzzleState({
-      ...puzzleState,
-      activeCell: [row, column],
-      words: calculateCurrentWords(row, column)
-    });
+    console.log("Value:", grid[row][column]);
+    if (grid[row][column]){
+      setPuzzleState({
+        ...puzzleState,
+        activeCell: [row, column],
+        words: calculateCurrentWords(row, column)
+      });
+    }
     
   };
 
