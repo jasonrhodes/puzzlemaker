@@ -107,6 +107,8 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
     if (grid[row][column]){
       let new_grid = grid;
       new_grid[row][column] = false;
+      const size = grid[0].length;
+      new_grid[size - (row + 1)][size - (column + 1)] = false;
       setPuzzleState({
         ...puzzleState,
         grid: new_grid
@@ -114,6 +116,8 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
     } else {
       let new_grid = grid;
       new_grid[row][column] = "A";
+      const size = grid[0].length;
+      new_grid[size - (row + 1)][size - (column + 1)] = "A";
       setPuzzleState({
         ...puzzleState,
         grid: new_grid
