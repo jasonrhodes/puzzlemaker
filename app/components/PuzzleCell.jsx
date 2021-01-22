@@ -55,14 +55,21 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       return;
     }
     if (e.key === "ArrowRight") {
-      const nextRow = Math.min()
-      puzzle.setActiveCell([row + 1, column])
+      const nextColumn = Math.min(column + 1, puzzle.grid[0].length - 1);
+      puzzle.setActiveCell([row, nextColumn])
+    }
+    if (e.key === "ArrowLeft") {
+      const prevColumn = Math.max(column - 1, 0);
+      puzzle.setActiveCell([row, prevColumn]);
+    }
+    if (/^[a-z0-9]$/.test(e.key)) {
+      puzzle.updateCellValue(row, column, e.key);
     }
   }
   
   return (
     <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown} tabIndex="0">
-      <div class="input">{value}</div>
+      <div class="input">{typeof value === "string" ? value.toUpperCase() : value}</div>
       {value && label ? <div class="label">{label}</div> : null}
     </div>
   );
