@@ -4,15 +4,16 @@ const PuzzleContext = React.createContext();
 function findAcross(row, activeColumn) {
   const range = row.reduce((range, column) => {
     
-    console.log('reducing across column', column, ' : ', range);
+    console.log('reducing across column', range.count, ' : ', range);
     
     if (range.start !== false && range.end && range.found) {
+      range.count++;
       return range;
     }
     if (!range.found && !range.start) {
       range.start = column;
     }
-    if (column === activeColumn) {
+    if (range.count === activeColumn) {
       range.found = true;
     }
     if (!row[column] && range.found) {
@@ -21,8 +22,10 @@ function findAcross(row, activeColumn) {
     if (!row[column] && !range.found) {
       range.start = false;
     }
+    
+    range.count++;
     return range;
-  }, { start: false, end: false, found: false });
+  }, { count: 0, start: false, end: false, found: false });
   
   return [range.start, range.end];
 }
