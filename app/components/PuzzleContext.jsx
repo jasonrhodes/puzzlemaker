@@ -110,9 +110,9 @@ const PuzzleContextProvider = ({ grid, children }) => {
     });
 
   const calculateCurrentWords = (row, column) => {
-    if (!row || !column) {
+    /*if (!row || !column) {
       return emptyWord;
-    }
+    }*/   // this gave an error for row/column 0
 
     if (!puzzleState.grid[row][column]) {
       return emptyWord;
@@ -120,8 +120,6 @@ const PuzzleContextProvider = ({ grid, children }) => {
 
     const across = findAcross(puzzleState.grid[row], column);
     const down = findDown(puzzleState.grid, row, column);
-
-    console.log("calculated some werds", { across, down });
 
     return { across, down };
   };
@@ -144,7 +142,6 @@ const PuzzleContextProvider = ({ grid, children }) => {
     if (puzzleState.direction === "down" && column !== activeColumn) {
       return false;
     }
-    console.log(puzzleState.words[puzzleState.direction]);
     const { range } = puzzleState.words[puzzleState.direction];
     const [min, max] = range;
     if (puzzleState.direction === "across") {
