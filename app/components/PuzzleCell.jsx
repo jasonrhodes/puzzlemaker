@@ -24,6 +24,7 @@ const getCellLabel = ({ puzzle, row, column }) => {
 
 const PuzzleCell = ({ value, row, column, puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
+    
   const classes = classnames({
     "puzzle-cell": true,
     "puzzle-cell-x": !value,
@@ -35,10 +36,15 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
 
   const handleClick = e => {
     const [currentRow, currentColumn] = puzzle.activeCell;
-    if (row === currentRow && column === currentColumn) {
-      puzzle.toggleDirection();
+    console.log("mode: ",puzzle.editMode)
+    if (!puzzle.editMode) {
+      if (row === currentRow && column === currentColumn) {
+        puzzle.toggleDirection();
+      } else {
+        puzzle.setActiveCell(row, column);
+      }
     } else {
-      puzzle.setActiveCell(row, column);
+      puzzle.toggleCell();
     }
   };
   
