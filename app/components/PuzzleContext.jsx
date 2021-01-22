@@ -11,15 +11,15 @@ function findAcross(row, activeColumn) {
       return range;
     }
     if (!range.found && !range.start) {
-      range.start = column;
+      range.start = range.count;
+    }
+    if (!column && range.found) {
+      range.end = range.count - 1;
     }
     if (range.count === activeColumn) {
       range.found = true;
     }
-    if (!row[column] && range.found) {
-      range.end = column - 1;
-    }
-    if (!row[column] && !range.found) {
+    if (!column && !range.found) {
       range.start = false;
     }
     
