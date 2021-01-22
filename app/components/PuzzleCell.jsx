@@ -35,10 +35,12 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
 
   const handleClick = e => {
     const [currentRow, currentColumn] = puzzle.activeCell;
-    if (row === currentRow && column === currentColumn) {
-      puzzle.toggleDirection();
-    } else {
-      puzzle.setActiveCell(row, column);
+    if (puzzle.grid[currentRow, currentColumn]){
+      if (row === currentRow && column === currentColumn) {
+        puzzle.toggleDirection();
+      } else {
+        puzzle.setActiveCell(row, column);
+      }
     }
   };
   return (
