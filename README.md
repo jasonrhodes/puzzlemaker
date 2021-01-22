@@ -1,2 +1,1 @@
-# puzzlemaker
-Dynamic crossword puzzle building app
+# PUZZLE BUILDER
