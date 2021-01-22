@@ -144,6 +144,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
     if (puzzleState.direction === "down" && column !== activeColumn) {
       return false;
     }
+    console.log(puzzleState.words[puzzleState.direction]);
     const { range } = puzzleState.words[puzzleState.direction];
     const [min, max] = range;
     if (puzzleState.direction === "across") {
