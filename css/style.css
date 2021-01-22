@@ -37,9 +37,14 @@ body {
 }
 
 .puzzle-cell.active {
-  border-color: lightBlue;
-  box-shadow: 0 0 2px 2px lightBlue;
+  border-color: rgb(64, 224, 208);
+  box-shadow: 0 0 2px 2px rgb(64, 224, 208);
   z-index: 100;
+}
+
+.puzzle-cell.highlighted {
+  border-color: rgb(64, 224, 208);
+  background-color: rgba(64, 224, 208, 0.4);
 }
 
 .puzzle-cell .label {

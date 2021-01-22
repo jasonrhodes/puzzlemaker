@@ -117,6 +117,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
   };
   
   const isCellInActiveWord = (row, column) => {
+    console.log("checking if cell is in active word", { row, column, puzzle: puzzleState });
     const [activeRow, activeColumn] = puzzleState.activeCell;
     if (puzzleState.direction === "across" && row !== activeRow) {
       return false;
@@ -125,20 +126,23 @@ const PuzzleContextProvider = ({ grid, children }) => {
       return false;
     }
     const { range } = puzzleState.words[puzzleState.direction];
+    const [min, max] = range;
     if (puzzleState === "across") {
-      return 
+      return column >= min && column <= max;
     }
+    return row >= min && row <= max;
   }
 
   const value = {
     ...puzzleState,
     setActiveCell,
     toggleDirection,
-    getNextClueNumber
+    getNextClueNumber,
+    isCellInActiveWord
   };
 
   return (
-    <PuzzleContext.Provider value={value}>{children}</PuzzleContext.Provider>
+    <PuzzleContext.Provider value={value}>{children}{JSON.stringify(puzzleState, null, 2)}</PuzzleContext.Provider>
   );
 };
 
