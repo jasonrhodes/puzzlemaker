@@ -74,8 +74,14 @@ const PuzzleContextProvider = ({ grid, children }) => {
     grid
   });
 
-  const setActiveCell = (row, column) =>
-    setPuzzleState({ ...puzzleState, activeCell: [row, column], words: calculateWords(row, column) });
+  const setActiveCell = (row, column) => {
+    const [currentRow, currentColumn] = puzzleState.activeCell;
+    if (row === currentRow && column === currentColumn) {
+      toggleDirection();
+    } else {
+      setPuzzleState({ ...puzzleState, activeCell: [row, column], words: calculateCurrentWords(row, column) });
+    }
+  }
 
   const toggleDirection = () =>
     setPuzzleState({
@@ -83,7 +89,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
       direction: puzzleState.direction === "across" ? "down" : "across"
     });
   
-  const calculateWords = (row, column) => {
+  const calculateCurrentWords = (row, column) => {
     if (!row || !column) {
       return emptyWord;
     }

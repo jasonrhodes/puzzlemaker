@@ -1,6 +1,6 @@
 const React = require("react");
 const classnames = require("classnames");
-                      
+
 const getCellLabel = ({ puzzle, row, column }) => {
   const { grid, getNextClueNumber } = puzzle;
   const currentCell = grid[row][column];
@@ -27,18 +27,18 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   const classes = classnames({
     "puzzle-cell": true,
     "puzzle-cell-x": !value,
-    "active": (activeRow === row && activeColumn === column)
+    active: activeRow === row && activeColumn === column
   });
-  
+
   const label = getCellLabel({ row, column, puzzle });
-  
-  const handleClick = (e) => {
+
+  const handleClick = e => {
     console.log("I got clicked!", e);
     puzzle.setActiveCell(row, column);
-  }
+  };
   return (
     <div class={classes} onClick={handleClick}>
-      {value}
+      <input value={value} />
       {value && label ? <div class="label">{label}</div> : null}
     </div>
   );
