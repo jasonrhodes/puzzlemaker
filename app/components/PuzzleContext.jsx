@@ -67,8 +67,18 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   };
   
   const updateCellValue = (row, column, value) => {
-    setGrid()
+    const newGrid = [...grid];
+    newGrid[row][column] = value;
+    setGrid(newGrid);
   }
+  
+  React.useEffect(() => {
+    setWords(calculateCurrentWords());
+  }, [grid, setWords, calculateCurrentWords])
+  
+  React.useEffect(() => {
+    setWords(calculateCurrentWords());
+  }, [activeCell, setWords, calculateCurrentWords])
 
   let clue = 0;
   const getNextClueNumber = () => {
@@ -100,7 +110,8 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     toggleDirection,
     toggleCell,
     getNextClueNumber,
-    isCellInActiveWord
+    isCellInActiveWord,
+    set
   };
 
   return (
