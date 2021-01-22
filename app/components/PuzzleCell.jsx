@@ -44,6 +44,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   };
   
   let keysDown = [];
+  window.keysDown = keysDown;
   
   const handleKeyUp = e => {
     keysDown = keysDown.filter(key => key !== e.key);
