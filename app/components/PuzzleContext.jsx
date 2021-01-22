@@ -3,6 +3,9 @@ const PuzzleContext = React.createContext();
 
 function findAcross(row, activeColumn) {
   const range = row.reduce((range, column) => {
+    
+    console.log('reducing across column', column, ' : ', range);
+    
     if (range.start !== false && range.end && range.found) {
       return range;
     }
