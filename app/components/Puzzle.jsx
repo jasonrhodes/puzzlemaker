@@ -4,18 +4,19 @@ const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 
 const Puzzle = ({ initialGrid, editMode }) => {
   return (
-    <PuzzleContextProvider initialGrid={grid} editMode={editMode}>
+    <PuzzleContextProvider initialGrid={initialGrid} editMode={editMode}>
       <PuzzleContext.Consumer>
-        {value => }
-      <div class="puzzle-grid">
-        {grid.map((columns, i) => (
-          <PuzzleRow
-            key={`row-${i}`}
-            row={i}
-            columns={columns}
-          />
-        ))}
-      </div>
+        {puzzle => (
+          <div class="puzzle-grid">
+            {puzzle.grid.map((columns, i) => (
+              <PuzzleRow
+                key={`row-${i}`}
+                row={i}
+                columns={columns}
+              />
+            ))}
+          </div>
+        )}
       </PuzzleContext.Consumer>
     </PuzzleContextProvider>
   );

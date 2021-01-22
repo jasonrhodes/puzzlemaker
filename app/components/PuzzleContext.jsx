@@ -21,7 +21,7 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     across: emptyWord,
     down: emptyWord
   });
-  const [grid, setGrid] = React.useState(grid);
+  const [grid, setGrid] = React.useState(initialGrid);
 
   const setActiveCell = (row, column) => {
     // console.log("Clicked on:", { row, column });
@@ -86,6 +86,9 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   };
 
   const isCellInActiveWord = (row, column) => {
+    if (!direction || !words[direction]) {
+      console.error("Error with checking cell in active word", { direction, words });
+    }
     const [activeRow, activeColumn] = activeCell;
     if (direction === "across" && row !== activeRow) {
       return false;
