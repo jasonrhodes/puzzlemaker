@@ -11,6 +11,12 @@ function findAcross(cellsInActiveRow, activeColumn) {
     }
     if (!range.found && !range.start) {
       range.start = range.count;
+      range.word = cellValue;
+      range.count++;
+      return range;
+    }
+    if (!isBlackSquare) {
+      range.word += cellValue;
     }
     if (isBlackSquare && range.found) {
       range.end = range.count - 1;
@@ -24,9 +30,9 @@ function findAcross(cellsInActiveRow, activeColumn) {
     
     range.count++;
     return range;
-  }, { count: 0, start: false, end: false, found: false });
+  }, { count: 0, start: false, end: false, found: false, word: '' });
   
-  return [range.start, range.end];
+  return { range: [range.start, range.end], word: range.word };
 }
 
 function findDown(rows, activeRow, activeColumn) {
@@ -57,12 +63,13 @@ function findDown(rows, activeRow, activeColumn) {
 }
 
 const PuzzleContextProvider = ({ grid, children }) => {
+  const emptyWord = { range: [], word: '' };
   const [puzzleState, setPuzzleState] = React.useState({
     activeCell: [],
     direction: "across",
     words: {
-      across: [], // range of columns for the currently active across word
-      down: [] // range of rows for the currently active down word
+      across: emptyWord, // range of columns for the currently active across word
+      down: emptyWord // range of rows for the currently active down word
     },
     grid
   });
@@ -77,17 +84,16 @@ const PuzzleContextProvider = ({ grid, children }) => {
     });
   
   const calculateWords = (row, column) => {
-    console.log('words!!');
     if (!row || !column) {
-      return { across: [], down: [] };
+      return emptyWord;
     }
     
     if (!puzzleState.grid[row][column]) {
-      return { across: [], down: [] };
+      return emptyWord;
     }
     
     const across = findAcross(puzzleState.grid[row], column);
-    const down = [];
+    const down = findDown(puzzleState.grid, row, column);
     
     console.log('calculated some werds', { across, down });
     
