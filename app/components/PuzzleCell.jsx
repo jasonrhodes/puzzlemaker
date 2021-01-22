@@ -50,10 +50,18 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   
   const handleKeyDown = e => {
     console.log('press', e.key);
+    if (e.key === ".") {
+      puzzle.updateCellValue(row, column, false);
+      return;
+    }
+    if (e.key === "ArrowRight") {
+      const nextRow = Math.min()
+      puzzle.setActiveCell([row + 1, column])
+    }
   }
   
   return (
-    <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown}>
+    <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown} tabIndex="0">
       <div class="input">{value}</div>
       {value && label ? <div class="label">{label}</div> : null}
     </div>
