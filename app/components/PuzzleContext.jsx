@@ -2,28 +2,33 @@ const React = require("react");
 const PuzzleContext = React.createContext();
 const { findAcross, findDown } = require("./utils");
 
-const PuzzleContextProvider = ({ grid, editMode, children }) => {
+const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   const emptyWord = { range: [], word: "" };
-  const [puzzleState, setPuzzleState] = React.useState({
-    activeCell: [],
-    direction: "across",
-    words: {
-      across: emptyWord, // range of columns for the currently active across word
-      down: emptyWord // range of rows for the currently active down word
-    },
-    grid,
-    editMode
+  // const [puzzleState, setPuzzleState] = React.useState({
+  //   activeCell: [],
+  //   direction: "across",
+  //   words: {
+  //     across: emptyWord, // range of columns for the currently active across word
+  //     down: emptyWord // range of rows for the currently active down word
+  //   },
+  //   grid,
+  //   editMode
+  // });
+  
+  const [activeCell, _setActiveCell] = React.useState([]);
+  const [direction, setDirection] = React.useState("across");
+  const [words, setWords] = React.useState({
+    across: emptyWord,
+    down: emptyWord
   });
+  const [grid, setGrid] = React.useState(grid);
 
   const setActiveCell = (row, column) => {
-    console.log("Clicked on:", { row, column });
-    console.log("Value:", grid[row][column]);
+    // console.log("Clicked on:", { row, column });
+    // console.log("Value:", grid[row][column]);
     if (grid[row][column]) {
-      setPuzzleState({
-        ...puzzleState,
-        activeCell: [row, column],
-        words: calculateCurrentWords(row, column)
-      });
+      _setActiveCell([row, column]);
+      setWords(calculateCurrentWords(row, column));
     }
   };
 
@@ -33,45 +38,36 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
       new_grid[row][column] = false;
       const size = grid[0].length;
       new_grid[size - (row + 1)][size - (column + 1)] = false;
-      setPuzzleState({
-        ...puzzleState,
-        grid: new_grid
-      });
+      setGrid(new_grid);
     } else {
       let new_grid = grid;
       new_grid[row][column] = "A";
       const size = grid[0].length;
       new_grid[size - (row + 1)][size - (column + 1)] = "A";
-      setPuzzleState({
-        ...puzzleState,
-        grid: new_grid
-      });
+      setGrid(new_grid);
     }
   };
 
   const toggleDirection = () =>
-    setPuzzleState({
-      ...puzzleState,
-      direction: puzzleState.direction === "across" ? "down" : "across"
-    });
+    setDirection(direction === "across" ? "down" : "across");
 
   const calculateCurrentWords = (row, column) => {
     if ((!row && row !== 0) || (!column && column !== 0)) {
       return emptyWord;
     }
 
-    if (!puzzleState.grid[row][column]) {
+    if (!grid[row][column]) {
       return emptyWord;
     }
 
-    const across = findAcross(puzzleState.grid[row], column);
-    const down = findDown(puzzleState.grid, row, column);
+    const across = findAcross(grid[row], column);
+    const down = findDown(grid, row, column);
 
     return { across, down };
   };
   
-  const updateCellValue(row, column, value) {
-    
+  const updateCellValue = (row, column, value) => {
+    setGrid()
   }
 
   let clue = 0;
@@ -80,23 +76,26 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
   };
 
   const isCellInActiveWord = (row, column) => {
-    const [activeRow, activeColumn] = puzzleState.activeCell;
-    if (puzzleState.direction === "across" && row !== activeRow) {
+    const [activeRow, activeColumn] = activeCell;
+    if (direction === "across" && row !== activeRow) {
       return false;
     }
-    if (puzzleState.direction === "down" && column !== activeColumn) {
+    if (direction === "down" && column !== activeColumn) {
       return false;
     }
-    const { range } = puzzleState.words[puzzleState.direction];
+    const { range } = words[direction];
     const [min, max] = range;
-    if (puzzleState.direction === "across") {
+    if (direction === "across") {
       return column >= min && column <= max;
     }
     return row >= min && row <= max;
   };
 
   const value = {
-    ...puzzleState,
+    activeCell,
+    direction,
+    words,
+    grid,
     setActiveCell,
     toggleDirection,
     toggleCell,
@@ -110,7 +109,7 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
       <br />
       <br />
       <pre>
-        <code>{JSON.stringify(puzzleState, null, 2)}</code>
+        <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
   );
