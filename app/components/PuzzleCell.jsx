@@ -45,8 +45,12 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   
   const handleKeyDown = e => {
     const [activeRow, activeColumn] = puzzle.activeCell;
-    if (e.key === "." || e.key === "Enter") {
+    if (e.key === ".") {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
+      return;
+    }
+    if (e.key === "Enter") {
+      puzzle.toggleDirection();
       return;
     }
     if (e.key === "ArrowRight") {
