@@ -14,7 +14,7 @@ module.exports.initGrid = ({ size, blocks }) => {
   for (let i = 0; i < size; i++) {
     let row = [];
     for (let j = 0; j < size; j++) {
-      row.push('A');
+      row.push(Math.random().toString(36));
     }
     grid.push(row);
   }
