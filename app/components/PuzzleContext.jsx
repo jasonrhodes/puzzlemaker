@@ -49,6 +49,10 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     }
   }
   
+  const advanceActiveCell = () => {
+    const 
+  }
+  
   React.useEffect(() => {
     setWords(calculateCurrentWords());
   }, [grid, setWords, calculateCurrentWords])
@@ -93,7 +97,8 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     getNextClueNumber,
     isCellInActiveWord,
     updateCellValue,
-    toggleSymmetry
+    toggleSymmetry,
+    toggleBlackSquare
   };
 
   return (

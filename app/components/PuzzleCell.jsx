@@ -46,7 +46,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   const handleKeyDown = e => {
     const [activeRow, activeColumn] = puzzle.activeCell;
     if (e.key === ".") {
-      puzzle.updateCellValue(activeRow, activeColumn, !puzzle.grid[activeRow][activeColumn]);
+      puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
     if (e.key === "ArrowRight") {
@@ -67,6 +67,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
     }
     if (/^[a-z0-9]$/.test(e.key)) {
       puzzle.updateCellValue(activeRow, activeColumn, e.key);
+      puzzle.advanceActiveCell();
     }
   }
   

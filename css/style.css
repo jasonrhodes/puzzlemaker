@@ -29,6 +29,10 @@ body {
   cursor: pointer;
 }
 
+.puzzle-cell:focus {
+  outline: none;
+}
+
 .puzzle-cell:first-child {
   margin-left: 0;
 }
