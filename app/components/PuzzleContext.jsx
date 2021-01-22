@@ -49,8 +49,49 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     }
   }
   
+  // if (e.key === "ArrowRight") {
+  //   const nextColumn = Math.min(activeColumn + 1, puzzle.grid[0].length - 1);
+  //   puzzle.setActiveCell([activeRow, nextColumn])
+  // }
+  // if (e.key === "ArrowLeft") {
+  //   const prevColumn = Math.max(activeColumn - 1, 0);
+  //   puzzle.setActiveCell([activeRow, prevColumn]);
+  // }
+  // if (e.key === "ArrowDown") {
+  //   const nextRow = Math.min(activeRow + 1, puzzle.grid.length - 1);
+  //   puzzle.setActiveCell([nextRow, activeColumn]);
+  // }
+  // if (e.key === "ArrowUp") {
+  //   const prevRow = Math.max(activeRow - 1, 0);
+  //   puzzle.setActiveCell([prevRow, activeColumn]);
+  // }
+  
+  const nextAcross = () => {
+    const [activeRow, activeColumn] = activeCell;
+    const nextColumn = Math.min(activeColumn + 1, grid[0].length - 1);
+    setActiveCell([activeRow, nextColumn])
+  }
+  
+  const prevAcross = () => {
+    const [activeRow, activeColumn] = activeCell;
+    const prevColumn = Math.max(activeColumn - 1, 0);
+    setActiveCell([activeRow, prevColumn]);
+  }
+  
+  const nextDown = () => {
+    const [activeRow, activeColumn] = activeCell;
+    const nextRow = Math.min(activeRow + 1, grid.length - 1);
+    setActiveCell([nextRow, activeColumn]);
+  }
+  
+  const prevDown = () => {
+    const [activeRow, activeColumn] = activeCell;
+    const prevRow = Math.max(activeRow - 1, 0);
+    setActiveCell([prevRow, activeColumn]);
+  }
+  
   const advanceActiveCell = () => {
-    const 
+    direction === "across" ? nextAcross() : nextDown();
   }
   
   React.useEffect(() => {
@@ -98,7 +139,12 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     isCellInActiveWord,
     updateCellValue,
     toggleSymmetry,
-    toggleBlackSquare
+    toggleBlackSquare,
+    nextAcross,
+    prevAcross,
+    nextDown,
+    prevDown,
+    advanceActiveCell
   };
 
   return (

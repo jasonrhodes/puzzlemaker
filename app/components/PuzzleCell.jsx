@@ -45,25 +45,27 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   
   const handleKeyDown = e => {
     const [activeRow, activeColumn] = puzzle.activeCell;
-    if (e.key === ".") {
+    if (e.key === "." || e.key === "Enter") {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
     if (e.key === "ArrowRight") {
-      const nextColumn = Math.min(activeColumn + 1, puzzle.grid[0].length - 1);
-      puzzle.setActiveCell([activeRow, nextColumn])
+      puzzle.nextAcross();
     }
     if (e.key === "ArrowLeft") {
-      const prevColumn = Math.max(activeColumn - 1, 0);
-      puzzle.setActiveCell([activeRow, prevColumn]);
+      puzzle.prevAcross();
     }
     if (e.key === "ArrowDown") {
-      const nextRow = Math.min(activeRow + 1, puzzle.grid.length - 1);
-      puzzle.setActiveCell([nextRow, activeColumn]);
+      puzzle.nextDown();
     }
     if (e.key === "ArrowUp") {
-      const prevRow = Math.max(activeRow - 1, 0);
-      puzzle.setActiveCell([prevRow, activeColumn]);
+      puzzle.prevDown();
+    }
+    if (e.key === "Tab") {
+      puzzle.advanceActiveCell();
+    }
+    if (e.key === "Backspace") {
+      puzzle.rewindActiveCell();
     }
     if (/^[a-z0-9]$/.test(e.key)) {
       puzzle.updateCellValue(activeRow, activeColumn, e.key);
