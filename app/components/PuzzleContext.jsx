@@ -92,13 +92,12 @@ const PuzzleContextProvider = ({ grid, children }) => {
 
   const setActiveCell = (row, column) => {
     console.log("Clicked on:", { row, column });
-    if (grid[row][column]){
-      setPuzzleState({
-        ...puzzleState,
-        activeCell: [row, column],
-        words: calculateCurrentWords(row, column)
-      });
-    }
+    setPuzzleState({
+      ...puzzleState,
+      activeCell: [row, column],
+      words: calculateCurrentWords(row, column)
+    });
+    
   };
 
   const toggleDirection = () =>
@@ -130,7 +129,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
   };
 
   const isCellInActiveWord = (row, column) => {
-    /*console.log("checking if cell is in active word", {
+    /*console.log("checking if cell is in an active word", {
       row,
       column,
       puzzle: puzzleState
