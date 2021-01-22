@@ -43,7 +43,14 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
     }
   };
   
+  let keysDown = [];
+  
+  const handleKeyUp = e => {
+    keysDown = keysDown.filter(key => key !== e.key);
+  }
+  
   const handleKeyDown = e => {
+    keysDown.push(e.key);
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
     if (e.key === ".") {
@@ -67,7 +74,11 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.prevDown();
     }
     if (e.key === "Tab") {
-      puzzle.advanceActiveCell();
+      if (keysDown.includes("Shift")) {
+        puzzle.rewindActiveCell();
+      } else {
+        puzzle.advanceActiveCell();
+      }
     }
     if (e.key === "Backspace") {
       if (puzzle.grid[activeRow][activeColumn] !== false) {
@@ -82,7 +93,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   }
   
   return (
-    <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown} tabIndex="0">
+    <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} tabIndex="0">
       <div class="input">{typeof value === "string" ? value.toUpperCase() : value}</div>
       {value && label ? <div class="label">{label}</div> : null}
     </div>
