@@ -41,7 +41,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       if (row === currentRow && column === currentColumn) {
         puzzle.toggleDirection();
       } else {
-        puzzle.setActiveCell(row, column);
+        puzzle.setActiveCell([row, column]);
       }
     // } else {
       // puzzle.toggleCell(row, column);

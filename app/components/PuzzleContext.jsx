@@ -15,7 +15,7 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   //   editMode
   // });
   
-  const [activeCell, _setActiveCell] = React.useState([]);
+  const [activeCell, setActiveCell] = React.useState([]);
   const [direction, setDirection] = React.useState("across");
   const [words, setWords] = React.useState({
     across: emptyWord,
@@ -23,14 +23,13 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   });
   const [grid, setGrid] = React.useState(initialGrid);
 
-  const setActiveCell = (row, column) => {
-    // console.log("Clicked on:", { row, column });
-    // console.log("Value:", grid[row][column]);
-    if (grid[row][column]) {
-      _setActiveCell([row, column]);
-      setWords(calculateCurrentWords(row, column));
-    }
-  };
+  // const setActiveCell = (row, column) => {
+  //   // console.log("Clicked on:", { row, column });
+  //   // console.log("Value:", grid[row][column]);
+  //   if (grid[row][column]) {
+  //     _setActiveCell([row, column]);
+  //   }
+  // };
 
   // const toggleCell = (row, column) => {
   //   if (grid[row][column]) {
@@ -51,13 +50,14 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   const toggleDirection = () =>
     setDirection(direction === "across" ? "down" : "across");
 
-  const calculateCurrentWords = (row, column) => {
+  const calculateCurrentWords = () => {
+    const [row, column] = activeCell;
     if ((!row && row !== 0) || (!column && column !== 0)) {
-      return emptyWord;
+      return { across: emptyWord, down: emptyWord };
     }
 
     if (!grid[row][column]) {
-      return emptyWord;
+      return { across: emptyWord, down: emptyWord };
     }
 
     const across = findAcross(grid[row], column);
