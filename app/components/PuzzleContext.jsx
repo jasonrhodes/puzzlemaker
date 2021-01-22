@@ -4,17 +4,6 @@ const { findAcross, findDown } = require("./utils");
 
 const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   const emptyWord = { range: [], word: "" };
-  // const [puzzleState, setPuzzleState] = React.useState({
-  //   activeCell: [],
-  //   direction: "across",
-  //   words: {
-  //     across: emptyWord, // range of columns for the currently active across word
-  //     down: emptyWord // range of rows for the currently active down word
-  //   },
-  //   grid,
-  //   editMode
-  // });
-  
   const [activeCell, setActiveCell] = React.useState([]);
   const [direction, setDirection] = React.useState("across");
   const [words, setWords] = React.useState({
@@ -22,33 +11,12 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     down: emptyWord
   });
   const [grid, setGrid] = React.useState(initialGrid);
-
-  // const setActiveCell = (row, column) => {
-  //   // console.log("Clicked on:", { row, column });
-  //   // console.log("Value:", grid[row][column]);
-  //   if (grid[row][column]) {
-  //     _setActiveCell([row, column]);
-  //   }
-  // };
-
-  // const toggleCell = (row, column) => {
-  //   if (grid[row][column]) {
-  //     let new_grid = grid;
-  //     new_grid[row][column] = false;
-  //     const size = grid[0].length;
-  //     new_grid[size - (row + 1)][size - (column + 1)] = false;
-  //     setGrid(new_grid);
-  //   } else {
-  //     let new_grid = grid;
-  //     new_grid[row][column] = "A";
-  //     const size = grid[0].length;
-  //     new_grid[size - (row + 1)][size - (column + 1)] = "A";
-  //     setGrid(new_grid);
-  //   }
-  // };
+  const [symmetry, setSymmetry] = React.useState(true);
 
   const toggleDirection = () =>
     setDirection(direction === "across" ? "down" : "across");
+  
+  const toggleSymmetry = () => setSymmetry(!symmetry);
 
   const calculateCurrentWords = () => {
     const [row, column] = activeCell;
@@ -70,6 +38,10 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     const newGrid = [...grid];
     newGrid[row][column] = value;
     setGrid(newGrid);
+  }
+  
+  const toggleBlackSquare = (row, column) => {
+    
   }
   
   React.useEffect(() => {
@@ -110,12 +82,13 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     direction,
     words,
     grid,
+    symmetry,
     setActiveCell,
     toggleDirection,
-    toggleCell: () => null,
     getNextClueNumber,
     isCellInActiveWord,
-    updateCellValue
+    updateCellValue,
+    toggleSymmetry
   };
 
   return (

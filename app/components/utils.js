@@ -14,16 +14,16 @@ function applyBlocks(_grid, blocks) {
   return grid;
 }
 
-function initGrid({ size, blocks }) {
+function initGrid({ size }) {
   const grid = [];
   for (let i = 0; i < size; i++) {
     let row = [];
     for (let j = 0; j < size; j++) {
-      row.push('A');
+      row.push(true);
     }
     grid.push(row);
   }
-  return applyBlocks(grid, blocks);
+  return grid;
 }
 
 function findAcross(cellsInActiveRow, activeColumn) {

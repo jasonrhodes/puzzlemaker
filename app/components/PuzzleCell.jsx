@@ -36,34 +36,38 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
 
   const handleClick = e => {
     const [currentRow, currentColumn] = puzzle.activeCell;
-    // console.log("mode: ",puzzle.editMode)
-    // if (!puzzle.editMode) {
-      if (row === currentRow && column === currentColumn) {
-        puzzle.toggleDirection();
-      } else {
-        puzzle.setActiveCell([row, column]);
-      }
-    // } else {
-      // puzzle.toggleCell(row, column);
-    // }
+    if (row === currentRow && column === currentColumn) {
+      puzzle.toggleDirection();
+    } else {
+      puzzle.setActiveCell([row, column]);
+    }
   };
   
   const handleKeyDown = e => {
     console.log('press', e.key);
+    const [activeRow, activeColumn] = puzzle.activeCell;
     if (e.key === ".") {
-      puzzle.updateCellValue(row, column, false);
+      puzzle.updateCellValue(activeRow, activeColumn, !puzzle.grid[activeRow][activeColumn]);
       return;
     }
     if (e.key === "ArrowRight") {
-      const nextColumn = Math.min(column + 1, puzzle.grid[0].length - 1);
-      puzzle.setActiveCell([row, nextColumn])
+      const nextColumn = Math.min(activeColumn + 1, puzzle.grid[0].length - 1);
+      puzzle.setActiveCell([activeRow, nextColumn])
     }
     if (e.key === "ArrowLeft") {
-      const prevColumn = Math.max(column - 1, 0);
-      puzzle.setActiveCell([row, prevColumn]);
+      const prevColumn = Math.max(activeColumn - 1, 0);
+      puzzle.setActiveCell([activeRow, prevColumn]);
+    }
+    if (e.key === "ArrowDown") {
+      const nextRow = Math.min(activeRow + 1, puzzle.grid.length - 1);
+      puzzle.setActiveCell([nextRow, activeColumn]);
+    }
+    if (e.key === "ArrowUp") {
+      const prevRow = Math.max(activeRow - 1, 0);
+      puzzle.setActiveCell([prevRow, activeColumn]);
     }
     if (/^[a-z0-9]$/.test(e.key)) {
-      puzzle.updateCellValue(row, column, e.key);
+      puzzle.updateCellValue(activeRow, activeColumn, e.key);
     }
   }
   
