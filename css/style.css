@@ -1,5 +1,6 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto",
+    "Droid Sans", "Arial", sans-serif;
 }
 
 .puzzle-grid {
@@ -49,3 +50,8 @@ body {
   left: 3px;
 }
 
+.puzzle-cell .input {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}

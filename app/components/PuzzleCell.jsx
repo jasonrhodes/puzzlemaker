@@ -38,7 +38,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   };
   return (
     <div class={classes} onClick={handleClick}>
-      <input value={value} />
+      <div class="input">{value}</div>
       {value && label ? <div class="label">{label}</div> : null}
     </div>
   );

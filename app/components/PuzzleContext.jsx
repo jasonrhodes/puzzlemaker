@@ -11,12 +11,10 @@ function findAcross(cellsInActiveRow, activeColumn) {
     }
     if (!range.found && !range.start) {
       range.start = range.count;
-      range.word = cellValue;
-      range.count++;
-      return range;
+      range.word = '';
     }
     if (!isBlackSquare) {
-      range.word += cellValue;
+      range.word += (typeof cellValue === "string" ? cellValue : "_");
     }
     if (isBlackSquare && range.found) {
       range.end = range.count - 1;
@@ -46,6 +44,10 @@ function findDown(rows, activeRow, activeColumn) {
     }
     if (!range.found && !range.start) {
       range.start = range.count;
+      range.word = '';
+    }
+    if (!isBlackSquare) {
+      range.word += (typeof cellValue === "string" ? cellValue : "_");
     }
     if (isBlackSquare && range.found) {
       range.end = range.count - 1;
@@ -60,6 +62,8 @@ function findDown(rows, activeRow, activeColumn) {
     range.count++;
     return range;
   }, { count: 0, start: false, end: false, found: false });
+  
+  return { range: [range.start, range.end], word: range.word };
 }
 
 const PuzzleContextProvider = ({ grid, children }) => {
@@ -76,6 +80,7 @@ const PuzzleContextProvider = ({ grid, children }) => {
 
   const setActiveCell = (row, column) => {
     const [currentRow, currentColumn] = puzzleState.activeCell;
+    console.log("Setting active cell", { row, column, currentRow, currentColumn });
     if (row === currentRow && column === currentColumn) {
       toggleDirection();
     } else {
