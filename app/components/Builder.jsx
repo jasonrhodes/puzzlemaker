@@ -21,12 +21,7 @@ const Builder = function() {
   
   const toggleEdit = e => {
     console.log(editMode)
-    if (!editMode){
-      setEditMode(true);
-    } 
-    else {
-      setEditMode(false);
-    }
+    setEditMode()
     console.log("changed to: ", editMode)
   }
   
