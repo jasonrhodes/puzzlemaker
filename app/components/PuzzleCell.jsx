@@ -27,14 +27,19 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   const classes = classnames({
     "puzzle-cell": true,
     "puzzle-cell-x": !value,
-    active: activeRow === row && activeColumn === column
+    active: activeRow === row && activeColumn === column,
+    
   });
 
   const label = getCellLabel({ row, column, puzzle });
 
   const handleClick = e => {
-    console.log("I got clicked!", e);
-    puzzle.setActiveCell(row, column);
+    const [currentRow, currentColumn] = puzzle.activeCell;
+    if (row === currentRow && column === currentColumn) {
+      puzzle.toggleDirection();
+    } else {
+      puzzle.setActiveCell(row, column);
+    }
   };
   return (
     <div class={classes} onClick={handleClick}>
