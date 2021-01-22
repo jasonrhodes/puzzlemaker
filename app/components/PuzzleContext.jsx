@@ -88,6 +88,7 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   const isCellInActiveWord = (row, column) => {
     if (!direction || !words[direction]) {
       console.error("Error with checking cell in active word", { direction, words });
+      return false;
     }
     const [activeRow, activeColumn] = activeCell;
     if (direction === "across" && row !== activeRow) {
