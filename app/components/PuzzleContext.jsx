@@ -25,6 +25,9 @@ function findAcross(cellsInActiveRow, activeColumn) {
     if (isBlackSquare && !range.found) {
       range.start = false;
     }
+    if (!range.end && range.count === cellsInActiveRow.length - 1) {
+      range.end = range.count;
+    }
     
     range.count++;
     return range;
@@ -34,15 +37,18 @@ function findAcross(cellsInActiveRow, activeColumn) {
 }
 
 function findDown(rows, activeRow, activeColumn) {
+  console.log("finding down", { rows, activeRow, activeColumn });
   const range = rows.reduce((range, row) => {
     const cellValue = row[activeColumn]
     const isBlackSquare = !cellValue;
+    
+    console.log("evaluating row", range);
     
     if (range.start !== false && range.end && range.found) {
       range.count++;
       return range;
     }
-    if (!range.found && !range.start) {
+    if (!range.found && range.start === false) {
       range.start = range.count;
       range.word = '';
     }
@@ -58,10 +64,13 @@ function findDown(rows, activeRow, activeColumn) {
     if (isBlackSquare && !range.found) {
       range.start = false;
     }
+    if (!range.end && range.count === rows.length - 1) {
+      range.end = range.count;
+    }
     
     range.count++;
     return range;
-  }, { count: 0, start: false, end: false, found: false });
+  }, { count: 0, start: false, end: false, found: false, word: '' });
   
   return { range: [range.start, range.end], word: range.word };
 }

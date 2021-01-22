@@ -55,3 +55,10 @@ body {
   width: 100%;
   text-align: center;
 }
+
+.puzzle-cell .rebus {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 8px;
+}
