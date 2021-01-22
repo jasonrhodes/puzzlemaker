@@ -91,11 +91,14 @@ const PuzzleContextProvider = ({ grid, children }) => {
   });
 
   const setActiveCell = (row, column) => {
-    setPuzzleState({
-      ...puzzleState,
-      activeCell: [row, column],
-      words: calculateCurrentWords(row, column)
-    });
+    console.log("Clicked on:", { row, column });
+    if (grid[row][column]){
+      setPuzzleState({
+        ...puzzleState,
+        activeCell: [row, column],
+        words: calculateCurrentWords(row, column)
+      });
+    }
   };
 
   const toggleDirection = () =>
@@ -127,11 +130,11 @@ const PuzzleContextProvider = ({ grid, children }) => {
   };
 
   const isCellInActiveWord = (row, column) => {
-    console.log("checking if cell is in active word", {
+    /*console.log("checking if cell is in active word", {
       row,
       column,
       puzzle: puzzleState
-    });
+    });*/
     const [activeRow, activeColumn] = puzzleState.activeCell;
     if (puzzleState.direction === "across" && row !== activeRow) {
       return false;
