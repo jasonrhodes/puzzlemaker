@@ -32,21 +32,21 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     }
   };
 
-  const toggleCell = (row, column) => {
-    if (grid[row][column]) {
-      let new_grid = grid;
-      new_grid[row][column] = false;
-      const size = grid[0].length;
-      new_grid[size - (row + 1)][size - (column + 1)] = false;
-      setGrid(new_grid);
-    } else {
-      let new_grid = grid;
-      new_grid[row][column] = "A";
-      const size = grid[0].length;
-      new_grid[size - (row + 1)][size - (column + 1)] = "A";
-      setGrid(new_grid);
-    }
-  };
+  // const toggleCell = (row, column) => {
+  //   if (grid[row][column]) {
+  //     let new_grid = grid;
+  //     new_grid[row][column] = false;
+  //     const size = grid[0].length;
+  //     new_grid[size - (row + 1)][size - (column + 1)] = false;
+  //     setGrid(new_grid);
+  //   } else {
+  //     let new_grid = grid;
+  //     new_grid[row][column] = "A";
+  //     const size = grid[0].length;
+  //     new_grid[size - (row + 1)][size - (column + 1)] = "A";
+  //     setGrid(new_grid);
+  //   }
+  // };
 
   const toggleDirection = () =>
     setDirection(direction === "across" ? "down" : "across");
@@ -112,7 +112,7 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
     grid,
     setActiveCell,
     toggleDirection,
-    toggleCell,
+    toggleCell: () => null,
     getNextClueNumber,
     isCellInActiveWord,
     updateCellValue
