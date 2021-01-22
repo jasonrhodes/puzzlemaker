@@ -111,6 +111,13 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
         ...puzzleState,
         grid: new_grid
       });
+    } else {
+      let new_grid = grid;
+      new_grid[row][column] = "A";
+      setPuzzleState({
+        ...puzzleState,
+        grid: new_grid
+      });
     }
   }
   
@@ -165,6 +172,7 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
     ...puzzleState,
     setActiveCell,
     toggleDirection,
+    toggleCell,
     getNextClueNumber,
     isCellInActiveWord
   };

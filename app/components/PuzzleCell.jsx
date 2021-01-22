@@ -44,7 +44,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
         puzzle.setActiveCell(row, column);
       }
     } else {
-      puzzle.toggleCell();
+      puzzle.toggleCell(row, column);
     }
   };
   
