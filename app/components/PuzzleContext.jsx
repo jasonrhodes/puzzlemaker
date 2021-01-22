@@ -1,10 +1,9 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
 
-function findAcross(row, activeColumn) {
-  const range = row.reduce((range, column) => {
-    
-    console.log('reducing across column', range.count, ' : ', range);
+function findAcross(cellsInActiveRow, activeColumn) {
+  const range = cellsInActiveRow.reduce((range, cellValue) => {
+    const isBlackSquare = !cellValue;
     
     if (range.start !== false && range.end && range.found) {
       range.count++;
@@ -13,13 +12,13 @@ function findAcross(row, activeColumn) {
     if (!range.found && !range.start) {
       range.start = range.count;
     }
-    if (!column && range.found) {
+    if (isBlackSquare && range.found) {
       range.end = range.count - 1;
     }
     if (range.count === activeColumn) {
       range.found = true;
     }
-    if (!column && !range.found) {
+    if (isBlackSquare && !range.found) {
       range.start = false;
     }
     
@@ -28,6 +27,33 @@ function findAcross(row, activeColumn) {
   }, { count: 0, start: false, end: false, found: false });
   
   return [range.start, range.end];
+}
+
+function findDown(rows, activeRow, activeColumn) {
+  const range = rows.reduce((range, row) => {
+    const cellValue = row[activeColumn]
+    const isBlackSquare = !cellValue;
+    
+    if (range.start !== false && range.end && range.found) {
+      range.count++;
+      return range;
+    }
+    if (!range.found && !range.start) {
+      range.start = range.count;
+    }
+    if (isBlackSquare && range.found) {
+      range.end = range.count - 1;
+    }
+    if (range.count === activeColumn) {
+      range.found = true;
+    }
+    if (isBlackSquare && !range.found) {
+      range.start = false;
+    }
+    
+    range.count++;
+    return range;
+  }, { count: 0, start: false, end: false, found: false });
 }
 
 const PuzzleContextProvider = ({ grid, children }) => {
