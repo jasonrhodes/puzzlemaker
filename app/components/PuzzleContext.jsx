@@ -78,7 +78,7 @@ function findDown(rows, activeRow, activeColumn) {
   return { range: [range.start, range.end], word: range.word };
 }
 
-const PuzzleContextProvider = ({ grid, children }) => {
+const PuzzleContextProvider = ({ grid, editMode, children }) => {
   const emptyWord = { range: [], word: "" };
   const [puzzleState, setPuzzleState] = React.useState({
     activeCell: [],
@@ -87,7 +87,8 @@ const PuzzleContextProvider = ({ grid, children }) => {
       across: emptyWord, // range of columns for the currently active across word
       down: emptyWord // range of rows for the currently active down word
     },
-    grid
+    grid,
+    editMode
   });
 
   const setActiveCell = (row, column) => {
@@ -100,9 +101,19 @@ const PuzzleContextProvider = ({ grid, children }) => {
         words: calculateCurrentWords(row, column)
       });
     }
-    
   };
 
+  const toggleCell = (row, column) => {
+    if (grid[row][column]){
+      let new_grid = grid;
+      new_grid[row][column] = false;
+      setPuzzleState({
+        ...puzzleState,
+        grid: new_grid
+      });
+    }
+  }
+  
   const toggleDirection = () =>
     setPuzzleState({
       ...puzzleState,

@@ -2,9 +2,9 @@ const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
 const { PuzzleContextProvider } = require("./PuzzleContext");
 
-const Puzzle = ({ grid }) => {
+const Puzzle = ({ grid, editMode }) => {
   return (
-    <PuzzleContextProvider grid={grid}>
+    <PuzzleContextProvider grid={grid} editMode={editMode}>
       <div class="puzzle-grid">
         {grid.map((columns, i) => (
           <PuzzleRow
