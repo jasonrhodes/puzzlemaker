@@ -1,8 +1,8 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
-const { findAcross, findDown } = require("./utils");
+const { findAcross, findDown, getSymmetricalCell } = require("./utils");
 
-const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
+const PuzzleContextProvider = ({ initialGrid, children }) => {
   const emptyWord = { range: [], word: "" };
   const [activeCell, setActiveCell] = React.useState([]);
   const [direction, setDirection] = React.useState("across");
@@ -41,7 +41,12 @@ const PuzzleContextProvider = ({ initialGrid, editMode, children }) => {
   }
   
   const toggleBlackSquare = (row, column) => {
-    
+    const currentValue = grid[row][column];
+    updateCellValue(row, column, !currentValue);
+    if (symmetry) {
+      const [symRow, symCol] = getSymmetricalCell(grid, row, column);
+      updateCellValue(symRow, symCol, !currentValue);
+    }
   }
   
   React.useEffect(() => {

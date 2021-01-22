@@ -44,7 +44,6 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   };
   
   const handleKeyDown = e => {
-    console.log('press', e.key);
     const [activeRow, activeColumn] = puzzle.activeCell;
     if (e.key === ".") {
       puzzle.updateCellValue(activeRow, activeColumn, !puzzle.grid[activeRow][activeColumn]);

@@ -1,4 +1,5 @@
 module.exports.applyBlocks = applyBlocks;
+module.exports.getSymmetricalCell = getSymmetricalCell;
 module.exports.initGrid = initGrid;
 module.exports.findAcross = findAcross;
 module.exports.findDown = findDown;
@@ -7,11 +8,17 @@ function applyBlocks(_grid, blocks) {
   const grid = [..._grid];
   blocks.forEach(([row, column]) => {
     grid[row][column] = false;
-    const size = grid[0].length;
-    grid[size - (row + 1)][size - (column + 1)] = false;
+    const [symRow, symCol] = getSymmetricalCell(grid, row, column);
+    grid[symRow][symCol] = false;
   });
 
   return grid;
+}
+
+function getSymmetricalCell(grid, row, column) {
+  const height = grid.length;
+  const width = grid[0].length;
+  return [width - (row + 1), height - (column + 1)];
 }
 
 function initGrid({ size }) {

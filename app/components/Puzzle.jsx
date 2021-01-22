@@ -2,9 +2,9 @@ const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
 const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 
-const Puzzle = ({ initialGrid, editMode }) => {
+const Puzzle = ({ initialGrid }) => {
   return (
-    <PuzzleContextProvider initialGrid={initialGrid} editMode={editMode}>
+    <PuzzleContextProvider initialGrid={initialGrid}>
       <PuzzleContext.Consumer>
         {puzzle => (
           <div class="puzzle-grid">
