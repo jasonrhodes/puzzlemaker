@@ -26,6 +26,7 @@ body {
   margin-left: -1px;
   position: relative;
   z-index: 50;
+  cursor: pointer;
 }
 
 .puzzle-cell:first-child {
@@ -45,6 +46,10 @@ body {
 .puzzle-cell.highlighted {
   border-color: rgb(64, 224, 208);
   background-color: rgba(64, 224, 208, 0.4);
+}
+
+.puzzle-cell.active.highlighted {
+  background-color: white;
 }
 
 .puzzle-cell .label {
