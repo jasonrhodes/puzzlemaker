@@ -1,82 +1,6 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
-
-function findAcross(cellsInActiveRow, activeColumn) {
-  const range = cellsInActiveRow.reduce(
-    (range, cellValue) => {
-      const isBlackSquare = !cellValue;
-
-      if (range.start !== false && range.end && range.found) {
-        range.count++;
-        return range;
-      }
-      if (!range.found && range.start === false) {
-        range.start = range.count;
-        range.word = "";
-      }
-      if (!isBlackSquare) {
-        range.word += typeof cellValue === "string" ? cellValue : "_";
-      }
-      if (isBlackSquare && range.found) {
-        range.end = range.count - 1;
-      }
-      if (range.count === activeColumn) {
-        range.found = true;
-      }
-      if (isBlackSquare && !range.found) {
-        range.start = false;
-      }
-      if (!range.end && range.count === cellsInActiveRow.length - 1) {
-        range.end = range.count;
-      }
-
-      range.count++;
-      return range;
-    },
-    { count: 0, start: false, end: false, found: false, word: "" }
-  );
-
-  return { range: [range.start, range.end], word: range.word };
-}
-
-function findDown(rows, activeRow, activeColumn) {
-  const range = rows.reduce(
-    (range, row) => {
-      const cellValue = row[activeColumn];
-      const isBlackSquare = !cellValue;
-
-      if (range.start !== false && range.end && range.found) {
-        range.count++;
-        return range;
-      }
-      if (!range.found && range.start === false) {
-        range.start = range.count;
-        range.word = "";
-      }
-      if (!isBlackSquare) {
-        range.word += typeof cellValue === "string" ? cellValue : "_";
-      }
-      if (isBlackSquare && range.found) {
-        range.end = range.count - 1;
-      }
-      if (range.count === activeRow) {
-        range.found = true;
-      }
-      if (isBlackSquare && !range.found) {
-        range.start = false;
-      }
-      if (!range.end && range.count === rows.length - 1) {
-        range.end = range.count;
-      }
-
-      range.count++;
-      return range;
-    },
-    { count: 0, start: false, end: false, found: false, word: "" }
-  );
-
-  return { range: [range.start, range.end], word: range.word };
-}
+const { findAcross, findDown } = require("./utils");
 
 const PuzzleContextProvider = ({ grid, editMode, children }) => {
   const emptyWord = { range: [], word: "" };
@@ -94,7 +18,7 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
   const setActiveCell = (row, column) => {
     console.log("Clicked on:", { row, column });
     console.log("Value:", grid[row][column]);
-    if (grid[row][column]){
+    if (grid[row][column]) {
       setPuzzleState({
         ...puzzleState,
         activeCell: [row, column],
@@ -104,7 +28,7 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
   };
 
   const toggleCell = (row, column) => {
-    if (grid[row][column]){
+    if (grid[row][column]) {
       let new_grid = grid;
       new_grid[row][column] = false;
       const size = grid[0].length;
@@ -123,8 +47,8 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
         grid: new_grid
       });
     }
-  }
-  
+  };
+
   const toggleDirection = () =>
     setPuzzleState({
       ...puzzleState,
@@ -132,9 +56,9 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
     });
 
   const calculateCurrentWords = (row, column) => {
-    /*if (!row || !column) {
+    if ((!row && row !== 0) || (!column && column !== 0)) {
       return emptyWord;
-    }*/   // this gave an error for row/column 0
+    }
 
     if (!puzzleState.grid[row][column]) {
       return emptyWord;
@@ -145,6 +69,10 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
 
     return { across, down };
   };
+  
+  const updateCellValue(row, column, value) {
+    
+  }
 
   let clue = 0;
   const getNextClueNumber = () => {
@@ -152,11 +80,6 @@ const PuzzleContextProvider = ({ grid, editMode, children }) => {
   };
 
   const isCellInActiveWord = (row, column) => {
-    /*console.log("checking if cell is in an active word", {
-      row,
-      column,
-      puzzle: puzzleState
-    });*/
     const [activeRow, activeColumn] = puzzleState.activeCell;
     if (puzzleState.direction === "across" && row !== activeRow) {
       return false;
