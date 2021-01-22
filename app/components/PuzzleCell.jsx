@@ -28,7 +28,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
     "puzzle-cell": true,
     "puzzle-cell-x": !value,
     active: activeRow === row && activeColumn === column,
-    highlighted: puzzle.isCellInActiveWord(row, column)
+    highlighted: value && puzzle.isCellInActiveWord(row, column)
   });
 
   const label = getCellLabel({ row, column, puzzle });
