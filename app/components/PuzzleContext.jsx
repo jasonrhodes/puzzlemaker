@@ -94,6 +94,10 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     direction === "across" ? nextAcross() : nextDown();
   }
   
+  const rewindActiveCell = () => {
+    direction === "across" ? prevAcross() : prevDown();
+  }
+  
   React.useEffect(() => {
     setWords(calculateCurrentWords());
   }, [grid, setWords, calculateCurrentWords])
@@ -144,7 +148,8 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     prevAcross,
     nextDown,
     prevDown,
-    advanceActiveCell
+    advanceActiveCell,
+    rewindActiveCell
   };
 
   return (

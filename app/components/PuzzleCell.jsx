@@ -65,6 +65,9 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.advanceActiveCell();
     }
     if (e.key === "Backspace") {
+      if (puzzle.grid[activeRow][activeColumn] !== false) {
+        puzzle.updateCellValue(activeRow, activeColumn, true);
+      }
       puzzle.rewindActiveCell();
     }
     if (/^[a-z0-9]$/.test(e.key)) {
