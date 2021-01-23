@@ -15,7 +15,7 @@ module.exports = () => {
   const handleChange = e => {
     setGridSize(e.target.value);
   }
-  const [rows = 0, columns = 0] = gridSize ? gridSize.split(" x ") : [];
+  const [rows = 0, columns = 0] = (gridSize ? gridSize.split(" x ") : [];
   return (
     <React.Fragment>
       <h1 class="title">Puzzlemaker</h1>
