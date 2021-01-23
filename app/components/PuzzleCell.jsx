@@ -23,7 +23,7 @@ const getCellLabel = ({ puzzle, row, column }) => {
 };
 
 const PuzzleCell = ({ value, row, column, puzzle }) => {
-  const [keysDown, setKeysDown] = React.useState([]);
+  // const [keysDown, setKeysDown] = React.useState([]);
   const [activeRow, activeColumn] = puzzle.activeCell;
     
   const classes = classnames({
@@ -51,8 +51,8 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   
   const handleKeyDown = e => {
     console.log('KeyDown', e.key);
-    setKeysDown([...keysDown, e.key]);
-    console.log('keys down:', keysDown.join(", "));
+    // setKeysDown([...keysDown, e.key]);
+    // console.log('keys down:', keysDown.join(", "));
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
     if (e.key === ".") {
@@ -76,11 +76,11 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.prevDown();
     }
     if (e.key === "Tab") {
-      if (keysDown.includes("Shift")) {
-        puzzle.rewindActiveCell();
-      } else {
+      // if (keysDown.includes("Shift")) {
+      //   puzzle.rewindActiveCell();
+      // } else {
         puzzle.advanceActiveCell();
-      }
+      // }
     }
     if (e.key === "Backspace") {
       if (puzzle.grid[activeRow][activeColumn] !== false) {
