@@ -23,10 +23,11 @@ const Builder = function() {
     setEditMode((prevSetting) => !prevSetting)
     console.log("changed to: ", editMode)
   }
+  const { DesktopDownloadIcon } = require("@primer/octicons-react");
   return (
     <div class="container">
-      <h1>p u z z l e m a k e r</h1>
-      <p>[Title] by [Author]</p>
+      <h1 class="title">Puzzlemaker</h1>
+      <p>[Title] by [Author] <DesktopDownloadIcon size={24} /></p>
       <Puzzle initialGrid={grid} />
     </div>
   );

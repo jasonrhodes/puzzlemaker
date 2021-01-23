@@ -76,3 +76,7 @@ body {
   width: 100%;
   text-align: center;
 }
+
+.title {
+  font-family: 'Laila', serif;
+}
