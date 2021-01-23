@@ -24,10 +24,13 @@ const Builder = function() {
     console.log("changed to: ", editMode)
   }
   const { DesktopDownloadIcon } = require("@primer/octicons-react");
+  const { PencilIcon } = require("@primer/octicons-react");
+  const { UnlockIcon } = require("@primer/octicons-react");
   return (
     <div class="container">
       <h1 class="title">Puzzlemaker</h1>
-      <p>[Title] by [Author] <DesktopDownloadIcon size={24} /></p>
+      <div class="menu"><DesktopDownloadIcon size={24} /> <PencilIcon size={24} /> <UnlockIcon size={24} /></div>
+      <div class="puzzle-info">[Title] by [Author] </div>
       <Puzzle initialGrid={grid} />
     </div>
   );
