@@ -6,7 +6,7 @@ const hashHistory = require('react-router-dom').hashHistory;
 
 /* Import Components */
 const Builder = require('./components/Builder');
-const Home = re
+const Home = require('./components/Home');
 
 ReactDOM.render((
   <BrowserRouter>
