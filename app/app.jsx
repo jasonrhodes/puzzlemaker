@@ -11,8 +11,7 @@ const Home = require('./components/Home');
 ReactDOM.render((
   <BrowserRouter>
     <div>
-      <Route exact path="/" component={Builder}/>
+      <Route exact path="/" component={Home}/>
       <Route exact path="/edit" component={Builder} />
-      <Route exact path="/home" component={Home} />
     </div>
   </BrowserRouter>), document.getElementById('main'));
