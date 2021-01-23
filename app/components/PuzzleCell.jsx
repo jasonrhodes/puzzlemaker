@@ -53,6 +53,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   const handleKeyDown = e => {
     console.log('KeyDown', e.key);
     keysDown.push(e.key);
+    console.log('keys down:', keysDown.join(", "));
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
     if (e.key === ".") {
