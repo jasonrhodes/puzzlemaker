@@ -4,7 +4,6 @@ const { Link } = require("react-router");
 module.exports = () => {
   const [gridSize, setGridSize] = React.useState(false);
   const handleChange = e => {
-    console.log("change", e);
     setGridSize(e.target.value);
   }
   return (
@@ -22,7 +21,7 @@ module.exports = () => {
         <option value="15 x 15">15 x 15 (standard NYT, Mon-Sat)</option>
         <option value="21 x 21">21 x 21 (standard NYT, Sun)</option>
       </select>
-      <div>{!gridSize ? <p>Create Puzzle</p> : <Link href="/edit">Create {gridSize} Puzzle</a>}</div>
+      <div>{!gridSize ? <p>Create Puzzle</p> : gridSize}</div>
     </React.Fragment>
   )
 }

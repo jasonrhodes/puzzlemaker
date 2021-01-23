@@ -15,14 +15,14 @@ const DEFAULT_BLOCKS = [
   [6, 3]
 ];
 
-const Builder = function() {
-  const grid = initGrid({ size: 15 });
-  
-  const toggleEdit = e => {
-    console.log(editMode)
-    setEditMode((prevSetting) => !prevSetting)
-    console.log("changed to: ", editMode)
+const Builder = function({ location }) {
+  let size = 15;
+  if (location.state && location.state.gridSize) {
+    const [rows, columns] = location.state.gridSize.split(" x ");
+    size = rows;
   }
+  const grid = initGrid({ size });
+  
   const { DesktopDownloadIcon } = require("@primer/octicons-react");
   const { PencilIcon } = require("@primer/octicons-react");
   const { UnlockIcon } = require("@primer/octicons-react");
@@ -30,7 +30,7 @@ const Builder = function() {
     <div class="container">
       <h1 class="title">Puzzlemaker</h1>
       <div class="menu"><DesktopDownloadIcon size={24} /> <PencilIcon size={24} /> <UnlockIcon size={24} /></div>
-      <div class="puzzle-info">[Title] by [Author] </div>
+      <div class="puzzle-info">[Title] by [Author]</div>
       <Puzzle initialGrid={grid} />
     </div>
   );
