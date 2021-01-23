@@ -1,4 +1,5 @@
 dependencies:
+  '@primer/octicons-react': 11.2.0
   classnames: 2.2.6
   express: 4.16.4
   jsx-loader: 0.13.2
@@ -14,6 +15,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-9lsJwJLxDh/T3Q3SZszfWOTkk3pHbkmH+3KY+zwIDmsNlxsumuhS2TH3NIpktU4kNvfzy+k3eLT7aTJSPTo0OA==
+  /@primer/octicons-react/11.2.0:
+    dev: false
+    engines:
+      node: '>=8'
+    peerDependencies:
+      react: '>=15'
+    resolution:
+      integrity: sha512-pi3DT5fUtATw2atMRQ7xCUUbdauA/hYTKfM2ijf3rtipeyQ7Ou3ij/JLhnc9Ke110ljHJh69j/PiINbbKAYegQ==
   /@webassemblyjs/ast/1.8.5:
     dependencies:
       '@webassemblyjs/helper-module-context': 1.8.5
@@ -3395,6 +3404,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  '@primer/octicons-react': ^11.2.0
   classnames: ^2.2.6
   express: ^4.16.4
   jsx-loader: ^0.13.2
