@@ -76,6 +76,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.prevDown();
     }
     if (e.key === "Tab") {
+      console.log({ keysDown });
       if (keysDown.includes("Shift")) {
         puzzle.rewindActiveCell();
       } else {
