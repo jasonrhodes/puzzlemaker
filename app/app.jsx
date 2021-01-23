@@ -6,10 +6,13 @@ const hashHistory = require('react-router-dom').hashHistory;
 
 /* Import Components */
 const Builder = require('./components/Builder');
+const Home = re
 
 ReactDOM.render((
   <BrowserRouter>
     <div>
       <Route exact path="/" component={Builder}/>
+      <Route exact path="/edit" component={Builder} />
+      <Route exact path="/home" component={Home} />
     </div>
   </BrowserRouter>), document.getElementById('main'));
