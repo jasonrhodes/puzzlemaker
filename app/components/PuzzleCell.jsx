@@ -23,6 +23,7 @@ const getCellLabel = ({ puzzle, row, column }) => {
 };
 
 const PuzzleCell = ({ value, row, column, puzzle }) => {
+  const [keysDown, setKeysDown] = React.useState([]);
   const [activeRow, activeColumn] = puzzle.activeCell;
     
   const classes = classnames({
@@ -43,8 +44,6 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
     }
   };
   
-  let keysDown = [];
-  
   const handleKeyUp = e => {
     console.log('KeyUp', e.key);
     // keysDown = keysDown.filter(key => key !== e.key);
@@ -52,7 +51,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   
   const handleKeyDown = e => {
     console.log('KeyDown', e.key);
-    keysDown.push(e.key);
+    setKeysDown([...keysDown, e.key]);
     console.log('keys down:', keysDown.join(", "));
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
