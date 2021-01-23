@@ -47,7 +47,7 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   
   const handleKeyUp = e => {
     console.log('KeyUp', e.key);
-    keysDown = keysDown.filter(key => key !== e.key);
+    // keysDown = keysDown.filter(key => key !== e.key);
   }
   
   const handleKeyDown = e => {
@@ -77,7 +77,6 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.prevDown();
     }
     if (e.key === "Tab") {
-      console.log({ keysDown });
       if (keysDown.includes("Shift")) {
         puzzle.rewindActiveCell();
       } else {
