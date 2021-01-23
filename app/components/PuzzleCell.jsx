@@ -36,23 +36,19 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
   const label = getCellLabel({ row, column, puzzle });
 
   const handleClick = e => {
-    const [currentRow, currentColumn] = puzzle.activeCell;
-    if (row === currentRow && column === currentColumn) {
+    const [activeRow, activeColumn] = puzzle.activeCell;
+    if (row === activeRow && column === activeColumn) {
       puzzle.toggleDirection();
     } else {
       puzzle.setActiveCell([row, column]);
     }
-  };
-
-  const handleKeyUp = e => {
-    console.log("KeyUp", e.key);
-    // keysDown = keysDown.filter(key => key !== e.key);
+    if (e.metaKey) {
+      puzzle.toggleBlackSquare(row, column);
+    }
   };
 
   const handleKeyDown = e => {
-    console.log("KeyDown", e.key);
-    // setKeysDown([...keysDown, e.key]);
-    // console.log('keys down:', keysDown.join(", "));
+    // console.log("KeyDown", e.key);
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
     if (e.key === ".") {
@@ -99,7 +95,6 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       class={classes}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      onKeyUp={handleKeyUp}
       tabIndex="0"
     >
       <div class="input">
