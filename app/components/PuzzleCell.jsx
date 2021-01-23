@@ -25,7 +25,7 @@ const getCellLabel = ({ puzzle, row, column }) => {
 const PuzzleCell = ({ value, row, column, puzzle }) => {
   // const [keysDown, setKeysDown] = React.useState([]);
   const [activeRow, activeColumn] = puzzle.activeCell;
-    
+
   const classes = classnames({
     "puzzle-cell": true,
     "puzzle-cell-x": !value,
@@ -43,14 +43,14 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.setActiveCell([row, column]);
     }
   };
-  
+
   const handleKeyUp = e => {
-    console.log('KeyUp', e.key);
+    console.log("KeyUp", e.key);
     // keysDown = keysDown.filter(key => key !== e.key);
-  }
-  
+  };
+
   const handleKeyDown = e => {
-    console.log('KeyDown', e.key);
+    console.log("KeyDown", e.key);
     // setKeysDown([...keysDown, e.key]);
     // console.log('keys down:', keysDown.join(", "));
     const [activeRow, activeColumn] = puzzle.activeCell;
@@ -76,11 +76,11 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.prevDown();
     }
     if (e.key === "Tab") {
-      // if (keysDown.includes("Shift")) {
-      //   puzzle.rewindActiveCell();
-      // } else {
+      if (e.shiftKey) {
+        puzzle.rewindActiveCell();
+      } else {
         puzzle.advanceActiveCell();
-      // }
+      }
     }
     if (e.key === "Backspace") {
       if (puzzle.grid[activeRow][activeColumn] !== false) {
@@ -92,11 +92,19 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       puzzle.updateCellValue(activeRow, activeColumn, e.key);
       puzzle.advanceActiveCell();
     }
-  }
-  
+  };
+
   return (
-    <div class={classes} onClick={handleClick} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} tabIndex="0">
-      <div class="input">{typeof value === "string" ? value.toUpperCase() : value}</div>
+    <div
+      class={classes}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      onKeyUp={handleKeyUp}
+      tabIndex="0"
+    >
+      <div class="input">
+        {typeof value === "string" ? value.toUpperCase() : value}
+      </div>
       {value && label ? <div class="label">{label}</div> : null}
     </div>
   );
