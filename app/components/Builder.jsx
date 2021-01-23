@@ -25,7 +25,7 @@ const Builder = function() {
   }
   
   return (
-    <div>
+    <div class="container">
       <h1>p u z z l e m a k e r</h1>
       <p>[Title] by [Author]</p>
       <Puzzle initialGrid={grid} />
