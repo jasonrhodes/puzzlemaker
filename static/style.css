@@ -9,6 +9,10 @@ body {
   margin-right: auto;
 }
 
+h1 {
+  font-family: 'Amaranth', serif;
+}
+
 .puzzle-grid {
   border: 1px solid black;
   border-bottom-width: 2px;
@@ -76,3 +80,8 @@ body {
   text-align: center;
 }
 
+@font-face {
+  font-family: 'Amaranth';
+  src: url('Amaranth-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('maranth-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
