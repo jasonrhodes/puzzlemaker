@@ -6,6 +6,7 @@ const hashHistory = require('react-router-dom').hashHistory;
 
 /* Import Components */
 const Builder = require('./components/Builder');
+import {RepoIcon} from '@primer/octicons-react';
 
 ReactDOM.render((
   <BrowserRouter>
