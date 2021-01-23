@@ -21,11 +21,11 @@ function getSymmetricalCell(grid, row, column) {
   return [width - (row + 1), height - (column + 1)];
 }
 
-function initGrid({ size }) {
+function initGrid({ rows, columns }) {
   const grid = [];
-  for (let i = 0; i < size; i++) {
+  for (let i = 0; i < rows; i++) {
     let row = [];
-    for (let j = 0; j < size; j++) {
+    for (let j = 0; j < columns; j++) {
       row.push(true);
     }
     grid.push(row);

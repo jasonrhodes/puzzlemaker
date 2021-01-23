@@ -16,12 +16,8 @@ const DEFAULT_BLOCKS = [
 ];
 
 const Builder = function({ location }) {
-  let size = 15;
-  if (location.state && location.state.gridSize) {
-    const [rows, columns] = location.state.gridSize.split(" x ");
-    size = rows;
-  }
-  const grid = initGrid({ size });
+  const { rows = 15, columns = 15 } = location.state || {};
+  const grid = initGrid({ rows, columns });
   
   const { DesktopDownloadIcon } = require("@primer/octicons-react");
   const { PencilIcon } = require("@primer/octicons-react");
