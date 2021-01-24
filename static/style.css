@@ -83,7 +83,7 @@ a {
 
 .title {
   font-family: 'Laila', serif;
-  margin: 10px 0px;
+  margin: 0px 0px 10px 0px;
   border-bottom: 2px solid #ccc;
 }
 
@@ -93,8 +93,8 @@ a {
 
 .menu {
   position: absolute;
-  top: 25px;
-  right: 1px;
+  top: 15px;
+  right: 2px;
 }
 
 .menu a {
@@ -105,11 +105,16 @@ input.inline-content-editable {
   border: 0px;
   font-size: 18px;
   font-weight: bold;
-  -webkit-appearance: none;
+  border-bottom: 2px solid #fff;
 }
 
 input.inline-content-editable:focus {
-  border-bottom: 1px solid rgb(34, 188, 172);
+  border-bottom: 2px solid rgb(34, 188, 172);
   -webkit-appearance: none;
-  
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  outline: none;
 }
