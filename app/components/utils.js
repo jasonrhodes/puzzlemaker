@@ -36,8 +36,10 @@ function initGrid({ rows, columns }) {
 }
 
 function findAcross(cellsInActiveRow, activeColumn) {
+  console.log("finding across", { cellsInActiveRow, activeColumn });
   const range = cellsInActiveRow.reduce(
     (range, cell) => {
+      console.log("cell", { range, cell });
       if (range.start !== false && range.end && range.found) {
         range.count++;
         return range;
