@@ -13,6 +13,7 @@ const Menu = ({}) => {
   return (
     <div class="menu">
       <Link data-tip="Home" to="/"><HomeIcon size={24} /></Link>
+      <ReactTooltip>Home</ReactTooltip>
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link><PencilIcon size={24} /></Link>
       <Link onClick={toggleLock()} ><UnlockIcon size={24} /></Link>
