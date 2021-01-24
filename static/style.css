@@ -125,7 +125,8 @@ input.inline-content-editable, .fakeinput {
   border-bottom: 4px solid transparent;
   min-width: 50px;
   padding: 1px 2px;
-
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
+    "Droid Sans", "Arial", sans-serif;
 }
 
 input.inline-content-editable:focus {

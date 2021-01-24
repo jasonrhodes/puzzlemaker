@@ -8,24 +8,20 @@ const Puzzle = ({ initialGrid }) => {
   const [author, setAuthor] = React.useState("Author");
   const handleTitleChange = e => {
     e.preventDefault();
-    var tid = e.target.id;
-    console.log(measureMyInputText(tid));
-    e.target.style.width = (measureMyInputText(tid) + 4) + 'px';
-    
+    e.target.style.width = measureMyInputText(e.target.id) + 'px';
     setTitle(e.target.value);
   }
   const handleAuthorChange = e => {
     e.preventDefault();
-    var aid = e.target.id;
-    e.target.style.width = (measureMyInputText(aid) + 4) + 'px';
+    e.target.style.width = measureMyInputText(e.target.id) + 'px';
     setAuthor(e.target.value);
   }
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
       <div class="puzzle-info">
-        <input id="title" class="inline-content-editable" style={{ width: '8ch' }} value={title} type="text" onChange={handleTitleChange} />
+        <input id="title" class="inline-content-editable" style={{ width: '5ch' }} value={title} type="text" onChange={handleTitleChange} />
         <span> by </span>
-        <input id="author" class="inline-content-editable" value={author} type="text" onChange={handleAuthorChange} />
+        <input id="author" class="inline-content-editable" style={{ width: '6ch' }} value={author} type="text" onChange={handleAuthorChange} />
       </div>
       <PuzzleContext.Consumer>
         {puzzle => (
