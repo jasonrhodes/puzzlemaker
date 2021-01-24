@@ -5,11 +5,18 @@ const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 const Puzzle = ({ initialGrid }) => {
   const [title, setTitle] = React.useState("Title");
   const [author, setAuthor] = React.useState("Author");
-  const handleTitleChange = e => setTitle
+  const handleTitleChange = e => setTitle(e.target.value);
+  const handleAuthorChange = e => setAuthor(e.target.value);
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
       <div class="puzzle-info">
-        <input type="text" value={title} onChange={handleTitleChange} /> by <input type="text" value={author} onChange={handleAuthorChange} />
+        <span class="inline-content-editable" contenteditable={true} onInput={handleTitleChange}>
+          {title}
+        </span>
+        by
+        <span class="inline-content-editable" contenteditable={true} onInput={handleAuthorChange}>
+          {author}
+        </span>
       </div>
       <PuzzleContext.Consumer>
         {puzzle => (
