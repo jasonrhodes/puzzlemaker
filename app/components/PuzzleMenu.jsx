@@ -10,9 +10,7 @@ const { ReactTooltip } = require ("react-tooltip");
 
 const PuzzleMenu = ({puzzle}) => {
   const toggleLock = e => {
-    console.log('hey');
-    console.log(puzzle.symmetry);
-    puzzle.symmetry = !puzzle.symmetry
+    puzzle.toggleSymmetry();
   };
   
   const lockIcon = () => {
@@ -28,7 +26,6 @@ const PuzzleMenu = ({puzzle}) => {
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link><PencilIcon size={24} /></Link>
       <Link onClick={toggleLock} >{lockIcon()}</Link>
-      <button onClick={toggleLock}>Test</button>
     </div>
   );
 };
