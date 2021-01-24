@@ -3,6 +3,7 @@ module.exports.getSymmetricalCell = getSymmetricalCell;
 module.exports.initGrid = initGrid;
 module.exports.findAcross = findAcross;
 module.exports.findDown = findDown;
+module.exports.getCellClue = getCellClue;
 
 function applyBlocks(_grid, blocks) {
   const grid = [..._grid];
@@ -110,25 +111,22 @@ function findDown(rows, activeRow, activeColumn) {
 function getCellClue({ puzzle, row, column }) {
   const { grid, getNextClueNumber } = puzzle;
   const currentCell = grid[row][column];
-  const prevAcrossCell = grid[row][column - 1] || {};
-  const prevDownCell = grid[row - 1][column] || {};
+  const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
+  const prevDownCell = row > 0 ? grid[row - 1][column] : {};
   
   if (currentCell.isBlackSquare) {
-    return {};
+    return false;
   }
-  
   if (row === 0) {
-    return {
-      
-    };
+    return getNextClueNumber();
   }
   if (column === 0) {
     return getNextClueNumber();
   }
-  if (grid[row][column - 1].isBlackSquare) {
+  if (prevAcrossCell.isBlackSquare) {
     return getNextClueNumber();
   }
-  if (grid[row - 1][column].isBlackSquare) {
+  if (prevDownCell.isBlackSquare) {
     return getNextClueNumber();
   }
   return false;

@@ -1,5 +1,6 @@
 const React = require("react");
 const classnames = require("classnames");
+const { getCellClue } = require("./utils");
 
 const PuzzleCell = ({ cell, row, column, puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
@@ -11,7 +12,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column)
   });
 
-  const label = getCellLabel({ row, column, puzzle });
+  const label = getCellClue({ row, column, puzzle });
 
   const handleClick = e => {
     const [activeRow, activeColumn] = puzzle.activeCell;
