@@ -8,21 +8,22 @@ const { ReactTooltip } = require ("react-tooltip");
 
 
 
-const Menu = ({puzzle}) => {
+const PuzzleMenu = ({puzz}) => {
   const toggleLock = e => {
-    puzzle.toggleSymmetry();
-    return (
-      puzzle.symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />
-    );
+    // puzz.toggleSymmetry();
+    // return (
+    //   puzz.symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />
+    // );
   };
   
   return (
     <div class="menu">
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link><PencilIcon size={24} /></Link>
-      <Link onClick={toggleLock()} >{puzzle.symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />}</Link>
+      <Link onClick={toggleLock()} ><UnlockIcon size={24} /></Link>
+<!--       <Link onClick={toggleLock()} >{puzz.symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />}</Link> -->
     </div>
   );
 };
 
-module.exports = Menu;
+module.exports = PuzzleMenu;
