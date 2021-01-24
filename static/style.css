@@ -114,7 +114,7 @@ a {
   padding: 8.5px;
 }
 
-input.inline-content-editable {
+input.inline-content-editable, .input {
   border: 0px;
   font-size: 18px;
   font-weight: bold;

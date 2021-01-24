@@ -8,16 +8,16 @@ const Puzzle = ({ initialGrid }) => {
   const [author, setAuthor] = React.useState("Author");
   const handleTitleChange = e => {
     e.preventDefault();
-    //e.target.style.width = `${e.target.value.length}ch`;
     var tid = e.target.id;
-    e.target.style.width = measureMyInputText(tid);
+    console.log(measureMyInputText(tid));
+    e.target.style.width = measureMyInputText(tid) + 'px';
+    
     setTitle(e.target.value);
   }
   const handleAuthorChange = e => {
     e.preventDefault();
-    //e.target.style.width = `${e.target.value.length}ch`;
     var aid = e.target.id;
-    e.target.style.width = measureMyInputText(aid);
+    e.target.style.width = measureMyInputText(aid) + 'px';
     setAuthor(e.target.value);
   }
   return (

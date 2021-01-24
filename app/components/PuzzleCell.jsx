@@ -27,7 +27,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
   };
 
   const handleKeyDown = e => {
-    // console.log("KeyDown", e.key);
+    console.log("KeyDown", e.key);
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
     if (e.key === ".") {
@@ -62,6 +62,11 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
         puzzle.updateCellValue(activeRow, activeColumn, '');
       }
       puzzle.rewindActiveCell();
+    }
+    if (e.key === "Delet") {
+      if (puzzle.grid[activeRow][activeColumn] !== false) {
+        puzzle.updateCellValue(activeRow, activeColumn, '');
+      }
     }
     if (/^[a-z0-9]$/.test(e.key)) {
       puzzle.updateCellValue(activeRow, activeColumn, e.key);

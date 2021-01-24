@@ -4,6 +4,7 @@ module.exports.initGrid = initGrid;
 module.exports.findAcross = findAcross;
 module.exports.findDown = findDown;
 module.exports.getCellClue = getCellClue;
+module.exports.measureMyInputText = measureMyInputText;
 
 function applyBlocks(_grid, blocks) {
   const grid = [..._grid];
@@ -134,8 +135,8 @@ function getCellClue({ puzzle, row, column }) {
 
 function measureMyInputText(id) {
     var input = document.getElementById(id);
-    var c = document.createElement("canvas");
-    var ctx = c.getContext("2d");
-    var txtWidth = ctx.measureText(input.value).width;
+    var c = document.createElement("div");
+    c.class = input;
+    var txtWidth = ctx.offsetWidth(input.value).width;
     return txtWidth;
 }
