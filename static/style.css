@@ -118,12 +118,14 @@ a {
   opacity: 0;
 }
 
-input.inline-content-editable, .input {
+input.inline-content-editable, .fakeinput {
   border: 0px;
   font-size: 18px;
   font-weight: bold;
   border-bottom: 4px solid transparent;
   min-width: 50px;
+  padding: 1px 2px;
+
 }
 
 input.inline-content-editable:focus {

@@ -10,14 +10,14 @@ const Puzzle = ({ initialGrid }) => {
     e.preventDefault();
     var tid = e.target.id;
     console.log(measureMyInputText(tid));
-    e.target.style.width = measureMyInputText(tid) + 'px';
+    e.target.style.width = (measureMyInputText(tid) + 4) + 'px';
     
     setTitle(e.target.value);
   }
   const handleAuthorChange = e => {
     e.preventDefault();
     var aid = e.target.id;
-    e.target.style.width = measureMyInputText(aid) + 'px';
+    e.target.style.width = (measureMyInputText(aid) + 4) + 'px';
     setAuthor(e.target.value);
   }
   return (

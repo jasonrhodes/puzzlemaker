@@ -136,7 +136,7 @@ function getCellClue({ puzzle, row, column }) {
 function measureMyInputText(id) {
     var input = document.getElementById(id);
     var tmp = document.createElement("span");
-    tmp.className = "input";
+    tmp.className = "fakeinput ";
     tmp.innerHTML = input.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     document.body.appendChild(tmp);
     var theWidth = tmp.getBoundingClientRect().width;
