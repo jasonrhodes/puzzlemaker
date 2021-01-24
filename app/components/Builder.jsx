@@ -18,7 +18,6 @@ const Builder = function({ location }) {
         <PencilIcon size={24} />
         <UnlockIcon size={24} />
       </div>
-      <div class="puzzle-info">[Title] by [Author]</div>
       <Puzzle initialGrid={grid} />
     </div>
   );
