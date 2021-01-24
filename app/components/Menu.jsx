@@ -6,7 +6,7 @@ const { DesktopDownloadIcon, PencilIcon, UnlockIcon, HomeIcon, LockIcon } = requ
 const { ReactTooltip } = require ("react-tooltip");
 
 const toggleLock = e => {
-  
+
 };
 
 const Menu = ({}) => {
@@ -15,7 +15,7 @@ const Menu = ({}) => {
       <Link data-tip="Home" to="/"><HomeIcon size={24} /></Link>
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link><PencilIcon size={24} /></Link>
-      <Link onClick={toggleLock()} ><UnlockIcon size={24} /></Link>
+      <Link onClick={toggleLock()} >{symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />}</Link>
     </div>
   );
 };
