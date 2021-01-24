@@ -3,6 +3,10 @@ body {
     "Droid Sans", "Arial", sans-serif;
 }
 
+a {
+  color: #000;
+}
+
 /*.container {
   width: 865px;
   margin-left: auto;
