@@ -1,6 +1,29 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto",
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
     "Droid Sans", "Arial", sans-serif;
+}
+
+a {
+  color: #000;
+}
+
+.btn {
+  background-color: rgb(34, 188, 172);
+  padding: 6px 8px;
+  color: #fff;
+  text-decoration: none;
+  margin: 2px 5px;
+  border-radius: 4px;
+}
+
+.inline > * {
+  display: inline-block;
+}
+
+.container {
+  width: auto;
+  display: inline-block;
+  position: relative;
 }
 
 .puzzle-grid {
@@ -11,7 +34,7 @@ body {
 
 .puzzle-row {
   display: block;
-  margin-bottom: -4px;
+  margin-bottom: -5px;
 }
 
 .puzzle-cell {
@@ -43,13 +66,14 @@ body {
 
 .puzzle-cell.active {
   border-color: rgb(64, 224, 208);
-  box-shadow: 0 0 2px 2px rgb(64, 224, 208);
+  box-shadow: 0 0 4px 3px rgb(64, 224, 208);
   z-index: 100;
 }
 
 .puzzle-cell.highlighted {
-  border-color: rgb(64, 224, 208);
+  border-color: rgb(34, 188, 172);
   background-color: rgba(64, 224, 208, 0.4);
+  z-index: 99;
 }
 
 .puzzle-cell.active.highlighted {
@@ -70,11 +94,61 @@ body {
   text-align: center;
 }
 
-.puzzle-cell .rebus {
+.title {
+  font-family: 'Laila', serif;
+  margin: 0px 0px 10px 0px;
+  border-bottom: 1px solid #ddd;
+}
+
+.accent-text {
+  color: rgb(34, 188, 172);
+}
+
+.puzzle-info {
+  margin: 1em 0;
+}
+
+.menu {
   position: absolute;
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  padding: 4px;
-  word-break: break-all;
+  top: 15px;
+  right: 2px;
+}
+
+.menu a {
+  padding: 8.5px;
+}
+
+.noopacity {
+  opacity: 0;
+}
+
+input.inline-content-editable, .fakeinput {
+  border: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 4px solid transparent;
+  min-width: 50px;
+  padding: 1px 2px;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
+    "Droid Sans", "Arial", sans-serif;
+}
+
+input.inline-content-editable:focus {
+  border-bottom-color: rgb(34, 188, 172);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  outline: none;
+}
+
+select {
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  padding: 4px 2px;
+  border-bottom: 2px solid rgb(34, 188, 172);
 }

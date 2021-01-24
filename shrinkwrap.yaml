@@ -1,10 +1,12 @@
 dependencies:
+  '@primer/octicons-react': 11.2.0
   classnames: 2.2.6
   express: 4.16.4
   jsx-loader: 0.13.2
   react: 16.8.6
   react-dom: 16.8.6
   react-router-dom: 5.0.0
+  react-tooltip: 4.2.13
   webpack: 4.30.0
   webpack-cli: 3.3.0
 packages:
@@ -14,6 +16,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-9lsJwJLxDh/T3Q3SZszfWOTkk3pHbkmH+3KY+zwIDmsNlxsumuhS2TH3NIpktU4kNvfzy+k3eLT7aTJSPTo0OA==
+  /@primer/octicons-react/11.2.0:
+    dev: false
+    engines:
+      node: '>=8'
+    peerDependencies:
+      react: '>=15'
+    resolution:
+      integrity: sha512-pi3DT5fUtATw2atMRQ7xCUUbdauA/hYTKfM2ijf3rtipeyQ7Ou3ij/JLhnc9Ke110ljHJh69j/PiINbbKAYegQ==
   /@webassemblyjs/ast/1.8.5:
     dependencies:
       '@webassemblyjs/helper-module-context': 1.8.5
@@ -2555,6 +2565,18 @@ packages:
       react: '>=15'
     resolution:
       integrity: sha512-6EQDakGdLG/it2x9EaCt9ZpEEPxnd0OCLBHQ1AcITAAx7nCnyvnzf76jKWG1s2/oJ7SSviUgfWHofdYljFexsA==
+  /react-tooltip/4.2.13:
+    dependencies:
+      prop-types: 15.7.2
+      uuid: 7.0.3
+    dev: false
+    engines:
+      npm: '>=6.13'
+    peerDependencies:
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    resolution:
+      integrity: sha512-iAZ02wSxChLWb7Vnu0zeQMyAo/jiGHrwFNILWaR3pCKaFVRjKcv/B6TBI4+Xd66xLXVzLngwJ91Tf5D+mqAqVA==
   /react/16.8.6:
     dependencies:
       loose-envify: 1.4.0
@@ -3231,6 +3253,11 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+  /uuid/7.0.3:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==
   /v8-compile-cache/2.0.2:
     dev: false
     resolution:
@@ -3395,11 +3422,13 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  '@primer/octicons-react': ^11.2.0
   classnames: ^2.2.6
   express: ^4.16.4
   jsx-loader: ^0.13.2
   react: ^16.8.6
   react-dom: ^16.8.6
   react-router-dom: ^5.0.0
+  react-tooltip: ^4.2.13
   webpack: ^4.30.0
   webpack-cli: ^3.3.0

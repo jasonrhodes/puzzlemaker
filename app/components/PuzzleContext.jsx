@@ -36,17 +36,23 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   
   const updateCellValue = (row, column, value) => {
     const newGrid = [...grid];
-    newGrid[row][column] = value;
+    newGrid[row][column].value = value;
     setGrid(newGrid);
   }
   
+  const updateCellClue = (row, column, clue) => {
+    
+  }
+  
   const toggleBlackSquare = (row, column) => {
-    const currentValue = grid[row][column];
-    updateCellValue(row, column, !currentValue);
+    const currentValue = grid[row][column].isBlackSquare;
+    const newGrid = [...grid];
+    newGrid[row][column].isBlackSquare = !currentValue;
     if (symmetry) {
       const [symRow, symCol] = getSymmetricalCell(grid, row, column);
-      updateCellValue(symRow, symCol, !currentValue);
+      newGrid[symRow][symCol].isBlackSquare = !currentValue;
     }
+    setGrid(newGrid);
   }
   
   const nextAcross = () => {
@@ -97,6 +103,9 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   const isCellInActiveWord = (row, column) => {
     if (!direction || !words[direction]) {
       console.error("Error with checking cell in active word", { direction, words });
+      return false;
+    }
+    if (grid[row][column].isBlackSquare) {
       return false;
     }
     const [activeRow, activeColumn] = activeCell;
