@@ -32,7 +32,7 @@ const Puzzle = ({ initialGrid }) => {
       <PuzzleContext.Consumer>
         {puzzle => (
           <div class="puzzle-container">
-            <PuzzleMenu />
+            <PuzzleMenu puzzle={puzzle} />
             <div class="puzzle-grid">
               {puzzle.grid.map((columns, i) => (
                 <PuzzleRow
@@ -43,8 +43,8 @@ const Puzzle = ({ initialGrid }) => {
               ))}
             </div>
             <div class="current-clues">
-              <div id="across"><h3>Across:</h3> {puzzle.words.across.word.toUpperCase()}</div>
-              <div id="down"><h3>Down:</h3> {puzzle.words.down.word.toUpperCase()}</div>
+              <div id="across"><h3>___ Across:</h3> {puzzle.words.across.word.toUpperCase()}</div>
+              <div id="down"><h3>___ Down:</h3> {puzzle.words.down.word.toUpperCase()}</div>
             </div>
           </div>
         )}
