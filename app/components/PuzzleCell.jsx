@@ -58,13 +58,13 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       }
     }
     if (e.key === "Backspace") {
-      if (puzzle.grid[activeRow][activeColumn] !== false) {
+      if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
         puzzle.updateCellValue(activeRow, activeColumn, '');
       }
       puzzle.rewindActiveCell();
     }
-    if (e.key === "Delet") {
-      if (puzzle.grid[activeRow][activeColumn] !== false) {
+    if (e.key === "Delete") {
+      if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
         puzzle.updateCellValue(activeRow, activeColumn, '');
       }
     }

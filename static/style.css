@@ -114,11 +114,16 @@ a {
   padding: 8.5px;
 }
 
+.noopacity {
+  opacity: 0;
+}
+
 input.inline-content-editable, .input {
   border: 0px;
   font-size: 18px;
   font-weight: bold;
   border-bottom: 4px solid transparent;
+  min-width: 50px;
 }
 
 input.inline-content-editable:focus {

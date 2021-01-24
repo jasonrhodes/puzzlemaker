@@ -135,8 +135,11 @@ function getCellClue({ puzzle, row, column }) {
 
 function measureMyInputText(id) {
     var input = document.getElementById(id);
-    var c = document.createElement("div");
-    c.class = input;
-    var txtWidth = ctx.offsetWidth(input.value).width;
-    return txtWidth;
+    var tmp = document.createElement("span");
+    tmp.className = "input";
+    tmp.innerHTML = input.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    document.body.appendChild(tmp);
+    var theWidth = tmp.getBoundingClientRect().width;
+    //document.body.removeChild(tmp);
+    return theWidth;
 }
