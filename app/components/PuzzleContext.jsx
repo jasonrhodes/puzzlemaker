@@ -105,6 +105,9 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       console.error("Error with checking cell in active word", { direction, words });
       return false;
     }
+    if (grid[row][column].isBlackSquare) {
+      return false;
+    }
     const [activeRow, activeColumn] = activeCell;
     if (direction === "across" && row !== activeRow) {
       return false;

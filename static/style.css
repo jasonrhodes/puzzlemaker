@@ -8,12 +8,12 @@ a {
 }
 
 .btn {
-  background-color: rgba(64, 224, 208, 0.4);
+  background-color: rgb(34, 188, 172);
   padding: 4px;
-  border: 2px solid rgb(34, 188, 172);
-  color: #000;
+  color: #fff;
   text-decoration: none;
   margin: 2px 5px;
+  border-radius: 4px;
 }
 
 .inline > * {
