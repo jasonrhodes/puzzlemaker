@@ -16,6 +16,10 @@ const Puzzle = ({ initialGrid }) => {
     e.target.style.width = measureMyInputText(e.target.id) + 'px';
     setAuthor(e.target.value);
   }
+  const handleClick = e => {
+    console.log("Click")
+    console.log("Click")
+  }
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
       <div class="puzzle-info">
@@ -23,6 +27,7 @@ const Puzzle = ({ initialGrid }) => {
         <span> by </span>
         <input id="author" class="inline-content-editable" style={{ width: '6ch' }} value={author} type="text" onChange={handleAuthorChange} />
       </div>
+      
       <PuzzleContext.Consumer>
         {puzzle => (
           <div class="puzzle-container">
