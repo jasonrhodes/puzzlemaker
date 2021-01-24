@@ -11,6 +11,7 @@ const { ReactTooltip } = require ("react-tooltip");
 const PuzzleMenu = ({puzzle}) => {
   const toggleLock = e => {
     console.log('hey');
+    //console.log(symmetry);
     // return (
     //   puzzle.symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />
     // );
