@@ -126,6 +126,17 @@ a {
   opacity: 0;
 }
 
+.current-clues {
+  position: absolute;
+  top: 0;
+  right: -320px;
+  width: 300px;
+}
+
+.current-clues > div {
+  min-height: 300px;
+}
+
 input.inline-content-editable, .fakeinput {
   border: 0px;
   font-size: 18px;

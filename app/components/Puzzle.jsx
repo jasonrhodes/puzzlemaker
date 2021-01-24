@@ -26,7 +26,7 @@ const Puzzle = ({ initialGrid }) => {
       <div class="puzzle-info">
         <input id="title" class="inline-content-editable" style={{ width: '6ch' }} value={title} type="text" onChange={handleTitleChange} />
         <span> by </span>
-        <input id="author" class="inline-content-editable" style={{ width: '5ch' }} value={author} type="text" onChange={handleAuthorChange} />
+        <input id="author" class="inline-content-editable" style={{ width: '6ch' }} value={author} type="text" onChange={handleAuthorChange} />
       </div>
       <button onClick={handleClick}>Test</button>
       <PuzzleContext.Consumer>
@@ -43,8 +43,8 @@ const Puzzle = ({ initialGrid }) => {
               ))}
             </div>
             <div class="current-clues">
-              <p>Across: {puzzle.words.across.word.toUpperCase()}</p>
-              <p>Down: {puzzle.words.down.word.toUpperCase()}</p>
+              <div id="across"><h3>Across:</h3> {puzzle.words.across.word.toUpperCase()}</div>
+              <div id="down"><h3>Down:</h3> {puzzle.words.down.word.toUpperCase()}</div>
             </div>
           </div>
         )}
