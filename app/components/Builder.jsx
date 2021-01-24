@@ -10,7 +10,7 @@ const Builder = function({ location }) {
   const symmetry = location.symmetry || true;
   const grid = initGrid({ rows: rows || 15, columns: columns || 15 });
   
-  
+  // oops sorry Paul
   return (
     <div class="container">
       <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
