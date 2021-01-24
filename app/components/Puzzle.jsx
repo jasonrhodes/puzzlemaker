@@ -6,7 +6,7 @@ const Puzzle = ({ initialGrid }) => {
   const [title, setTitle] = React.useState("Title");
   const [author, setAuthor] = React.useState("Author");
   const handleTitleChange = e => {
-    this.style.width = e.target.value.length + "ch";
+    e.target.style.width = e.target.value.length + "ch";
     setTitle(e.target.value);
   }
   const handleAuthorChange = e => setAuthor(e.target.value);

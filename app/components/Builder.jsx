@@ -1,7 +1,8 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
 const Puzzle = require("./Puzzle");
-const { DesktopDownloadIcon, PencilIcon, UnlockIcon, HomeIcon } = require("@primer/octicons-react");
+const Menu = require("./Menu");
+
 const { initGrid } = require("./utils");
 
 const Builder = function({ location }) {
@@ -12,12 +13,6 @@ const Builder = function({ location }) {
   return (
     <div class="container">
       <h1 class="title">Puzzlemaker</h1>
-      <div class="menu">
-        <Link to="/"><HomeIcon size={24} /></Link>
-        <DesktopDownloadIcon size={24} />
-        <PencilIcon size={24} />
-        <UnlockIcon size={24} />
-      </div>
       <Puzzle initialGrid={grid} />
     </div>
   );

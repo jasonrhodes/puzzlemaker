@@ -3,12 +3,12 @@ body {
     "Droid Sans", "Arial", sans-serif;
 }
 
-.container {
+/*.container {
   width: 865px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
-}
+}*/
 
 .puzzle-grid {
   border: 1px solid black;
