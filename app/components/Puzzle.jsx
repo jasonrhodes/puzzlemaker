@@ -3,15 +3,18 @@ const PuzzleRow = require("./PuzzleRow");
 const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 
 const Puzzle = ({ initialGrid }) => {
-  const [title, setTitle] = React.useState("Title");
+  const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
   const handleTitleChange = e => {
     e.preventDefault();
-    console.log("title change", { title, author, e, value: e.target.value, length: e.target.value.length });
     e.target.style.width = `${e.target.value.length}ch`;
     setTitle(e.target.value);
   }
-  const handleAuthorChange = e => setAuthor(e.target.value);
+  const handleAuthorChange = e => {
+    e.preventDefault();
+    e.target.style.width = `${e.target.value.length}ch`;
+    setAuthor(e.target.value);
+  }
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
       <div class="puzzle-info">

@@ -118,11 +118,12 @@ input.inline-content-editable {
   border: 0px;
   font-size: 18px;
   font-weight: bold;
-  border-bottom: 2px solid #fff;
+  border-bottom: 4px solid #eee;
+  margin-bottom: 1em;
 }
 
 input.inline-content-editable:focus {
-  border-bottom: 2px solid rgb(34, 188, 172);
+  border-bottom-color: rgb(34, 188, 172);
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
