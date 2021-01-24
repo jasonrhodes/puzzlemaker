@@ -118,3 +118,27 @@ input.inline-content-editable:focus {
   box-shadow: none;
   outline: none;
 }
+
+select {
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  outline: none;
+  appearance: none;
+  box-shadow: none;
+  border: none;
+  padding: 4px 2px;
+  border-bottom: 2px solid rgb(34, 188, 172);
+}
+
+select:after {
+        content: '';   
+        position: absolute;   
+        border: 7px solid transparent; 
+        /* This will set the direction of the arrow.*/  
+         border-top: 7px solid white; 
+           top: 34px; 
+        margin-left: 5px; 
+}
