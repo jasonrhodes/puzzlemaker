@@ -26,7 +26,7 @@ function initGrid({ rows, columns }) {
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let j = 0; j < columns; j++) {
-      row.push(true);
+      row.push({ value: '', isBlackSquare: false, clue: null });
     }
     grid.push(row);
   }
@@ -35,9 +35,7 @@ function initGrid({ rows, columns }) {
 
 function findAcross(cellsInActiveRow, activeColumn) {
   const range = cellsInActiveRow.reduce(
-    (range, cellValue) => {
-      const isBlackSquare = !cellValue;
-
+    (range, cell) => {
       if (range.start !== false && range.end && range.found) {
         range.count++;
         return range;
@@ -46,16 +44,16 @@ function findAcross(cellsInActiveRow, activeColumn) {
         range.start = range.count;
         range.word = "";
       }
-      if (!isBlackSquare) {
-        range.word += typeof cellValue === "string" ? cellValue : "_";
+      if (!cell.isBlackSquare) {
+        range.word += typeof cell.value === "string" ? cell.value : "-";
       }
-      if (isBlackSquare && range.found) {
+      if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;
       }
       if (range.count === activeColumn) {
         range.found = true;
       }
-      if (isBlackSquare && !range.found) {
+      if (cell.isBlackSquare && !range.found) {
         range.start = false;
       }
       if (!range.end && range.count === cellsInActiveRow.length - 1) {
@@ -74,8 +72,7 @@ function findAcross(cellsInActiveRow, activeColumn) {
 function findDown(rows, activeRow, activeColumn) {
   const range = rows.reduce(
     (range, row) => {
-      const cellValue = row[activeColumn];
-      const isBlackSquare = !cellValue;
+      const cell = row[activeColumn];
 
       if (range.start !== false && range.end && range.found) {
         range.count++;
@@ -85,16 +82,16 @@ function findDown(rows, activeRow, activeColumn) {
         range.start = range.count;
         range.word = "";
       }
-      if (!isBlackSquare) {
-        range.word += typeof cellValue === "string" ? cellValue : "_";
+      if (!cell.isBlackSquare) {
+        range.word += typeof cell.value === "string" ? cell.value : "-";
       }
-      if (isBlackSquare && range.found) {
+      if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;
       }
       if (range.count === activeRow) {
         range.found = true;
       }
-      if (isBlackSquare && !range.found) {
+      if (cell.isBlackSquare && !range.found) {
         range.start = false;
       }
       if (!range.end && range.count === rows.length - 1) {

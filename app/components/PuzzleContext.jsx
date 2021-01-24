@@ -36,17 +36,19 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   
   const updateCellValue = (row, column, value) => {
     const newGrid = [...grid];
-    newGrid[row][column] = value;
+    newGrid[row][column].value = value;
     setGrid(newGrid);
   }
   
   const toggleBlackSquare = (row, column) => {
-    const currentValue = grid[row][column];
-    updateCellValue(row, column, !currentValue);
+    const currentValue = grid[row][column].isBlackSquare;
+    const newGrid = [...grid];
+    newGrid[row][column].isBlackSquare = !currentValue;
     if (symmetry) {
       const [symRow, symCol] = getSymmetricalCell(grid, row, column);
-      updateCellValue(symRow, symCol, !currentValue);
+      newGrid[symRow][symCol].isBlackSquare = !currentValue;
     }
+    setGrid(newGrid);
   }
   
   const nextAcross = () => {

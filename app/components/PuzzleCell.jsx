@@ -22,15 +22,14 @@ const getCellLabel = ({ puzzle, row, column }) => {
   return false;
 };
 
-const PuzzleCell = ({ value, row, column, puzzle }) => {
-  // const [keysDown, setKeysDown] = React.useState([]);
+const PuzzleCell = ({ cell, row, column, puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
 
   const classes = classnames({
     "puzzle-cell": true,
-    "puzzle-cell-x": !value,
+    "puzzle-cell-x": cell.isBlackSquare,
     active: activeRow === row && activeColumn === column,
-    highlighted: value && puzzle.isCellInActiveWord(row, column)
+    highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column)
   });
 
   const label = getCellLabel({ row, column, puzzle });
@@ -98,9 +97,9 @@ const PuzzleCell = ({ value, row, column, puzzle }) => {
       tabIndex="0"
     >
       <div class="input">
-        {typeof value === "string" ? value.toUpperCase() : value}
+        {cell.value.toUpperCase()}
       </div>
-      {value && label ? <div class="label">{label}</div> : null}
+      {cell.value && label ? <div class="label">{label}</div> : null}
     </div>
   );
 };

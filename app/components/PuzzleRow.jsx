@@ -14,7 +14,7 @@ const PuzzleRow = ({
             key={`cell-${row}-${i}`}
             row={row}
             column={i}
-            value={cell}
+            cell={cell}
             puzzle={puzzle}
           />
         ))}
