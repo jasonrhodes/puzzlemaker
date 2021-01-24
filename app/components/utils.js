@@ -106,3 +106,30 @@ function findDown(rows, activeRow, activeColumn) {
 
   return { range: [range.start, range.end], word: range.word };
 }
+
+function getCellClue({ puzzle, row, column }) {
+  const { grid, getNextClueNumber } = puzzle;
+  const currentCell = grid[row][column];
+  const prevAcrossCell = grid[row][column - 1] || {};
+  const prevDownCell = grid[row - 1][column] || {};
+  
+  if (currentCell.isBlackSquare) {
+    return {};
+  }
+  
+  if (row === 0) {
+    return {
+      
+    };
+  }
+  if (column === 0) {
+    return getNextClueNumber();
+  }
+  if (grid[row][column - 1].isBlackSquare) {
+    return getNextClueNumber();
+  }
+  if (grid[row - 1][column].isBlackSquare) {
+    return getNextClueNumber();
+  }
+  return false;
+};

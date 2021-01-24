@@ -36,7 +36,7 @@ const Puzzle = ({ initialGrid }) => {
             </div>
             <div class="current-clues">
               <p>Across: {puzzle.words.across.word.toUpperCase()}</p>
-              <p>Down: {puzzle.words.down.word.t}</p>
+              <p>Down: {puzzle.words.down.word.toUpperCase()}</p>
             </div>
           </div>
         )}

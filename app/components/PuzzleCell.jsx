@@ -1,27 +1,6 @@
 const React = require("react");
 const classnames = require("classnames");
 
-const getCellLabel = ({ puzzle, row, column }) => {
-  const { grid, getNextClueNumber } = puzzle;
-  const currentCell = grid[row][column];
-  if (!currentCell) {
-    return false;
-  }
-  if (row === 0) {
-    return getNextClueNumber();
-  }
-  if (column === 0) {
-    return getNextClueNumber();
-  }
-  if (grid[row][column - 1] === false) {
-    return getNextClueNumber();
-  }
-  if (grid[row - 1][column] === false) {
-    return getNextClueNumber();
-  }
-  return false;
-};
-
 const PuzzleCell = ({ cell, row, column, puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
 
