@@ -9,21 +9,23 @@ const Puzzle = ({ initialGrid }) => {
   const handleTitleChange = e => {
     e.preventDefault();
     //e.target.style.width = `${e.target.value.length}ch`;
-    e.target.style.width = measureMyInputText(e.target);
+    var tid = e.target.id;
+    e.target.style.width = measureMyInputText(tid);
     setTitle(e.target.value);
   }
   const handleAuthorChange = e => {
     e.preventDefault();
     //e.target.style.width = `${e.target.value.length}ch`;
-    e.target.style.width = measureMyInputText(e.target);
+    var aid = e.target.id;
+    e.target.style.width = measureMyInputText(aid);
     setAuthor(e.target.value);
   }
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
       <div class="puzzle-info">
-        <input class="inline-content-editable" style={{ width: '8ch' }} value={title} type="text" onChange={handleTitleChange} />
+        <input id="title" class="inline-content-editable" style={{ width: '8ch' }} value={title} type="text" onChange={handleTitleChange} />
         <span> by </span>
-        <input class="inline-content-editable" value={author} type="text" onChange={handleAuthorChange} />
+        <input id="author" class="inline-content-editable" value={author} type="text" onChange={handleAuthorChange} />
       </div>
       <PuzzleContext.Consumer>
         {puzzle => (

@@ -132,7 +132,8 @@ function getCellClue({ puzzle, row, column }) {
   return false;
 };
 
-function measureMyInputText(input) {
+function measureMyInputText(id) {
+    var input = document.getElementById(id);
     var c = document.createElement("canvas");
     var ctx = c.getContext("2d");
     var txtWidth = ctx.measureText(input.value).width;
