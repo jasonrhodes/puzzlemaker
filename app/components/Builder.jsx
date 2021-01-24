@@ -12,7 +12,7 @@ const Builder = function({ location }) {
   
   return (
     <div class="container">
-      <h1 class="title">Puzzlemaker</h1>
+      <h1 class="title">Puzzle<span class="accent-text">Maker</span></h1>
       <Menu />
       <Puzzle initialGrid={grid} />
     </div>
