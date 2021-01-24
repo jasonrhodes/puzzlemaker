@@ -97,11 +97,11 @@ a {
 .title {
   font-family: 'Laila', serif;
   margin: 0px 0px 10px 0px;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 1px solid #ddd;
 }
 
 .puzzle-info {
-  margin-bottom: 5px;
+  margin: 1em 0;
 }
 
 .menu {
@@ -118,8 +118,7 @@ input.inline-content-editable {
   border: 0px;
   font-size: 18px;
   font-weight: bold;
-  border-bottom: 4px solid #eee;
-  margin-bottom: 1em;
+  border-bottom: 4px solid transparent;
 }
 
 input.inline-content-editable:focus {

@@ -18,7 +18,7 @@ const Puzzle = ({ initialGrid }) => {
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
       <div class="puzzle-info">
-        <input class="inline-content-editable" value={title} type="text" onChange={handleTitleChange} />
+        <input class="inline-content-editable" style={{ width: '8ch' }} value={title} type="text" onChange={handleTitleChange} />
         <span> by </span>
         <input class="inline-content-editable" value={author} type="text" onChange={handleAuthorChange} />
       </div>
