@@ -99,7 +99,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       <div class="input">
         {cell.value.toUpperCase()}
       </div>
-      {cell.value && label ? <div class="label">{label}</div> : null}
+      {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
     </div>
   );
 };

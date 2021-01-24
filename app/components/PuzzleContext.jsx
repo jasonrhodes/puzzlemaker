@@ -40,6 +40,10 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     setGrid(newGrid);
   }
   
+  const updateCellClue = (row, column, clue) => {
+    
+  }
+  
   const toggleBlackSquare = (row, column) => {
     const currentValue = grid[row][column].isBlackSquare;
     const newGrid = [...grid];

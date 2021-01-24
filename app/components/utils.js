@@ -45,7 +45,7 @@ function findAcross(cellsInActiveRow, activeColumn) {
         range.word = "";
       }
       if (!cell.isBlackSquare) {
-        range.word += typeof cell.value === "string" ? cell.value : "-";
+        range.word += (cell.value.length > 0 ? cell.value : "-");
       }
       if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;
@@ -83,7 +83,7 @@ function findDown(rows, activeRow, activeColumn) {
         range.word = "";
       }
       if (!cell.isBlackSquare) {
-        range.word += typeof cell.value === "string" ? cell.value : "-";
+        range.word += (cell.value.length > 0 ? cell.value : "-");
       }
       if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;

@@ -24,14 +24,20 @@ const Puzzle = ({ initialGrid }) => {
       </div>
       <PuzzleContext.Consumer>
         {puzzle => (
-          <div class="puzzle-grid">
-            {puzzle.grid.map((columns, i) => (
-              <PuzzleRow
-                key={`row-${i}`}
-                row={i}
-                columns={columns}
-              />
-            ))}
+          <div class="puzzle-container">
+            <div class="puzzle-grid">
+              {puzzle.grid.map((columns, i) => (
+                <PuzzleRow
+                  key={`row-${i}`}
+                  row={i}
+                  columns={columns}
+                />
+              ))}
+            </div>
+            <div class="current-clues">
+              <p>Across: {puzzle.words.across.word.toUpperCase()}</p>
+              <p>Down: {puzzle.words.down.word.t}</p>
+            </div>
           </div>
         )}
       </PuzzleContext.Consumer>
