@@ -1,5 +1,6 @@
 const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
+const PuzzleMenu = require("./PuzzleMenu");
 const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 const { measureMyInputText } = require("./utils");
 
@@ -31,6 +32,7 @@ const Puzzle = ({ initialGrid }) => {
       <PuzzleContext.Consumer>
         {puzzle => (
           <div class="puzzle-container">
+            <Menu puzzle={puzzle} />
             <div class="puzzle-grid">
               {puzzle.grid.map((columns, i) => (
                 <PuzzleRow
