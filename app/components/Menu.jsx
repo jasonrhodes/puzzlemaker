@@ -9,13 +9,13 @@ const toggleLock = e => {
 
 };
 
-const Menu = ({}) => {
+const Menu = ({sym}) => {
   return (
     <div class="menu">
       <Link data-tip="Home" to="/"><HomeIcon size={24} /></Link>
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link><PencilIcon size={24} /></Link>
-      <Link onClick={toggleLock()} >{symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />}</Link>
+      <Link onClick={toggleLock()} >{sym ? <LockIcon size={24} /> : <UnlockIcon size={24} />}</Link>
     </div>
   );
 };
