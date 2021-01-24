@@ -7,9 +7,9 @@ const Menu = ({}) => {
   return (
     <div class="menu">
       <Link to="/"><HomeIcon size={24} /></Link>
-      <DesktopDownloadIcon size={24} />
-      <PencilIcon size={24} />
-      <UnlockIcon size={24} />
+      <Link to="/"><DesktopDownloadIcon size={24} /></Link>
+      <Link to="/"><PencilIcon size={24} /></Link>
+      <Link to="/"><UnlockIcon size={24} /></Link>
     </div>
   );
 };

@@ -84,6 +84,7 @@ a {
 .title {
   font-family: 'Laila', serif;
   margin: 10px 0px;
+  border-bottom: 2px solid #ccc;
 }
 
 .puzzle-info {
@@ -92,14 +93,23 @@ a {
 
 .menu {
   position: absolute;
-  top: 20px;
-  right: 0px;
+  top: 25px;
+  right: 1px;
+}
+
+.menu a {
+  padding: 8.5px;
 }
 
 input.inline-content-editable {
   border: 0px;
+  font-size: 18px;
+  font-weight: bold;
+  -webkit-appearance: none;
 }
 
 input.inline-content-editable:focus {
   border-bottom: 1px solid rgb(34, 188, 172);
+  -webkit-appearance: none;
+  
 }
