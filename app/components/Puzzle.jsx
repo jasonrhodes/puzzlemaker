@@ -1,18 +1,21 @@
 const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
 const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
+const { measureMyInputText } = require("./utils");
 
 const Puzzle = ({ initialGrid }) => {
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
   const handleTitleChange = e => {
     e.preventDefault();
-    e.target.style.width = `${e.target.value.length}ch`;
+    //e.target.style.width = `${e.target.value.length}ch`;
+    e.target.style.width = measureMyInputText(e.target);
     setTitle(e.target.value);
   }
   const handleAuthorChange = e => {
     e.preventDefault();
-    e.target.style.width = `${e.target.value.length}ch`;
+    //e.target.style.width = `${e.target.value.length}ch`;
+    e.target.style.width = measureMyInputText(e.target);
     setAuthor(e.target.value);
   }
   return (
