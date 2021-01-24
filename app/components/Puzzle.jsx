@@ -32,7 +32,7 @@ const Puzzle = ({ initialGrid }) => {
       <PuzzleContext.Consumer>
         {puzzle => (
           <div class="puzzle-container">
-            <PuzzleMenu puzz={puzzle} />
+            <PuzzleMenu />
             <div class="puzzle-grid">
               {puzzle.grid.map((columns, i) => (
                 <PuzzleRow
