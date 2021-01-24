@@ -18,7 +18,7 @@ const Puzzle = ({ initialGrid }) => {
   }
   const handleClick = e => {
     console.log("Click")
-    console.log("Click")
+    console.log(e)
   }
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
@@ -27,7 +27,7 @@ const Puzzle = ({ initialGrid }) => {
         <span> by </span>
         <input id="author" class="inline-content-editable" style={{ width: '6ch' }} value={author} type="text" onChange={handleAuthorChange} />
       </div>
-      
+      <button onClick={handleClick}>Test</button>
       <PuzzleContext.Consumer>
         {puzzle => (
           <div class="puzzle-container">
