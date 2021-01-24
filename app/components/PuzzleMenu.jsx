@@ -10,7 +10,7 @@ const { ReactTooltip } = require ("react-tooltip");
 
 const PuzzleMenu = ({puzzle}) => {
   const toggleLock = e => {
-    // puzzle.toggleSymmetry();
+    console.log('hey');
     // return (
     //   puzzle.symmetry ? <LockIcon size={24} /> : <UnlockIcon size={24} />
     // );
@@ -20,6 +20,7 @@ const PuzzleMenu = ({puzzle}) => {
     <div class="menu">
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link><PencilIcon size={24} /></Link>
+      <Link onClick={toggleLock} >< LockIcon size={24} /></Link>
     </div>
   );
 };
