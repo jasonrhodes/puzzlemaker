@@ -1,7 +1,7 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
 
-const { DesktopDownloadIcon, PencilIcon, UnlockIcon, HomeIcon, LockIcon } = require("@primer/octicons-react");
+const { DesktopDownloadIcon, PencilIcon, UnlockIcon, HomeIcon, LockIcon, MirrorIcon } = require("@primer/octicons-react");
 
 const { ReactTooltip } = require ("react-tooltip");
 
@@ -24,7 +24,7 @@ const PuzzleMenu = ({puzzle}) => {
   return (
     <div class="menu">
       <Link><DesktopDownloadIcon size={24} /></Link>
-      <Link onClick={toggleLock} >{lockIcon()}</Link>
+      <Link onClick={toggleLock} >{lockIcon()} <MirrorIcon class="subicon" size={16} /></Link>
     </div>
   );
 };

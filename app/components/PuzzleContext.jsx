@@ -88,12 +88,14 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   }
   
   React.useEffect(() => {
+    console.log("USE EFFECT 1 (GRID)")
     setWords(calculateCurrentWords());
-  }, [grid, setWords, calculateCurrentWords])
+  }, [grid, setWords])
   
   React.useEffect(() => {
+    console.log("USE EFFECT 2 (activeCell)")
     setWords(calculateCurrentWords());
-  }, [activeCell, setWords, calculateCurrentWords])
+  }, [activeCell, setWords])
 
   let clue = 0;
   const getNextClueNumber = () => {

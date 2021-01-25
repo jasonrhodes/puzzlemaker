@@ -109,17 +109,22 @@ a {
 }
 
 .puzzle-info {
-  margin: 10px 0;
+  margin: 10px 0 5px 0;
 }
 
 .menu {
   position: absolute;
-  top: -35px;
+  top: -32px;
   right: 2px;
 }
 
 .menu a {
   padding: 8.5px;
+}
+
+.subicon {
+  position: relative;
+  left: -20px;
 }
 
 .noopacity {
