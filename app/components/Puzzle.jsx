@@ -4,13 +4,19 @@ const PuzzleMenu = require("./PuzzleMenu");
 const { PuzzleContext } = require("./PuzzleContext");
 const PuzzleTitle = require("./PuzzleTitle");
 
+const convertAnswerToSquares = (clue) => {
+  var chars = clue.split('');
+  return chars.map((char, i) => (
+    <span class={char == '-' ? 'emptycell' : ''}>{char}</span>
+  ))
+};
+
+const CurrentClues = ({ puzzle }) => {
+  
+}
+
 const Puzzle = ({ initialGrid }) => {
-  const clueBreaker = (clue) => {
-    var chars = clue.split('');
-    return chars.map((char, i) => (
-      <span class={char == '-' ? 'emptycell' : ''}>{char}</span>
-    ))
-  };
+  
   
   return (
     <PuzzleContext.Consumer>
