@@ -81,11 +81,19 @@ a {
 }
 
 .puzzle-cell.circled{
-  background-color: 
+  background-color: #bbb
+}
+
+.puzzle-cell.highlighted.circled{
+  background-color: rgba(64, 224, 208, 0.9);
 }
 
 .puzzle-cell.active.highlighted {
   background-color: white;
+}
+
+.puzzle-cell.active.highlighted.circled {
+  background-color: rgba(64, 224, 208, 0.6);
 }
 
 .puzzle-cell .label {
