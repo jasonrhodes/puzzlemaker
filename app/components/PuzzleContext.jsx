@@ -55,6 +55,17 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     setGrid(newGrid);
   }
   
+  const toggleStyle = (row, column) => {
+    const currentValue = grid[row][column].style;
+    const newGrid = [...grid];
+    if (!currentValue) {
+      newGrid[row][column].style = 'circled';
+    } else {
+      newGrid[row][column].style = null;
+    }
+    setGrid(newGrid);
+  }
+  
   const nextAcross = () => {
     const [activeRow, activeColumn] = activeCell;
     const nextColumn = Math.min(activeColumn + 1, grid[0].length - 1);
