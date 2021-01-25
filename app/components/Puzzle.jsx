@@ -20,7 +20,6 @@ const Puzzle = ({ initialGrid }) => {
   
   const clueBreaker = (clue) => {
     var chars = clue.split('');
-    console.log(chars);
     return chars.map((char, i) => (
       <span class={char == '-' ? 'emptycell' : ''}>{char}</span>
     ))
