@@ -116,6 +116,10 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   const getNextClueNumber = () => {
     return (clue += 1);
   };
+  
+  const resetClue = () => {
+    clue = 0;
+  }
 
   const isCellInActiveWord = (row, column) => {
     if (!direction || !words[direction]) {
@@ -146,6 +150,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     words,
     grid,
     clue,
+    resetClue,
     symmetry,
     setActiveCell,
     toggleDirection,
