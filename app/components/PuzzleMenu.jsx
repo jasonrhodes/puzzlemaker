@@ -16,18 +16,18 @@ const PuzzleMenu = ({puzzle}) => {
   
   const lockIcon = () => {
     if (puzzle.symmetry){
-      return < LockIcon data-tip="Unlock symmetry" size={24}/>;
+      return < LockIcon data-tip="Unlock symmetry" data-for='b' size={24}/>;
     } else {
-      return < UnlockIcon data-tip="Lock symmetry" size={24}/>;
+      return < UnlockIcon data-tip="Lock symmetry" data-for='b' size={24}/>;
     };
   };
   
   return (
     <div class="menu">
-      <ReactTooltip/>
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link class="subicon" onClick={toggleLock} >{lockIcon()} <MirrorIcon size={12} /></Link>
-      
+      <a data-tip="test" data-for='b'>test 1</a>
+      <ReactTooltip id='a'>test 2</ReactTooltip>
     </div>
   );
 };
