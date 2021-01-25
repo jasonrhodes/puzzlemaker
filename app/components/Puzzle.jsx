@@ -18,8 +18,7 @@ const Puzzle = ({ initialGrid }) => {
     setAuthor(e.target.value);
   }
   const handleClick = (puzzle) => {
-    console.log("Click")
-    console.log(puzzle.activeCell)
+    puzzle.setActiveCell([]);
   }
   
   const clueBreaker = (clue) => {
@@ -39,8 +38,8 @@ const Puzzle = ({ initialGrid }) => {
       </div>
       <PuzzleContext.Consumer>
         {puzzle => (
-          <div class="puzzle-container" onClick={()=>handleClick(puzzle)}>
-            <PuzzleMenu puzzle={puzzle} onClick={handleClick}/>
+          <div class="puzzle-container">
+            <PuzzleMenu puzzle={puzzle} onClick={()=>handleClick(puzzle)}/>
             <div class="puzzle-grid">
               {puzzle.grid.map((columns, i) => (
                 <PuzzleRow
@@ -50,7 +49,7 @@ const Puzzle = ({ initialGrid }) => {
                 />
               ))}
             </div>
-            <div class="current-clues" onClick={handleClick}>
+            <div class="current-clues" onClick={()=>handleClick(puzzle)}>
               <div id="across">
                 <h3>1 Across:</h3>
                 <div class="current">{clueBreaker(puzzle.words.across.word.toUpperCase())}</div>
