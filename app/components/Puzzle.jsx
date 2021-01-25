@@ -3,21 +3,9 @@ const PuzzleRow = require("./PuzzleRow");
 const PuzzleMenu = require("./PuzzleMenu");
 const { PuzzleContext } = require("./PuzzleContext");
 const PuzzleTitle = require("./PuzzleTitle");
-
-const convertAnswerToSquares = (clue) => {
-  var chars = clue.split('');
-  return chars.map((char, i) => (
-    <span class={char == '-' ? 'emptycell' : ''}>{char}</span>
-  ))
-};
-
-const CurrentClues = ({ puzzle }) => {
-  
-}
+const CurrentClues = require("./CurrentClues");
 
 const Puzzle = ({ initialGrid }) => {
-  
-  
   return (
     <PuzzleContext.Consumer>
       {puzzle => (
@@ -34,18 +22,7 @@ const Puzzle = ({ initialGrid }) => {
                 />
               ))}
             </div>
-            <div class="current-clues">
-              <div id="across">
-                <h3>1 Across:</h3>
-                <div class="current">{clueBreaker(puzzle.words.across.word.toUpperCase())}</div>
-                <div class="suggestions"></div>
-              </div>
-              <div id="down">
-                <h3>1 Down:</h3>
-                <div class="current">{clueBreaker(puzzle.words.down.word.toUpperCase())}</div>
-                <div class="suggestions"></div>
-              </div>
-            </div>
+            <CurrentClues across={puzzle.words.across} down={puzzle.words.down} />
           </div>
         </div>
       )}
