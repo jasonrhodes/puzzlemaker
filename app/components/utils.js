@@ -114,18 +114,29 @@ function findDown(rows, activeRow, activeColumn) {
 
 function getClueLabel(puzzle) {
   let [row, column] = puzzle.activeCell;
+  if (!row || !column){
+    row = 0;
+    column = 0;
+  }
   if (puzzle.direction === 'across'){
-  while (column > 0){
+    while (column > 0){
       column -= 1;
       if (puzzle.grid[row][column].isBlackSquare){
         column += 1;
-        break;
+        return getCellClue({puzzle, row, column});
       }
     }
     return getCellClue({puzzle, row, column});
   }
   else {
-    return 'down';
+    while (row > 0){
+      row -= 1;
+      if (puzzle.grid[row][column].isBlackSquare){
+        row += 1;
+        return getCellClue({puzzle, row, column});
+      }
+    }
+    return getCellClue({puzzle, row, column});
   }
   return "neither";  
 }
