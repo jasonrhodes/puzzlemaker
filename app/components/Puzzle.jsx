@@ -23,11 +23,11 @@ const Puzzle = ({ initialGrid }) => {
   }
   
   const clueBreaker = (clue) => {
-    var html = '';
-    for (var i = 0; i < clue.length; i++) {
-      html += '<span>' + clue.charAt(i) + '</span>';
-    }
-    return html;
+    var chars = clue.split('');
+    console.log(chars);
+    return chars.map((char, i) => (
+      <span>{char}</span>
+    ))
   };
   
   return (
