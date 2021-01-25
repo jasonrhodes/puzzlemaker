@@ -25,7 +25,6 @@ const PuzzleMenu = ({puzzle}) => {
     <div class="menu">
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link class="subicon" onClick={toggleLock} >{lockIcon()} <MirrorIcon size={12} /></Link>
-      <ReactTooltip />
     </div>
   );
 };
