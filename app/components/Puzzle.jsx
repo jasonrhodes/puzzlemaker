@@ -4,7 +4,7 @@ const PuzzleMenu = require("./PuzzleMenu");
 const { PuzzleContext } = require("./PuzzleContext");
 const { measureMyInputText } = require("./utils");
 
-const Puzzle = ({ initialGrid }) => {
+const PuzzleTitle = () => {
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
   const handleTitleChange = (e,puzzle) => {
@@ -19,6 +19,17 @@ const Puzzle = ({ initialGrid }) => {
     setAuthor(e.target.value);
     puzzle.resetClue();
   }
+  return (
+    <div class="puzzle-info">
+      <input id="title" class="inline-content-editable" style={{ width: '6ch' }} value={title} type="text" onChange={e => handleTitleChange(e)} />
+      <span> by </span>
+      <input id="author" class="inline-content-editable" style={{ width: '57px' }} value={author} type="text" onChange={e => handleAuthorChange(e,puzzle)} />
+    </div>
+  );
+}
+
+const Puzzle = ({ initialGrid }) => {
+  
   
   const clueBreaker = (clue) => {
     var chars = clue.split('');
@@ -31,11 +42,7 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <div class="puzzle-info">
-            <input id="title" class="inline-content-editable" style={{ width: '6ch' }} value={title} type="text" onChange={e => handleTitleChange(e,puzzle)} />
-            <span> by </span>
-            <input id="author" class="inline-content-editable" style={{ width: '57px' }} value={author} type="text" onChange={e => handleAuthorChange(e,puzzle)} />
-          </div>
+          
           <div class="puzzle-container">
             <PuzzleMenu puzzle={puzzle}/>
             <div class="puzzle-grid">
