@@ -50,7 +50,7 @@ const Puzzle = ({ initialGrid }) => {
                 />
               ))}
             </div>
-            <div class="current-clues">
+            <div class="current-clues" onClick={handleClick}>
               <div id="across">
                 <h3>1 Across:</h3>
                 <div class="current">{clueBreaker(puzzle.words.across.word.toUpperCase())}</div>
