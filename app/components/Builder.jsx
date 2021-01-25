@@ -11,6 +11,7 @@ const Builder = function({ location }) {
   const grid = initGrid({ rows: rows || 15, columns: columns || 15 });
   const handleClick = (puzzle) => {
     console.log("click!");
+    console.log(puzzle);
     puzzle.setActiveCell([]);
   }
   
