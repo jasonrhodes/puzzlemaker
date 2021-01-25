@@ -111,6 +111,10 @@ function findDown(rows, activeRow, activeColumn) {
   return { range: [range.start, range.end], word: range.word };
 }
 
+function getClueLabel({puzzle}) {
+  const [row, column] = puzzle.activeCell;
+}
+
 function getCellClue({ puzzle, row, column }) {
   const { grid, getNextClueNumber } = puzzle;
   const currentCell = grid[row][column];
