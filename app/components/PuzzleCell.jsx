@@ -24,6 +24,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (e.metaKey) {
       puzzle.toggleBlackSquare(row, column);
     }
+    e.stopPropagation();
   };
 
   const handleKeyDown = e => {

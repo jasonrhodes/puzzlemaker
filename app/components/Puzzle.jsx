@@ -38,7 +38,7 @@ const Puzzle = ({ initialGrid }) => {
       </div>
       <PuzzleContext.Consumer>
         {puzzle => (
-          <div class="puzzle-container">
+          <div class="puzzle-container" onClick={()=>handleClick(puzzle)}>
             <PuzzleMenu puzzle={puzzle} onClick={()=>handleClick(puzzle)}/>
             <div class="puzzle-grid">
               {puzzle.grid.map((columns, i) => (
