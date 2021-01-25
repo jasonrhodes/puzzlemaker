@@ -34,7 +34,7 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContextProvider initialGrid={initialGrid}>
       <PuzzleContext.Consumer>
         {puzzle => (
-          <div onClick={()=>handleClick(puzzle)}>
+          <div>
             <div class="puzzle-info">
               <input id="title" class="inline-content-editable" style={{ width: '6ch' }} value={title} type="text" onChange={handleTitleChange} />
               <span> by </span>
