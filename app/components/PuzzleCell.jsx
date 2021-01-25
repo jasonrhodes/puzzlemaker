@@ -36,6 +36,10 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
+    if (e.key === "+") {
+      puzzle.toggleStyle(activeRow, activeColumn);
+      return;
+    }
     if (e.key === "Enter") {
       puzzle.toggleDirection();
       return;

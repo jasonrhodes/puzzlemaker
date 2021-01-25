@@ -80,6 +80,10 @@ a {
   z-index: 99;
 }
 
+.puzzle-cell.circled{
+  background-color: 
+}
+
 .puzzle-cell.active.highlighted {
   background-color: white;
 }

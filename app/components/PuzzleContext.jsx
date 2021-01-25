@@ -149,6 +149,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     updateCellValue,
     toggleSymmetry,
     toggleBlackSquare,
+    toggleStyle,
     nextAcross,
     prevAcross,
     nextDown,
