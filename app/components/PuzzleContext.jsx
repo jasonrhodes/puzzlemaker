@@ -24,7 +24,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       return { across: emptyWord, down: emptyWord };
     }
 
-    if (!grid[row][column]) {
+    if (grid[row][column].isBlackSquare) {
       return { across: emptyWord, down: emptyWord };
     }
 
