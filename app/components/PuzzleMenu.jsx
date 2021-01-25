@@ -11,6 +11,7 @@ const ReactTooltip = require("react-tooltip");
 const PuzzleMenu = ({puzzle}) => {
   const toggleLock = e => {
     puzzle.toggleSymmetry();
+    e.stopPropagation();
   };
   
   const lockIcon = () => {
@@ -23,8 +24,10 @@ const PuzzleMenu = ({puzzle}) => {
   
   return (
     <div class="menu">
+      <ReactTooltip/>
       <Link><DesktopDownloadIcon size={24} /></Link>
       <Link class="subicon" onClick={toggleLock} >{lockIcon()} <MirrorIcon size={12} /></Link>
+      
     </div>
   );
 };
