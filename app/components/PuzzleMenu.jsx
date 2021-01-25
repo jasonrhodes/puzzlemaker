@@ -24,7 +24,6 @@ const PuzzleMenu = ({puzzle}) => {
   return (
     <div class="menu">
       <Link><DesktopDownloadIcon size={24} /></Link>
-      <Link><PencilIcon size={24} /></Link>
       <Link onClick={toggleLock} >{lockIcon()}</Link>
     </div>
   );

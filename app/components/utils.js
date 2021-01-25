@@ -47,7 +47,6 @@ function findAcross(cellsInActiveRow, activeColumn) {
       if (!range.found && range.start === false) {
         range.start = range.count;
         range.word = "";
-        range.label = 'a number';
       }
       if (!cell.isBlackSquare) {
         range.word += (cell.value.length > 0 ? cell.value : "-");
@@ -71,7 +70,7 @@ function findAcross(cellsInActiveRow, activeColumn) {
     { count: 0, start: false, end: false, found: false, word: "" }
   );
 
-  return { range: [range.start, range.end], word: range.word, label: range.label };
+  return { range: [range.start, range.end], word: range.word };
 }
 
 function findDown(rows, activeRow, activeColumn) {
