@@ -1,5 +1,6 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
+const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 
 const CreateLink = ({ rows, columns }) => {
   if (!rows || !columns) {
@@ -17,6 +18,7 @@ module.exports = () => {
   }
   const [rows, columns] = (gridSize ? gridSize.split(" x ") : []);
   return (
+    <PuzzleContext.Consumer>
     <React.Fragment>
       <h1 class="title">Puzzlemaker</h1>
       <h2>Create a New Puzzle</h2>
