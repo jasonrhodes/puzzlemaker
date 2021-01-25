@@ -113,20 +113,21 @@ function findDown(rows, activeRow, activeColumn) {
 }
 
 function getClueLabel(puzzle) {
-  /*const [row, column] = puzzle.activeCell;
+  let [row, column] = puzzle.activeCell;
   if (puzzle.direction === 'across'){
-    while (column > 0){
+  while (column > 0){
       column -= 1;
       if (puzzle.grid[row][column].isBlackSquare){
+        column += 1;
         break;
       }
     }
-    return getCellClue(puzzle, row, column);
+    return getCellClue({puzzle, row, column});
   }
   else {
-    return '';
-  }*/
-  return '';  
+    return 'down';
+  }
+  return "neither";  
 }
 
 function getCellClue({ puzzle, row, column }) {
