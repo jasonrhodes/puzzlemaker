@@ -48,9 +48,11 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     const currentValue = grid[row][column].isBlackSquare;
     const newGrid = [...grid];
     newGrid[row][column].isBlackSquare = !currentValue;
+    newGrid[row][column].style = null;
     if (symmetry) {
       const [symRow, symCol] = getSymmetricalCell(grid, row, column);
       newGrid[symRow][symCol].isBlackSquare = !currentValue;
+      newGrid[symRow][symCol].style = null;
     }
     setGrid(newGrid);
   }
@@ -59,7 +61,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     const currentValue = grid[row][column].style;
     const newGrid = [...grid];
     if (!currentValue) {
-      newGrid[row][column].style = 'circled';
+      newGrid[row][column].style = 'marked';
     } else {
       newGrid[row][column].style = null;
     }

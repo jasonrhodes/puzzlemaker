@@ -10,7 +10,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     "puzzle-cell-x": cell.isBlackSquare,
     active: activeRow === row && activeColumn === column,
     highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column),
-    circled: cell.style === 'circled'
+    marked: cell.style === 'marked'
   });
 
   const label = getCellClue({ row, column, puzzle });

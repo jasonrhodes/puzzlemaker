@@ -80,11 +80,11 @@ a {
   z-index: 99;
 }
 
-.puzzle-cell.circled{
+.puzzle-cell.marked{
   background-color: #bbb
 }
 
-.puzzle-cell.highlighted.circled{
+.puzzle-cell.highlighted.marked{
   background-color: rgba(64, 224, 208, 0.9);
 }
 
@@ -92,7 +92,7 @@ a {
   background-color: white;
 }
 
-.puzzle-cell.active.highlighted.circled {
+.puzzle-cell.active.highlighted.marked {
   background-color: rgba(64, 224, 208, 0.6);
 }
 
