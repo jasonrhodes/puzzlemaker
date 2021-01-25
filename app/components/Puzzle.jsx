@@ -2,7 +2,7 @@ const React = require("react");
 const PuzzleRow = require("./PuzzleRow");
 const PuzzleMenu = require("./PuzzleMenu");
 const { PuzzleContext } = require("./PuzzleContext");
-const { measureMyInputText, getClueLabel } = require("./utils");
+const { measureMyInputText } = require("./utils");
 
 const Puzzle = ({ initialGrid }) => {
   const [title, setTitle] = React.useState("Untitled");
@@ -49,7 +49,6 @@ const Puzzle = ({ initialGrid }) => {
             <div class="current-clues">
               <div id="across">
                 <h3>1 Across:</h3>
-                <h3>{getClueLabel(puzzle)}</h3>
                 <div class="current">{clueBreaker(puzzle.words.across.word.toUpperCase())}</div>
                 <div class="suggestions"></div>
               </div>

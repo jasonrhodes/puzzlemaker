@@ -4,7 +4,6 @@ module.exports.initGrid = initGrid;
 module.exports.findAcross = findAcross;
 module.exports.findDown = findDown;
 module.exports.getCellClue = getCellClue;
-module.exports.getClueLabel = getClueLabel;
 module.exports.measureMyInputText = measureMyInputText;
 
 function applyBlocks(_grid, blocks) {
@@ -110,35 +109,6 @@ function findDown(rows, activeRow, activeColumn) {
   );
 
   return { range: [range.start, range.end], word: range.word };
-}
-
-function getClueLabel(puzzle) {
-  let [row, column] = puzzle.activeCell;
-  if (!row || !column){
-    row = 0;
-    column = 0;
-  }
-  if (puzzle.direction === 'across'){
-    while (column > 0){
-      column -= 1;
-      if (puzzle.grid[row][column].isBlackSquare){
-        column += 1;
-        return getCellClue({puzzle, row, column});
-      }
-    }
-    return getCellClue({puzzle, row, column});
-  }
-  else {
-    while (row > 0){
-      row -= 1;
-      if (puzzle.grid[row][column].isBlackSquare){
-        row += 1;
-        return getCellClue({puzzle, row, column});
-      }
-    }
-    return getCellClue({puzzle, row, column});
-  }
-  return "neither";  
 }
 
 function getCellClue({ puzzle, row, column }) {
