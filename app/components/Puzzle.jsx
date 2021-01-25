@@ -17,9 +17,9 @@ const Puzzle = ({ initialGrid }) => {
     e.target.style.width = measureMyInputText(e.target.id) + 'px';
     setAuthor(e.target.value);
   }
-  const handleClick = e => {
+  const handleClick = (puzzle) => {
     console.log("Click")
-    console.log(e)
+    console.log(puzzle.activeCell)
   }
   
   const clueBreaker = (clue) => {
@@ -39,8 +39,8 @@ const Puzzle = ({ initialGrid }) => {
       </div>
       <PuzzleContext.Consumer>
         {puzzle => (
-          <div class="puzzle-container">
-            <PuzzleMenu puzzle={puzzle} />
+          <div class="puzzle-container" onClick={()=>handleClick(puzzle)}>
+            <PuzzleMenu puzzle={puzzle} onClick={handleClick}/>
             <div class="puzzle-grid">
               {puzzle.grid.map((columns, i) => (
                 <PuzzleRow
