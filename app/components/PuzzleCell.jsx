@@ -10,7 +10,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     "puzzle-cell-x": cell.isBlackSquare,
     active: activeRow === row && activeColumn === column,
     highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column),
-    marked: cell.style === 'marked'
+    marked: cell.style === 'marked',
+    circled: cell.style === 'circled'
   });
 
   const label = getCellClue({ row, column, puzzle });
@@ -22,7 +23,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     } else {
       puzzle.setActiveCell([row, column]);
     }
-    if (e.metaKey) {
+    if (e.metaKey || e.ctrlKey) {
       puzzle.toggleBlackSquare(row, column);
     }
     e.stopPropagation();
@@ -37,7 +38,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       return;
     }
     if (e.key === "+") {
-      puzzle.toggleStyle(activeRow, activeColumn);
+      puzzle.rotateStyle(activeRow, activeColumn);
       return;
     }
     if (e.key === "Enter") {
@@ -90,7 +91,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       <div class="input">
         {cell.value.toUpperCase()}
       </div>
-      {cell.style === 'marked' ? <div class="circle"/>: null}
+      {cell.style === 'circled' ? <div class="circle"/>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
     </div>
   );

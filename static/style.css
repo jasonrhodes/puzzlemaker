@@ -99,14 +99,14 @@ a {
 .circle {
   border: 1px solid black;
   border-radius: 50%;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   line-height: 1;
   text-align: center;
   display: inline-block;
   position: absolute;
-  left: 2px;
-  top: 2px;
+  left: 4px;
+  top: 4px;
   
 }
 

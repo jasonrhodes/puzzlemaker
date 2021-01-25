@@ -57,10 +57,12 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     setGrid(newGrid);
   }
   
-  const toggleStyle = (row, column) => {
+  const rotateStyle = (row, column) => {
     const currentValue = grid[row][column].style;
     const newGrid = [...grid];
     if (!currentValue) {
+      newGrid[row][column].style = 'circled';
+    } else if (currentValue === 'circled') {
       newGrid[row][column].style = 'marked';
     } else {
       newGrid[row][column].style = null;
@@ -151,7 +153,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     updateCellValue,
     toggleSymmetry,
     toggleBlackSquare,
-    toggleStyle,
+    rotateStyle,
     nextAcross,
     prevAcross,
     nextDown,
