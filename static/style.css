@@ -145,6 +145,19 @@ a {
   min-height: 300px;
 }
 
+.current-clues .current > span {
+  border: 1px solid rgb(34, 188, 172);
+  height: 18px;
+  width: 18px;
+  text-align: center;
+  display: inline-block;
+}
+
+.current-clues .current > span:not(:first-child) {
+  border-left: 0;
+}
+
+
 input.inline-content-editable, .fakeinput {
   border: 0px;
   font-size: 18px;
