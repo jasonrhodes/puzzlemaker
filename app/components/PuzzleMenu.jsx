@@ -23,8 +23,8 @@ const PuzzleMenu = ({puzzle}) => {
   
   return (
     <div class="menu">
-      <Link><DesktopDownloadIcon size={24} /></Link>
-      <Link onClick={toggleLock} >{lockIcon()} <MirrorIcon class="subicon" size={16} /></Link>
+      <Link><DesktopDownloadIcon size={24} /><ReactTooltip /></Link>
+      <Link class="subicon" onClick={toggleLock} >{lockIcon()} <MirrorIcon size={12} /></Link>
     </div>
   );
 };
