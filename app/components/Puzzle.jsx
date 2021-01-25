@@ -21,6 +21,15 @@ const Puzzle = ({ initialGrid }) => {
     console.log("Click")
     console.log(e)
   }
+  
+  const clueBreaker = (clue) => {
+    var html = '';
+    for (var i = 0; i < clue.length; i++) {
+      html += '<span>' + clue.charAt(i) + '</span>';
+    }
+    return html;
+  };
+  
   return (
     <PuzzleContextProvider initialGrid={initialGrid}>
       <div class="puzzle-info">
@@ -42,8 +51,16 @@ const Puzzle = ({ initialGrid }) => {
               ))}
             </div>
             <div class="current-clues">
-              <div id="across"><h3>1 Across:</h3><span class="current">{puzzle.words.across.word.toUpperCase()}</span></div>
-              <div id="down"><h3>1 Down:</h3><span class="current">{puzzle.words.down.word.toUpperCase()}</span></div>
+              <div id="across">
+                <h3>1 Across:</h3>
+                <div class="current">{clueBreaker(puzzle.words.across.word.toUpperCase())}</div>
+                <div class="suggestions"></div>
+              </div>
+              <div id="down">
+                <h3>1 Down:</h3>
+                <div class="current">{clueBreaker(puzzle.words.down.word.toUpperCase())}</div>
+                <div class="suggestions"></div>
+              </div>
             </div>
           </div>
         )}
