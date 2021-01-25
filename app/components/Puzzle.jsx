@@ -16,6 +16,7 @@ const Puzzle = ({ initialGrid }) => {
   const handleAuthorChange = (e,puzzle) => {
     e.preventDefault();
     e.target.style.width = measureMyInputText(e.target.id) + 'px';
+    console.log(puzzle.clue);
     setAuthor(e.target.value);
     puzzle.clue = 0;
   }

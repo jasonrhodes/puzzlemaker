@@ -145,6 +145,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     direction,
     words,
     grid,
+    clue,
     symmetry,
     setActiveCell,
     toggleDirection,
