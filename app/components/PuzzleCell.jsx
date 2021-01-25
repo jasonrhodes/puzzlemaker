@@ -90,6 +90,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       <div class="input">
         {cell.value.toUpperCase()}
       </div>
+      {cell.style === 'marked' ? <div class="circle"/>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
     </div>
   );
