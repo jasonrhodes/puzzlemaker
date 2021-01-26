@@ -3,9 +3,6 @@ const { Link } = require("react-router-dom");
 
 const { DesktopDownloadIcon, DatabaseIcon, UnlockIcon, HomeIcon, LockIcon, MirrorIcon, ShareIcon, PlayIcon } = require("@primer/octicons-react");
 
-const ReactTooltip = require("react-tooltip");
-
-
 
 
 const PuzzleMenu = ({puzzle}) => {
@@ -16,9 +13,9 @@ const PuzzleMenu = ({puzzle}) => {
   
   const lockIcon = () => {
     if (puzzle.symmetry){
-      return < LockIcon data-tip="Unlock symmetry" size={24}/>;
+      return < LockIcon onmouseover={pbTips(this)} data-tip="Unlock symmetry" size={24}/>;
     } else {
-      return < UnlockIcon data-tip="Lock symmetry" size={24}/>;
+      return < UnlockIcon onmouseover={pbTips(this)} data-tip="Lock symmetry" size={24}/>;
     };
   };
   
