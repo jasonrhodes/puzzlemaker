@@ -34,6 +34,10 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     return { across, down };
   };
   
+  const calculateAllClues = () => {
+    for (c of )
+  }
+  
   const updateCellValue = (row, column, value) => {
     const newGrid = [...grid];
     newGrid[row][column].value = value;
