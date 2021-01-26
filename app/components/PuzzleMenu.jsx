@@ -13,9 +13,9 @@ const PuzzleMenu = ({puzzle}) => {
   
   const lockIcon = () => {
     if (puzzle.symmetry){
-      return <Link class="subicon" onClick={toggleLock} >< LockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip">Unlock symmetry</span></Link>;
+      return <Link class="subicon" onClick={toggleLock} >< LockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip"><b>Unlock symmetry</b></span></Link>;
     } else {
-      return <Link class="subicon" onClick={toggleLock} >< UnlockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip">Lock symmetry</span></Link>;
+      return <Link class="subicon" onClick={toggleLock} >< UnlockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip"><b>Lock symmetry</b></span></Link>;
     };
   };
   
@@ -28,10 +28,10 @@ const PuzzleMenu = ({puzzle}) => {
           <i>"."</i> to toggle black square<br/>
           <i>"+"</i> to toggle circle</span>
       </Link>
-      <Link><ShareIcon size={24} /><span class="pbtip">Share</span></Link>
-      <Link><PlayIcon size={24} /><span class="pbtip">Play</span></Link>
-      <Link><DatabaseIcon size={24} /><span class="pbtip">Save</span></Link>
-      <Link><DesktopDownloadIcon size={24} /><span class="pbtip">Download</span></Link>
+      <Link><ShareIcon size={24} /><span class="pbtip"><b>Share</b><br/>Link to send pzlmkr.me/4k8sd3k</span></Link>
+      <Link><PlayIcon size={24} /><span class="pbtip"><b>Play</b><br/>Open in Puzzlesolver</span></Link>
+      <Link><DatabaseIcon size={24} /><span class="pbtip"><b>Save</b><br/>Save to cloud</span></Link>
+      <Link><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>Download as .PUZ</span></Link>
       {lockIcon()}
     </div>
   );
