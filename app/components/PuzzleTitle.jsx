@@ -14,13 +14,7 @@ const PuzzleTitle = ({ width }) => {
     setFunc(e.target.value);
     setWidthFunc(fieldWidth < 40 ? 40 : fieldWidth);
   }
-  const handleAuthorChange = e => {
-    e.preventDefault();
-    let fieldWidth = measureMyInputText(e.target.id);
-    e.target.style.width = fieldWidth + 'px';
-    setAuthor(e.target.value);
-    setAuthorWidth(fieldWidth < 40 ? 40 : fieldWidth);
-  }
+
   return (
     <div>
       <div class="puzzle-info" id="puzzle-info">
@@ -28,7 +22,7 @@ const PuzzleTitle = ({ width }) => {
         <span>by </span>
         <input id="author" class="inline-content-editable" style={{ width: '57px' }} value={author} type="text" onChange={(e) => handleChange(e, setAuthor, setAuthorWidth)} />
       </div>
-      {authorWidth + titleWidth > width - 200 ? <div><br/><br/></div> : null}
+      {authorWidth + titleWidth > width - 210 ? <div><br/><br/></div> : null}
     </div>
   );
 }
