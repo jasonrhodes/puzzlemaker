@@ -26,6 +26,9 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (e.metaKey || e.ctrlKey) {
       puzzle.toggleBlackSquare(row, column);
     }
+    if (e.metaKey || e.ctrlKey) {
+      puzzle.toggleBlackSquare(row, column);
+    }
     e.stopPropagation();
   };
 
