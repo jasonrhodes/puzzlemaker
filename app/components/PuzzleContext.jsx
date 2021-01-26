@@ -71,19 +71,30 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   }
   
   const getCluesForCell = (row, column) => {
+    if (!row && !column) {
+      row = 0;
+      column = 0;
+    }
+    
     const { labelGrid } = calculateAllClueNumbers();
     let acrossNumber = 0;
     let downNumber = 0;
     
+    if (grid[row][column].isBlackSquare){
+      acrossNumber = '-';
+      downNumber = '-';
+      return {acrossNumber, downNumber};
+    }
+    
     for (let i = column; i >= 0; i--){
-      if (labelGrid[row][i] === 'X'){
+      if (i === 0 || grid[row][i-1].isBlackSquare){
         acrossNumber = labelGrid[row][i];
         break;
       }
     }
     
     for (let j = row; j >= 0; j--){
-      if (labelGrid[j][column] === 'X'){
+      if (j === 0 || grid[j-1][column].isBlackSquare){
         downNumber = labelGrid[j][column];
         break;
       }
