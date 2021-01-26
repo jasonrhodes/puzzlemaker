@@ -35,7 +35,20 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   };
   
   const calculateAllClues = () => {
-    for (c of )
+    let inWord = false;
+    const clues = [];
+    for (let r of grid){
+      for (let cell of r){
+        if (!inWord) {
+          clues.push("TEST");
+          inWord = true;
+        } else if (cell.isBlackSquare) {
+          inWord = false;
+        }
+      }
+      inWord = false;
+    }
+    return clues;
   }
   
   const updateCellValue = (row, column, value) => {
@@ -178,6 +191,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       <br />
       <br />
       <pre>
+        <code>{calculateAllClues()}</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
