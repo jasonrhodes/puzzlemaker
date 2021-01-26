@@ -1,7 +1,7 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
 
-const { DesktopDownloadIcon, DatabaseIcon, UnlockIcon, HomeIcon, LockIcon, MirrorIcon, ShareIcon, PlayIcon } = require("@primer/octicons-react");
+const { DesktopDownloadIcon, DatabaseIcon, UnlockIcon, HomeIcon, LockIcon, MirrorIcon, ShareIcon, PlayIcon, InfoIcon } = require("@primer/octicons-react");
 
 
 
@@ -13,19 +13,20 @@ const PuzzleMenu = ({puzzle}) => {
   
   const lockIcon = () => {
     if (puzzle.symmetry){
-      return < LockIcon onmouseover={pbTips(this)} data-tip="Unlock symmetry" size={24}/>;
+      return <Link class="subicon" onClick={toggleLock} >< LockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip">Unlock symmetry</span></Link>;
     } else {
-      return < UnlockIcon onmouseover={pbTips(this)} data-tip="Lock symmetry" size={24}/>;
+      return <Link class="subicon" onClick={toggleLock} >< UnlockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip">Lock symmetry</span></Link>;
     };
   };
   
   return (
     <div class="menu">
-      <Link><ShareIcon size={24} /></Link>
-      <Link><PlayIcon size={24} /></Link>
-      <Link><DatabaseIcon size={24} /></Link>
-      <Link><DesktopDownloadIcon size={24} /></Link>
-      <Link class="subicon" onClick={toggleLock} >{lockIcon()} <MirrorIcon size={12} /></Link>
+      <Link><InfoIcon size={24} /><span class="pbtip">Info</span></Link>
+      <Link><ShareIcon size={24} /><span class="pbtip">Share</span></Link>
+      <Link><PlayIcon size={24} /><span class="pbtip">Play</span></Link>
+      <Link><DatabaseIcon size={24} /><span class="pbtip">Save</span></Link>
+      <Link><DesktopDownloadIcon size={24} /><span class="pbtip">Download</span></Link>
+      {lockIcon()}
     </div>
   );
 };

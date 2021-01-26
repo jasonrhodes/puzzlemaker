@@ -147,6 +147,7 @@ a {
 .menu a {
   padding: 8.5px;
   text-decoration: none;
+  position: relative;
 }
 
 .subicon > svg + svg {
@@ -189,6 +190,21 @@ a {
 
 .current-clues .current > span.emptycell {
   color: rgba(0,0,0,0)
+}
+
+.pbtip {
+  display: none;
+}
+
+
+
+*:hover > .pbtip {
+  display: block;
+  position: absolute;
+  top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  
 }
 
 input.inline-content-editable, .fakeinput {
