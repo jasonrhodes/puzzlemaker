@@ -26,11 +26,10 @@ const PuzzleMenu = ({puzzle}) => {
           <b>Info</b><br/>
           <i>Ctrl+click</i> to toggle black square<br/>
           <i>"."</i> to toggle black square<br/>
-          <i>"+"</i> to toggle circle/shaded square</span>
+          <i>"+"</i> to toggle circle/shaded square
+        </span>
       </Link>
-      <Link><ShareIcon size={24} /><span class="pbtip"><b>Share</b><br/>Link to send pzlmkr.me/4k8sd3k</span></Link>
-      <Link><PlayIcon size={24} /><span class="pbtip"><b>Play</b><br/>Open in Puzzlesolver</span></Link>
-      <Link><DatabaseIcon size={24} /><span class="pbtip"><b>Save</b><br/>Save to cloud</span></Link>
+      <Link><DatabaseIcon size={24} /><span class="pbtip"><b>Save</b><br/>Save to our storage</span></Link>
       <Link><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>Download as .PUZ</span></Link>
       {lockIcon()}
     </div>

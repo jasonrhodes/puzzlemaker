@@ -16,8 +16,8 @@ const PuzzleTitle = () => {
   }
   return (
     <div class="puzzle-info">
-      <input id="title" class="inline-content-editable" style={{ width: '6ch' }} value={title} type="text" onChange={handleTitleChange} />
-      <span> by </span>
+      <input id="title" class="inline-content-editable" style={{ width: '66px' }} value={title} type="text" onChange={handleTitleChange} />
+      <span>by </span>
       <input id="author" class="inline-content-editable" style={{ width: '57px' }} value={author} type="text" onChange={handleAuthorChange} />
     </div>
   );
