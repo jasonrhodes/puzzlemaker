@@ -12,6 +12,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   });
   const [grid, setGrid] = React.useState(initialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
+  const [labelGrid, setLabelGrid] = React.useState([]);
 
   const toggleDirection = () =>
     setDirection(direction === "across" ? "down" : "across");
@@ -67,35 +68,39 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       }
       inAcrossWord = false;
     }
-    return { acrossClues, downClues, labelGrid} ;
+    return { acrossClues, downClues, labelGrid } ;
   }
   
-  const getCluesForCell = (row, column) => {
+  React.useEffect(() => {
     const { labelGrid } = calculateAllClueNumbers();
+    setLabelGrid(labelGrid);
+  }, [grid]);
+  
+  const getCluesForCell = (row, column) => {
     let acrossNumber = 0;
     let downNumber = 0;
     
     if ((!row && !column && row !== 0) || grid[row][column].isBlackSquare){
       acrossNumber = '-';
       downNumber = '-';
-      return {acrossNumber, downNumber};
+      return { acrossNumber, downNumber };
     }
     
-    for (let i = column; i >= 0; i--){
+    for (let i = column; i >= 0; i--) {
       if (i === 0 || grid[row][i-1].isBlackSquare){
         acrossNumber = labelGrid[row][i];
         break;
       }
     }
     
-    for (let j = row; j >= 0; j--){
+    for (let j = row; j >= 0; j--) {
       if (j === 0 || grid[j-1][column].isBlackSquare){
         downNumber = labelGrid[j][column];
         break;
       }
     }
     
-    return {acrossNumber, downNumber}
+    return { acrossNumber, downNumber }
   }
   
   const updateCellValue = (row, column, value) => {
