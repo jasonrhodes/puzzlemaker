@@ -35,10 +35,29 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   };
   
   const calculateAllClues = () => {
-    const inWord = grid[0].map(() => false);
+    const inDownWord = grid[0].map(() => false);
+    let inAcrossWord = true;
+    let count = 1;
     const AcrossClues = [];
     const DownClues = [];
     for (let r of grid){
+      for (let c = 0; c < r.length; c++){
+        if (!inAcrossWord && !r[c].isBlackSquare) {
+          AcrossClues.push(count);
+          inAcrossWord = true;
+        } else if (r[c].isBlackSquare) {
+          inAcrossWord = false;
+        }
+        if (!inDownWord[c] && !r[c].isBlackSquare) {
+          DownClues.push(count);
+          inDownWord[c] = true;
+        } else if (r[c].isBlackSquare) {
+          inDownWord[c] = false;
+        }
+      }
+      inAcrossWord = false;
+    }
+    /*for (let r of grid){
       for (let cell of r){
         if (!inWord) {
           AcrossClues.push("X ");
@@ -60,7 +79,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
         }
       }
       inWord = false;
-    }
+    }*/
     return 'Across: ' + AcrossClues + ', Down: ' + DownClues ;
   }
   
