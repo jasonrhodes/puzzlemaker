@@ -152,7 +152,7 @@ a {
 
 .subicon > svg + svg {
   position: relative;
-  left: -22px;
+  left: -18px;
   top: -2px;
   margin-right: -15px;
 }
@@ -196,15 +196,40 @@ a {
   display: none;
 }
 
-
-
 *:hover > .pbtip {
   display: block;
   position: absolute;
-  top: 20px;
-  border: 1px solid #ddd;
+  top: 40px;
+  left: 0px;
+  border: 2px solid rgb(34, 188, 172);
   border-radius: 2px;
-  
+  padding: 10px;
+  background-color: #fff;
+  z-index: 101;
+}
+
+*:hover > .pbtip:after, *:hover > .pbtip:before   {
+	bottom: 100%;
+	left: 20px;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+*:hover > .pbtip:after  {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 10px;
+	margin-left: -10px;
+}
+*:hover > .pbtip:before {
+	border-color: rgba(221, 221, 221, 0);
+	border-bottom-color: rgb(34, 188, 172);
+	border-width: 11px;
+	margin-left: -11px;
 }
 
 input.inline-content-editable, .fakeinput {
