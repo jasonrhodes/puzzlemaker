@@ -71,16 +71,11 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   }
   
   const getCluesForCell = (row, column) => {
-    if (!row && !column) {
-      row = 0;
-      column = 0;
-    }
-    
     const { labelGrid } = calculateAllClueNumbers();
     let acrossNumber = 0;
     let downNumber = 0;
     
-    if (grid[row][column].isBlackSquare){
+    if ((!row && !column && row !== 0) || grid[row][column].isBlackSquare){
       acrossNumber = '-';
       downNumber = '-';
       return {acrossNumber, downNumber};
