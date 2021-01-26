@@ -11,33 +11,28 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
   const {acrossNumber, downNumber} = puzzle.getCluesForCell(row, column)
   
-  const [aSuggestions,setASuggestions] = React.useState([]);
-  const [dSuggestions,setDSuggestions] = React.useState([]);
+  const [acrossSuggestions,setAcrossSuggestions] = React.useState([]);
+  const [downSuggestions,setDownSuggestions] = React.useState([]);
   React.useEffect(() => {
     console.log("USE EFFECT 3 (A SUGGESTIONS)")
-    getSuggestions(across.word.toLowerCase(), setASuggestions);
-  }, [across])
-  React.useEffect(() => {
-    console.log("USE EFFECT 4 (D SUGGESTIONS)")
-    getSuggestions(down.word.toLowerCase(), setDSuggestions);
-  }, [down])
-  
+    getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
+    getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+  }, [across, down])
   
   const getSuggestions = async (clue, setFunc) => {
-    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=500';
+    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=50';
     console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
-    //console.log(myJson.map(x => x.word.toUpperCase()));
-    //setFunc(myJson.map(x => x.word.toUpperCase()));
     setFunc(getMatches(myJson, clue.length));
   } 
   
   const getMatches = (response, len) => {
     let result = [];
     for (let entry of response){
-      if (entry.word.replace(/-/g,'').replace(/ /g,'').length === len) {
-        result.push(entry.word.replace(/-/g,'').replace(/ /g,''));
+      let word = entry.word.replace(/-/g,'').replace(/ /g,'')
+      if (word.length === len) {
+        result.push(word.toUpperCase());
       }
       if (result.length === 10) {
         break;
@@ -51,12 +46,18 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across">
         <h3>{acrossNumber} Across:</h3>
         <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
-        <div>{aSuggestions.map((x) => <div class="suggestions">{x}</div>)}</div>
+        <div>{acrossSuggestions.map(
+            (x) => <div class="suggestions">{x}</div>
+          )}
+        </div>
       </div>
       <div id="down">
         <h3>{downNumber} Down:</h3>
         <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
-        <div>{dSuggestions.map((x) => <div class="suggestions">{x}</div>)}</div>
+        <div>{downSuggestions.map(
+            (x) => <div class="suggestions">{x}</div>
+          )}
+        </div>
       </div>
     </div>
   );
