@@ -29,8 +29,8 @@ const PuzzleMenu = ({puzzle}) => {
           <i>"+"</i> to toggle circle/shaded square
         </span>
       </Link>
-      <Link><DatabaseIcon size={24} /><span class="pbtip"><b>Save</b><br/>Save to our storage</span></Link>
-      <Link><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>Download as .PUZ</span></Link>
+      <Link><DatabaseIcon size={24} /><span class="pbtip"><b>Save</b><br/>...to our storage</span></Link>
+      <Link><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>...as .puz file</span></Link>
       {lockIcon()}
     </div>
   );
