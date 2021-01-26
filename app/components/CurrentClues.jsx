@@ -20,7 +20,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }, [across, down])
   
   const getSuggestions = async (clue, setFunc) => {
-    if 
+    if (!clue.includes('-')) {
+      setFunc([clue.toUpperCase()]);
+      return;
+    }
     const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=50';
     console.log(apiString);
     const response = await fetch(apiString);
