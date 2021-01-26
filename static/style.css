@@ -159,10 +159,10 @@ a {
 }
 
 .subicon > svg + svg {
-  position: relative;
-  left: -18px;
-  top: -2px;
-  margin-right: -15px;
+  position: absolute;
+  left: 14px;
+  top: 13px;
+  margin-right: 0px;
 }
 
 .noopacity {
