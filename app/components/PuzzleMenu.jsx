@@ -29,7 +29,7 @@ const PuzzleMenu = ({puzzle}) => {
           <i>"+"</i> to toggle circle/shaded square
         </span>
       </Link>
-      <Link to={{ pathname: "/play", state: { puzzle }}}><PlayIcon size={24} /><span class="pbtip"><b>Play</b></span></Link>
+      <Link to={{ pathname: "/play"}}><PlayIcon size={24} /><span class="pbtip"><b>Play</b></span></Link>
       <Link><DatabaseIcon size={24} /><span class="pbtip"><b>Save</b><br/>...to our storage</span></Link>
       <Link><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>...as .puz file</span></Link>
       {lockIcon()}
