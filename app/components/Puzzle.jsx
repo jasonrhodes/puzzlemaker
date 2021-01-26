@@ -10,7 +10,7 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <PuzzleTitle />
+          <PuzzleTitle width={puzzle.grid[0].length * 40}/>
           <div class="puzzle-container">
             <PuzzleMenu puzzle={puzzle}/>
             <div class="puzzle-grid">
