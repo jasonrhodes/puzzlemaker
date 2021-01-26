@@ -36,11 +36,12 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   
   const calculateAllClues = () => {
     let inWord = false;
-    const clues = [];
+    const AcrossClues = [];
+    const DownClues = [];
     for (let r of grid){
       for (let cell of r){
         if (!inWord) {
-          clues.push("TEST");
+          AcrossClues.push("X ");
           inWord = true;
         } else if (cell.isBlackSquare) {
           inWord = false;
@@ -48,7 +49,19 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       }
       inWord = false;
     }
-    return clues;
+    inWord = false;
+    for (let c = 0; c < grid[0].length; c++){
+      for (let r = 0; r < grid.length; r++){
+        if (!inWord) {
+          AcrossClues.push("X ");
+          inWord = true;
+        } else if (cell.isBlackSquare) {
+          inWord = false;
+        }
+      }
+      inWord = false;
+    }
+    return 'Across: ' + AcrossClues + ', Down: ' + DownClues ;
   }
   
   const updateCellValue = (row, column, value) => {
