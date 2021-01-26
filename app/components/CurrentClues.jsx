@@ -24,7 +24,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   
   const getSuggestions = async (clue, setFunc) => {
-    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'*') + '&max=100';
+    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=500';
     console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
@@ -36,7 +36,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const getMatches = (response, len) => {
     let result = [];
     for (let entry of response){
-      if (entry.word.length >= len && entry.word.replace(/-/g,'').replace(/ /g,'').length === len) {
+      if (entry.word.replace(/-/g,'').replace(/ /g,'').length === len) {
         result.push(entry.word.replace(/-/g,'').replace(/ /g,''));
       }
       if (result.length === 10) {
