@@ -10,7 +10,7 @@ const convertAnswerToSquares = (clue) => {
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
-  const {acrossNumber, downNumber} = puzzle.getCluesForCell(row, column)
+  const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column)
   
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
@@ -20,9 +20,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
     getSuggestions(down.word.toLowerCase(), setDownSuggestions);
   }, [across, down])
   
+  const hasDash = char => char === "-";
   const getSuggestions = async (clue, setFunc) => {
-    if (!clue.includes('-')) {  // if the word is already filled out, we don't need to make an API request
-      setFunc([]); // no suggestions needed
+    const chars = clue.split("");
+    const hasNoDashes = !chars.some(hasDash);
+    const hasAllDashes = chars.every(hasDash);
+    if (hasNoDashes || hasAllDashes) {  // if the word is all blank or all filled in, no suggestions needed
+      setFunc([]);
       return;
     }
     const cached = WordCache.get(clue);
