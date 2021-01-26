@@ -22,7 +22,7 @@ const Puzzle = ({ initialGrid }) => {
                 />
               ))}
             </div>
-            <CurrentClues across={puzzle.words.across} down={puzzle.words.down} />
+            <CurrentClues across={puzzle.words.across} down={puzzle.words.down} puzzle={puzzle} />
           </div>
         </div>
       )}

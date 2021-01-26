@@ -70,20 +70,20 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     return { acrossClues, downClues, labelGrid} ;
   }
   
-  const getCluesForCell = (activ) => {
+  const getCluesForCell = (row, column) => {
     const { labelGrid } = calculateAllClueNumbers();
     let acrossNumber = 0;
     let downNumber = 0;
     
     for (let i = column; i >= 0; i--){
-      if (typeof labelGrid[row][i] === 'number'){
+      if (labelGrid[row][i] === 'X'){
         acrossNumber = labelGrid[row][i];
         break;
       }
     }
     
     for (let j = row; j >= 0; j--){
-      if (typeof labelGrid[j][column] === 'number'){
+      if (labelGrid[j][column] === 'X'){
         downNumber = labelGrid[j][column];
         break;
       }
@@ -213,6 +213,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     setActiveCell,
     toggleDirection,
     getNextClueNumber,
+    getCluesForCell,
     isCellInActiveWord,
     updateCellValue,
     toggleSymmetry,
@@ -232,6 +233,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       <br />
       <br />
       <pre>
+        <code>{JSON.stringify(getCluesForCell(activeCell[0],activeCell[1])) }</code>
         <code>{JSON.stringify(calculateAllClueNumbers()) }</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
