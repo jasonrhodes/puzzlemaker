@@ -7,28 +7,26 @@ const PuzzleTitle = ({ width }) => {
   const [authorWidth, setAuthorWidth] = React.useState(60);
   const [titleWidth, setTitleWidth] = React.useState(75);
   
-  //setWidth(measureMyInputText("puzzle-info"))
-  
-  const handleTitleChange = e => {
+  const handleChange = (e, setFunc, setWidthFunc) => {
     e.preventDefault();
-    let width = measureMyInputText(e.target.id);
-    e.target.style.width = width + 'px';
-    setTitle(e.target.value);
-    setTitleWidth(width);
+    let fieldWidth = measureMyInputText(e.target.id);
+    e.target.style.width = fieldWidth + 'px';
+    setFunc(e.target.value);
+    setWidthFunc(fieldWidth < 40 ? 40 : fieldWidth);
   }
   const handleAuthorChange = e => {
     e.preventDefault();
-    let width = measureMyInputText(e.target.id);
-    e.target.style.width = width + 'px';
+    let fieldWidth = measureMyInputText(e.target.id);
+    e.target.style.width = fieldWidth + 'px';
     setAuthor(e.target.value);
-    setAuthorWidth(width);
+    setAuthorWidth(fieldWidth < 40 ? 40 : fieldWidth);
   }
   return (
     <div>
       <div class="puzzle-info" id="puzzle-info">
-        <input id="title" class="inline-content-editable" style={{ width: '66px' }} value={title} type="text" onChange={handleTitleChange} />
+        <input id="title" class="inline-content-editable" style={{ width: '66px' }} value={title} type="text" onChange={(e) => handleChange(e, setTitle, setTitleWidth)} />
         <span>by </span>
-        <input id="author" class="inline-content-editable" style={{ width: '57px' }} value={author} type="text" onChange={handleAuthorChange} />
+        <input id="author" class="inline-content-editable" style={{ width: '57px' }} value={author} type="text" onChange={(e) => handleChange(e, setAuthor, setAuthorWidth)} />
       </div>
       {authorWidth + titleWidth > width - 200 ? <div><br/><br/></div> : null}
     </div>
