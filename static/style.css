@@ -204,9 +204,8 @@ a {
   font-family: Courier, Monaco, monospace;
   margin: 2px;
   height: 15px;
-  width: 50px;
+  width: 15px;
   text-align: center;
-  border-left: 0;
 }
 
 .pbtip {

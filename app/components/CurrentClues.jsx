@@ -28,7 +28,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
-
+    console.log(myJson.map(x => x.word.toUpperCase()));
     setFunc(myJson.map(x => x.word.toUpperCase()));
   } 
   
@@ -42,7 +42,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="down">
         <h3>{downNumber} Down:</h3>
         <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
-        <div class="suggestions">{dSuggestions.map((x) => <div>{x}</div>)}</div>
+        <div>{dSuggestions.map((x) => <div class="suggestions">{x}</div>)}</div>
       </div>
     </div>
   );
