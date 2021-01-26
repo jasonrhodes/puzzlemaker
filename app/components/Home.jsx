@@ -20,11 +20,11 @@ module.exports = () => {
   }
   
   console.log('a');
-  datamuse.request('words?ml=ringing in the ears')
+  /*datamuse.request('words?ml=ringing in the ears')
 .then((json) => {
   console.log(json);
   //do it!
-});
+});*/
   
   const [rows, columns] = (gridSize ? gridSize.split(" x ") : []);
   return (
