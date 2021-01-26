@@ -70,6 +70,14 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     return { acrossClues, downClues, labelGrid} ;
   }
   
+  const getCluesForCell = (row, column) => {
+    const { labelGrid } = calculateAllClueNumbers();
+    for (let i = column; i >= 0; i--){
+      
+    }
+    
+  }
+  
   const updateCellValue = (row, column, value) => {
     const newGrid = [...grid];
     newGrid[row][column].value = value;
