@@ -19,7 +19,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }, [across])
   React.useEffect(() => {
     console.log("USE EFFECT 4 (D SUGGESTIONS)")
-    getSuggestions(across.word.toLowerCase(), setDSuggestions);
+    getSuggestions(down.word.toLowerCase(), setDSuggestions);
   }, [down])
   
   
@@ -37,7 +37,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across">
         <h3>{acrossNumber} Across:</h3>
         <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
-        <div class="suggestions">{aSuggestions.map((x) => <div>{x}</div>)}</div>
+        <div>{aSuggestions.map((x) => <div class="suggestions">{x}</div>)}</div>
       </div>
       <div id="down">
         <h3>{downNumber} Down:</h3>
