@@ -2,11 +2,8 @@ const React = require("react");
 const { Link } = require("react-router-dom");
 const datamuse = require('datamuse');
  
-datamuse.request('words?ml=ringing in the ears')
-.then((json) => {
-  console.log(json);
-  //do it!
-});
+
+
 const CreateLink = ({ rows, columns }) => {
   if (!rows || !columns) {
     return null;
@@ -21,6 +18,14 @@ module.exports = () => {
   const handleChange = e => {
     setGridSize(e.target.value);
   }
+  
+  console.log('a');
+  datamuse.request('words?ml=ringing in the ears')
+.then((json) => {
+  console.log(json);
+  //do it!
+});
+  
   const [rows, columns] = (gridSize ? gridSize.split(" x ") : []);
   return (
     <React.Fragment>
