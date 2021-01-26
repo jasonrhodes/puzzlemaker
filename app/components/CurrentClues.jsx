@@ -12,20 +12,24 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const {acrossNumber, downNumber} = puzzle.getCluesForCell(row, column)
   
   const [aSuggestions,setASuggestions] = React.useState([]);
+  const [dSuggestions,setDSuggestions] = React.useState([]);
   React.useEffect(() => {
-    console.log("USE EFFECT 3 (SUGGESTIONS)")
-    getSuggestions(across.word.toLowerCase());
+    console.log("USE EFFECT 3 (A SUGGESTIONS)")
+    getSuggestions(across.word.toLowerCase(), setASuggestions);
   }, [across])
+  React.useEffect(() => {
+    console.log("USE EFFECT 4 (D SUGGESTIONS)")
+    getSuggestions(across.word.toLowerCase(), setDSuggestions);
+  }, [down])
   
   
-  const getSuggestions = async (clue) => {
+  const getSuggestions = async (clue, setFunc) => {
     const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=10';
     console.log(apiString);
-    const response = await fetch('https://api.datamuse.com/words?ml=ringing+in+the+ears');
-    const myJson = await response.json(); //extract JSON from the http response
+    const response = await fetch(apiString);
+    const myJson = await response.json(); 
 
-    setASuggestions(myJson.map(x => x.word.toUpperCase()));
-    // do something with myJson
+    setFunc(myJson.map(x => x.word.toUpperCase()));
   } 
   
   return (
@@ -33,12 +37,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across">
         <h3>{acrossNumber} Across:</h3>
         <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
-        <div class="suggestions">{aSuggestions}</div>
+        <div class="suggestions">{aSuggestions.map((x) => <div>{x}</div>)}</div>
       </div>
       <div id="down">
         <h3>{downNumber} Down:</h3>
         <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
-        <div class="suggestions"></div>
+        <div class="suggestions">{dSuggestions.map((x) => <div>{x}</div>)}</div>
       </div>
     </div>
   );
