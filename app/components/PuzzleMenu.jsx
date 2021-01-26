@@ -21,7 +21,7 @@ const PuzzleMenu = ({puzzle}) => {
   
   return (
     <div class="menu">
-      <Link><InfoIcon size={24} /><span class="pbtip">Info</span></Link>
+      <Link><InfoIcon size={24} /><span class="pbtip"><b>Info</b><br/><i>"."</i> to toggle black square</span></Link>
       <Link><ShareIcon size={24} /><span class="pbtip">Share</span></Link>
       <Link><PlayIcon size={24} /><span class="pbtip">Play</span></Link>
       <Link><DatabaseIcon size={24} /><span class="pbtip">Save</span></Link>
