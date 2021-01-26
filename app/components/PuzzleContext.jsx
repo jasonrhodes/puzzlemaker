@@ -126,12 +126,21 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     setGrid(newGrid);
   }
   
-  const rotateStyle = (row, column) => {
+  const toggleCircle = (row, column) => {
     const currentValue = grid[row][column].style;
     const newGrid = [...grid];
     if (!currentValue) {
       newGrid[row][column].style = 'circled';
-    } else if (currentValue === 'circled') {
+    } else {
+      newGrid[row][column].style = null;
+    }
+    setGrid(newGrid);
+  }
+  
+  const toggleShaded = (row, column) => {
+    const currentValue = grid[row][column].style;
+    const newGrid = [...grid];
+    if (!currentValue) {
       newGrid[row][column].style = 'marked';
     } else {
       newGrid[row][column].style = null;
@@ -229,7 +238,8 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     updateCellValue,
     toggleSymmetry,
     toggleBlackSquare,
-    rotateStyle,
+    toggleCircle,
+    toggleShaded,
     nextAcross,
     prevAcross,
     nextDown,

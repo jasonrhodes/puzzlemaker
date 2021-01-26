@@ -26,8 +26,11 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (e.metaKey || e.ctrlKey) {
       puzzle.toggleBlackSquare(row, column);
     }
-    if (e.metaKey || e.ctrlKey) {
-      puzzle.toggleBlackSquare(row, column);
+    if (e.altKey ) {
+      puzzle.toggleCircle(row, column);
+    }
+    if (e.shiftKey ) {
+      puzzle.toggleShaded(row, column);
     }
     e.stopPropagation();
   };
@@ -40,8 +43,12 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
-    if (e.key === "+") {
-      puzzle.rotateStyle(activeRow, activeColumn);
+    if (e.key === ";") {
+      puzzle.toggleCircle(activeRow, activeColumn);
+      return;
+    }
+    if (e.key === "/") {
+      puzzle.toggleShaded(activeRow, activeColumn);
       return;
     }
     if (e.key === "Enter") {

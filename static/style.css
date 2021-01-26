@@ -227,6 +227,10 @@ a {
   margin-right: -300px;
 }
 
+*:hover > .pbtip.stip {
+  
+}
+
 *:hover > .pbtip:after, *:hover > .pbtip:before   {
 	bottom: 100%;
 	left: 14px;
