@@ -39,19 +39,19 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     let inAcrossWord = false;
     let count = 1;
     let doubleClueChance = false;
-    const AcrossClues = [];
-    const DownClues = [];
+    const acrossClues = [];
+    const downClues = [];
     for (let r of grid){
       for (let c = 0; c < r.length; c++){
         if (!inAcrossWord && !r[c].isBlackSquare) {
-          AcrossClues.push(count++);
+          acrossClues.push(count++);
           doubleClueChance = true;
           inAcrossWord = true;
         } else if (r[c].isBlackSquare) {
           inAcrossWord = false;
         }
         if (!inDownWord[c] && !r[c].isBlackSquare) {
-          DownClues.push(doubleClueChance ? count - 1 : count++);
+          downClues.push(doubleClueChance ? count - 1 : count++);
           inDownWord[c] = true;
         } else if (r[c].isBlackSquare) {
           inDownWord[c] = false;
@@ -59,32 +59,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
         doubleClueChance = false;
       }
       inAcrossWord = false;
-      
-    }
-    /*for (let r of grid){
-      for (let cell of r){
-        if (!inWord) {
-          AcrossClues.push("X ");
-          inWord = true;
-        } else if (cell.isBlackSquare) {
-          inWord = false;
-        }
-      }
-      inWord = false;
-    }
-    inWord = false;
-    for (let c = 0; c < grid[0].length; c++){
-      for (let r = 0; r < grid.length; r++){
-        if (!inWord) {
-          DownClues.push("X ");
-          inWord = true;
-        } else if (grid[r][c].isBlackSquare) {
-          inWord = false;
-        }
-      }
-      inWord = false;
-    }*/
-    return 'Across: ' + AcrossClues + ', Down: ' + DownClues ;
+    return { acrossClues, downClues} ;
   }
   
   const updateCellValue = (row, column, value) => {
@@ -227,7 +202,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       <br />
       <br />
       <pre>
-        <code>{calculateAllClues()}</code>
+        <code>{JSON.stringify(calculateAllClues()) }</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
