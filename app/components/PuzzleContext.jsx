@@ -35,7 +35,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   };
   
   const calculateAllClues = () => {
-    let inWord = false;
+    const inWord = grid[0].map(() => false);
     const AcrossClues = [];
     const DownClues = [];
     for (let r of grid){
@@ -53,9 +53,9 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     for (let c = 0; c < grid[0].length; c++){
       for (let r = 0; r < grid.length; r++){
         if (!inWord) {
-          AcrossClues.push("X ");
+          DownClues.push("X ");
           inWord = true;
-        } else if (cell.isBlackSquare) {
+        } else if (grid[r][c].isBlackSquare) {
           inWord = false;
         }
       }
