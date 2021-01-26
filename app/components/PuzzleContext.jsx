@@ -34,31 +34,33 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     return { across, down };
   };
   
-  const calculateAllClues = () => {
+  const calculateAllClueNumbers = () => {
     const inDownWord = grid[0].map(() => false);
+    label
     let inAcrossWord = false;
     let count = 1;
     let doubleClueChance = false;
     const acrossClues = [];
     const downClues = [];
-    for (let r of grid){
-      for (let c = 0; c < r.length; c++){
-        if (!inAcrossWord && !r[c].isBlackSquare) {
+    for (let r = 0; r < grid[0].length; r++){
+      for (let c = 0; c < grid.length; c++){
+        if (!inAcrossWord && !grid[r][c].isBlackSquare) {
           acrossClues.push(count++);
           doubleClueChance = true;
           inAcrossWord = true;
-        } else if (r[c].isBlackSquare) {
+        } else if (grid[r][c].isBlackSquare) {
           inAcrossWord = false;
         }
-        if (!inDownWord[c] && !r[c].isBlackSquare) {
+        if (!inDownWord[c] && !grid[r][c].isBlackSquare) {
           downClues.push(doubleClueChance ? count - 1 : count++);
           inDownWord[c] = true;
-        } else if (r[c].isBlackSquare) {
+        } else if (grid[r][c].isBlackSquare) {
           inDownWord[c] = false;
         }
         doubleClueChance = false;
       }
       inAcrossWord = false;
+    }
     return { acrossClues, downClues} ;
   }
   
@@ -202,7 +204,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       <br />
       <br />
       <pre>
-        <code>{JSON.stringify(calculateAllClues()) }</code>
+        <code>{JSON.stringify(calculateAllClueNumbers()) }</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
