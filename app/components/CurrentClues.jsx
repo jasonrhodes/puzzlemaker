@@ -1,4 +1,5 @@
 const React = require("react");
+const WordCache = new Map();
 
 const convertAnswerToSquares = (clue) => {
   var chars = clue.split('');
@@ -11,8 +12,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
   const {acrossNumber, downNumber} = puzzle.getCluesForCell(row, column)
   
-  const [acrossSuggestions,setAcrossSuggestions] = React.useState([]);
-  const [downSuggestions,setDownSuggestions] = React.useState([]);
+  const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
+  const [downSuggestions, setDownSuggestions] = React.useState([]);
   React.useEffect(() => {
     console.log("USE EFFECT 3 (A SUGGESTIONS)")
     getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
@@ -21,14 +22,21 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   const getSuggestions = async (clue, setFunc) => {
     if (!clue.includes('-')) {  // if the word is already filled out, we don't need to make an API request
-      setFunc([clue.toUpperCase()]);
+      setFunc([]); // no suggestions needed
+      return;
+    }
+    const cached = WordCache.get(clue);
+    if (cached) {
+      setFunc(matches); // don't re-call API for clue pattern we already cached
       return;
     }
     const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=50';
     console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
-    setFunc(getMatches(myJson, clue.length));
+    const matches = getMatches(myJson, clue.length);
+    WordCache.set(clue, matches);
+    setFunc(matches);
   } 
   
   const getMatches = (response, len) => {
