@@ -36,26 +36,30 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
   
   const calculateAllClues = () => {
     const inDownWord = grid[0].map(() => false);
-    let inAcrossWord = true;
+    let inAcrossWord = false;
     let count = 1;
+    let doubleClueChance = false;
     const AcrossClues = [];
     const DownClues = [];
     for (let r of grid){
       for (let c = 0; c < r.length; c++){
         if (!inAcrossWord && !r[c].isBlackSquare) {
-          AcrossClues.push(count);
+          AcrossClues.push(count++);
+          doubleClueChance = true;
           inAcrossWord = true;
         } else if (r[c].isBlackSquare) {
           inAcrossWord = false;
         }
         if (!inDownWord[c] && !r[c].isBlackSquare) {
-          DownClues.push(count);
+          DownClues.push(doubleClueChance ? count - 1 : count++);
           inDownWord[c] = true;
         } else if (r[c].isBlackSquare) {
           inDownWord[c] = false;
         }
+        doubleClueChance = false;
       }
       inAcrossWord = false;
+      
     }
     /*for (let r of grid){
       for (let cell of r){
