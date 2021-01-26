@@ -28,13 +28,22 @@ const CurrentClues = ({ across, down, puzzle }) => {
     console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
-    console.log(myJson.map(x => x.word.toUpperCase()));
-    setFunc(myJson.map(x => x.word.toUpperCase()));
+    //console.log(myJson.map(x => x.word.toUpperCase()));
+    //setFunc(myJson.map(x => x.word.toUpperCase()));
+    setFunc(getMatches(myJson, clue.length));
   } 
   
-  const getMatches = (response, length) => {
+  const getMatches = (response, len) => {
     let result = [];
-    for (entry of res)
+    for (let entry of response){
+      if (entry.word.length >= len && entry.word.replace(/-/g,'').replace(/ /g,'').length === len) {
+        result.push(entry.word.replace(/-/g,'').replace(/ /g,''));
+      }
+      if (result.length === 10) {
+        break;
+      }
+    }
+    return result;
   }
   
   return (
