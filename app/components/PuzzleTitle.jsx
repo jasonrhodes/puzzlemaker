@@ -6,7 +6,7 @@ const PuzzleTitle = () => {
   const [author, setAuthor] = React.useState("Author");
   const [width, setWidth] = React.useState(160);
   
-  setWidth(measureMyInputText("puzzle-info"))
+  //setWidth(measureMyInputText("puzzle-info"))
   
   const handleTitleChange = e => {
     e.preventDefault();
