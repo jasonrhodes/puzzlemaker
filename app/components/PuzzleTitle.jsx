@@ -5,7 +5,7 @@ const PuzzleTitle = ({ width }) => {
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
   const [authorWidth, setAuthorWidth] = React.useState(60);
-  const [titleWidth, setTitleWidth] = React.useState(70);
+  const [titleWidth, setTitleWidth] = React.useState(75);
   
   //setWidth(measureMyInputText("puzzle-info"))
   
@@ -30,7 +30,7 @@ const PuzzleTitle = ({ width }) => {
         <span>by </span>
         <input id="author" class="inline-content-editable" style={{ width: '57px' }} value={author} type="text" onChange={handleAuthorChange} />
       </div>
-      {authorWidth + titleWidth > width - 200 ? <br/> : null}{authorWidth + titleWidth} vs. {width}
+      {authorWidth + titleWidth > width - 200 ? <div><br/><br/></div> : null}
     </div>
   );
 }
