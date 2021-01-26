@@ -18,7 +18,7 @@ module.exports = () => {
   const [rows, columns] = (gridSize ? gridSize.split(" x ") : []);
   return (
     <React.Fragment>
-      <h1 class="title">Puzzlemaker</h1>
+      <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
       <h2>Create a New Puzzle</h2>
       <div class="inline">
         <select onChange={handleChange}>
