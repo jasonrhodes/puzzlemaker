@@ -206,14 +206,14 @@ a {
   top: 38px;
   left: 0px;
   border: 4px solid rgb(34, 188, 172);
-  border-radius: 2px;
-  padding: 12px;
+  padding: 8px 10px;
   background-color: #fff;
   z-index: 101;
   color: #000;
   min-width: 30px;
   width: auto;
-  margin-right: -200px;
+  margin-right: -300px;
+  margin-left: -300px;
 }
 
 *:hover > .pbtip:after, *:hover > .pbtip:before   {

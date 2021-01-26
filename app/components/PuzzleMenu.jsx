@@ -24,8 +24,8 @@ const PuzzleMenu = ({puzzle}) => {
       <Link><InfoIcon size={24} />
         <span class="pbtip">
           <b>Info</b><br/>
+          <i>Ctrl+click</i> to toggle black square<br/>
           <i>"."</i> to toggle black square<br/>
-          <i>Ctrl/cmd + click</i> to toggle black square<br/>
           <i>"+"</i> to toggle circle</span>
       </Link>
       <Link><ShareIcon size={24} /><span class="pbtip">Share</span></Link>
