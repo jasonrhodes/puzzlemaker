@@ -24,13 +24,18 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   
   const getSuggestions = async (clue, setFunc) => {
-    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=10';
+    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'*') + '&max=100';
     console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
     console.log(myJson.map(x => x.word.toUpperCase()));
     setFunc(myJson.map(x => x.word.toUpperCase()));
   } 
+  
+  const getMatches = (response, length) => {
+    let result = [];
+    for (entry of res)
+  }
   
   return (
     <div class="current-clues">
