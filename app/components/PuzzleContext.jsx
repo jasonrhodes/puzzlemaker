@@ -70,12 +70,26 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     return { acrossClues, downClues, labelGrid} ;
   }
   
-  const getCluesForCell = (row, column) => {
+  const getCluesForCell = (activ) => {
     const { labelGrid } = calculateAllClueNumbers();
+    let acrossNumber = 0;
+    let downNumber = 0;
+    
     for (let i = column; i >= 0; i--){
-      
+      if (typeof labelGrid[row][i] === 'number'){
+        acrossNumber = labelGrid[row][i];
+        break;
+      }
     }
     
+    for (let j = row; j >= 0; j--){
+      if (typeof labelGrid[j][column] === 'number'){
+        downNumber = labelGrid[j][column];
+        break;
+      }
+    }
+    
+    return {acrossNumber, downNumber}
   }
   
   const updateCellValue = (row, column, value) => {
