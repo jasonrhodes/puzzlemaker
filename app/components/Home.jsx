@@ -1,6 +1,12 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
-
+const datamuse = require('datamuse');
+ 
+datamuse.request('words?ml=ringing in the ears')
+.then((json) => {
+  console.log(json);
+  //do it!
+});
 const CreateLink = ({ rows, columns }) => {
   if (!rows || !columns) {
     return null;
