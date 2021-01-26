@@ -26,7 +26,7 @@ const PuzzleMenu = ({puzzle}) => {
           <b>Info</b><br/>
           <i>Ctrl+click</i> to toggle black square<br/>
           <i>"."</i> to toggle black square<br/>
-          <i>"+"</i> to toggle circle</span>
+          <i>"+"</i> to toggle circle/shaded square</span>
       </Link>
       <Link><ShareIcon size={24} /><span class="pbtip"><b>Share</b><br/>Link to send pzlmkr.me/4k8sd3k</span></Link>
       <Link><PlayIcon size={24} /><span class="pbtip"><b>Play</b><br/>Open in Puzzlesolver</span></Link>
