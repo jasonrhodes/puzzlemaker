@@ -20,7 +20,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }, [across, down])
   
   const getSuggestions = async (clue, setFunc) => {
-    if (!clue.includes('-')) {
+    if (!clue.includes('-')) {  // if the word is already filled out, we don't need to make an API request
       setFunc([clue.toUpperCase()]);
       return;
     }
