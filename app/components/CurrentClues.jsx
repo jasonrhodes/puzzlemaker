@@ -38,6 +38,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
       getSuggestions(across.word.toLowerCase(), setAcrossSuggestions),
       getSuggestions(down.word.toLowerCase(), setDownSuggestions)
       ]);
+    setAcrossStyles(accs.map(() => 'black'));           
+    setDownStyles(downs.map(() => 'black'));
     if (puzzle.activeCell.length > 0 && accs.length && downs.length) {
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]].value){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
@@ -58,15 +60,14 @@ const CurrentClues = ({ across, down, puzzle }) => {
           }
           //console.log(aStyles)
           //console.log(dStyles)
-          
+          setAcrossStyles(aStyles)            
+          setDownStyles(dStyles)            
 
         } catch(error) {
             console.log(error);
-        }
+        }  
       }
     }
-    setAcrossStyles(aStyles);
-    setDownStyles(dStyles);
   }
   
   const hasDash = char => char === "-";
