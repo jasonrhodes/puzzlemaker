@@ -43,17 +43,19 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   
   React.useEffect(() => {
     savePuzzle();
-  }, [grid, puzzleId]);
+  }, [grid, words, puzzleId]);
   
-  const savedPuzzle = getSavedPuzzle(puzzleId);
-  if (savedPuzzle) {
-    console.log({ savedPuzzle });
-    setActiveCell(savedPuzzle.activeCell);
-    // setDirection(savedPuzzle.direction);
-  //   setWords(savedPuzzle.words);
-  //   setGrid(savedPuzzle.grid);
-  //   setSymmetry(savedPuzzle.symmetry);
-  }
+  React.useEffect(() => {
+    const savedPuzzle = getSavedPuzzle(puzzleId);
+    if (savedPuzzle) {
+      console.log({ savedPuzzle });
+      setGrid(savedPuzzle.grid);
+      setActiveCell(savedPuzzle.activeCell);
+      setDirection(savedPuzzle.direction);
+      setWords(savedPuzzle.words);
+      setSymmetry(savedPuzzle.symmetry);
+    }
+  }, [puzzleId]);
 
   const toggleDirection = () =>
     setDirection(direction === "across" ? "down" : "across");
