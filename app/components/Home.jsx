@@ -23,7 +23,7 @@ module.exports = () => {
   return (
     <React.Fragment>
       <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
-      <h2>Create a New Puzzle</h2>
+      <h3>Create a New Puzzle</h3>
       <div class="inline">
         <select onChange={handleChange}>
           <option disabled={true} selected={true}>-- Choose a grid size --</option>
@@ -44,8 +44,9 @@ module.exports = () => {
         </select>
         <div>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
       </div>
+      <br/>
       <div>
-        <h2>Load a Saved Puzzle</h2>
+        <h3>Load a Saved Puzzle</h3>
         <SavedPuzzleList />
       </div>
     </React.Fragment>
