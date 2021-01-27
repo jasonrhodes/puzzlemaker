@@ -15,11 +15,21 @@ module.exports = function SavedPuzzleList() {
     }));
   }, []);
   
+  const storageDelete = e => {
+    e.preventDefault();
+    console.log(Object.keys(window.localStorage));
+    console.log(e.target.id);
+    console.log(e.target.id.replace('del',''));
+    window.localStorage.removeItem(e.target.id.replace('del',''));
+    console.log(Object.keys(window.localStorage));
+  }
+    
+  
   return (
     <ul className="saved-puzzle-list">
       {puzzles.map(({ id, title, author }) => (
         <li key={id}>
-          <Link to={"/edit/" + id}>{title} by {author}</Link> <a><TrashIcon /></a>
+          <Link to={"/edit/" + id}>{title} by {author}</Link> <a id={'del' + id} onClick={(e)=>{storageDelete}}><TrashIcon /></a>
         </li>
       ))}
     </ul>
