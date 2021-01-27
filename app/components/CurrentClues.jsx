@@ -42,17 +42,21 @@ const CurrentClues = ({ across, down, puzzle }) => {
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]].value){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
         let downIndex = puzzle.activeCell[0] - down.range[0];
-        let aStyles = accs.map(() => '');
+        let aStyles = accs.map(() => 'black');
+        let dStyles = accs.map(() => 'black');
         try {
           let acrossLetter = '';
           for (let i = 0; i < accs.length; i++) {
             acrossLetter = accs[i][acrossIndex];
             let x = letters.indexOf(acrossLetter);
-            x >= 0 letters.push(acrossLetter)
-            setDownStyles(downs.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))            
-            
+            x < 0 ? (letters.push(acrossLetter), x = 0) : null;
+            aStyles[i] = colors[x];
+            dStyles = dStyles.map((ds) => downs[downIndex]===acrossLetter ? aStyles[i] : ds);
           }
-          
+          console.log(aStyles)
+          console.log(dStyles)
+          setAcrossStyles(aStyles)            
+          setDownStyles(dStyles)            
 
         } catch(error) {
             console.log(error);
