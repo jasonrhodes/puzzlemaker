@@ -170,12 +170,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   React.useEffect(() => {
     console.log("USE EFFECT 1 (GRID)");
     setWords(calculateCurrentWords());
-  }, [grid, setWords]);
-
-  React.useEffect(() => {
-    console.log("USE EFFECT 2 (activeCell)");
-    setWords(calculateCurrentWords());
-  }, [activeCell, setWords]);
+  }, [grid, setWords, activeCell]);
 
   let clue = 0;
   const getNextClueNumber = () => {
