@@ -31,6 +31,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
     }
     const cached = WordCache.get(clue);
     if (cached) {
+      console.log('test')
+      console.log('cached')
       setFunc(matches); // don't re-call API for clue pattern we already cached
       return;
     }
