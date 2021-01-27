@@ -7,10 +7,7 @@ const PuzzleTitle = ({ width, title, author, setTitle, setAuthor }) => {
   
   const handleChange = (e, setFunc, setWidthFunc) => {
     e.preventDefault();
-    //let fieldWidth = measureMyInputText(e.value);
-    //e.target.style.width = fieldWidth + 'px';
-    //setFunc(e.target.value);
-    //setWidthFunc(fieldWidth < 40 ? 40 : fieldWidth);
+    setFunc(e.target.value);
   }
 
   return (
