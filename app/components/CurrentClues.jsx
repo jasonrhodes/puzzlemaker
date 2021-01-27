@@ -49,8 +49,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
           for (let i = 0; i < accs.length; i++) {
             acrossLetter = accs[i][acrossIndex];
             let x = letters.indexOf(acrossLetter);
-            x < 0 ? (letters.push(acrossLetter), x = 0) : null;
+            x < 0 ? (letters.push(acrossLetter), x = letters.length - 1) : null;
             aStyles[i] = colors[x];
+            console.log(downs[downIndex], acrossLetter)
             dStyles = dStyles.map((ds) => downs[downIndex]===acrossLetter ? aStyles[i] : ds);
           }
           console.log(aStyles)
