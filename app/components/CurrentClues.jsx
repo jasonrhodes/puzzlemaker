@@ -33,7 +33,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
       console.log(puzzle.activeCell[1]);
       console.log(acrossSuggestions);
       console.log(downSuggestions);
-      if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]]){
+      console.log(puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]]);
+      if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]].value){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
         let acrossLetter = acrossSuggestions[0][acrossIndex];
         console.log("Letter: ", acrossLetter);
