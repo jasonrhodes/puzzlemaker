@@ -1,12 +1,13 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
+const { v4: uuidv4 } = require('uuid');
 
 const CreateLink = ({ rows, columns }) => {
   if (!rows || !columns) {
     return null;
   }
   return (
-    <Link class="btn" to={{ pathname: "/edit", state: { rows, columns }}}>Create {rows} x {columns} puzzle</Link>
+    <Link class="btn" to={{ pathname: "/edit/" + , state: { rows, columns }}}>Create {rows} x {columns} puzzle</Link>
   );
 }
 

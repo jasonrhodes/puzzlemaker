@@ -43,6 +43,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   }, [grid, setWords, activeCell]);
   
   React.useEffect(() => {
+    console.log("possibly saving the puzzle?", !!savedPuzzleId);
     savedPuzzleId && savePuzzle(savedPuzzleId);
   }, [grid, words, savedPuzzleId]);
   
@@ -51,15 +52,16 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   React.useEffect(() => {
     const savedPuzzle = getSavedPuzzle(puzzleId);
     if (savedPuzzle) {
-      console.log({ savedPuzzle });
+      console.log("loading saved puzzle", { savedPuzzle });
       setGrid(savedPuzzle.grid);
       setActiveCell(savedPuzzle.activeCell);
       setDirection(savedPuzzle.direction);
       setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
-      setSavedPuzzleId(savedPuzzleId)
+      setSavedPuzzleId(puzzleId)
     } else {
-      setSavedPuzzleId(savedPuzzleId);
+      console.log("no saved puzzle");
+      setSavedPuzzleId(puzzleId);
     }
   }, [puzzleId]);
 

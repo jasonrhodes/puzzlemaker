@@ -20,7 +20,8 @@
     "webpack-cli": "^3.3.0",
     "classnames": "^2.2.6",
     "@primer/octicons-react": "^11.2.0",
-    "react-tooltip": "^4.2.13"
+    "react-tooltip": "^4.2.13",
+    "uuid": "^8.3.2"
   },
   "engines": {
     "node": "8.x"
