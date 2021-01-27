@@ -69,6 +69,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       }
     }
     puzzle.setGrid(newGrid);
+    e.stopPropagation();
   }
   
   return (
