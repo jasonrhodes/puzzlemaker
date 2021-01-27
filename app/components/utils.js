@@ -117,20 +117,22 @@ function getCellClue({ puzzle, row, column }) {
   const currentCell = grid[row][column];
   const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
   const prevDownCell = row > 0 ? grid[row - 1][column] : {};
+  const nextAcrossCell = column < grid[0].length - 1 ? grid[row][column + 1] : {};
+  const nextDownCell = row < grid.length - 1 ? grid[row + 1][column] : {};
   
   if (currentCell.isBlackSquare) {
     return false;
   }
-  if (row === 0 && !grid[1][column].isBlackSquare) {
+  if (row === 0 && !nextDownCell.isBlackSquare) {
     return getNextClueNumber();
   }
-  if (column === 0 && !grid[row][1].isBlackSquare) {
+  if (column === 0 && !nextAcrossCell.isBlackSquare) {
     return getNextClueNumber();
   }
-  if (prevAcrossCell.isBlackSquare && column < grid[0].length - 1) {
+  if (prevAcrossCell.isBlackSquare && column < grid[0].length - 1 && !nextAcrossCell.isBlackSquare) {
     return getNextClueNumber();
   }
-  if (prevDownCell.isBlackSquare && row < grid.length - 1) {
+  if (prevDownCell.isBlackSquare && row < grid.length - 1 && !nextDownCell.isBlackSquare) {
     return getNextClueNumber();
   }
   return false;
@@ -157,7 +159,7 @@ function calculateAllClueNumbers(grid) {
     for (let r = 0; r < grid[0].length; r++){
       labelGrid.push([]);
       for (let c = 0; c < grid.length; c++){
-        if (!inAcrossWord && !grid[r][c].isBlackSquare && (c < grid.length - 1)) {
+        if (!inAcrossWord && !grid[r][c].isBlackSquare && c < grid[0].length - 1 && !grid[r][c+1].isBlackSquare) {
           acrossClues.push(count++);
           labelGrid[r].push(count - 1);
           doubleClueChance = true;
@@ -166,7 +168,7 @@ function calculateAllClueNumbers(grid) {
           inAcrossWord = false;
           labelGrid[r].push('X');
         } 
-        if (!inDownWord[c] && !grid[r][c].isBlackSquare) {
+        if (!inDownWord[c] && !grid[r][c].isBlackSquare && r < grid.length - 1 && !grid[r+1][c].isBlackSquare) {
           downClues.push(doubleClueChance ? count - 1 : count++);
           !doubleClueChance ? labelGrid[r].push(count -1) : null;
           inDownWord[c] = true;
