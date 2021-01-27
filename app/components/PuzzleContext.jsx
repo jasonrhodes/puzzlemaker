@@ -28,7 +28,20 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   });
   const [grid, setGrid] = React.useState(initialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
-  const [labelGrid, setLabelGrid] = React.useState([]);
+  const [labelGrid, setLabelGrid] = React.useState(calculateAllClueNumbers(grid));
+  
+  React.useEffect(() => {
+    const { labelGrid } = calculateAllClueNumbers(grid);
+    setLabelGrid(labelGrid);
+  }, [grid]);
+  
+  React.useEffect(() => {
+    setWords(calculateCurrentWords());
+  }, [grid, setWords, activeCell]);
+  
+  React.useEffect(() => {
+    savePuzzle();
+  }, [grid, puzzleId]);
   
   const savedPuzzle = getSavedPuzzle(puzzleId);
   if (savedPuzzle) {
@@ -59,11 +72,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
     return { across, down };
   };
-
-  React.useEffect(() => {
-    const { labelGrid } = calculateAllClueNumbers(grid);
-    setLabelGrid(labelGrid);
-  }, [grid]);
 
   const getCluesForCell = (row, column) => {
     let acrossNumber = 0;
@@ -167,11 +175,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     direction === "across" ? prevAcross() : prevDown();
   };
 
-  React.useEffect(() => {
-    console.log("USE EFFECT 1 (GRID)");
-    setWords(calculateCurrentWords());
-  }, [grid, setWords, activeCell]);
-
   let clue = 0;
   const getNextClueNumber = () => {
     return (clue += 1);
@@ -240,10 +243,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   }
   
   value.savePuzzle = savePuzzle;
-  
-  React.useEffect(() => {
-    savePuzzle();
-  }, [grid, puzzleId]);
 
   return (
     <PuzzleContext.Provider value={value}>
