@@ -1,6 +1,11 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
-const { findAcross, findDown, getSymmetricalCell } = require("./utils");
+const {
+  findAcross,
+  findDown,
+  getSymmetricalCell,
+  calculateAllClueNumbers
+} = require("./utils");
 
 const PuzzleContextProvider = ({ initialGrid, children }) => {
   const emptyWord = { range: [], word: "" };
@@ -16,7 +21,7 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
 
   const toggleDirection = () =>
     setDirection(direction === "across" ? "down" : "across");
-  
+
   const toggleSymmetry = () => setSymmetry(!symmetry);
 
   const calculateCurrentWords = () => {
@@ -34,85 +39,47 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
 
     return { across, down };
   };
-  
-  const calculateAllClueNumbers = () => {
-    const inDownWord = grid[0].map(() => false);
-    const labelGrid = [];
-    let inAcrossWord = false;
-    let count = 1;
-    let doubleClueChance = false;
-    const acrossClues = [];
-    const downClues = [];
-    for (let r = 0; r < grid[0].length; r++){
-      labelGrid.push([]);
-      for (let c = 0; c < grid.length; c++){
-        if (!inAcrossWord && !grid[r][c].isBlackSquare) {
-          acrossClues.push(count++);
-          labelGrid[r].push(count - 1);
-          doubleClueChance = true;
-          inAcrossWord = true;
-        } else if (grid[r][c].isBlackSquare) {
-          inAcrossWord = false;
-          labelGrid[r].push('X');
-        } 
-        if (!inDownWord[c] && !grid[r][c].isBlackSquare) {
-          downClues.push(doubleClueChance ? count - 1 : count++);
-          !doubleClueChance ? labelGrid[r].push(count -1) : null;
-          inDownWord[c] = true;
-        } else if (grid[r][c].isBlackSquare) {
-          inDownWord[c] = false;
-        } else if (!doubleClueChance) {
-          labelGrid[r].push('O')
-        }
-        doubleClueChance = false;
-      }
-      inAcrossWord = false;
-    }
-    return { acrossClues, downClues, labelGrid } ;
-  }
-  
+
   React.useEffect(() => {
-    const { labelGrid } = calculateAllClueNumbers();
+    const { labelGrid } = calculateAllClueNumbers(grid);
     setLabelGrid(labelGrid);
   }, [grid]);
-  
+
   const getCluesForCell = (row, column) => {
     let acrossNumber = 0;
     let downNumber = 0;
-    
-    if ((!row && !column && row !== 0) || grid[row][column].isBlackSquare){
-      acrossNumber = '-';
-      downNumber = '-';
+
+    if ((!row && !column && row !== 0) || grid[row][column].isBlackSquare) {
+      acrossNumber = "-";
+      downNumber = "-";
       return { acrossNumber, downNumber };
     }
-    
+
     for (let i = column; i >= 0; i--) {
-      if (i === 0 || grid[row][i-1].isBlackSquare){
+      if (i === 0 || grid[row][i - 1].isBlackSquare) {
         acrossNumber = labelGrid[row][i];
         break;
       }
     }
-    
+
     for (let j = row; j >= 0; j--) {
-      if (j === 0 || grid[j-1][column].isBlackSquare){
+      if (j === 0 || grid[j - 1][column].isBlackSquare) {
         downNumber = labelGrid[j][column];
         break;
       }
     }
-    
-    return { acrossNumber, downNumber }
-  }
-  
+
+    return { acrossNumber, downNumber };
+  };
+
   const updateCellValue = (row, column, value) => {
     const newGrid = [...grid];
     newGrid[row][column].value = value;
     setGrid(newGrid);
-  }
-  
-  const updateCellClue = (row, column, clue) => {
-    
-  }
-  
+  };
+
+  const updateCellClue = (row, column, clue) => {};
+
   const toggleBlackSquare = (row, column) => {
     const currentValue = grid[row][column].isBlackSquare;
     const newGrid = [...grid];
@@ -124,84 +91,87 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       newGrid[symRow][symCol].style = null;
     }
     setGrid(newGrid);
-  }
-  
+  };
+
   const toggleCircle = (row, column) => {
     const currentValue = grid[row][column].style;
     const newGrid = [...grid];
     if (!currentValue) {
-      newGrid[row][column].style = 'circled';
+      newGrid[row][column].style = "circled";
     } else {
       newGrid[row][column].style = null;
     }
     setGrid(newGrid);
-  }
-  
+  };
+
   const toggleShaded = (row, column) => {
     const currentValue = grid[row][column].style;
     const newGrid = [...grid];
     if (!currentValue) {
-      newGrid[row][column].style = 'marked';
+      newGrid[row][column].style = "marked";
     } else {
       newGrid[row][column].style = null;
     }
     setGrid(newGrid);
-  }
-  
+  };
+
   const nextAcross = () => {
     const [activeRow, activeColumn] = activeCell;
     const nextColumn = Math.min(activeColumn + 1, grid[0].length - 1);
-    setActiveCell([activeRow, nextColumn])
-  }
-  
+    setActiveCell([activeRow, nextColumn]);
+  };
+
   const prevAcross = () => {
     const [activeRow, activeColumn] = activeCell;
     const prevColumn = Math.max(activeColumn - 1, 0);
     setActiveCell([activeRow, prevColumn]);
-  }
-  
+  };
+
   const nextDown = () => {
     const [activeRow, activeColumn] = activeCell;
     const nextRow = Math.min(activeRow + 1, grid.length - 1);
     setActiveCell([nextRow, activeColumn]);
-  }
-  
+  };
+
   const prevDown = () => {
     const [activeRow, activeColumn] = activeCell;
     const prevRow = Math.max(activeRow - 1, 0);
     setActiveCell([prevRow, activeColumn]);
-  }
-  
+  };
+
   const advanceActiveCell = () => {
     direction === "across" ? nextAcross() : nextDown();
-  }
-  
+  };
+
   const rewindActiveCell = () => {
     direction === "across" ? prevAcross() : prevDown();
-  }
-  
+  };
+
   React.useEffect(() => {
-    console.log("USE EFFECT 1 (GRID)")
+    console.log("USE EFFECT 1 (GRID)");
     setWords(calculateCurrentWords());
-  }, [grid, setWords])
-  
+  }, [grid, setWords]);
+
   React.useEffect(() => {
-    console.log("USE EFFECT 2 (activeCell)")
+    console.log("USE EFFECT 2 (activeCell)");
     setWords(calculateCurrentWords());
-  }, [activeCell, setWords])
+  }, [activeCell, setWords]);
 
   let clue = 0;
   const getNextClueNumber = () => {
     return (clue += 1);
   };
-  
+
   const resetClue = () => {
     clue = 0;
-  }
+  };
 
   const isCellInActiveWord = (row, column) => {
     if (!direction || !words[direction]) {
-      console.error("Error with checking cell in active word", { direction, words });
+      console.error("Error with checking cell in active word", {
+        direction,
+        words
+      });
       return false;
     }
     if (grid[row][column].isBlackSquare) {
@@ -254,8 +224,10 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       <br />
       <br />
       <pre>
-        <code>{JSON.stringify(getCluesForCell(activeCell[0],activeCell[1])) }</code>
-        <code>{JSON.stringify(calculateAllClueNumbers()) }</code>
+        <code>
+          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
+        </code>
+        <code>{JSON.stringify(calculateAllClueNumbers())}</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>

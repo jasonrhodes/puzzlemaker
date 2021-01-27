@@ -13,7 +13,9 @@ ReactDOM.render((
   <BrowserRouter>
     <div>
       <Route exact path="/" component={Home}/>
+      <Route exact path="/edit/:puzzleId" component={Builder} />
       <Route exact path="/edit" component={Builder} />
       <Route exact path="/play" component={Solver} />
+      
     </div>
   </BrowserRouter>), document.getElementById('main'));

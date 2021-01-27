@@ -1,5 +1,5 @@
 const React = require("react");
-const { Link } = require("react-router-dom");
+const { Link, useParams } = require("react-router-dom");
 const Puzzle = require("./Puzzle");
 const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
 
@@ -7,8 +7,9 @@ const { initGrid } = require("./utils");
 
 const Builder = function({ location }) {
   const { rows, columns } = location.state || {};
-  const symmetry = location.symmetry || true;
   const grid = initGrid({ rows: rows || 15, columns: columns || 15 });
+  // const { puzzleId } = useParams();
+  
   const handleClick = (puzzle) => {
     puzzle.setActiveCell([]);
   }
