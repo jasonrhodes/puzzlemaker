@@ -9,6 +9,7 @@ const Builder = function({ location }) {
   const { rows, columns } = location.state || {};
   const grid = initGrid({ rows: rows || 15, columns: columns || 15 });
   // const { puzzleId } = useParams();
+  console.log('location', location);
   
   const handleClick = (puzzle) => {
     puzzle.setActiveCell([]);
