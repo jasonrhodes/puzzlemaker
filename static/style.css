@@ -170,7 +170,7 @@ a {
 }
 
 .noopacity {
-  opacity: 0;
+/*   opacity: 0; */
 }
 
 .current-clues {
