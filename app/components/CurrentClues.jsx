@@ -58,14 +58,15 @@ const CurrentClues = ({ across, down, puzzle }) => {
           }
           //console.log(aStyles)
           //console.log(dStyles)
-          setAcrossStyles(aStyles)            
-          setDownStyles(dStyles)            
+          
 
         } catch(error) {
             console.log(error);
-        }  
+        }
       }
     }
+    setAcrossStyles(aStyles);
+    setDownStyles(dStyles);
   }
   
   const hasDash = char => char === "-";
