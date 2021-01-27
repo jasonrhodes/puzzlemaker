@@ -56,8 +56,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
               return downs[ind][downIndex]===acrossLetter ? aStyles[i] : ds;
             });
           }
-          console.log(aStyles)
-          console.log(dStyles)
+          //console.log(aStyles)
+          //console.log(dStyles)
           setAcrossStyles(aStyles)            
           setDownStyles(dStyles)            
 
@@ -121,13 +121,17 @@ const CurrentClues = ({ across, down, puzzle }) => {
     e.stopPropagation();
   }
   
+  const getStyle = (i, direction) => { 
+    return {color: direction === "across" ? acrossStyles[i] : downStyles[i] };
+  }
+  
   return (
     <div class="current-clues">
       <div id="across">
         <h3>{acrossNumber} Across:</h3>
         <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
         <div class="suggestions">{acrossSuggestions.map(
-            (x) => <div class="suggestion" onClick={(e) => fillWithSuggestion(e, x, 'across')}>{convertAnswerToSquares(x)}</div>
+            (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
@@ -135,7 +139,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <h3>{downNumber} Down:</h3>
         <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
         <div class="suggestions">{downSuggestions.map(
-            (x) => <div class="suggestion" onClick={(e) => fillWithSuggestion(e, x, 'down')}>{convertAnswerToSquares(x)}</div>
+            (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
