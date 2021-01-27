@@ -20,6 +20,7 @@ function getSavedPuzzle(id) {
 
 const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const emptyWord = { range: [], word: "" };
+  const [savedPuzzleId, setSavedPuzzleId] = React.useState(null);
   const [activeCell, setActiveCell] = React.useState([]);
   const [direction, setDirection] = React.useState("across");
   const [words, setWords] = React.useState({
@@ -42,9 +43,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   }, [grid, setWords, activeCell]);
   
   React.useEffect(() => {
-    savePuzzle();
-  }, [grid, words, puzzleId]);
+    savedPuzzleId && savePuzzle(savedPuzzleId);
+  }, [grid, words, savedPuzzleId]);
   
+  // Initial instantiation of the saved puzzle and/or the saved puzzle 
+  // id used to save the puzzle going forward
   React.useEffect(() => {
     const savedPuzzle = getSavedPuzzle(puzzleId);
     if (savedPuzzle) {
@@ -54,6 +57,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setDirection(savedPuzzle.direction);
       setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
+      setSavedPuzzleId(savedPuzzleId)
+    } else {
+      setSavedPuzzleId(savedPuzzleId);
     }
   }, [puzzleId]);
 
@@ -242,10 +248,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     rewindActiveCell
   };
   
-  const savePuzzle = () => {
-    if (puzzleId) {
-      window.localStorage.setItem(puzzleId, JSON.stringify(value));
-    }
+  const savePuzzle = (id) => {
+    window.localStorage.setItem(puzzleId, JSON.stringify(value));
   }
   
   value.savePuzzle = savePuzzle;
