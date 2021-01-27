@@ -47,11 +47,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   
   const savedPuzzle = getSavedPuzzle(puzzleId);
   if (savedPuzzle) {
+    console.log({ savedPuzzle });
     setActiveCell(savedPuzzle.activeCell);
-    setDirection(savedPuzzle.direction);
-    setWords(savedPuzzle.words);
-    setGrid(savedPuzzle.grid);
-    setSymmetry(savedPuzzle.symmetry);
+    // setDirection(savedPuzzle.direction);
+  //   setWords(savedPuzzle.words);
+  //   setGrid(savedPuzzle.grid);
+  //   setSymmetry(savedPuzzle.symmetry);
   }
 
   const toggleDirection = () =>
