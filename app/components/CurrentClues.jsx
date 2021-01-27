@@ -19,8 +19,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   React.useEffect(() => {
     console.log("USE EFFECT 3 (A SUGGESTIONS)")
-    getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
-    getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+    const aSug = getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
+    const dSug = getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+    /*if (aSug && dSug) {
+      if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]]){
+        let index = puzzle.activeCell[0]
+      }
+    }*/
   }, [across, down])
   
   const hasDash = char => char === "-";
@@ -30,12 +35,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
     const hasAllDashes = chars.every(hasDash);
     if (hasNoDashes || hasAllDashes) {  // if the word is all blank or all filled in, no suggestions needed
       setFunc([]);
-      return;
+      return [];
     }
     const cached = WordCache.get(clue);
     if (cached) {
       setFunc(cached); // don't re-call API for clue pattern we already cached
-      return;
+      return cached;
     }
     const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=50';
     console.log(apiString);
@@ -44,6 +49,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     const matches = getMatches(myJson, clue.length);
     WordCache.set(clue, matches);
     setFunc(matches);
+    return matches;
   } 
   
   const getMatches = (response, len) => {
