@@ -17,25 +17,31 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
-  React.useEffect(async () => {
+  React.useEffect(() => {
     console.log("USE EFFECT 3 (A SUGGESTIONS)")
-    const aSug = await getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
-    const dSug = await getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+    getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
+    getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+    
+    matchSuggestions()
+  }, [across, down])
+  
+  const matchSuggestions = async () => {
+    let downs = await getSuggestions(down.word.toLowerCase(), setDownSuggestions);
     console.log(puzzle.activeCell);
-    if (puzzle.activeCell.length > 0 && aSug !== [] && dSug !== []) {
+    if (puzzle.activeCell.length > 0 && acrossSuggestions !== [] && downs !== []) {
       console.log(puzzle.activeCell[0]);
       console.log(puzzle.activeCell[1]);
-      console.log(aSug);
-      console.log(dSug);
+      console.log(acrossSuggestions);
+      console.log(downSuggestions);
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]]){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
-        let acrossLetter = aSug[0][acrossIndex];
+        let acrossLetter = acrossSuggestions[0][acrossIndex];
         console.log("Letter: ", acrossLetter);
         let downIndex = puzzle.activeCell[0] - down.range[0];
-        setDownSuggestions(dSug.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))
+        setDownSuggestions(downs.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))
       }
     }
-  }, [across, down])
+  }
   
   const hasDash = char => char === "-";
   const getSuggestions = async (clue, setFunc) => {
