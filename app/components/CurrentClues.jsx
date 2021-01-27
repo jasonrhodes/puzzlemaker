@@ -61,11 +61,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
     const newGrid = [...puzzle.grid];
     if (direction === 'across') {
       for (let i = across.range[0]; i <= across.range[1]; i++){
-        newGrid[puzzle.activeCell[0]][i].value = suggestion[i];  
+        newGrid[puzzle.activeCell[0]][i].value = suggestion[i - across.range[0]]; 
       }
     } else if (direction === 'down') {
       for (let i = down.range[0]; i <= down.range[1]; i++){
-        newGrid[i][puzzle.activeCell[1]].value = suggestion[i];  
+        newGrid[i][puzzle.activeCell[1]].value = suggestion[i - down.range[0]];  
       }
     }
     puzzle.setGrid(newGrid);
