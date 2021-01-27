@@ -121,16 +121,16 @@ function getCellClue({ puzzle, row, column }) {
   if (currentCell.isBlackSquare) {
     return false;
   }
-  if (row === 0) {
+  if (row === 0 && !grid[1][column].isBlackSquare) {
     return getNextClueNumber();
   }
-  if (column === 0) {
+  if (column === 0 && !grid[row][1].isBlackSquare) {
     return getNextClueNumber();
   }
-  if (prevAcrossCell.isBlackSquare) {
+  if (prevAcrossCell.isBlackSquare && column < grid[0].length - 1) {
     return getNextClueNumber();
   }
-  if (prevDownCell.isBlackSquare) {
+  if (prevDownCell.isBlackSquare && row < grid.length - 1) {
     return getNextClueNumber();
   }
   return false;
@@ -157,7 +157,7 @@ function calculateAllClueNumbers(grid) {
     for (let r = 0; r < grid[0].length; r++){
       labelGrid.push([]);
       for (let c = 0; c < grid.length; c++){
-        if (!inAcrossWord && !grid[r][c].isBlackSquare) {
+        if (!inAcrossWord && !grid[r][c].isBlackSquare && (c < grid.length - 1)) {
           acrossClues.push(count++);
           labelGrid[r].push(count - 1);
           doubleClueChance = true;
