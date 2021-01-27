@@ -8,15 +8,15 @@ module.exports = function SavedPuzzleList() {
       const puzzle = JSON.parse(window.localStorage.getItem(id));
       return {
         id,
-        title: puzzle.title,
-        author: puzzle.author
+        title: puzzle.title || "Untitled",
+        author: puzzle.author || "Nobody"
       }
     }));
   }, []);
   
   return (
     <ul className="saved-puzzle-list">
-      {puzzles.map(({ id, title = "Untitled", author = "Unknown" }) => (
+      {puzzles.map(({ id, title, author }) => (
         <li key={id}>
           <Link to={"/edit/" + id}>{title} by {author}</Link>
         </li>
