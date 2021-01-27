@@ -239,6 +239,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     title,
     author,
     setActiveCell,
+    setGrid,
     toggleDirection,
     getNextClueNumber,
     getCluesForCell,

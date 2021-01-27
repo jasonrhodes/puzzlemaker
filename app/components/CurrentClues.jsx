@@ -57,15 +57,19 @@ const CurrentClues = ({ across, down, puzzle }) => {
     return result;
   }
   
-  const fillWithSuggestion = (suggestion, direction) => {
+  const fillWithSuggestion = (e, suggestion, direction) => {
     const newGrid = [...puzzle.grid];
     if (direction === 'across') {
-      newGrid[puzzle.activeCell][column].value = value;
-      setGrid(newGrid);
       for (let i = across.range[0]; i <= across.range[1]; i++){
-        
+        newGrid[puzzle.activeCell[0]][i].value = suggestion[i];  
+      }
+    } else if (direction === 'down') {
+      for (let i = down.range[0]; i <= down.range[1]; i++){
+        newGrid[i][puzzle.activeCell[1]].value = suggestion[i];  
       }
     }
+    puzzle.setGrid(newGrid);
+    e.stopPropagation();
   }
   
   return (
@@ -74,7 +78,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <h3>{acrossNumber} Across:</h3>
         <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
         <div class="suggestions">{acrossSuggestions.map(
-            (x) => <div class="suggestion" onClick={(x) => fillWithSuggestion(x, 'across')}>{convertAnswerToSquares(x)}</div>
+            (x) => <div class="suggestion" onClick={(e) => fillWithSuggestion(e, x, 'across')}>{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
@@ -82,7 +86,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <h3>{downNumber} Down:</h3>
         <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
         <div class="suggestions">{downSuggestions.map(
-            (x) => <div class="suggestion" onClick={(x) => fillWithSuggestion(x, 'down')}>{convertAnswerToSquares(x)}</div>
+            (x) => <div class="suggestion" onClick={(e) => fillWithSuggestion(e, x, 'down')}>{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
