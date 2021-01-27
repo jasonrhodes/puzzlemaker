@@ -21,11 +21,16 @@ const CurrentClues = ({ across, down, puzzle }) => {
     console.log("USE EFFECT 3 (A SUGGESTIONS)")
     const aSug = getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
     const dSug = getSuggestions(down.word.toLowerCase(), setDownSuggestions);
-    /*if (aSug && dSug) {
+    console.log(puzzle.activeCell);
+    if (puzzle.activeCell && aSug && dSug) {
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]]){
-        let index = puzzle.activeCell[0]
+        let acrossIndex = puzzle.activeCell[1] - across.range[0];
+        let acrossLetter = aSug[0][acrossIndex];
+        console.log("Letter: ", acrossLetter);
+        let downIndex = puzzle.activeCell[0] - down.range[0];
+        setDownSuggestions(dSug.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))
       }
-    }*/
+    }
   }, [across, down])
   
   const hasDash = char => char === "-";
