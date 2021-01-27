@@ -31,9 +31,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     }
     const cached = WordCache.get(clue);
     if (cached) {
-      console.log('test')
-      console.log('cached')
-      setFunc(matches); // don't re-call API for clue pattern we already cached
+      setFunc(cached); // don't re-call API for clue pattern we already cached
       return;
     }
     const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=50';
@@ -59,13 +57,24 @@ const CurrentClues = ({ across, down, puzzle }) => {
     return result;
   }
   
+  const fillWithSuggestion = (suggestion, direction) => {
+    const newGrid = [...puzzle.grid];
+    if (direction === 'across') {
+      newGrid[puzzle.activeCell][column].value = value;
+      setGrid(newGrid);
+      for (let i = across.range[0]; i <= across.range[1]; i++){
+        
+      }
+    }
+  }
+  
   return (
     <div class="current-clues">
       <div id="across">
         <h3>{acrossNumber} Across:</h3>
         <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
         <div class="suggestions">{acrossSuggestions.map(
-            (x) => <div class="suggestion">{convertAnswerToSquares(x)}</div>
+            (x) => <div class="suggestion" onClick={(x) => fillWithSuggestion(x, 'across')}>{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
@@ -73,7 +82,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <h3>{downNumber} Down:</h3>
         <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
         <div class="suggestions">{downSuggestions.map(
-            (x) => <div class="suggestion">{convertAnswerToSquares(x)}</div>
+            (x) => <div class="suggestion" onClick={(x) => fillWithSuggestion(x, 'down')}>{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
