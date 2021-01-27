@@ -26,9 +26,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }, [across, down])
   
   const matchSuggestions = async () => {
+    let accs = await getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
     let downs = await getSuggestions(down.word.toLowerCase(), setDownSuggestions);
     console.log(puzzle.activeCell);
-    if (puzzle.activeCell.length > 0 && acrossSuggestions !== [] && downs !== []) {
+    if (puzzle.activeCell.length > 0 && acrossSuggestions !== [] && downSuggestions !== []) {
       console.log(puzzle.activeCell[0]);
       console.log(puzzle.activeCell[1]);
       console.log(acrossSuggestions);
@@ -36,7 +37,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       console.log(puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]]);
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]].value){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
-        let acrossLetter = acrossSuggestions[0][acrossIndex];
+        let acrossLetter = accs[0][acrossIndex];
         console.log("Letter: ", acrossLetter);
         let downIndex = puzzle.activeCell[0] - down.range[0];
         setDownSuggestions(downs.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))
