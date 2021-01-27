@@ -17,12 +17,16 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
-  React.useEffect(() => {
+  React.useEffect(async () => {
     console.log("USE EFFECT 3 (A SUGGESTIONS)")
-    const aSug = getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
-    const dSug = getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+    const aSug = await getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
+    const dSug = await getSuggestions(down.word.toLowerCase(), setDownSuggestions);
     console.log(puzzle.activeCell);
-    if (puzzle.activeCell && aSug && dSug) {
+    if (puzzle.activeCell.length > 0 && aSug !== [] && dSug !== []) {
+      console.log(puzzle.activeCell[0]);
+      console.log(puzzle.activeCell[1]);
+      console.log(aSug);
+      console.log(dSug);
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]]){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
         let acrossLetter = aSug[0][acrossIndex];
