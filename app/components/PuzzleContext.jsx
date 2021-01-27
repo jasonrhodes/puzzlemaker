@@ -28,7 +28,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   });
   const [grid, setGrid] = React.useState(initialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
-  const [labelGrid, setLabelGrid] = React.useState(calculateAllClueNumbers(grid).labelGrid);
+  const [labelGrid, setLabelGrid] = React.useState([]);
   
   React.useEffect(() => {
     console.log("grid updated, calculating clue numbers");
@@ -80,25 +80,25 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     let acrossNumber = 0;
     let downNumber = 0;
 
-    if ((!row && !column && row !== 0) || grid[row][column].isBlackSquare) {
-      acrossNumber = "-";
-      downNumber = "-";
-      return { acrossNumber, downNumber };
-    }
+//     if (!labelGrid.length || (!row && !column && row !== 0) || grid[row][column].isBlackSquare) {
+//       acrossNumber = "-";
+//       downNumber = "-";
+//       return { acrossNumber, downNumber };
+//     }
 
-    for (let i = column; i >= 0; i--) {
-      if (i === 0 || grid[row][i - 1].isBlackSquare) {
-        acrossNumber = labelGrid[row][i];
-        break;
-      }
-    }
+//     for (let i = column; i >= 0; i--) {
+//       if (i === 0 || grid[row][i - 1].isBlackSquare) {
+//         acrossNumber = labelGrid[row][i];
+//         break;
+//       }
+//     }
 
-    for (let j = row; j >= 0; j--) {
-      if (j === 0 || grid[j - 1][column].isBlackSquare) {
-        downNumber = labelGrid[j][column];
-        break;
-      }
-    }
+//     for (let j = row; j >= 0; j--) {
+//       if (j === 0 || grid[j - 1][column].isBlackSquare) {
+//         downNumber = labelGrid[j][column];
+//         break;
+//       }
+//     }
 
     return { acrossNumber, downNumber };
   };
