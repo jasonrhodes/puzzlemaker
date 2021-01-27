@@ -28,10 +28,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   });
   const [grid, setGrid] = React.useState(initialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
-  const [labelGrid, setLabelGrid] = React.useState(calculateAllClueNumbers(grid));
+  const [labelGrid, setLabelGrid] = React.useState(calculateAllClueNumbers(grid).labelGrid);
   
   React.useEffect(() => {
+    console.log("grid updated, calculating clue numbers");
     const { labelGrid } = calculateAllClueNumbers(grid);
+    console.log("label grid", labelGrid);
     setLabelGrid(labelGrid);
   }, [grid]);
   
@@ -74,6 +76,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const getCluesForCell = (row, column) => {
+    console.log("getting clues for cell", row, column);
     let acrossNumber = 0;
     let downNumber = 0;
 
