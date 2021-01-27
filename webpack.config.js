@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   mode: 'production',
   context: path.join(__dirname, './'),
-  devtool: 'source-map', // uncomment this for source map support but builds get SO SLOW 😭
+  // devtool: 'source-map', // uncomment this for source map support but builds get SO SLOW 😭
   entry: './app/app.jsx',
   output: {
     path: path.join(__dirname, 'public'),

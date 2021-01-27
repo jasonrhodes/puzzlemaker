@@ -16,7 +16,7 @@ module.exports = function SavedPuzzleList() {
   
   return (
     <ul className="saved-puzzle-list">
-      {puzzles.map(({ id, title, author }) => (
+      {puzzles.map(({ id, title = "Untitled", author = "Unknown" }) => (
         <li key={id}>
           <Link to={"/edit/" + id}>{title} by {author}</Link>
         </li>

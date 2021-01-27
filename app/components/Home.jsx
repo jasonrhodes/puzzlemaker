@@ -1,6 +1,7 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
+const SavedPuzzleList = require("./SavedPuzzleList");
 
 const CreateLink = ({ rows, columns }) => {
   const [id] = React.useState(uuidv4());
@@ -43,8 +44,10 @@ module.exports = () => {
         </select>
         <div>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
         
-        <h2>Load a saved puzzle</h2>
-        <SavedPuzzleList />
+        <section>
+          <h2>Load a saved puzzle</h2>
+          <SavedPuzzleList />
+        </section>
       </div>
     </React.Fragment>
   )
