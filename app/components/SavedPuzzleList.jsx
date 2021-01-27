@@ -1,5 +1,6 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
+const { TrashIcon } = require("@primer/octicons-react");
 
 module.exports = function SavedPuzzleList() {
   const [puzzles, setPuzzles] = React.useState([]);
@@ -18,7 +19,7 @@ module.exports = function SavedPuzzleList() {
     <ul className="saved-puzzle-list">
       {puzzles.map(({ id, title, author }) => (
         <li key={id}>
-          <Link to={"/edit/" + id}>{title} by {author}</Link>
+          <Link to={"/edit/" + id}>{title} by {author}</Link><TrashIcon />
         </li>
       ))}
     </ul>

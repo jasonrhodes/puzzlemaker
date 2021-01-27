@@ -43,11 +43,10 @@ module.exports = () => {
           <option value="20 x 20">20 x 20</option>
         </select>
         <div>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
-        
-        <section>
-          <h2>Load a saved puzzle</h2>
-          <SavedPuzzleList />
-        </section>
+      </div>
+      <div>
+        <h2>Load a Saved Puzzle</h2>
+        <SavedPuzzleList />
       </div>
     </React.Fragment>
   )

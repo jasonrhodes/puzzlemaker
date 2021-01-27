@@ -7,6 +7,38 @@ a {
   color: #000;
 }
 
+input.inline-content-editable, .fakeinput {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
+    "Droid Sans", "Arial", sans-serif;
+  padding: 1px 2px;
+  min-width: 30px;
+  border: 0px;
+  border-bottom: 4px solid transparent;
+}
+
+input.inline-content-editable:focus {
+  border-bottom-color: rgb(34, 188, 172);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  outline: none;
+}
+
+select {
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  padding: 4px 2px;
+  border-bottom: 2px solid rgb(34, 188, 172);
+}
+
+
 .btn {
   background-color: rgba(34, 188, 172);
   padding: 6px 8px;
@@ -142,6 +174,10 @@ a {
   color: #6a59b9;
 }
 
+.saved-puzzle-list li {
+  list-style: none;
+}
+
 .puzzle-info {
   margin: 10px 0 5px 0;
 }
@@ -176,8 +212,8 @@ a {
 .current-clues {
   position: absolute;
   top: 0;
-  right: -420px;
-  width: 400px;
+  right: -470px;
+  width: 450px;
 }
 
 .current-clues h3 {
@@ -190,6 +226,7 @@ a {
   width: 20px;
   text-align: center;
   display: inline-block;
+  margin-bottom: 5px;
 }
 
 .current-clues .current > span:not(:first-child) {
@@ -201,8 +238,9 @@ a {
 }
 
 .current-clues .suggestions {
-  height: 250px;
+  height: 245px;
   overflow-y: scroll;
+  border-bottom: 1px solid #ddd;
 } 
 
 .current-clues .suggestion > span {
@@ -216,6 +254,10 @@ a {
 }
 .current-clues .suggestion > span:first-child {
   margin-left: 1px;
+}
+
+.current-clues .suggestion:hover > span {
+  color: #000;
 }
 
 
@@ -272,33 +314,3 @@ a {
 	margin-left: -16px;
 }
 
-input.inline-content-editable, .fakeinput {
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
-    "Droid Sans", "Arial", sans-serif;
-  padding: 1px 2px;
-  min-width: 30px;
-  border: 0px;
-  border-bottom: 4px solid transparent;
-}
-
-input.inline-content-editable:focus {
-  border-bottom-color: rgb(34, 188, 172);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  box-shadow: none;
-  outline: none;
-}
-
-select {
-  font-size: 14px;
-  outline: none;
-  box-shadow: none;
-  border: none;
-  padding: 4px 2px;
-  border-bottom: 2px solid rgb(34, 188, 172);
-}
