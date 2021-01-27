@@ -170,7 +170,7 @@ a {
 }
 
 .noopacity {
-/*   opacity: 0; */
+  opacity: 0; 
 }
 
 .current-clues {
@@ -204,13 +204,17 @@ a {
   color: rgba(0,0,0,0)
 }
 
-.current-clues .suggestions {
-  font-family: Courier, Monaco, monospace;
-  margin: 2px;
-  height: 15px;
-  width: 15px;
+.current-clues .suggestions > span {
+  height: 21px;
+  width: 21px;
   text-align: center;
+  display: inline-block;
+  color: #777;
 }
+.current-clues .suggestions > span:first-child {
+  margin-left: 1px;
+}
+
 
 .pbtip {
   display: none;
