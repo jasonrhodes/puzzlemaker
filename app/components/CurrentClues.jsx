@@ -17,6 +17,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
+  const [acrossStyles, setAcrossStyles] = React.useState([]);
+  const [downStyles, setDownStyles] = React.useState([]);
   React.useEffect(() => {
     console.log("USE EFFECT 3 (A SUGGESTIONS)")
     //getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
@@ -30,14 +32,20 @@ const CurrentClues = ({ across, down, puzzle }) => {
       getSuggestions(across.word.toLowerCase(), setAcrossSuggestions),
       getSuggestions(down.word.toLowerCase(), setDownSuggestions)
       ]);
-    if (puzzle.activeCell.length > 0 && accs !== [] && downs !== []) {
+    if (puzzle.activeCell.length > 0 && accs.length && downs.length) {
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]].value){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
+        let downIndex = puzzle.activeCell[0] - down.range[0];
+        let acrossStyles = accs.map
         try {
-          let acrossLetter = accs[0][acrossIndex];
-          console.log("Lettera: ", acrossLetter);
-          let downIndex = puzzle.activeCell[0] - down.range[0];
-          setDownSuggestions(downs.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))
+          let acrossLetter = '';
+          for (let acc of accs) {
+            acrossLetter = acc[acrossIndex];
+            setDownStyles(downs.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))            
+            
+          }
+          
+
         } catch(error) {
             console.log(error);
         }  
