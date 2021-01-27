@@ -10,19 +10,25 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <PuzzleTitle width={puzzle.grid[0].length * 40}/>
+          <PuzzleTitle
+            width={puzzle.grid[0].length * 40}
+            title={puzzle.title}
+            author={puzzle.author}
+            setTitle={puzzle.setTitle}
+            setAuthor={puzzle.setAuthor}
+          />
           <div class="puzzle-container">
-            <PuzzleMenu puzzle={puzzle}/>
+            <PuzzleMenu puzzle={puzzle} />
             <div class="puzzle-grid">
               {puzzle.grid.map((columns, i) => (
-                <PuzzleRow
-                  key={`row-${i}`}
-                  row={i}
-                  columns={columns}
-                />
+                <PuzzleRow key={`row-${i}`} row={i} columns={columns} />
               ))}
             </div>
-            <CurrentClues across={puzzle.words.across} down={puzzle.words.down} puzzle={puzzle} />
+            <CurrentClues
+              across={puzzle.words.across}
+              down={puzzle.words.down}
+              puzzle={puzzle}
+            />
           </div>
         </div>
       )}

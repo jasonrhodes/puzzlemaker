@@ -30,6 +30,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [grid, setGrid] = React.useState(initialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
   const [labelGrid, setLabelGrid] = React.useState([]);
+  const [title, setTitle] = React.useState("Untitled");
+  const [author, setAuthor] = React.useState("Author")
   
   React.useEffect(() => {
     console.log("grid updated, calculating clue numbers");
@@ -53,6 +55,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     const savedPuzzle = getSavedPuzzle(puzzleId);
     if (savedPuzzle) {
       console.log("loading saved puzzle", { savedPuzzle });
+      setTitle(savedPuzzle.title);
+      setAuthor(savedPuzzle.author);
       setGrid(savedPuzzle.grid);
       setActiveCell(savedPuzzle.activeCell);
       setDirection(savedPuzzle.direction);
@@ -232,6 +236,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     clue,
     resetClue,
     symmetry,
+    title,
+    author,
     setActiveCell,
     toggleDirection,
     getNextClueNumber,
@@ -247,7 +253,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     nextDown,
     prevDown,
     advanceActiveCell,
-    rewindActiveCell
+    rewindActiveCell,
+    setTitle,
+    setAuthor
   };
   
   const savePuzzle = (id) => {
