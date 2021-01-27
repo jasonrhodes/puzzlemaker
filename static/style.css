@@ -228,8 +228,9 @@ a {
 }
 
 *:hover > .pbtip.stip {
-  width: 100px;
-  left: 50px;
+  width: 80px;
+  left: -30px;
+  text-align: center;
 }
 
 *:hover > .pbtip:after, *:hover > .pbtip:before   {
@@ -244,7 +245,7 @@ a {
 }
 
 *:hover > .pbtip.stip:after, *:hover > .pbtip.stip:before   {
-	left: 50px;
+	left: 50%;
 }
 
 *:hover > .pbtip:after  {

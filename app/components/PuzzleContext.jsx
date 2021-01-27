@@ -7,7 +7,7 @@ const {
   calculateAllClueNumbers
 } = require("./utils");
 
-const PuzzleContextProvider = ({ initialGrid, children }) => {
+const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const emptyWord = { range: [], word: "" };
   const [activeCell, setActiveCell] = React.useState([]);
   const [direction, setDirection] = React.useState("across");
@@ -218,11 +218,17 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     rewindActiveCell
   };
   
-  const savePuzzle = (id = 123) => {
-    window.localStorage.set(id, JSON.stringify(value));
+  const savePuzzle = () => {
+    if (puzzleId) {
+      window.localStorage.setItem(puzzleId, JSON.stringify(value));
+    }
   }
   
   value.savePuzzle = savePuzzle;
+  
+  React.useEffect(() => {
+    savePuzzle(puzzleId);
+  }, [grid, puzzleId]);
 
   return (
     <PuzzleContext.Provider value={value}>
