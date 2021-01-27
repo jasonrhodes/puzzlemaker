@@ -136,11 +136,10 @@ function getCellClue({ puzzle, row, column }) {
   return false;
 };
 
-function measureMyInputText(id) {
-    var input = document.getElementById(id);
+function measureMyInputText(value) {
     var tmp = document.createElement("span");
     tmp.className = "fakeinput noopacity";
-    tmp.innerHTML = input.value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    tmp.innerHTML = value;
     document.body.appendChild(tmp);
     var theWidth = tmp.getBoundingClientRect().width;
     document.body.removeChild(tmp);
