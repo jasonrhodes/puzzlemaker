@@ -130,6 +130,10 @@ a {
   border-bottom: 1px solid #ddd;
 }
 
+.title a {
+  text-decoration: none;
+}
+
 .accent-text {
   color: rgb(34, 188, 172);
 }
@@ -228,8 +232,8 @@ a {
 }
 
 *:hover > .pbtip.stip {
-  width: 80px;
-  left: -30px;
+  width: 40px;
+  left: -10px;
   text-align: center;
 }
 

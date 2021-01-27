@@ -1,7 +1,7 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
 
-const { DesktopDownloadIcon, DatabaseIcon, UnlockIcon, HomeIcon, LockIcon, MirrorIcon, ShareIcon, PlayIcon, InfoIcon } = require("@primer/octicons-react");
+const { DesktopDownloadIcon, UnlockIcon, HomeIcon, LockIcon, MirrorIcon, ShareIcon, PlayIcon, InfoIcon } = require("@primer/octicons-react");
 
 
 
@@ -13,9 +13,9 @@ const PuzzleMenu = ({puzzle}) => {
   
   const lockIcon = () => {
     if (puzzle.symmetry){
-      return <a class="subicon" onClick={toggleLock} >< LockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip stip"><b>Unlock symmetry</b></span></a>;
+      return <a class="subicon" onClick={toggleLock} >< LockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip"><b>Unlock symmetry</b></span></a>;
     } else {
-      return <a class="subicon" onClick={toggleLock} >< UnlockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip stip"><b>Lock symmetry</b></span></a>;
+      return <a class="subicon" onClick={toggleLock} >< UnlockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip"><b>Lock symmetry</b></span></a>;
     };
   };
   
@@ -35,7 +35,6 @@ const PuzzleMenu = ({puzzle}) => {
         </span>
       </a>
       <Link to={{ pathname: "/play"}}><PlayIcon size={24} /><span class="pbtip stip"><b>Play</b></span></Link>
-      <a onClick={handleSave}><DatabaseIcon size={24}  /><span class="pbtip"><b>Save</b><br/>...to local storage</span></a>
       <a><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>...as .puz file</span></a>
       {lockIcon()}
     </div>
