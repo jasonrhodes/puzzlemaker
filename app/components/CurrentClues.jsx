@@ -58,6 +58,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const fillWithSuggestion = (e, suggestion, direction) => {
+    e.preventDefault();
     const newGrid = [...puzzle.grid];
     if (direction === 'across') {
       for (let i = across.range[0]; i <= across.range[1]; i++){
@@ -70,7 +71,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
     }
     puzzle.setGrid(newGrid);
     e.stopPropagation();
-    puzzle.advanceActiveCell();
   }
   
   return (
