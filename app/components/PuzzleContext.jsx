@@ -7,6 +7,17 @@ const {
   calculateAllClueNumbers
 } = require("./utils");
 
+function getSavedPuzzle(id) {
+  if (!id) {
+    return undefined;
+  }
+  const str = window.localStorage.getItem(id);
+  if (str && typeof str === "string") {
+    return JSON.parse(str);
+  }
+  return undefined;
+}
+
 const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const emptyWord = { range: [], word: "" };
   const [activeCell, setActiveCell] = React.useState([]);
@@ -18,6 +29,15 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [grid, setGrid] = React.useState(initialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
   const [labelGrid, setLabelGrid] = React.useState([]);
+  
+  const savedPuzzle = getSavedPuzzle(puzzleId);
+  if (savedPuzzle) {
+    setActiveCell(savedPuzzle.activeCell);
+    setDirection(savedPuzzle.direction);
+    setWords(savedPuzzle.words);
+    setGrid(savedPuzzle.grid);
+    setSymmetry(savedPuzzle.symmetry);
+  }
 
   const toggleDirection = () =>
     setDirection(direction === "across" ? "down" : "across");
@@ -227,7 +247,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   value.savePuzzle = savePuzzle;
   
   React.useEffect(() => {
-    savePuzzle(puzzleId);
+    savePuzzle();
   }, [grid, puzzleId]);
 
   return (
