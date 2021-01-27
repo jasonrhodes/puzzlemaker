@@ -2,6 +2,9 @@ const React = require("react");
 const WordCache = new Map();
 
 const convertAnswerToSquares = (clue) => {
+  if (clue.length < 2) {
+    return "";    
+  } 
   var chars = clue.split('');
   return chars.map((char, i) => (
     <span class={char == '-' ? 'emptycell' : ''}>{char}</span>

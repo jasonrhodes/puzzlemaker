@@ -103,14 +103,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
     for (let i = column; i >= 0; i--) {
       if (i === 0 || grid[row][i - 1].isBlackSquare) {
-        acrossNumber = labelGrid[row][i];
+        acrossNumber = labelGrid[row][i] !== 'O' ? labelGrid[row][i] : '-';
         break;
       }
     }
 
     for (let j = row; j >= 0; j--) {
       if (j === 0 || grid[j - 1][column].isBlackSquare) {
-        downNumber = labelGrid[j][column];
+        downNumber = labelGrid[j][column] !== 'O' ? labelGrid[j][column] : '-';
         break;
       }
     }
