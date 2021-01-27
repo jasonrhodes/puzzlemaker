@@ -19,7 +19,7 @@ module.exports = function SavedPuzzleList() {
     <ul className="saved-puzzle-list">
       {puzzles.map(({ id, title, author }) => (
         <li key={id}>
-          <Link to={"/edit/" + id}>{title} by {author}</Link><TrashIcon />
+          <Link to={"/edit/" + id}>{title} by {author}</Link> <a><TrashIcon /></a>
         </li>
       ))}
     </ul>
