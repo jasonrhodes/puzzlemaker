@@ -41,7 +41,7 @@ function findAcross(cellsInActiveRow, activeColumn) {
   const range = cellsInActiveRow.reduce(
     (range, cell) => {
       // console.log("cell", { range, cell });
-      if (range.start !== false && range.end && range.found) {
+      if (range.start !== false && range.end !== false && range.found) {
         range.count++;
         return range;
       }
@@ -79,7 +79,7 @@ function findDown(rows, activeRow, activeColumn) {
     (range, row) => {
       const cell = row[activeColumn];
 
-      if (range.start !== false && range.end && range.found) {
+      if (range.start !== false && range.end !== false && range.found) {
         range.count++;
         return range;
       }
