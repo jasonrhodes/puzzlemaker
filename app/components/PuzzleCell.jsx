@@ -43,11 +43,11 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
-    if (e.key === ";") {
+    if (e.key === ";" || e.key === ",") {
       puzzle.toggleCircle(activeRow, activeColumn);
       return;
     }
-    if (e.key === "/") {
+    if (e.key === "/" || e.key === "-") {
       puzzle.toggleShaded(activeRow, activeColumn);
       return;
     }
