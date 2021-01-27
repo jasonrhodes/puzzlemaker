@@ -63,7 +63,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <h3>{acrossNumber} Across:</h3>
         <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
         <div>{acrossSuggestions.map(
-            (x) => <div class="suggestions">{x}</div>
+            (x) => <div class="suggestions">{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
@@ -71,7 +71,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <h3>{downNumber} Down:</h3>
         <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
         <div>{downSuggestions.map(
-            (x) => <div class="suggestions">{x}</div>
+            (x) => <div class="suggestions">{convertAnswerToSquares(x)}</div>
           )}
         </div>
       </div>
