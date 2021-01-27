@@ -243,7 +243,7 @@ a {
 	pointer-events: none;
 }
 
-*:hover > .pbtip:after, *:hover > .pbtip.stip:before   {
+*:hover > .pbtip.stip:after, *:hover > .pbtip.stip:before   {
 	left: 50px;
 }
 

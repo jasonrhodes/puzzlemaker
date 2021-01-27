@@ -217,6 +217,12 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
     advanceActiveCell,
     rewindActiveCell
   };
+  
+  const savePuzzle = (id = 123) => {
+    window.localStorage.set(id, JSON.stringify(value));
+  }
+  
+  value.savePuzzle = savePuzzle;
 
   return (
     <PuzzleContext.Provider value={value}>
@@ -225,9 +231,9 @@ const PuzzleContextProvider = ({ initialGrid, children }) => {
       <br />
       <pre>
         <code>
-          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
+          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]), null, 2)}
         </code>
-        <code>{JSON.stringify(calculateAllClueNumbers())}</code>
+        <code>{JSON.stringify(calculateAllClueNumbers(grid), null, 2)}</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>

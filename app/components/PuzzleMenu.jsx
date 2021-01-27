@@ -19,6 +19,8 @@ const PuzzleMenu = ({puzzle}) => {
     };
   };
   
+  const handleSave = () => puzzle.savePuzzle();
+  
   return (
     <div class="menu">
       <Link><InfoIcon size={24} />
@@ -33,8 +35,8 @@ const PuzzleMenu = ({puzzle}) => {
         </span>
       </Link>
       <Link to={{ pathname: "/play"}}><PlayIcon size={24} /><span class="pbtip stip"><b>Play</b></span></Link>
-      <Link><DatabaseIcon size={24} /><span class="pbtip"><b>Save</b><br/>...to our storage</span></Link>
-      <Link><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>...as .puz file</span></Link>
+      <DatabaseIcon size={24} onClick={handleSave} /><span class="pbtip"><b>Save</b><br/>...to local storage</span>
+      <DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>...as .puz file</span>
       {lockIcon()}
     </div>
   );

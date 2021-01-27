@@ -5,6 +5,7 @@ module.exports.findAcross = findAcross;
 module.exports.findDown = findDown;
 module.exports.getCellClue = getCellClue;
 module.exports.measureMyInputText = measureMyInputText;
+module.exports.calculateAllClueNumbers = calculateAllClueNumbers;
 
 function applyBlocks(_grid, blocks) {
   const grid = [..._grid];
