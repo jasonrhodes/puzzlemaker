@@ -43,7 +43,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
         let downIndex = puzzle.activeCell[0] - down.range[0];
         let aStyles = accs.map(() => 'black');
-        let dStyles = accs.map(() => 'black');
+        let dStyles = downs.map(() => 'black');
         try {
           let acrossLetter = '';
           for (let i = 0; i < accs.length; i++) {
@@ -51,8 +51,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
             let x = letters.indexOf(acrossLetter);
             x < 0 ? (letters.push(acrossLetter), x = letters.length - 1) : null;
             aStyles[i] = colors[x];
-            console.log(downs[downIndex], acrossLetter)
-            dStyles = dStyles.map((ds) => downs[downIndex]===acrossLetter ? aStyles[i] : ds);
+            dStyles = dStyles.map((ds, ind) => {
+              //console.log(ds, ind, downs[ind]);
+              return downs[ind][downIndex]===acrossLetter ? aStyles[i] : ds;
+            });
           }
           console.log(aStyles)
           console.log(dStyles)
