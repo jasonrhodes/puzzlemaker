@@ -28,6 +28,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }, [across, down])
   
   const matchSuggestions = async () => {
+    const colors = ['blue', 'red', 'green', 'yellow', 'blueviolet', 'brown',
+                    'chartreuse', 'chocolate', 'cyan', 'orange', 'darkslategray', 'deeppink',
+                    'gold', 'indianred', 'indigo', 'lightgray', 'lightseagreen', 'mediumaquamarine',
+                    'navajowhite', 'olive', 'peru', 'royalblue', 'seagreen', 'silver',
+                    'springgreen', 'teal'];
+    const letters = [];
     const [accs, downs] = await Promise.all([
       getSuggestions(across.word.toLowerCase(), setAcrossSuggestions),
       getSuggestions(down.word.toLowerCase(), setDownSuggestions)
@@ -36,11 +42,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]].value){
         let acrossIndex = puzzle.activeCell[1] - across.range[0];
         let downIndex = puzzle.activeCell[0] - down.range[0];
-        let acrossStyles = accs.map
+        let aStyles = accs.map(() => '');
         try {
           let acrossLetter = '';
-          for (let acc of accs) {
-            acrossLetter = acc[acrossIndex];
+          for (let i = 0; i < accs.length; i++) {
+            acrossLetter = accs[i][acrossIndex];
+            let x = letters.indexOf(acrossLetter);
+            x >= 0 letters.push(acrossLetter)
             setDownStyles(downs.map((sug) => sug[downIndex]===acrossLetter ? sug+'*' : sug))            
             
           }
