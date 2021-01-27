@@ -180,10 +180,6 @@ a {
   width: 400px;
 }
 
-.current-clues > div {
-  min-height: 300px;
-}
-
 .current-clues h3 {
   margin: 5px 0;
 }
@@ -204,14 +200,21 @@ a {
   color: rgba(0,0,0,0)
 }
 
-.current-clues .suggestions > span {
+.current-clues .suggestions {
+  height: 250px;
+  overflow-y: scroll;
+} 
+
+.current-clues .suggestion > span {
   height: 21px;
   width: 21px;
   text-align: center;
   display: inline-block;
   color: #777;
+  text-decoration: none;
+  cursor: pointer;
 }
-.current-clues .suggestions > span:first-child {
+.current-clues .suggestion > span:first-child {
   margin-left: 1px;
 }
 
