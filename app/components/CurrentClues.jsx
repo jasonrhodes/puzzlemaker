@@ -124,7 +124,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div class="current-clues">
         <div id="across">
           <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + 'clue'} type="text"  /></div>
-          <div class="current">{across.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></a></div>
+          <div class="current">{across.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a></div>
           <div class="suggestions">{acrossSuggestions.map(
               (x, i) => <div class="inline">
                 <div class={'suggestion ' + getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x}</div> 

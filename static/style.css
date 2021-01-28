@@ -242,6 +242,10 @@ input.inline-content-editable:focus {
   margin-bottom: 5px;
 }
 
+.current-clues a {
+  position: relative;
+}
+
 .current-clues .suggestions {
   position: relative;
   overflow-y: scroll;
@@ -263,11 +267,16 @@ input.inline-content-editable:focus {
 
 .current-clues .suggestions > div > a {
   display:none;
+  margin-left: 4px;
 }
 
 .current-clues .suggestions > div:hover > a {
   display: inline-block;
 } 
+
+.current-clues .suggestions > div > a > svg {
+  margin-top: -3px;
+}
 
 .pbtip {
   display: none;
@@ -286,6 +295,12 @@ input.inline-content-editable:focus {
   min-width: 30px;
   width: auto;
   margin-right: -300px;
+  font-size: 14px;
+}
+
+.current-clues *:hover > .pbtip {
+  left: -11px;
+  top: 30px;
 }
 
 *:hover > .pbtip.stip {
