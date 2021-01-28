@@ -13,8 +13,9 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     marked: cell.style === 'marked',
     circled: cell.style === 'circled'
   });
-
-  const label = getCellClue({ row, column, puzzle });
+  
+  const { grid, getNextClueNumber } = puzzle;
+  const label = getCellClue({ row, column, grid, getNextClueNumber });
 
   const handleClick = e => {
     const [activeRow, activeColumn] = puzzle.activeCell;

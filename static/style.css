@@ -227,8 +227,8 @@ input.inline-content-editable:focus {
 .current-clues {
   position: absolute;
   top: 0;
-  right: -320px;
-  width: 300px;
+  right: -300px;
+  width: 280px;
 }
 
 .current-clues h3 {

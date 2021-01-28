@@ -112,8 +112,7 @@ function findDown(rows, activeRow, activeColumn) {
   return { range: [range.start, range.end], word: range.word };
 }
 
-function getCellClue({ puzzle, row, column }) {
-  const { grid, getNextClueNumber } = puzzle;
+function getCellClue({ grid, getNextClueNumber, row, column }) {
   const currentCell = grid[row][column];
   const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
   const prevDownCell = row > 0 ? grid[row - 1][column] : {};
@@ -137,6 +136,17 @@ function getCellClue({ puzzle, row, column }) {
   }
   return false;
 };
+
+function getGridWithClueNumbers(grid) {
+  let clue = 0;
+  const getNextClueNumber = () => clue++;
+  
+  for (let row in grid) {
+    for (let cell in row) {
+      
+    }
+  }
+}
 
 function measureMyInputText(value) {
     var tmp = document.createElement("span");

@@ -188,15 +188,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     direction === "across" ? prevAcross() : prevDown();
   };
 
-  let clue = 0;
+  let clueNumber = 0;
   const getNextClueNumber = () => {
-    return (clue += 1);
+    return (clueNumber += 1);
   };
-
-  const resetClue = () => {
-    clue = 0;
-  };
-
+  
   const isCellInActiveWord = (row, column) => {
     if (!direction || !words[direction]) {
       console.error("Error with checking cell in active word", {
@@ -228,8 +224,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     direction,
     words,
     grid,
-    clue,
-    resetClue,
     symmetry,
     title,
     author,
