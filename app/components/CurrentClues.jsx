@@ -127,7 +127,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const hideNonCrosses = (e, ad) => {
+    e.stopPropagation();
     var da = ad == 'down' ? 'across' : 'down';
+    e.currentTarget.style.color = 'rgb(34, 188, 172)';
+    e.currentTarget.querySelector('.pbtip')[0].text = 'Unfilter ' + da + ' crosses';
     var showclass = e.currentTarget.previousSibling.className.replace('suggestion ' + ad,'');
     var x = document.getElementsByClassName('suggestion');
     var i;
@@ -136,6 +139,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         x[i].style.display = 'none';
       }
     }
+    
   }
   
   const hideCrosses = (e) => {
