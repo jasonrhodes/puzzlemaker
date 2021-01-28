@@ -227,8 +227,8 @@ input.inline-content-editable:focus {
 .current-clues {
   position: absolute;
   top: 0;
-  right: -270px;
-  width: 250px;
+  right: -320px;
+  width: 300px;
 }
 
 .current-clues h3 {
@@ -236,9 +236,10 @@ input.inline-content-editable:focus {
 }
 
 .current-clues .current {
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: 2px;
   height: 21px;
+  margin-bottom: 5px;
 }
 
 .current-clues .suggestions {
@@ -251,8 +252,7 @@ input.inline-content-editable:focus {
 }
 
 .current-clues .suggestions .suggestion {
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-size: 16px;
   color: #777;
   cursor: pointer;
 }
