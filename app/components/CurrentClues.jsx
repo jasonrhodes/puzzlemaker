@@ -1,6 +1,7 @@
 const React = require("react");
 const WordCache = new Map();
 const { measureMyInputText } = require("./utils");
+const { Link } = require("react-router-dom");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
@@ -122,17 +123,17 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div class="current-clues">
         <div id="across">
           <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + 'clue'} type="text"  /></div>
-          <div class="current">{across.word.toUpperCase()}<Link to={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></Link></div>
+          <div class="current">{across.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></a></div>
           <div class="suggestions">{acrossSuggestions.map(
-              (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x}</div>
+              (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x} <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></a></div>
             )}
           </div>
         </div>
         <div id="down">
           <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(downNumber + 'clue') + 'px' }} value={downNumber + 'clue'} type="text"  /></div>
-          <div class="current">{down.word.toUpperCase()}</div>
+          <div class="current">{down.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + down.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></a></div>
           <div class="suggestions">{downSuggestions.map(
-              (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{x}</div>
+              (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{x} <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></a></div>
             )}
           </div>
         </div>

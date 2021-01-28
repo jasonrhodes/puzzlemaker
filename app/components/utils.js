@@ -137,13 +137,13 @@ function getCellClue({ grid, getNextClueNumber, row, column }) {
   return false;
 };
 
-function getGridWithClueNumbers(grid) {
+function assignClueNumbersToGrid(grid) {
   let clue = 0;
   const getNextClueNumber = () => clue++;
   
   for (let row in grid) {
     for (let cell in row) {
-      
+      console.log("looking at row", row, "and cell", cell);
     }
   }
 }
