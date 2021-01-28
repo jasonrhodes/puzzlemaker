@@ -1,16 +1,6 @@
 const React = require("react");
 const WordCache = new Map();
 
-const convertAnswerToSquares = (clue) => {
-  if (clue.length < 2) {
-    return "";    
-  } 
-  var chars = clue.split('');
-  return chars.map((char, i) => (
-    <span class={char == '-' ? 'emptycell' : ''}>{char}</span>
-  ))
-};
-
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column)
@@ -131,17 +121,17 @@ const CurrentClues = ({ across, down, puzzle }) => {
     <div class="current-clues">
       <div id="across">
         <h3>{acrossNumber} Across:</h3>
-        <div class="current">{convertAnswerToSquares(across.word.toUpperCase())}</div>
+        <div class="current">{across.word.toUpperCase()}</div>
         <div class="suggestions">{acrossSuggestions.map(
-            (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{convertAnswerToSquares(x)}</div>
+            (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x}</div>
           )}
         </div>
       </div>
       <div id="down">
         <h3>{downNumber} Down:</h3>
-        <div class="current">{convertAnswerToSquares(down.word.toUpperCase())}</div>
+        <div class="current">{down.word.toUpperCase()}</div>
         <div class="suggestions">{downSuggestions.map(
-            (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{convertAnswerToSquares(x)}</div>
+            (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{x}</div>
           )}
         </div>
       </div>

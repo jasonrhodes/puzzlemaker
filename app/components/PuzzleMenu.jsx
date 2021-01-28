@@ -29,9 +29,13 @@ const PuzzleMenu = ({puzzle}) => {
           <i>Ctrl+click</i> to toggle black square<br/>
           <i>Alt+click</i> to toggle circle<br/>
           <i>Shift+click</i> to toggle shaded square<br/>
+          <i>Enter</i> to switch directions<br/>
+          <i>Tab</i> to move ahead<br/>
+          <i>Shift+Tab</i> to move back<br/>
           <i>"."</i> to toggle black square<br/>
-          <i>";"</i> to toggle circle<br/>
-          <i>"/"</i> to toggle shaded square
+          <i>";" or ","</i> to toggle circle<br/>
+          <i>"/" or "-"</i> to toggle shaded square
+          
         </span>
       </a>
       <Link to={{ pathname: "/play"}}><PlayIcon size={24} /><span class="pbtip stip"><b>Play</b></span></Link>
