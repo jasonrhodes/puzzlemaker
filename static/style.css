@@ -261,6 +261,13 @@ input.inline-content-editable:focus {
   color: #000;
 }
 
+.current-clues .suggestions > div > a {
+  display:none;
+}
+
+.current-clues .suggestions > div:hover > a {
+  display: inline-block;
+} 
 
 .pbtip {
   display: none;
