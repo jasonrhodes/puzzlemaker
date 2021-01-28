@@ -242,6 +242,10 @@ input.inline-content-editable:focus {
   margin-bottom: 5px;
 }
 
+.current-clues .current a {
+  margin-left: 4px; 
+}
+
 .current-clues a {
   position: relative;
 }
@@ -269,6 +273,7 @@ input.inline-content-editable:focus {
   display:none;
   margin-left: 4px;
 }
+
 
 .current-clues .suggestions > div:hover > a {
   display: inline-block;

@@ -20,14 +20,19 @@ module.exports = function SavedPuzzleList() {
     window.localStorage.removeItem(e.currentTarget.id.replace('del',''));
     location.reload();
   }
-  
-  return (
-    <ul className="saved-puzzle-list">
-      {puzzles.map(({ id, title, author }) => (
-        <li key={id}>
-          <Link to={"/edit/" + id}>{title} by {author}</Link> <a id={'del' + id} onClick={(e) => storageDelete(e) }><TrashIcon /></a>
-        </li>
-      ))}
-    </ul>
-  )
+  if (puzzles.length) {
+    return (
+      <ul className="saved-puzzle-list">
+        {puzzles.map(({ id, title, author }) => (
+          <li key={id}>
+            <Link to={"/edit/" + id}>{title} by {author}</Link> <a id={'del' + id} onClick={(e) => storageDelete(e) }><TrashIcon /></a>
+          </li>
+        ))}
+      </ul>
+    )
+  } else {
+    return (
+      <div><i>No puzzles found...</i></div>
+    )
+  }
 }
