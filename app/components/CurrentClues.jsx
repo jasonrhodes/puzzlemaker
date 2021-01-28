@@ -116,7 +116,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     e.stopPropagation();
   }
   
-  const showCrosses = (e, lock) => {
+  const showCrosses = (e, ad) => {
     var showclass = e.currentTarget.className.replace('suggestion ','');
     var x = document.getElementsByClassName(showclass);
     var i;
@@ -125,7 +125,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
     }
   }
   const hideCrosses = (e) => {
-    console.log(e.currentTarget);
+    var x = document.getElementsByClassName('suggestion');
+    var i;
+    for (i = 0; i < x.length; i++) {
+      x[i].style.removeProperty('color');
+    }
   }
   
   const getStyle = (i, direction) => { 
