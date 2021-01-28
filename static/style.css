@@ -296,6 +296,7 @@ input.inline-content-editable:focus {
   width: auto;
   margin-right: -300px;
   font-size: 14px;
+  letter-spacing: 0;
 }
 
 .current-clues *:hover > .pbtip {

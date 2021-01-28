@@ -156,11 +156,14 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const showNonCrosses = (e) => {
+    e.stopPropagation();
     var x = document.getElementsByClassName('suggestion');
     var i;
     for (i = 0; i < x.length; i++) {
       x[i].style.removeProperty('display');
     }
+    setAcrossFilter(false);
+    setDownFilter(false);
   }
   
   const getStyle = (i, direction) => { 
@@ -170,8 +173,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
     return (
       <div class="current-clues">
         <div id="across">
-          <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + 'clue'} type="text"  /></div>
-          <div class="current">{across.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a></div>
+          <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + ' clue'} type="text"  /></div>
+          <div class="current">{across.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
+            {acrossFilter ? <a onClick={(e) => showNonCrosses(e, 'across')}><EyeIcon size={24}/><span class="pbtip"><b>Unfilter Down crosses</b></span></a> : ''}
+          </div>
           <div class="suggestions">{acrossSuggestions.map(
               (x, i) => <div class="inline">
                 <div onMouseEnter={(e) => showCrosses(e, 'across')} onMouseLeave={(e) => hideCrosses(e)} class={'suggestion across' + getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
@@ -182,18 +187,19 @@ const CurrentClues = ({ across, down, puzzle }) => {
           </div>
         </div>
         <div id="down">
-          <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(downNumber + 'clue') + 'px' }} value={downNumber + 'clue'} type="text"  /></div>
-          <div class="current">{down.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + down.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></a>
-            if (downFilter) {
-              <a onClick
-            }
+          <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={downNumber + ' clue'} type="text"  /></div>
+          <div class="current">{down.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + down.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
+            {downFilter ? <a onClick={(e) => showNonCrosses(e)}><EyeIcon size={24}/><span class="pbtip"><b>Unfilter Down crosses</b></span></a> : ''}
           </div>
-          <div class="suggestions">{downSuggestions.map(
-              (x, i) => <div class="inline"><div class={'suggestion down' + getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{x}</div> <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/></a></div>
+          <div class="suggestions">{acrossSuggestions.map(
+              (x, i) => <div class="inline">
+                <div onMouseEnter={(e) => showCrosses(e, 'across')} onMouseLeave={(e) => hideCrosses(e)} class={'suggestion across' + getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
+                <a onClick={(e) => hideNonCrosses(e, 'across')}><ArrowDownIcon size={12}/><span class="pbtip"><b>Filter Down crosses</b></span></a>
+                <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
+              </div>
             )}
           </div>
         </div>
-      </div>
     );
   } else {
     return (
