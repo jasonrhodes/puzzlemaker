@@ -125,13 +125,33 @@ const CurrentClues = ({ across, down, puzzle }) => {
       x[i].style.color = 'rgb(34, 188, 172)';
     }
   }
+  
+  const hideNonCrosses = (e, ad) => {
+    var da = ad == 'down' ? 'across' : 'down';
+    var showclass = e.currentTarget.previousSibling.className.replace('suggestion ' + ad,'');
+    var x = document.getElementsByClassName('suggestion');
+    var i;
+    for (i = 0; i < x.length; i++) {
+      if (x[i].className.search(da) > -1 && x[i].className.search(showclass) == -1 ) {
+        x[i].style.display = 'none';
+      }
+    }
+  }
+  
   const hideCrosses = (e) => {
     var x = document.getElementsByClassName('suggestion');
     var i;
     for (i = 0; i < x.length; i++) {
       x[i].style.removeProperty('color');
     }
-    
+  }
+  
+  const showNonCrosses = (e) => {
+    var x = document.getElementsByClassName('suggestion');
+    var i;
+    for (i = 0; i < x.length; i++) {
+      x[i].style.removeProperty('color');
+    }
   }
   
   const getStyle = (i, direction) => { 
@@ -146,7 +166,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           <div class="suggestions">{acrossSuggestions.map(
               (x, i) => <div class="inline">
                 <div onMouseEnter={(e) => showCrosses(e, 'across')} onMouseLeave={(e) => hideCrosses(e)} class={'suggestion across' + getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
-                <a onClick={(e) => showCrosses(e)}><ArrowDownIcon size={12}/><span class="pbtip"><b>Filter Down crosses</b></span></a>
+                <a onClick={(e) => hideNonCrosses(e, 'across')}><ArrowDownIcon size={12}/><span class="pbtip"><b>Filter Down crosses</b></span></a>
                 <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
               </div>
             )}
