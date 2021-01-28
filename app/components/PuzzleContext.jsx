@@ -34,9 +34,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [author, setAuthor] = React.useState("Author")
   
   React.useEffect(() => {
-    console.log("grid updated, calculating clue numbers");
     const { labelGrid } = calculateAllClueNumbers(grid);
-    console.log("label grid", labelGrid);
     setLabelGrid(labelGrid);
   }, [grid]);
   
@@ -45,7 +43,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   }, [grid, setWords, activeCell]);
   
   React.useEffect(() => {
-    console.log("possibly saving the puzzle?", !!savedPuzzleId);
     savedPuzzleId && savePuzzle(savedPuzzleId);
   }, [grid, words, savedPuzzleId]);
   
