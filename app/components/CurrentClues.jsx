@@ -1,5 +1,6 @@
 const React = require("react");
 const WordCache = new Map();
+const { measureMyInputText } = require("./utils");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
@@ -114,13 +115,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const getStyle = (i, direction) => { 
-    return {color: direction === "across" ? acrossStyles[i] : downStyles[i] };
+    return {class: direction === "across" ? acrossStyles[i] : downStyles[i] };
   }
   
   return (
     <div class="current-clues">
       <div id="across">
-        <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(across.clue) + 'px' }} value={across.clue} type="text"  />
+        <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + 'clue'} type="text"  /></div>
         <div class="current">{across.word.toUpperCase()}</div>
         <div class="suggestions">{acrossSuggestions.map(
             (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x}</div>
@@ -128,7 +129,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         </div>
       </div>
       <div id="down">
-        <h3>{downNumber} Down:</h3>
+        <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(downNumber + 'clue') + 'px' }} value={downNumber + 'clue'} type="text"  /></div>
         <div class="current">{down.word.toUpperCase()}</div>
         <div class="suggestions">{downSuggestions.map(
             (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{x}</div>
