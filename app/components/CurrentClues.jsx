@@ -2,7 +2,7 @@ const React = require("react");
 const WordCache = new Map();
 const { measureMyInputText } = require("./utils");
 const { Link } = require("react-router-dom");
-const { DownIcon, RightIcon } = require("@primer/octicons-react");
+const { ArrowDownIcon, ArrowRightIcon } = require("@primer/octicons-react");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
@@ -116,14 +116,17 @@ const CurrentClues = ({ across, down, puzzle }) => {
     e.stopPropagation();
   }
   
-  //const showCrosses = (e, lock) => {
-    //console.log(e.currentTarget);
-  //}
-  //const hideCrosses = (e) => {
-    //console.log(e.currentTarget);
-  //}
-  
-  //onMouseEnter={(e) => showCrosses(e, false)} onMouseLeave={(e) => hideCrosses(e)}
+  const showCrosses = (e, lock) => {
+    var showclass = e.currentTarget.className.replace('suggestion ','');
+    var x = document.getElementsByClassName(showclass);
+    var i;
+    for (i = 0; i < x.length; i++) {
+      x[i].style.color = 'rgb(34, 188, 172)';
+    }
+  }
+  const hideCrosses = (e) => {
+    console.log(e.currentTarget);
+  }
   
   const getStyle = (i, direction) => { 
     return  "across" ? acrossStyles[i] : downStyles[i] ;
@@ -136,8 +139,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
           <div class="current">{across.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a></div>
           <div class="suggestions">{acrossSuggestions.map(
               (x, i) => <div class="inline">
-                <div class={'suggestion ' + getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
-                <a><DownIcon size={12}/><span class="pbtip"><b>Filter Down crosses</b></span></a>
+                <div onMouseEnter={(e) => showCrosses(e, false)} onMouseLeave={(e) => hideCrosses(e)} class={'suggestion ' + getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
+                <a><ArrowDownIcon size={12}/><span class="pbtip"><b>Filter Down crosses</b></span></a>
                 <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
               </div>
             )}
