@@ -235,44 +235,24 @@ input.inline-content-editable:focus {
   margin: 5px 0;
 }
 
-.current-clues .current > span {
-  border: 1px solid rgba(34, 188, 172,0.5);
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  display: inline-block;
-  margin-bottom: 5px;
-}
-
-.current-clues .current > span:not(:first-child) {
-  border-left: 0;
-}
-
-.current-clues .current > span.emptycell {
-  color: rgba(0,0,0,0)
+.current-clues .current {
+  font-size: 18px;
+  letter-spacing: 2px;
 }
 
 .current-clues .suggestions {
-  height: 245px;
+  position: relative;
   overflow-y: scroll;
-  border-bottom: 1px solid #ddd;
-} 
-
-.current-clues .suggestion > span {
-  height: 21px;
-  width: 21px;
-  text-align: center;
-  display: inline-block;
-  
-  text-decoration: none;
-  cursor: pointer;
-}
-.current-clues .suggestion > span:first-child {
-  margin-left: 1px;
+  height: 250px;
+  border: 1px solid #777;
+  border-left: 0;
+  border-right: 0;
 }
 
-.current-clues .suggestion:hover > span {
-  color: #000;
+.current-clues .suggestions .suggestion {
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #ddd;
 }
 
 

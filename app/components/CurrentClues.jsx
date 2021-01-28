@@ -120,7 +120,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   return (
     <div class="current-clues">
       <div id="across">
-        <h3>{acrossNumber} Across:</h3>
+        <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(across.clue) + 'px' }} value={across.clue} type="text"  />
         <div class="current">{across.word.toUpperCase()}</div>
         <div class="suggestions">{acrossSuggestions.map(
             (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x}</div>
