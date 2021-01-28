@@ -117,27 +117,32 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const getStyle = (i, direction) => { 
     return {class: direction === "across" ? acrossStyles[i] : downStyles[i] };
   }
-  
-  return (
-    <div class="current-clues">
-      <div id="across">
-        <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + 'clue'} type="text"  /></div>
-        <div class="current">{across.word.toUpperCase()}</div>
-        <div class="suggestions">{acrossSuggestions.map(
-            (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x}</div>
-          )}
+  if (acrossNumber != '-' || downNumber != '-') {
+    return (
+      <div class="current-clues">
+        <div id="across">
+          <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + 'clue'} type="text"  /></div>
+          <div class="current">{across.word.toUpperCase()}</div>
+          <div class="suggestions">{acrossSuggestions.map(
+              (x, i) => <div class="suggestion" style={getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')}>{x}</div>
+            )}
+          </div>
+        </div>
+        <div id="down">
+          <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(downNumber + 'clue') + 'px' }} value={downNumber + 'clue'} type="text"  /></div>
+          <div class="current">{down.word.toUpperCase()}</div>
+          <div class="suggestions">{downSuggestions.map(
+              (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{x}</div>
+            )}
+          </div>
         </div>
       </div>
-      <div id="down">
-        <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" style={{ width: measureMyInputText(downNumber + 'clue') + 'px' }} value={downNumber + 'clue'} type="text"  /></div>
-        <div class="current">{down.word.toUpperCase()}</div>
-        <div class="suggestions">{downSuggestions.map(
-            (x, i) => <div class="suggestion" style={getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')}>{x}</div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div></div>
+    );
+  }
 }
 
 module.exports = CurrentClues;

@@ -54,7 +54,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   React.useEffect(() => {
     const savedPuzzle = getSavedPuzzle(puzzleId);
     if (savedPuzzle) {
-      console.log("loading saved puzzle", { savedPuzzle });
       setTitle(savedPuzzle.title);
       setAuthor(savedPuzzle.author);
       setGrid(savedPuzzle.grid);
@@ -64,7 +63,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setSymmetry(savedPuzzle.symmetry);
       setSavedPuzzleId(puzzleId)
     } else {
-      console.log("no saved puzzle");
       setSavedPuzzleId(puzzleId);
     }
   }, [puzzleId]);
