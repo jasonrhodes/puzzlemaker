@@ -23,11 +23,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }, [across, down])
   
   const matchSuggestions = async () => {
-    const colors = ['blue', 'red', 'green', 'yellow', 'blueviolet', 'brown',
-                    'chartreuse', 'chocolate', 'cyan', 'orange', 'darkslategray', 'deeppink',
-                    'gold', 'indianred', 'indigo', 'lightgray', 'lightseagreen', 'mediumaquamarine',
-                    'navajowhite', 'olive', 'peru', 'royalblue', 'seagreen', 'silver',
-                    'springgreen', 'teal'];
+    const colors = ['darkblue', 'lightred', 'nicegreen', 'whatyellow', 'dougviolet', 'circlebrown',
+                    'chartreuse', 'chocolate', 'cyancosling', 'bourntorange', 'darkslategray', 'deeppink',
+                    'foolsgold', 'nicecolour', 'indigogirls', 'lightgray', 'lightseagreen', 'mediumaquamarine',
+                    'navajowhite', 'oliveoyl', 'peruvian', 'royalblue', 'seagreen', 'silverfox',
+                    'springgreen', 'artoftheteal'];
     const letters = [];
     const [accs, downs] = await Promise.all([
       getSuggestions(across.word.toLowerCase(), setAcrossSuggestions),
