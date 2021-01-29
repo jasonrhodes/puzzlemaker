@@ -50,7 +50,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       if (word.length === len && /^[a-zA-Z]+$/.test(word) && !result.includes(word.toUpperCase())) {
         result.push(word.toUpperCase());
       }
-      if (result.length === 1000) {
+      if (result.length === 500) {
         break;
       }
     }
