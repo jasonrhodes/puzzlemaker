@@ -10,19 +10,16 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
-  const [acrossStyles, setAcrossStyles] = React.useState([]);
-  const [downStyles, setDownStyles] = React.useState([]);
-  const [downFilter, setDownFilter] = React.useState(false);
+  //const [acrossStyles, setAcrossStyles] = React.useState([]);
+  //const [downStyles, setDownStyles] = React.useState([]);
+  onst [downFilter, setDownFilter] = React.useState(false);
   const [acrossFilter, setAcrossFilter] = React.useState(false);
   const [downHighlight, setDownHighlight] = React.useState(false);
   const [acrossHighlight, setAcrossHighlight] = React.useState(false);
-//   React.useEffect(() => {
-//     console.log("USE EFFECT 3 (A SUGGESTIONS)")
-//     //getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
-//     //getSuggestions(down.word.toLowerCase(), setDownSuggestions);
-    
-//     matchSuggestions()
-//   }, [across, down])
+   React.useEffect(() => {
+     getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
+     getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+   }, [across, down]);
   
 //   const matchSuggestions = async () => {
 //     const colors = ['darkblue', 'lightred', 'nicegreen', 'whatyellow', 'dougviolet', 'circlebrown',
@@ -123,10 +120,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const showCrosses = (e, ad) => {
     var da = ad == 'down' ? 'across' : 'down';
     var showclass = e.currentTarget.className.replace('suggestion ' + ad,da);
-    var x = document.getElementsByClassName(showclass);
-    var i;
-    for (i = 0; i < x.length; i++) {
-      x[i].style.color = 'rgb(34, 188, 172)';
+
     }
   }
   
@@ -186,7 +180,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           </div>
           <div class="suggestions">{acrossSuggestions.map(
               (x, i) => <div class="inline">
-                <div onMouseEnter={(e) => showCrosses(e, 'across')} onMouseLeave={(e) => hideCrosses(e)} class={'suggestion across' + getStyle(i, "across")} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
+                <div onMouseEnter={(e) => showCrosses(e, 'across')} onMouseLeave={(e) => hideCrosses(e)} class='suggestion' onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
                 <a onClick={(e) => hideNonCrosses(e, 'across')}><ArrowDownIcon size={12}/><span class="pbtip"><b>Filter Down crosses</b></span></a>
                 <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
               </div>
@@ -200,7 +194,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           </div>
           <div class="suggestions">{downSuggestions.map(
               (x, i) => <div class="inline">
-                <div onMouseEnter={(e) => showCrosses(e, 'down')} onMouseLeave={(e) => hideCrosses(e)} class={'suggestion down' + getStyle(i, "down")} onClick={(e) => fillWithSuggestion(e, x, 'down')} >{x}</div>
+                <div onMouseEnter={(e) => showCrosses(e, 'down')} onMouseLeave={(e) => hideCrosses(e)} class='suggestion' onClick={(e) => fillWithSuggestion(e, x, 'down')} >{x}</div>
                 <a onClick={(e) => hideNonCrosses(e, 'down')}><ArrowRightIcon size={12}/><span class="pbtip"><b>Filter Across crosses</b></span></a>
                 <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
               </div>
