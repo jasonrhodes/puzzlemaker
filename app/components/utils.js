@@ -193,3 +193,201 @@ function calculateAllClueNumbers(grid) {
     }
     return { acrossClues, downClues, labelGrid } ;
   }
+
+function convertPuzzleToJSON(puzzle) {
+  let puz = {};
+  puz["author"] = puzzle.author;
+  puz["title"] = puzzle.title;
+  puz["size"] = {
+    "rows": puzzle.grid.length,
+    "cols": puzzle.grid[0].length
+  };
+  // Translate clues to standard JSON puzzle format
+  puz["clues"] = {
+    "across": [],
+    "down": []
+  };
+  
+  const { acrossClues, downClues, labelGrid } = calculateAllClueNumbers(puzzle.grid);
+  for (let x in acrossClues) {
+    puz.clues.across.push(x + "|| " + "testClue");
+  }
+  for (let x in downClues) {
+    puz.clues.down.push(x + "|| " + "testClue");
+  }
+  
+  // Read grid
+  puz["grid"] = [];
+  for (let i = 0; i < puzzle.grid.length; i++) {
+    for (let j = 0; j < puzzle.grid[0].length; j++) {
+      puz.grid.push(puzzle.grid[i][j].value);
+    }
+  }
+  return puz;
+}
+
+function pad(buf, n) {
+  for (var i = 0; i < n; i++) {
+    buf.push(0);
+    return buf;
+  }
+}
+
+function writeShort(buf, x) {
+  buf.push(x & 0xff, (x >> 8) & 0xff);
+  return buf;
+}
+
+function setShort(buf, ix, x) {
+  buf[ix] = x & 0xff;
+  buf[ix + 1] = (x >> 8) & 0xff;
+  return buf;
+}
+
+function writeString(buf, s) {
+  if (s === undefined) s = '';
+  for (var i = 0; i < s.length; i++) {
+    var cp = s.codePointAt(i);
+    if (cp < 0x100 && cp > 0) {
+      buf.push(cp);
+    } else {
+      // TODO: expose this warning through the UI
+      console.log('string "' + s + '" has non-ISO-8859-1 codepoint at offset ' + i);
+      buf.push('?'.codePointAt(0));
+    }
+    if (cp >= 0x10000) i++;   // advance by one codepoint
+  }
+  buf.push(0);
+  return buf;
+}
+
+function writeHeader(buf, json) {
+  buf = pad(buf, 2); // placeholder for checksum
+  buf = writeString(buf, 'ACROSS&DOWN');
+  buf = pad(buf, 2); // placeholder for cib checksum
+  buf = pad(buf, 8); // placeholder for masked checksum
+  // version = '1.3';
+  buf = writeString(buf, '1.3'); // version
+  buf = pad(buf, 2); // probably extra space for version string
+  buf = writeShort(buf, 0);  // scrambled checksum
+  buf = pad(buf, 12);  // reserved
+  const w = json.size.cols;
+  const h = json.size.rows;
+  buf.push(w);
+  buf.push(h);
+  const numClues = json.clues.across.length + json.clues.down.length;
+  buf = writeShort(buf, numClues);
+  buf = writeShort(buf, 1);  // puzzle type
+  buf = writeShort(0);  // scrambled tag
+return [buf, w, h, numClues];
+}
+
+function writeFill(buf, json) {
+  const grid = json.grid;
+  const BLACK_CP = '.'.codePointAt(0);
+  const solution = this.buf.length;
+  for (var i = 0; i < grid.length; i++) {
+    buf.push(grid[i].codePointAt(0));  // Note: assumes grid is ISO-8859-1
+  }
+  const grid2 = buf.length;
+  for (var i = 0; i < grid.length; i++) {
+    var cp = grid[i].codePointAt(0);
+    if (cp != BLACK_CP) cp = '-'.codePointAt(0);
+    buf.push(cp);
+  }
+  return [buf, solution, grid2];
+}
+
+function writeStrings(buf, json) {
+  const stringStart = buf.length;
+  buf = writeString(buf, json.title);
+  buf = writeString(buf, json.author);
+  buf = writeString(buf, json.copyright);
+  const across = json.clues.across;
+  const down = json.clues.down;
+  var clues = [];
+  for (var i = 0; i < across.length; i++) {
+    const sp = across[i].split('|| ');
+    clues.push([2 * parseInt(sp[0]), sp[1]]);
+  }
+  for (var i = 0; i < down.length; i++) {
+    const sp = down[i].split('|| ');
+    clues.push([2 * parseInt(sp[0]) + 1, sp[1]]);
+  }
+  clues.sort((a, b) => a[0] - b[0]);
+  for (var i = 0; i < clues.length; i++) {
+    buf = writeString(buf, clues[i][1]);
+  }
+  buf = writeString(buf, json.notepad);
+  return [buf, stringStart];
+}
+
+function checksumRegion(buf, base, len, cksum) {
+  for (var i = 0; i < len; i++) {
+    cksum = (cksum >> 1) | ((cksum & 1) << 15);
+    cksum = (cksum + buf[base + i]) & 0xffff;
+  }
+  return cksum;
+}
+
+function strlen(buf, ix) {
+  var i = 0;
+  while (buf[ix + i]) i++;
+  return i;
+}
+
+function checksumStrings(buf, stringStart, numClues, cksum) {
+  let ix = stringStart;
+  const version = "1.3";
+  for (var i = 0; i < 3; i++) {
+    const len = strlen(buf, ix);
+    if (len) {
+      cksum = checksumRegion(buf, ix, len + 1, cksum);
+    }
+    ix += len + 1;
+  }
+  for (var i = 0; i < numClues; i++) {
+    const len = strlen(buf, ix);
+    cksum = checksumRegion(buf, ix, len, cksum);
+    ix += len + 1;
+  }
+  if (version == '1.3') {
+    const len = strlen(buf, ix);
+    if (len) {
+      cksum = checksumRegion(buf, ix, len + 1, cksum);
+    }
+    ix += len + 1;
+  }
+  return cksum;
+}
+
+function setMaskedChecksum(buf, i, maskLow, maskHigh, cksum) {
+  buf[0x10 + i] = maskLow ^ (cksum & 0xff);
+  buf[0x14 + i] = maskHigh ^ (cksum >> 8);
+  return buf;
+}
+
+function computeChecksums(buf, solution, w, h, grid, numClues, stringStart) {
+  var c_cib = checksumRegion(buf, 0x2c, 8, 0);
+  buf = setShort(buf, 0xe, c_cib);
+  var cksum = checksumRegion(buf, solution, w * h, c_cib);
+  var cksum = checksumRegion(buf, grid, w * h, cksum);
+  cksum = checksumStrings(buf, stringStart, numClues, cksum);
+  buf = setShort(buf, 0x0, cksum);
+  buf = setMaskedChecksum(buf, 0, 0x49, 0x41, c_cib);
+  var c_sol = checksumRegion(buf, solution, w * h, 0);
+  buf = setMaskedChecksum(buf, 1, 0x43, 0x54, c_sol);
+  var c_grid = checksumRegion(buf, grid, w * h, 0);
+  buf = setMaskedChecksum(buf, 2, 0x48, 0x45, c_grid);
+  var c_part = checksumStrings(buf, stringStart, numClues, 0);
+  buf = setMaskedChecksum(buf, 3, 0x45, 0x44, c_part);
+  return buf;
+}
+
+function toPuz(buf, json) {
+  const [buf2, w, h, numClues] = writeHeader(buf, json);
+  const [buf3, solution, grid2] = writeFill(buf2, json);
+  const [buf4, stringStart] = writeStrings(buf3, json);
+  const buf5 = computeChecksums(buf4, solution, w, h, grid2, numClues, stringStart);
+  return new Uint8Array(buf);
+}

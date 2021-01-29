@@ -1,5 +1,9 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
+const {
+  convertPuzzleToJSON,
+  toPuz
+} = require("./utils");
 
 const { DesktopDownloadIcon, UnlockIcon, HomeIcon, LockIcon, MirrorIcon, ShareIcon, PlayIcon, InfoIcon } = require("@primer/octicons-react");
 
@@ -13,12 +17,19 @@ const PuzzleMenu = ({puzzle}) => {
   
   const downloadFile = () => {
     const element = document.createElement("a");
-    const file = new Blob(["test"],    
-                 {type: 'text/plain;charset=utf-8'});
+    //const file = new Blob(["test"],    
+    //             {type: 'text/plain;charset=utf-8'});
+    let fileName = 'myPuz.puz';
+    let serialized = convertPuzzleToJSON(puzzle);
+    let fileContents = toPuz([], serialized);
+    let file = new File([fileContents], filename);
+    
     element.href = URL.createObjectURL(file);
-    element.download = "myFile.txt";
+    element.download = "myPuz.puz";
     document.body.appendChild(element);
     element.click();
+   
+}
   }
   
   const lockIcon = () => {
