@@ -181,10 +181,10 @@ function getCellClue({ grid, getNextClueNumber, row, column }) {
     clue.isDownStart || clue.isAcrossStart ? getNextClueNumber() : null;
   clue.downClueNumber = clue.isDownStart
     ? newClueNumber
-    : prevDownCell.clue.downClueNumber;
+    : (prevDownCell.clue && prevDownCell.clue.downClueNumber);
   clue.acrossClueNumber = clue.isAcrossStart
     ? newClueNumber
-    : prevAcrossCell.clue.acrossClueNumber;
+    : (prevAcrossCell.clue && prevAcrossCell.clue.acrossClueNumber);
 
   return clue;
 }

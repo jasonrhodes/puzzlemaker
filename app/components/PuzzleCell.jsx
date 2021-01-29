@@ -16,7 +16,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
   });
   
   const { grid, getNextClueNumber } = puzzle;
-  const { clue = {} } = grid[row][column];
+  const currentCell = grid[row][column];
+  const clue = currentCell.clue || {};
   const label = (clue.isAcrossStart && clue.acrossClueNumber) || (clue.isDownStart && clue.downClueNumber);
 
   const handleClick = e => {
