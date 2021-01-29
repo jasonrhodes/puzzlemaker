@@ -115,6 +115,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
       }
     }
     puzzle.setGrid(newGrid);
+    setAcrossFilter([]);
+    setDownFilter([]);
+    setAcrossHighlight(null);
+    setDownHighlight(null);
   }
   
   const highlightCrosses = (e, ad) => {
@@ -138,14 +142,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
       } else {
         setAcrossFilter([e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[0] - down.range[0]]]);
       }
-      console.log(acrossFilter);
     } else {
       if (downFilter[0] == e.currentTarget.previousSibling.textContent) {
         setDownFilter([]);
       } else {
         setDownFilter([e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[1] - across.range[0]]]);
       }
-      console.log(downFilter);
     }
     
   }

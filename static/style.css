@@ -237,7 +237,7 @@ input.inline-content-editable:focus {
 
 .current-clues img {
   filter: grayscale(1);
-  opacity: 0.9;
+  opacity: 0.5;
 }
 
 .current-clues img:hover {
@@ -255,6 +255,10 @@ input.inline-content-editable:focus {
 
 .current-clues .current a {
   margin-left: 4px; 
+}
+
+.current-clues .current svg {
+  margin-bottom: 2px;
 }
 
 .current-clues a {
@@ -326,7 +330,13 @@ input.inline-content-editable:focus {
     "Droid Sans", "Arial", sans-serif;
 }
 
-.current-clues *:hover > .pbtip {
+.current-clues .current *:hover > .pbtip {
+  left: -10px;
+  top: 35px;
+}
+
+
+.current-clues .suggestions *:hover > .pbtip {
   left: -11px;
   top: 30px;
 }
@@ -365,3 +375,6 @@ input.inline-content-editable:focus {
 	margin-left: -16px;
 }
 
+@media only screen and (max-width: 600px) {
+  
+}
