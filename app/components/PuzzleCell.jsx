@@ -99,7 +99,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       onKeyDown={handleKeyDown}
       tabIndex="0"
     >
-      <input value={cell.value.toUpperCase()} />
+      {!cell.isBlackSquare && <input value={cell.value.toUpperCase()} />}
       {cell.style === 'circled' ? <div class="circle"/>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
     </div>
