@@ -23,13 +23,13 @@ const PuzzleMenu = ({ puzzle }) => {
     const element = document.createElement("a");
     //const file = new Blob(["test"],
     //             {type: 'text/plain;charset=utf-8'});
-    let filename = "myPuz.puz";
+    let filename = puzzle.title ? puzzle.title+'.puz' : 'myPuz.puz';
     let serialized = convertPuzzleToJSON(puzzle);
     let fileContents = new PuzWriter().toPuz(serialized);
     let file = new File([fileContents], filename);
 
     element.href = URL.createObjectURL(file);
-    element.download = "myPuz.puz";
+    //element.download = "myPuz.puz";
     document.body.appendChild(element);
     element.click();
   };
