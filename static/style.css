@@ -376,24 +376,56 @@ input.inline-content-editable:focus {
 }
 
 @media only screen and (max-width: 600px) {
+  .menu {
+    top: -78px;
+  }
+  .menu a {
+    padding: 6.5px;
+  }
+  
+  .title {
+    font-size: 1.5em;
+  }
+  
   .current-clues {
     position: relative;
+    top: 0;
+    right: 0;
+    width: auto;
+  }
+  
+  .puzzle-grid {
+    margin: 0 -8px 0 -8px;
+    border: 0;
+    overflow-x: show;
   }
 
-  .grid15 .puzzle-cell .label {
+  .puzzle-cell .label {
     font-size: 8px;
     border: 0;
     position: absolute;
     top: 1px;
     left: 1px;
   }
+  
+  .current-clues .suggestions {
+    height: 120px;
+  }
 
   .puzzle-cell {
     font-size: 16px;
-    width: 22px;
+    width: 23.9px;
     height: 17px;
     padding: 5px 0 0 0 ;
-    line-height: 1;
   }
+  
+
+  .grid15 .puzzle-cell {
+    width: 23.9px;
+    height: 17px;
+    padding: 5px 0 0 0 ;
+  }
+  
+
 
 }

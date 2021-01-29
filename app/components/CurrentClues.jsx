@@ -10,60 +10,15 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
-  //const [acrossStyles, setAcrossStyles] = React.useState([]);
-  //const [downStyles, setDownStyles] = React.useState([]);
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
   const [downHighlight, setDownHighlight] = React.useState(null);
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
-   React.useEffect(() => {
+  React.useEffect(() => {
      getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
      getSuggestions(down.word.toLowerCase(), setDownSuggestions);
-   }, [across, down]);
-  
-//   const matchSuggestions = async () => {
-//     const colors = ['darkblue', 'lightred', 'nicegreen', 'whatyellow', 'dougviolet', 'circlebrown',
-//                     'chartreuse', 'chocolate', 'cyancosling', 'bourntorange', 'darkslategray', 'deeppink',
-//                     'foolsgold', 'nicecolour', 'indigogirls', 'lightgray', 'lightseagreen', 'mediumaquamarine',
-//                     'navajowhite', 'oliveoyl', 'peruvian', 'royalblue', 'seagreen', 'silverfox',
-//                     'springgreen', 'artoftheteal'];
-//     const letters = [];
-//     const [accs, downs] = await Promise.all([
-//       getSuggestions(across.word.toLowerCase(), setAcrossSuggestions),
-//       getSuggestions(down.word.toLowerCase(), setDownSuggestions)
-//       ]);
-//     setAcrossStyles(accs.map(() => 'black'));           
-//     setDownStyles(downs.map(() => 'black'));
-//     if (puzzle.activeCell.length > 0 && accs.length && downs.length) {
-//       if (!puzzle.grid[puzzle.activeCell[0]][puzzle.activeCell[1]].value){
-//         let acrossIndex = puzzle.activeCell[1] - across.range[0];
-//         let downIndex = puzzle.activeCell[0] - down.range[0];
-//         let aStyles = accs.map(() => 'black');
-//         let dStyles = downs.map(() => 'black');
-//         try {
-//           let acrossLetter = '';
-//           for (let i = 0; i < accs.length; i++) {
-//             acrossLetter = accs[i][acrossIndex];
-//             let x = letters.indexOf(acrossLetter);
-//             x < 0 ? (letters.push(acrossLetter), x = letters.length - 1) : null;
-//             aStyles[i] = colors[x];
-//             dStyles = dStyles.map((ds, ind) => {
-//               //console.log(ds, ind, downs[ind]);
-//               return downs[ind][downIndex]===acrossLetter ? aStyles[i] : ds;
-//             });
-//           }
-//           //console.log(aStyles)
-//           //console.log(dStyles)
-//           setAcrossStyles(aStyles)            
-//           setDownStyles(dStyles)            
+  }, [across, down]);
 
-//         } catch(error) {
-//             console.log(error);
-//         }  
-//       }
-//     }
-//   }
-  
   const hasDash = char => char === "-";
   const getSuggestions = async (clue, setFunc) => {
     const chars = clue.split("");
