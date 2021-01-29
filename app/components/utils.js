@@ -9,6 +9,7 @@ module.exports.calculateAllClueNumbers = calculateAllClueNumbers;
 module.exports.assignClueNumbersToGrid = assignClueNumbersToGrid;
 module.exports.convertPuzzleToJSON = convertPuzzleToJSON;
 module.exports.toPuz = toPuz;
+module.exports.PuzWriter = PuzWriter;
 
 function applyBlocks(_grid, blocks) {
   const grid = [..._grid];
