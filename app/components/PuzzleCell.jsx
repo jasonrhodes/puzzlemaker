@@ -11,7 +11,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     active: activeRow === row && activeColumn === column,
     highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column),
     marked: cell.style === 'marked',
-    circled: cell.style === 'circled'
+    circled: cell.style === 'circled',
+    "disable-select": true
   });
   
   const { grid, getNextClueNumber } = puzzle;
