@@ -150,7 +150,7 @@ function isStart({ index, prevCell, nextCell }) {
 }
 
 function getCellClue({ grid, getNextClueNumber, row, column }) {
-  if (row === undefined || column === undefined || ! grid[row] || !grid[row][column]) {
+  if (row === undefined || column === undefined || !grid || !grid[row] || !grid[row][column]) {
     return {};
   }
   const currentCell = grid[row][column];
@@ -197,7 +197,7 @@ function assignClueNumbersToGrid(grid) {
   for (let row = 0; row < newGrid.length; row++) {
     for (let column = 0; column < newGrid[row].length; column++) {
       const clue = getCellClue({
-        newGrid,
+        grid: newGrid,
         getNextClueNumber,
         row,
         column,
