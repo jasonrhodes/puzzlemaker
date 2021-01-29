@@ -33,7 +33,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       setFunc(cached); // don't re-call API for clue pattern we already cached
       return cached;
     }
-    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=500';
+    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=1000';
     //console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
@@ -50,7 +50,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       if (word.length === len && /^[a-zA-Z]+$/.test(word) && !result.includes(word.toUpperCase())) {
         result.push(word.toUpperCase());
       }
-      if (result.length === 500) {
+      if (result.length === 1000) {
         break;
       }
     }
