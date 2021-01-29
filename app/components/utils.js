@@ -345,7 +345,7 @@ function writeHeader(buf2, json) {
   const numClues = json.clues.across.length + json.clues.down.length;
   buf = writeShort(buf, numClues);
   buf = writeShort(buf, 1);  // puzzle type
-  buf = writeShort(0);  // scrambled tag
+  buf = writeShort(buf, 0);  // scrambled tag
 return [buf, w, h, numClues];
 }
 
@@ -353,7 +353,7 @@ function writeFill(buf2, json) {
   let buf = buf2;
   const grid = json.grid;
   const BLACK_CP = '.'.codePointAt(0);
-  const solution = this.buf.length;
+  const solution = buf.length;
   for (var i = 0; i < grid.length; i++) {
     buf.push(grid[i].codePointAt(0));  // Note: assumes grid is ISO-8859-1
   }
