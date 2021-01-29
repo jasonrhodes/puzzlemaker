@@ -42,7 +42,7 @@ module.exports = () => {
           <option value="19 x 19">19 x 19</option>
           <option value="20 x 20">20 x 20</option>
         </select>
-        <div>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
+        <div style={{'margin-top': '10px'}}>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
       </div>
       <br/>
       <div>

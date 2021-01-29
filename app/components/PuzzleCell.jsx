@@ -86,7 +86,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
         puzzle.updateCellValue(activeRow, activeColumn, '');
       }
     }
-    if (/^[a-z0-9]$/.test(e.key)) {
+    if (/^[a-zA-Z0-9]$/.test(e.key)) {
       puzzle.updateCellValue(activeRow, activeColumn, e.key);
       puzzle.advanceActiveCell();
     }
