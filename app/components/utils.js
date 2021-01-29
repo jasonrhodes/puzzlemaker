@@ -6,6 +6,7 @@ module.exports.findDown = findDown;
 module.exports.getCellClue = getCellClue;
 module.exports.measureMyInputText = measureMyInputText;
 module.exports.calculateAllClueNumbers = calculateAllClueNumbers;
+module.exports.assignClueNumbersToGrid = assignClueNumbersToGrid;
 
 function applyBlocks(_grid, blocks) {
   const grid = [..._grid];
@@ -112,40 +113,95 @@ function findDown(rows, activeRow, activeColumn) {
   return { range: [range.start, range.end], word: range.word };
 }
 
+// function getCellClue({ grid, getNextClueNumber, row, column }) {
+//   const currentCell = grid[row][column];
+//   const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
+//   const prevDownCell = row > 0 ? grid[row - 1][column] : {};
+//   const nextAcrossCell = column < grid[0].length - 1 ? grid[row][column + 1] : {};
+//   const nextDownCell = row < grid.length - 1 ? grid[row + 1][column] : {};
+  
+//   if (currentCell.isBlackSquare) {
+//     return false;
+//   }
+//   if (row === 0 && !nextDownCell.isBlackSquare) {
+//     return getNextClueNumber();
+//   }
+//   if (column === 0 && !nextAcrossCell.isBlackSquare) {
+//     return getNextClueNumber();
+//   }
+//   if (prevAcrossCell.isBlackSquare && column < grid[0].length - 1 && !nextAcrossCell.isBlackSquare) {
+//     return getNextClueNumber();
+//   }
+//   if (prevDownCell.isBlackSquare && row < grid.length - 1 && !nextDownCell.isBlackSquare) {
+//     return getNextClueNumber();
+//   }
+//   return false;
+// };
+
+function isStart({ index, prevCell, nextCell }) {
+  if (index === 0 && !nextCell.isBlackSquare) {
+    return true;
+  }
+  if (prevCell.isBlackSquare && !nextCell.isBlackSquare) {
+    return true;
+  }
+}
+
 function getCellClue({ grid, getNextClueNumber, row, column }) {
   const currentCell = grid[row][column];
   const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
   const prevDownCell = row > 0 ? grid[row - 1][column] : {};
-  const nextAcrossCell = column < grid[0].length - 1 ? grid[row][column + 1] : {};
+  const nextAcrossCell =
+    column < grid[0].length - 1 ? grid[row][column + 1] : {};
   const nextDownCell = row < grid.length - 1 ? grid[row + 1][column] : {};
-  
+
   if (currentCell.isBlackSquare) {
     return false;
   }
-  if (row === 0 && !nextDownCell.isBlackSquare) {
-    return getNextClueNumber();
-  }
-  if (column === 0 && !nextAcrossCell.isBlackSquare) {
-    return getNextClueNumber();
-  }
-  if (prevAcrossCell.isBlackSquare && column < grid[0].length - 1 && !nextAcrossCell.isBlackSquare) {
-    return getNextClueNumber();
-  }
-  if (prevDownCell.isBlackSquare && row < grid.length - 1 && !nextDownCell.isBlackSquare) {
-    return getNextClueNumber();
-  }
-  return false;
-};
+
+  const clue = {
+    isDownStart: isStart({
+      index: row,
+      prevCell: prevAcrossCell,
+      nextCell: nextAcrossCell,
+    }),
+    isAcrossStart: isStart({
+      index: column,
+      prevCell: prevDownCell,
+      nextCell: nextDownCell,
+    }),
+  };
+
+  const newClueNumber =
+    clue.isDownStart || clue.isAcrossStart ? getNextClueNumber() : null;
+  clue.downClueNumber = clue.isDownStart
+    ? newClueNumber
+    : prevDownCell.clue.downClueNumber;
+  clue.acrossClueNumber = clue.isAcrossStart
+    ? newClueNumber
+    : prevAcrossCell.clue.acrossClueNumber;
+
+  return clue;
+}
 
 function assignClueNumbersToGrid(grid) {
   let clue = 0;
   const getNextClueNumber = () => clue++;
-  
-  for (let row in grid) {
-    for (let cell in row) {
-      console.log("looking at row", row, "and cell", cell);
+  const newGrid = [...grid];
+
+  for (let row = 0; row < newGrid.length; row++) {
+    for (let column = 0; column < newGrid[row].length; column++) {
+      const clue = getCellClue({
+        newGrid,
+        getNextClueNumber,
+        row,
+        column,
+      });
+      newGrid[row][column].clue = clue;
     }
   }
+  
+  return newGrid;
 }
 
 function measureMyInputText(value) {

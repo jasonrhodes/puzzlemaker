@@ -4,7 +4,8 @@ const {
   findAcross,
   findDown,
   getSymmetricalCell,
-  calculateAllClueNumbers
+  calculateAllClueNumbers,
+  assignClueNumbersToGrid
 } = require("./utils");
 
 function getSavedPuzzle(id) {
@@ -27,7 +28,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     across: emptyWord,
     down: emptyWord
   });
-  const [grid, setGrid] = React.useState(initialGrid);
+  const numberedInitialGrid = assignClueNumbersToGrid(initialGrid);
+  const [grid, setGrid] = React.useState(numberedInitialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
   const [labelGrid, setLabelGrid] = React.useState([]);
   const [title, setTitle] = React.useState("Untitled");
@@ -53,7 +55,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (savedPuzzle) {
       setTitle(savedPuzzle.title);
       setAuthor(savedPuzzle.author);
-      setGrid(savedPuzzle.grid);
+      const numberedGrid = assignClueNumbersToGrid(savedPuzzle.grid);
+      setGrid(numberedGrid);
       setActiveCell(savedPuzzle.activeCell);
       setDirection(savedPuzzle.direction);
       setWords(savedPuzzle.words);
@@ -135,6 +138,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       newGrid[symRow][symCol].value = "";
       newGrid[symRow][symCol].style = null;
     }
+    assignClueNumbersToGrid(newGrid);
     setGrid(newGrid);
   };
 
@@ -222,6 +226,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     return row >= min && row <= max;
   };
+  
+  const savePuzzle = (id) => {
+    window.localStorage.setItem(puzzleId, JSON.stringify(value));
+  }
 
   const value = {
     activeCell,
@@ -237,6 +245,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     getNextClueNumber,
     getCluesForCell,
     isCellInActiveWord,
+    savePuzzle,
     updateCellValue,
     toggleSymmetry,
     toggleBlackSquare,
@@ -251,12 +260,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setTitle,
     setAuthor
   };
-  
-  const savePuzzle = (id) => {
-    window.localStorage.setItem(puzzleId, JSON.stringify(value));
-  }
-  
-  value.savePuzzle = savePuzzle;
 
   return (
     <PuzzleContext.Provider value={value}>
@@ -265,9 +268,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       <br />
       <pre>
         <code>
-          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]), null, 2)}
+          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1])}
         </code>
-        <code>{JSON.stringify(calculateAllClueNumbers(grid), null, 2)}</code>
+        <code>{JSON.stringify(calculateAllClueNumbers(grid)}</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
