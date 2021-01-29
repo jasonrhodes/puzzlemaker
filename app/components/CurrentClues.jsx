@@ -133,17 +133,27 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const hideNonCrosses = (e, ad) => {
     e.stopPropagation();
     if (ad == 'down') {
-      setAcrossFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[0] - down.range[0]]);
+      if (acrossFilter[0] == e.currentTarget.previousSibling.textContent) {
+        setAcrossFilter([]);
+      } else {
+        setAcrossFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[0] - down.range[0]]);
+      }
     } else {
-      setDownFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[1] - across.range[0]]);
+      if (downFilter[0] == e.currentTarget.previousSibling.textContent) {
+        setDownFilter([]);
+      } else {
+        setDownFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[1] - across.range[0]]);
+      }
     }
   }
   
-  const showNonCrosses = (e) => {
+  const showNonCrosses = (e, ad) => {
     e.stopPropagation();
-    
-    setAcrossFilter([]);
-    setDownFilter([]);
+    if (ad == 'down') {
+      setDownFilter([]);
+    } else {
+      setAcrossFilter([]);
+    }
   }
   
   if (acrossNumber != '-' || downNumber != '-') {
@@ -152,12 +162,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <div id="across">
           <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" onClick={(e) => e.stopPropagation()} style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + ' clue'} type="text"  /></div>
           <div class="current">{across.word.toUpperCase()} <a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
-            {acrossFilter ? <a onClick={(e) => showNonCrosses(e)}><EyeIcon size={20}/><span class="pbtip"><b>Unfilter Across crosses</b></span></a> : ''}
+            {acrossFilter[0] ? <a onClick={(e) => showNonCrosses(e,'across')}><EyeIcon size={20}/><span class="pbtip"><b>Unfilter Across crosses</b></span></a> : ''}
           </div>
           <div class="suggestions">{acrossSuggestions.map(
               (x, i) => <div class="inline">
-                <div onMouseEnter={(e) => highlightCrosses(e, 'across')} onMouseLeave={(e) => unHighlightCrosses(e)} class={acrossHighlight == x[puzzle.activeCell[1] - across.range[0]] ? 'suggestion highlighted' : 'suggestion'} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
-                <a onClick={(e) => hideNonCrosses(e, 'across')}><ArrowDownIcon size={12}/><span class="pbtip"><b>Filter Down crosses</b></span></a>
+                <div onMouseEnter={(e) => highlightCrosses(e, 'across')} onMouseLeave={(e) => unHighlightCrosses(e)} class={acrossHighlight == x[puzzle.activeCell[1] - across.range[0]] || x == acrossFilter[0] ? 'suggestion highlighted' : acrossFilter[1] && acrossFilter[1] != x[puzzle.activeCell[1] - across.range[0]] ? 'hidden' : 'suggestion'} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
+                <a onClick={(e) => hideNonCrosses(e, 'across')}><ArrowDownIcon size={12}/><span class="pbtip"><b>{x == acrossFilter[0] ? 'Unfilter Down crosses' : 'Filter Down crosses'}</b></span></a>
                 <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
               </div>
             )}
@@ -166,12 +176,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <div id="down">
           <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" onClick={(e) => e.stopPropagation()} style={{ width: measureMyInputText(downNumber + 'clue') + 'px' }} value={downNumber + ' clue'} type="text"  /></div>
           <div class="current">{down.word.toUpperCase()}<a target="_blank" href={'http://onelook.com/?w=' + down.word.toUpperCase().replace('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
-            {downFilter ? <a onClick={(e) => showNonCrosses(e)}><EyeIcon size={20}/><span class="pbtip"><b>Unfilter Down crosses</b></span></a> : ''}
+            {downFilter[0] ? <a onClick={(e) => showNonCrosses(e,'down')}><EyeIcon size={20}/><span class="pbtip"><b>Unfilter Down crosses</b></span></a> : ''}
           </div>
           <div class="suggestions">{downSuggestions.map(
               (x, i) => <div class="inline">
-                <div onMouseEnter={(e) => highlightCrosses(e, 'down')} onMouseLeave={(e) => unHighlightCrosses(e)} class={downHighlight == x[puzzle.activeCell[0] - down.range[0]] ? 'suggestion highlighted' : 'suggestion'} onClick={(e) => fillWithSuggestion(e, x, 'down')} >{x}</div>
-                <a onClick={(e) => hideNonCrosses(e, 'down')}><ArrowRightIcon size={12}/><span class="pbtip"><b>Filter Across crosses</b></span></a>
+                <div onMouseEnter={(e) => highlightCrosses(e, 'down')} onMouseLeave={(e) => unHighlightCrosses(e)} class={downHighlight == x[puzzle.activeCell[0] - down.range[0]] || x == acrossFilter[0] ? 'suggestion highlighted' : downFilter[1] && downFilter[1] != x[puzzle.activeCell[0] - down.range[0]] ? 'hidden' : 'suggestion'} onClick={(e) => fillWithSuggestion(e, x, 'down')} >{x}</div>
+                <a onClick={(e) => hideNonCrosses(e, 'down')}><ArrowRightIcon size={12}/><span class="pbtip"><b>{x == acrossFilter[0] ? 'Unfilter Across crosses' : 'Filter Across crosses'}</b></span></a>
                 <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
               </div>
             )}
