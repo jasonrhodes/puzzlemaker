@@ -7,6 +7,8 @@ module.exports.getCellClue = getCellClue;
 module.exports.measureMyInputText = measureMyInputText;
 module.exports.calculateAllClueNumbers = calculateAllClueNumbers;
 module.exports.assignClueNumbersToGrid = assignClueNumbersToGrid;
+module.exports.convertPuzzleToJSON = convertPuzzleToJSON;
+module.exports.toPuz = toPuz;
 
 function applyBlocks(_grid, blocks) {
   const grid = [..._grid];

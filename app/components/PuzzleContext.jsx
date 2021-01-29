@@ -268,9 +268,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       <br />
       <pre>
         <code>
-          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1])}
+          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
         </code>
-        <code>{JSON.stringify(calculateAllClueNumbers(grid)}</code>
+        <code>{JSON.stringify(calculateAllClueNumbers(grid))}</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
