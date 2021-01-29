@@ -306,8 +306,8 @@ input.inline-content-editable:focus {
   color: rgb(34, 188, 172);
 }
 
-.current-clues .suggestions .suggestion.red {
-  color: red;
+.current-clues .suggestions .suggestion.unmatched {
+  color: darkred;
 }
 
 .current-clues .suggestions .suggestion.hidden {
