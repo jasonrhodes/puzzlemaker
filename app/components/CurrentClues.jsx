@@ -79,7 +79,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       return cached;
     }
     const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=50';
-    console.log(apiString);
+    //console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
     const matches = getMatches(myJson, clue.length);
@@ -136,15 +136,18 @@ const CurrentClues = ({ across, down, puzzle }) => {
       if (acrossFilter[0] == e.currentTarget.previousSibling.textContent) {
         setAcrossFilter([]);
       } else {
-        setAcrossFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[0] - down.range[0]]);
+        setAcrossFilter([e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[0] - down.range[0]]]);
       }
+      console.log(acrossFilter);
     } else {
       if (downFilter[0] == e.currentTarget.previousSibling.textContent) {
         setDownFilter([]);
       } else {
-        setDownFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[1] - across.range[0]]);
+        setDownFilter([e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[1] - across.range[0]]]);
       }
+      console.log(downFilter);
     }
+    
   }
   
   const showNonCrosses = (e, ad) => {
@@ -166,7 +169,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           </div>
           <div class="suggestions">{acrossSuggestions.map(
               (x, i) => <div class="inline">
-                <div onMouseEnter={(e) => highlightCrosses(e, 'across')} onMouseLeave={(e) => unHighlightCrosses(e)} class={acrossHighlight == x[puzzle.activeCell[1] - across.range[0]] || x == acrossFilter[0] ? 'suggestion highlighted' : acrossFilter[1] && acrossFilter[1] != x[puzzle.activeCell[1] - across.range[0]] ? 'suggestion hidden' : 'suggestion'} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x}</div>
+                <div onMouseEnter={(e) => highlightCrosses(e, 'across')} onMouseLeave={(e) => unHighlightCrosses(e)} class={acrossHighlight == x[puzzle.activeCell[1] - across.range[0]] || x == downFilter[0] ? 'suggestion highlighted' : acrossFilter[1] && acrossFilter[1] != x[puzzle.activeCell[1] - across.range[0]] ? 'suggestion hidden' : 'suggestion'} onClick={(e) => fillWithSuggestion(e, x, 'across')} >{x} {downFilter[0]}</div>
                 <a onClick={(e) => hideNonCrosses(e, 'across')}><ArrowDownIcon size={12}/><span class="pbtip"><b>{x == acrossFilter[0] ? 'Unfilter Down crosses' : 'Filter Down crosses'}</b></span></a>
                 <a target="_blank" href={'http://onelook.com/?w=' + x}><img style={{width: '12px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
               </div>
