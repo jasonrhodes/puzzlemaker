@@ -12,8 +12,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   //const [acrossStyles, setAcrossStyles] = React.useState([]);
   //const [downStyles, setDownStyles] = React.useState([]);
-  const [downFilter, setDownFilter] = React.useState(null);
-  const [acrossFilter, setAcrossFilter] = React.useState(null);
+  const [downFilter, setDownFilter] = React.useState([]);
+  const [acrossFilter, setAcrossFilter] = React.useState([]);
   const [downHighlight, setDownHighlight] = React.useState(null);
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
    React.useEffect(() => {
@@ -103,6 +103,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const fillWithSuggestion = (e, suggestion, direction) => {
+    e.stopPropagation();
     const newGrid = [...puzzle.grid];
     if (direction === 'across') {
       for (let i = across.range[0]; i <= across.range[1]; i++){
@@ -114,7 +115,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
       }
     }
     puzzle.setGrid(newGrid);
-    e.stopPropagation();
   }
   
   const highlightCrosses = (e, ad) => {
@@ -132,13 +132,18 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   const hideNonCrosses = (e, ad) => {
     e.stopPropagation();
+    if (ad == 'down') {
+      setAcrossFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[0] - down.range[0]]);
+    } else {
+      setDownFilter(e.currentTarget.previousSibling.textContent,e.currentTarget.previousSibling.textContent[puzzle.activeCell[1] - across.range[0]]);
+    }
   }
   
   const showNonCrosses = (e) => {
     e.stopPropagation();
     
-    setAcrossFilter(false);
-    setDownFilter(false);
+    setAcrossFilter([]);
+    setDownFilter([]);
   }
   
   if (acrossNumber != '-' || downNumber != '-') {

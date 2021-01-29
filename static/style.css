@@ -265,6 +265,10 @@ input.inline-content-editable:focus {
   cursor: pointer;
 }
 
+.current-clues .suggestions .suggestion.highlighted {
+  color: rgb(34, 188, 172);
+}
+
 .current-clues .suggestions .suggestion:hover {
   color: #000;
 }
