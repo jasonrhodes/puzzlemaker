@@ -150,6 +150,9 @@ function isStart({ index, prevCell, nextCell }) {
 }
 
 function getCellClue({ grid, getNextClueNumber, row, column }) {
+  if (row === undefined || column === undefined || ! grid[row] || !grid[row][column]) {
+    return {};
+  }
   const currentCell = grid[row][column];
   const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
   const prevDownCell = row > 0 ? grid[row - 1][column] : {};
