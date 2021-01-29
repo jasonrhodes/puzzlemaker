@@ -144,7 +144,13 @@ select {
    text-shadow: 0px 0px 0px #000;
   margin-left: -1px;
   cursor: pointer;
+  color:transparent;
 }
+
+.puzzle-cell input::selection {
+  color:transparent;
+}
+
 
 .puzzle-cell input:focus {
   outline: 0;

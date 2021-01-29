@@ -77,11 +77,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const highlightCrosses = (e, ad) => {
-    if (ad == 'down') {
+    //if (ad == 'down') {
       setAcrossHighlight(e.currentTarget.textContent[puzzle.activeCell[0] - down.range[0]]);
-    } else {
+    //} else {
       setDownHighlight(e.currentTarget.textContent[puzzle.activeCell[1] - across.range[0]]);
-    }
+    //}
   }
   
   const unHighlightCrosses = (e) => {
