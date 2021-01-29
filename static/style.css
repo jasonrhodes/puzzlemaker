@@ -235,11 +235,22 @@ input.inline-content-editable:focus {
   margin: 5px 0;
 }
 
+.current-clues img {
+  filter: grayscale(1);
+  opacity: 0.9;
+}
+
+.current-clues img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
 .current-clues .current {
   font-size: 20px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   height: 21px;
   margin-bottom: 5px;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .current-clues .current a {
@@ -263,6 +274,7 @@ input.inline-content-editable:focus {
   font-size: 16px;
   color: #777;
   cursor: pointer;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .current-clues .suggestions .suggestion.highlighted {
@@ -272,7 +284,6 @@ input.inline-content-editable:focus {
 .current-clues .suggestions .suggestion.hidden {
   display: none;
 }
-
 
 .current-clues .suggestions .suggestion:hover {
   color: #000;
@@ -311,6 +322,8 @@ input.inline-content-editable:focus {
   margin-right: -300px;
   font-size: 14px;
   letter-spacing: 0;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
+    "Droid Sans", "Arial", sans-serif;
 }
 
 .current-clues *:hover > .pbtip {
