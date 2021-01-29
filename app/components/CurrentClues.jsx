@@ -12,10 +12,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   //const [acrossStyles, setAcrossStyles] = React.useState([]);
   //const [downStyles, setDownStyles] = React.useState([]);
-  onst [downFilter, setDownFilter] = React.useState(false);
-  const [acrossFilter, setAcrossFilter] = React.useState(false);
-  const [downHighlight, setDownHighlight] = React.useState(false);
-  const [acrossHighlight, setAcrossHighlight] = React.useState(false);
+  const [downFilter, setDownFilter] = React.useState(null);
+  const [acrossFilter, setAcrossFilter] = React.useState(null);
+  const [downHighlight, setDownHighlight] = React.useState(null);
+  const [acrossHighlight, setAcrossHighlight] = React.useState(null);
    React.useEffect(() => {
      getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
      getSuggestions(down.word.toLowerCase(), setDownSuggestions);
@@ -117,11 +117,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
     e.stopPropagation();
   }
   
-  const showCrosses = (e, ad) => {
-    var da = ad == 'down' ? 'across' : 'down';
-    var showclass = e.currentTarget.className.replace('suggestion ' + ad,da);
-
-    }
+  const highlightCrosses = (e, ad) => {
+    var other = ad == 'down' ? 'across' : 'down';
+    var active = 
   }
   
   const hideNonCrosses = (e, ad) => {
