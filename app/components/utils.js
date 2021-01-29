@@ -271,10 +271,10 @@ function convertPuzzleToJSON(puzzle) {
   
   const { acrossClues, downClues, labelGrid } = calculateAllClueNumbers(puzzle.grid);
   for (let x in acrossClues) {
-    puz.clues.across.push(x + "|| " + "testClue");
+    puz.clues.across.push(x + "|| " + "(blank clue)");
   }
   for (let x in downClues) {
-    puz.clues.down.push(x + "|| " + "testClue");
+    puz.clues.down.push(x + "|| " + "(blank clue)");
   }
   
   // Read grid
