@@ -464,5 +464,5 @@ function toPuz(bufx, json) {
   const [buf3, solution, grid2] = writeFill(buf2, json);
   const [buf4, stringStart] = writeStrings(buf3, json);
   const buf5 = computeChecksums(buf4, solution, w, h, grid2, numClues, stringStart);
-  return new Uint8Array(buf);
+  return new Uint8Array(buf5);
 }
