@@ -1,6 +1,6 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
-const { convertPuzzleToJSON, toPuz } = require("./utils");
+const { convertPuzzleToJSON, toPuz, PuzWriter } = require("./utils");
 
 const {
   DesktopDownloadIcon,
@@ -25,7 +25,7 @@ const PuzzleMenu = ({ puzzle }) => {
     //             {type: 'text/plain;charset=utf-8'});
     let filename = "myPuz.puz";
     let serialized = convertPuzzleToJSON(puzzle);
-    let fileContents = toPuz([], serialized);
+    let fileContents = new PuzWriter().toPuz(serialized);
     let file = new File([fileContents], filename);
 
     element.href = URL.createObjectURL(file);
