@@ -33,7 +33,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       setFunc(cached); // don't re-call API for clue pattern we already cached
       return cached;
     }
-    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=50';
+    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=75';
     //console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
@@ -47,7 +47,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     let result = [];
     for (let entry of response){
       let word = entry.word.replace(/-/g,'').replace(/ /g,'')
-      if (word.length === len) {
+      if (word.length === len && /^[a-zA-Z]+$/.test(word) && !result.includes(word.toUpperCase())) {
         result.push(word.toUpperCase());
       }
       if (result.length === 50) {
@@ -77,11 +77,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const highlightCrosses = (e, ad) => {
-    //if (ad == 'down') {
+    if (ad == 'down') {
       setAcrossHighlight(e.currentTarget.textContent[puzzle.activeCell[0] - down.range[0]]);
-    //} else {
+    } else {
       setDownHighlight(e.currentTarget.textContent[puzzle.activeCell[1] - across.range[0]]);
-    //}
+    }
   }
   
   const unHighlightCrosses = (e) => {
