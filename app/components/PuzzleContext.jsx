@@ -114,9 +114,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const updateCellValue = (row, column, value) => {
-    const newGrid = [...grid];
-    newGrid[row][column].value = value;
-    setGrid(newGrid);
+    if (!grid[row][column].isBlackSquare) {
+      const newGrid = [...grid];    
+      newGrid[row][column].value = value;
+      setGrid(newGrid);
+    }
   };
 
   const updateCellClue = (row, column, clue) => {};
@@ -125,10 +127,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     const currentValue = grid[row][column].isBlackSquare;
     const newGrid = [...grid];
     newGrid[row][column].isBlackSquare = !currentValue;
+    newGrid[row][column].value = "";
     newGrid[row][column].style = null;
     if (symmetry) {
       const [symRow, symCol] = getSymmetricalCell(grid, row, column);
       newGrid[symRow][symCol].isBlackSquare = !currentValue;
+      newGrid[symRow][symCol].value = "";
       newGrid[symRow][symCol].style = null;
     }
     setGrid(newGrid);

@@ -143,6 +143,7 @@ select {
    color: transparent;
    text-shadow: 0px 0px 0px #000;
   margin-left: -1px;
+  cursor: pointer;
 }
 
 .puzzle-cell input:focus {
