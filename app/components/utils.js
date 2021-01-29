@@ -281,9 +281,10 @@ function convertPuzzleToJSON(puzzle) {
   puz["grid"] = [];
   for (let i = 0; i < puzzle.grid.length; i++) {
     for (let j = 0; j < puzzle.grid[0].length; j++) {
-      puz.grid.push(puzzle.grid[i][j].value);
+      puz.grid.push(puzzle.grid[i][j].isBlackSquare ? '.' : puzzle.grid[i][j].value ? puzzle.grid[i][j].value.toUpperCase() : " " );
     }
   }
+  console.log(puz);
   return puz;
 }
 
@@ -297,8 +298,7 @@ function pad(buf2, n) {
 
 function writeShort(buf2, x) {
   let buf = buf2;
-  buf.push(x & 0xff);
-  buf.push((x >> 8) & 0xff);
+  buf.push(x & 0xff, (x >> 8) & 0xff);
   return buf;
 }
 
