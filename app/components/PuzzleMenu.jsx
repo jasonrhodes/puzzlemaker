@@ -11,6 +11,16 @@ const PuzzleMenu = ({puzzle}) => {
     e.stopPropagation();
   };
   
+  const downloadFile = () => {
+    const element = document.createElement("a");
+    const file = new Blob(["test"],    
+                 {type: 'text/plain;charset=utf-8'});
+    element.href = URL.createObjectURL(file);
+    element.download = "myFile.txt";
+    document.body.appendChild(element);
+    element.click();
+  }
+  
   const lockIcon = () => {
     if (puzzle.symmetry){
       return <a class="subicon" onClick={toggleLock} >< LockIcon size={24}/><MirrorIcon size={12} /><span class="pbtip"><b>Unlock symmetry</b></span></a>;
@@ -39,7 +49,7 @@ const PuzzleMenu = ({puzzle}) => {
         </span>
       </a>
       <Link to={{ pathname: "/play"}}><PlayIcon size={24} /><span class="pbtip stip"><b>Play</b></span></Link>
-      <a><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>...as .puz file</span></a>
+      <a onClick={downloadFile}><DesktopDownloadIcon size={24} /><span class="pbtip"><b>Download</b><br/>...as .puz file</span></a>
       {lockIcon()}
     </div>
   );
