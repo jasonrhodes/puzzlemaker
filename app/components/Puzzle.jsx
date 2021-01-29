@@ -19,7 +19,7 @@ const Puzzle = ({ initialGrid }) => {
           />
           <div class="puzzle-container">
             <PuzzleMenu puzzle={puzzle} />
-            <div class="puzzle-grid">
+            <div class={"puzzle-grid grid" + puzzle.grid[0].length}>
               {puzzle.grid.map((columns, i) => (
                 <PuzzleRow key={`row-${i}`} row={i} columns={columns} />
               ))}
