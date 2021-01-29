@@ -287,25 +287,30 @@ function convertPuzzleToJSON(puzzle) {
   return puz;
 }
 
-function pad(buf, n) {
+function pad(buf2, n) {
+  let buf = buf2;
   for (var i = 0; i < n; i++) {
     buf.push(0);
     return buf;
   }
 }
 
-function writeShort(buf, x) {
-  buf.push(x & 0xff, (x >> 8) & 0xff);
+function writeShort(buf2, x) {
+  let buf = buf2;
+  buf.push(x & 0xff);
+  buf.push((x >> 8) & 0xff);
   return buf;
 }
 
-function setShort(buf, ix, x) {
+function setShort(buf2, ix, x) {
+  let buf = buf2;
   buf[ix] = x & 0xff;
   buf[ix + 1] = (x >> 8) & 0xff;
   return buf;
 }
 
-function writeString(buf, s) {
+function writeString(buf2, s) {
+  let buf = buf2;
   if (s === undefined) s = '';
   for (var i = 0; i < s.length; i++) {
     var cp = s.codePointAt(i);
@@ -322,7 +327,8 @@ function writeString(buf, s) {
   return buf;
 }
 
-function writeHeader(buf, json) {
+function writeHeader(buf2, json) {
+  let buf = buf2;
   buf = pad(buf, 2); // placeholder for checksum
   buf = writeString(buf, 'ACROSS&DOWN');
   buf = pad(buf, 2); // placeholder for cib checksum
@@ -343,7 +349,8 @@ function writeHeader(buf, json) {
 return [buf, w, h, numClues];
 }
 
-function writeFill(buf, json) {
+function writeFill(buf2, json) {
+  let buf = buf2;
   const grid = json.grid;
   const BLACK_CP = '.'.codePointAt(0);
   const solution = this.buf.length;
@@ -359,7 +366,8 @@ function writeFill(buf, json) {
   return [buf, solution, grid2];
 }
 
-function writeStrings(buf, json) {
+function writeStrings(buf2, json) {
+  let buf = buf2;
   const stringStart = buf.length;
   buf = writeString(buf, json.title);
   buf = writeString(buf, json.author);
@@ -383,7 +391,8 @@ function writeStrings(buf, json) {
   return [buf, stringStart];
 }
 
-function checksumRegion(buf, base, len, cksum) {
+function checksumRegion(buf2, base, len, cksum) {
+  let buf = buf2;
   for (var i = 0; i < len; i++) {
     cksum = (cksum >> 1) | ((cksum & 1) << 15);
     cksum = (cksum + buf[base + i]) & 0xffff;
@@ -391,13 +400,15 @@ function checksumRegion(buf, base, len, cksum) {
   return cksum;
 }
 
-function strlen(buf, ix) {
+function strlen(buf2, ix) {
+  let buf = buf2;
   var i = 0;
   while (buf[ix + i]) i++;
   return i;
 }
 
-function checksumStrings(buf, stringStart, numClues, cksum) {
+function checksumStrings(buf2, stringStart, numClues, cksum) {
+  let buf = buf2;
   let ix = stringStart;
   const version = "1.3";
   for (var i = 0; i < 3; i++) {
@@ -422,13 +433,15 @@ function checksumStrings(buf, stringStart, numClues, cksum) {
   return cksum;
 }
 
-function setMaskedChecksum(buf, i, maskLow, maskHigh, cksum) {
+function setMaskedChecksum(buf2, i, maskLow, maskHigh, cksum) {
+  let buf = buf2;
   buf[0x10 + i] = maskLow ^ (cksum & 0xff);
   buf[0x14 + i] = maskHigh ^ (cksum >> 8);
   return buf;
 }
 
-function computeChecksums(buf, solution, w, h, grid, numClues, stringStart) {
+function computeChecksums(buf2, solution, w, h, grid, numClues, stringStart) {
+  let buf = buf2;
   var c_cib = checksumRegion(buf, 0x2c, 8, 0);
   buf = setShort(buf, 0xe, c_cib);
   var cksum = checksumRegion(buf, solution, w * h, c_cib);
@@ -445,7 +458,8 @@ function computeChecksums(buf, solution, w, h, grid, numClues, stringStart) {
   return buf;
 }
 
-function toPuz(buf, json) {
+function toPuz(bufx, json) {
+  let buf = bufx;
   const [buf2, w, h, numClues] = writeHeader(buf, json);
   const [buf3, solution, grid2] = writeFill(buf2, json);
   const [buf4, stringStart] = writeStrings(buf3, json);
