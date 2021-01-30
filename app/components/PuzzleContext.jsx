@@ -111,7 +111,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const getCluesForCell = (row, column) => {
-    if (row === undefined || column === undefined) {
+    if (! grid || row === undefined || column === undefined) {
       return { acrossNumber: "-", downNumber: "-" };
     }
     const { clue } = grid[row][column];
