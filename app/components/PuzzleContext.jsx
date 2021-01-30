@@ -30,15 +30,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const numberedInitialGrid = assignClueNumbersToGrid(initialGrid);
   const [grid, setGrid] = React.useState(numberedInitialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
-  // const [labelGrid, setLabelGrid] = React.useState([]);
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
   const [clues, setClues] = React.useState({ across: {}, down: {} });
-
-  //   React.useEffect(() => {
-  //     const { labelGrid } = calculateAllClueNumbers(grid);
-  //     setLabelGrid(labelGrid);
-  //   }, [grid]);
+  
+  const tempSetAuthor = (value) => {
+    console.log("setting author", value);
+    setAuthor(value);
+  }
 
   React.useEffect(() => {
     setWords(calculateCurrentWords());

@@ -6,6 +6,7 @@ const PuzzleTitle = ({ width, title, author, setTitle, setAuthor }) => {
   const [titleWidth, setTitleWidth] = React.useState(75);
   
   const handleChange = (e, setFunc, setWidthFunc) => {
+    console.log("setting value", e.target.value);
     e.preventDefault();
     setFunc(e.target.value);
   }
