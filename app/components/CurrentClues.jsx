@@ -122,6 +122,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     let finalresult = [];
     
     console.log(list);
+    list.sort((a, b) => (a.score - b.score)
     
     for (let word of list) {
       if (filter && filter != word.text[position]) {
