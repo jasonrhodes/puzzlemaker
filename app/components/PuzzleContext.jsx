@@ -4,8 +4,7 @@ const {
   findAcross,
   findDown,
   getSymmetricalCell,
-  assignClueNumbersToGrid,
-  calculateAllClueNumbers
+  assignClueNumbersToGrid
 } = require("./utils");
 
 function getSavedPuzzle(id) {
@@ -51,7 +50,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   React.useEffect(() => {
     const newClues = grid
-      .reduce((acc, row) => [...acc, ...row], [])
+      .reduce((acc, row) => acc.concat(row), [])
       .reduce(
         (c, { clue }) => {
           if (clue && clue.isAcrossStart) {
@@ -242,6 +241,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     direction,
     words,
     grid,
+    clues,
     symmetry,
     title,
     author,
@@ -278,8 +278,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         </code>
         <br />
         <code>{JSON.stringify({ clues })}</code>
-        <br />
-        <code>{JSON.stringify(calculateAllClueNumbers(grid), null, 2)}</code>
         <br />
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
