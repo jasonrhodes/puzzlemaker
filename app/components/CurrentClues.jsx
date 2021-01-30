@@ -1,6 +1,6 @@
 const React = require("react");
 const WordCache = new Map();
-const { measureMyInputText } = require("./utils");
+const { measureMyInputText, focusOnActive } = require("./utils");
 const { Link } = require("react-router-dom");
 const { ArrowDownIcon, ArrowRightIcon, EyeIcon } = require("@primer/octicons-react");
 
@@ -72,6 +72,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
     setDownFilter([]);
     setAcrossHighlight(null);
     setDownHighlight(null);
+    
+    focusOnActive();
   }
   
   const highlightCrosses = (e, ad) => {

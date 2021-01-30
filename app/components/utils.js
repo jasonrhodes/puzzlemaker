@@ -8,6 +8,7 @@ module.exports.measureMyInputText = measureMyInputText;
 module.exports.assignClueNumbersToGrid = assignClueNumbersToGrid;
 module.exports.convertPuzzleToJSON = convertPuzzleToJSON;
 module.exports.PuzWriter = PuzWriter;
+module.exports.focusOnActive = focusOnActive;
 // module.exports.calculateAllClueNumbers = calculateAllClueNumbers;
 
 function applyBlocks(_grid, blocks) {
@@ -200,6 +201,11 @@ function measureMyInputText(value) {
   var theWidth = tmp.getBoundingClientRect().width;
   document.body.removeChild(tmp);
   return theWidth;
+}
+
+function focusOnActive() {
+  var active = document.querySelector('.active');
+  active.querySelector('input').focus();
 }
 
 // function calculateAllClueNumbers(grid) {
