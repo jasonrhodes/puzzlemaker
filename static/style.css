@@ -408,7 +408,7 @@ input.inline-content-editable:focus {
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 636px) {
   .menu {
     top: -78px;
   }
@@ -428,6 +428,10 @@ input.inline-content-editable:focus {
   }
   .current-clues .suggestions {
     height: 120px;
+  }
+  
+  .puzzle-row {
+    margin-top: -4px;
   }
 
   .puzzle-grid {
@@ -454,10 +458,10 @@ input.inline-content-editable:focus {
   .puzzle-cell input {
       width: 100%;
       font-size: 16px;
-      margin-left: -1px;
+      padding: 0;
       position: absolute;
-      top: -4px;
-      left: -6px;
+      margin-left: -13px;
+      margin-top: 3px;
   }
 
 
