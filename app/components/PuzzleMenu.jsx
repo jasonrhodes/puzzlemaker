@@ -67,7 +67,7 @@ const PuzzleMenu = ({ puzzle }) => {
         <span class="pbtip">
           <b>Info</b>
           <br />
-          <i>Ctrl+click</i> to toggle black square
+          <kbd>Ctrl</kbd><i>+click</i> to toggle black square
           <br />
           <i>Alt+click</i> to toggle circle
           <br />
