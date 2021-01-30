@@ -1,11 +1,8 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
-const {
-  findAcross,
-  findDown,
-  getSymmetricalCell,
-  assignClueNumbersToGrid
-} = require("../../utils");
+const { assignClueNumbersToGrid } = require("../../utils/clues");
+const getSymmetricalCell = require("../../utils/getSymmetricalCell");
+const { findAcross, findDown } = require("../../utils/currentWordFinders");
 
 function getSavedPuzzle(id) {
   if (!id) {
