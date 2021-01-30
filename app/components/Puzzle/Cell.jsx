@@ -1,6 +1,6 @@
 const React = require("react");
 const classnames = require("classnames");
-const { getCellClue } = require("../utils");
+const { getCellClue } = require("../../utils");
 
 const PuzzleCell = ({ cell, row, column, puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;

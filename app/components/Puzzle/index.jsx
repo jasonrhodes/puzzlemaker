@@ -1,8 +1,8 @@
 const React = require("react");
-const PuzzleRow = require("./PuzzleRow");
-const PuzzleMenu = require("./PuzzleMenu");
-const { PuzzleContext } = require("./PuzzleContext");
-const PuzzleTitle = require("./PuzzleTitle");
+const Row = require("./Row");
+const Menu = require("./Menu");
+const { PuzzleContext } = require("./Context");
+const Title = require("./Title");
 const CurrentClues = require("./CurrentClues");
 
 const Puzzle = ({ initialGrid }) => {
@@ -10,7 +10,7 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <PuzzleTitle
+          <Title
             width={puzzle.grid[0].length * 40}
             title={puzzle.title}
             author={puzzle.author}
@@ -18,10 +18,10 @@ const Puzzle = ({ initialGrid }) => {
             setAuthor={puzzle.setAuthor}
           />
           <div class="puzzle-container">
-            <PuzzleMenu puzzle={puzzle} />
+            <Menu puzzle={puzzle} />
             <div class={"puzzle-grid grid" + puzzle.grid[0].length}>
               {puzzle.grid.map((columns, i) => (
-                <PuzzleRow key={`row-${i}`} row={i} columns={columns} />
+                <Row key={`row-${i}`} row={i} columns={columns} />
               ))}
             </div>
             <CurrentClues

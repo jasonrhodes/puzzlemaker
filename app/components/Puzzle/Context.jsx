@@ -5,7 +5,7 @@ const {
   findDown,
   getSymmetricalCell,
   assignClueNumbersToGrid
-} = require("../utils");
+} = require("../../utils");
 
 function getSavedPuzzle(id) {
   if (!id) {
@@ -33,20 +33,17 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
   const [clues, setClues] = React.useState({ across: {}, down: {} });
-  
-  const tempSetAuthor = (value) => {
-    console.log("setting author", value);
-    setAuthor(value);
-  }
 
   React.useEffect(() => {
     setWords(calculateCurrentWords());
   }, [grid, setWords, activeCell]);
-
+  
+  // auto save the whole puzzle when main parts change
   React.useEffect(() => {
     savedPuzzleId && savePuzzle(savedPuzzleId);
-  }, [grid, words, author, title, savedPuzzleId]);
-
+  }, [grid, words, author, title, clues, savedPuzzleId]);
+  
+  // Update clues when the grid changes
   React.useEffect(() => {
     const newClues = grid
       .reduce((acc, row) => acc.concat(row), [])

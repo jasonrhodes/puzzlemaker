@@ -1,6 +1,6 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
-const { convertPuzzleToJSON, PuzWriter } = require("../utils");
+const { convertPuzzleToJSON, PuzWriter } = require("../../utils");
 
 const {
   DesktopDownloadIcon,
