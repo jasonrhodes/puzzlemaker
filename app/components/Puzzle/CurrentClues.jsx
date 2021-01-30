@@ -8,7 +8,7 @@ const KeyBoard = require("./KeyBoard");
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column)
-  
+  const [mobileView, setMobileView] = React.useState([]);
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   const [downFilter, setDownFilter] = React.useState([]);
@@ -167,8 +167,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
             )}
           </div>
         </div>
+        <KeyBoard />
       </div>
-      <KeyBoard puzzle={puzzle} />
+      
     );
   } else {
     return (
