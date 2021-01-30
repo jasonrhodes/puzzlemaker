@@ -8,7 +8,7 @@ const KeyBoard = require("./KeyBoard");
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column)
-  const [mobileView, setMobileView] = React.useState([]);
+  const [mobileView, setMobileView] = React.useState('keyboard');
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   const [downFilter, setDownFilter] = React.useState([]);
@@ -139,7 +139,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   if (acrossNumber != '-' || downNumber != '-') {
     return (
       <div class="current-clues">
-        <div id="across">
+        <div id="across" class={mobileView == 'across' ? 'activemobile' : ''}>
           <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" onClick={(e) => e.stopPropagation()} style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + ' clue'} type="text"  /></div>
           <div class="current">{across.word.toUpperCase()}<a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replaceAll('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
             {acrossFilter[0] ? <a onClick={(e) => showNonCrosses(e,'across')}><EyeIcon size={20}/><span class="pbtip"><b>Unfilter Across crosses</b></span></a> : ''}
@@ -153,7 +153,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             )}
           </div>
         </div>
-        <div id="down">
+        <div id="down" class={mobileView == 'down' ? 'activemobile' : ''}>
           <div class="inline"><h3>{downNumber} Down:</h3><input class="inline-content-editable" onClick={(e) => e.stopPropagation()} style={{ width: measureMyInputText(downNumber + 'clue') + 'px' }} value={downNumber + ' clue'} type="text"  /></div>
           <div class="current">{down.word.toUpperCase()}<a target="_blank" href={'http://onelook.com/?w=' + down.word.toUpperCase().replaceAll('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
             {downFilter[0] ? <a onClick={(e) => showNonCrosses(e,'down')}><EyeIcon size={20}/><span class="pbtip"><b>Unfilter Down crosses</b></span></a> : ''}
@@ -167,7 +167,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             )}
           </div>
         </div>
-        <KeyBoard />
+        <KeyBoard mobileView={mobileView} />
       </div>
     );
   } else {

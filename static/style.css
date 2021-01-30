@@ -420,6 +420,10 @@ input.inline-content-editable:focus {
     font-size: 1.5em;
   }
   
+  .current-clues > div:not(.activemobile) {
+    display: none;
+  }
+  
   .current-clues {
     position: relative;
     top: 0;
