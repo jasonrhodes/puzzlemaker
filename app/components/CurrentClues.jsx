@@ -117,22 +117,18 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const filterSuggestions = (list,ad) => {
     var filter = ad == 'down' ? downFilter[1] : acrossFilter[1];
     var position = ad == 'down' ? (puzzle.activeCell[0] - down.range[0]) : (puzzle.activeCell[1] - across.range[0]);
-    let result = [];
-    console.log(ad + ' list:');
-    console.log(list);
+    let finalresult = [];
     
     for (let word of list) {
       if (filter && filter != word[position]) {
         continue;
       }
-      if (result.length === 100) {
+      if (finalresult.length === 100) {
         break;
       }
-      result.push(word);
+      finalresult.push(word);
     }
-    console.log(ad + ' result:');
-    console.log(result);
-    return result;
+    return finalresult;
   }
   
   if (acrossNumber != '-' || downNumber != '-') {
