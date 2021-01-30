@@ -41,6 +41,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 //     setLabelGrid(labelGrid);
 //   }, [grid]);
   
+
+  
   React.useEffect(() => {
     setWords(calculateCurrentWords());
   }, [grid, setWords, activeCell]);
@@ -50,7 +52,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   }, [grid, words, savedPuzzleId]);
   
   React.useEffect(() => {
-    
+    const newClues = grid.reduce((acc, row) => [...acc, ...row], []).reduce((c, cell) => {
+      if (cell.clue && cell.clue.isAcrossStart) {
+        c.across[cell.clue.]
+      }
+    }, { across: {}, down: {}});
   }, [grid, setClues]);
   
   // Initial instantiation of the saved puzzle and/or the saved puzzle 
