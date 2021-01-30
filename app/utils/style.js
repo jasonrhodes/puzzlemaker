@@ -20,6 +20,6 @@ function focusOnActive() {
 }
 
 function hitKey(e,key) {
-  e.stopPropogation();
+  e.stopPropagation();
   document.dispatchEvent(new KeyboardEvent('keypress', {'key': key}));
 }

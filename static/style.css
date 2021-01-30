@@ -408,6 +408,10 @@ input.inline-content-editable:focus {
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
+#keyboard {
+  display: none;
+}
+
 @media only screen and (max-width: 636px) {
   .menu {
     top: -78px;
@@ -423,6 +427,23 @@ input.inline-content-editable:focus {
   .current-clues > div:not(.activemobile) {
     display: none;
   }
+  
+  #keyboard {
+    display: block;
+  }
+  
+  pre {
+    display: none;
+  }
+  
+  #keyboard > .keyrow {
+    display: flex;
+  }
+  
+  #keyboard > .keyrow > .key {
+    
+  }
+  
   
   .current-clues {
     position: relative;
