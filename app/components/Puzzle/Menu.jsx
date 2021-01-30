@@ -12,12 +12,36 @@ const {
   FileIcon
 } = require("@primer/octicons-react");
 
-const PuzzleMenu = ({ puzzle }) => {
+const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   const toggleLock = e => {
-    puzzle.toggleSymmetry();
+    toggleSymmetry();
     e.stopPropagation();
   };
+  
+  if (symmetry) {
+    return (
+      <a class="subicon" onClick={toggleLock}>
+        <LockIcon size={24} />
+        <MirrorIcon size={12} />
+        <span class="pbtip">
+          <b>Unlock symmetry</b>
+        </span>
+      </a>
+    );
+  } else {
+    return (
+      <a class="subicon" onClick={toggleLock}>
+        <UnlockIcon size={24} />
+        <MirrorIcon size={12} />
+        <span class="pbtip">
+          <b>Lock symmetry</b>
+        </span>
+      </a>
+    );
+  }
+};
 
+const PuzzleMenu = ({ puzzle }) => {
   const downloadFile = () => {
     const element = document.createElement("a");
     //const file = new Blob(["test"],
@@ -32,32 +56,6 @@ const PuzzleMenu = ({ puzzle }) => {
     document.body.appendChild(element);
     element.click();
   };
-
-  const lockIcon = () => {
-    if (puzzle.symmetry) {
-      return (
-        <a class="subicon" onClick={toggleLock}>
-          <LockIcon size={24} />
-          <MirrorIcon size={12} />
-          <span class="pbtip">
-            <b>Unlock symmetry</b>
-          </span>
-        </a>
-      );
-    } else {
-      return (
-        <a class="subicon" onClick={toggleLock}>
-          <UnlockIcon size={24} />
-          <MirrorIcon size={12} />
-          <span class="pbtip">
-            <b>Lock symmetry</b>
-          </span>
-        </a>
-      );
-    }
-  };
-
-  const handleSave = () => puzzle.savePuzzle();
 
   return (
     <div class="menu">
@@ -85,7 +83,7 @@ const PuzzleMenu = ({ puzzle }) => {
           <i>"/" or "-"</i> to toggle shaded square
         </span>
       </a>
-      <Link to={{ pathname: "/play" }}>
+      <Link to={{ pathname: "/play/" + puzzle.id }}>
         <PlayIcon size={24} />
         <span class="pbtip stip">
           <b>Play</b>
@@ -105,7 +103,7 @@ const PuzzleMenu = ({ puzzle }) => {
           ...as .puz file
         </span>
       </a>
-      {lockIcon()}
+      <SymmetryToggle symmetry={puzzle.symmetry} toggleSymmetry={puzzle.toggleSymmetry} />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-module.exports.applyBlocks = applyBlocks;
 module.exports.getSymmetricalCell = getSymmetricalCell;
 module.exports.initGrid = initGrid;
 module.exports.findAcross = findAcross;
@@ -9,18 +8,6 @@ module.exports.assignClueNumbersToGrid = assignClueNumbersToGrid;
 module.exports.convertPuzzleToJSON = convertPuzzleToJSON;
 module.exports.PuzWriter = PuzWriter;
 module.exports.focusOnActive = focusOnActive;
-// module.exports.calculateAllClueNumbers = calculateAllClueNumbers;
-
-function applyBlocks(_grid, blocks) {
-  const grid = [..._grid];
-  blocks.forEach(([row, column]) => {
-    grid[row][column] = false;
-    const [symRow, symCol] = getSymmetricalCell(grid, row, column);
-    grid[symRow][symCol] = false;
-  });
-
-  return grid;
-}
 
 function getSymmetricalCell(grid, row, column) {
   const height = grid.length;
