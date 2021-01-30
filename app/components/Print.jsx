@@ -1,5 +1,5 @@
 const React = require("react");
-const { Document, Page } = require("./react-pdf");
+const { Document, Page } = require("react-pdf");
 
 function MyApp() {
   const [numPages, setNumPages] = React.useState(null);
