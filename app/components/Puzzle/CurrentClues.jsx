@@ -169,7 +169,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
         </div>
         <KeyBoard />
       </div>
-      
     );
   } else {
     return (
