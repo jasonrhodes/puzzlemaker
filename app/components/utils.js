@@ -260,7 +260,7 @@ function convertPuzzleToJSON(puzzle) {
       across: Object.keys(puzzle.clues.across).map(key => key + "|| " + "(blank clue)"),
       down: Object.keys(puzzle.clues.down).map(key => key + "|| " + "(blank clue)")
     },
-    grid: [];
+    grid: []
   };
 
   for (let i = 0; i < puzzle.grid.length; i++) {
