@@ -5,12 +5,11 @@ const { convertPuzzleToJSON, PuzWriter } = require("./utils");
 const {
   DesktopDownloadIcon,
   UnlockIcon,
-  HomeIcon,
   LockIcon,
   MirrorIcon,
-  ShareIcon,
   PlayIcon,
-  InfoIcon
+  InfoIcon,
+  FileIcon
 } = require("@primer/octicons-react");
 
 const PuzzleMenu = ({ puzzle }) => {
@@ -90,6 +89,12 @@ const PuzzleMenu = ({ puzzle }) => {
         <PlayIcon size={24} />
         <span class="pbtip stip">
           <b>Play</b>
+        </span>
+      </Link>
+      <Link to={{ pathname: "/play" }}>
+        <FileIcon size={24} />
+        <span class="pbtip stip">
+          <b>PDF</b>
         </span>
       </Link>
       <a onClick={downloadFile}>
