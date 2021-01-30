@@ -20,7 +20,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }, [across, down]);
 
   const hasDash = char => char === "-";
-  const getSuggestions = async (clue, setFunc, filter, position) => {
+  const getSuggestions = async (clue, setFunc) => {
     const chars = clue.split("");
     const hasNoDashes = !chars.some(hasDash);
     const hasAllDashes = chars.every(hasDash);
@@ -37,32 +37,19 @@ const CurrentClues = ({ across, down, puzzle }) => {
     //console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
-    const matches = getMatches(myJson, clue.length, filter, position);
+    const matches = getMatches(myJson, clue.length);
     WordCache.set(clue, matches);
     setFunc(matches);
     return matches;
   } 
   
-  const getMatches = (response, len, filter, position) => {
+  const getMatches = (response, len) => {
     let result = [];
-    
-    console.log('filter: ' + filter);
-    console.log('position: ' + position);
     
     for (let entry of response){
       let word = entry.word.replace(/-/g,'').replace(/ /g,'')
-      
-
       if (word.length === len && /^[a-zA-Z]+$/.test(word) && !result.includes(word.toUpperCase())) {
-        
-        
         result.push(word.toUpperCase());
-      }
-      
-      
-      
-      if (result.length === 100) {
-        break;
       }
     }
     return result;
@@ -128,7 +115,24 @@ const CurrentClues = ({ across, down, puzzle }) => {
   }
   
   const filterSuggestions = (list,ad) => {
+    var filter = ad == 'down' ? downFilter[1] : acrossFilter[1];
+    var position = ad == 'down' ? (puzzle.activeCell[0] - down.range[0]) : (puzzle.activeCell[1] - across.range[0]);
+    let result = [];
+    console.log(ad + ' list:');
+    console.log(list);
     
+    for (let word of list) {
+      if (filter && filter != word[position]) {
+        continue;
+      }
+      if (result.length === 100) {
+        break;
+      }
+      result.push(word);
+    }
+    console.log(ad + ' result:');
+    console.log(result);
+    return result;
   }
   
   if (acrossNumber != '-' || downNumber != '-') {
