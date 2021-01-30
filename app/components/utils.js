@@ -32,7 +32,7 @@ function initGrid({ rows, columns }) {
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let j = 0; j < columns; j++) {
-      row.push({ value: '', isBlackSquare: false, clue: null, style: null });
+      row.push({ value: "", isBlackSquare: false, clue: null, style: null });
     }
     grid.push(row);
   }
@@ -53,7 +53,7 @@ function findAcross(cellsInActiveRow, activeColumn) {
         range.word = "";
       }
       if (!cell.isBlackSquare) {
-        range.word += (cell.value.length > 0 ? cell.value : "-");
+        range.word += cell.value.length > 0 ? cell.value : "-";
       }
       if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;
@@ -91,7 +91,7 @@ function findDown(rows, activeRow, activeColumn) {
         range.word = "";
       }
       if (!cell.isBlackSquare) {
-        range.word += (cell.value.length > 0 ? cell.value : "-");
+        range.word += cell.value.length > 0 ? cell.value : "-";
       }
       if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;
@@ -125,7 +125,13 @@ function isStart({ index, prevCell, nextCell }) {
 }
 
 function getCellClue({ grid, getNextClueNumber, row, column }) {
-  if (row === undefined || column === undefined || !grid || !grid[row] || !grid[row][column]) {
+  if (
+    row === undefined ||
+    column === undefined ||
+    !grid ||
+    !grid[row] ||
+    !grid[row][column]
+  ) {
     return {};
   }
   const currentCell = grid[row][column];
@@ -140,26 +146,28 @@ function getCellClue({ grid, getNextClueNumber, row, column }) {
   }
 
   const clue = {
-    isDownStart: isStart({
-      index: row,
-      prevCell: prevAcrossCell,
-      nextCell: nextAcrossCell,
-    }),
     isAcrossStart: isStart({
       index: column,
-      prevCell: prevDownCell,
-      nextCell: nextDownCell,
+      prevCell: prevAcrossCell,
+      nextCell: nextAcrossCell
     }),
+    isDownStart: isStart({
+      index: row,
+      prevCell: prevDownCell,
+      nextCell: nextDownCell
+    })
   };
 
   const newClueNumber =
     clue.isDownStart || clue.isAcrossStart ? getNextClueNumber() : null;
   clue.downClueNumber = clue.isDownStart
     ? newClueNumber
-    : (prevDownCell && prevDownCell.clue && prevDownCell.clue.downClueNumber);
+    : prevDownCell && prevDownCell.clue && prevDownCell.clue.downClueNumber;
   clue.acrossClueNumber = clue.isAcrossStart
     ? newClueNumber
-    : (prevAcrossCell && prevAcrossCell.clue && prevAcrossCell.clue.acrossClueNumber);
+    : prevAcrossCell &&
+      prevAcrossCell.clue &&
+      prevAcrossCell.clue.acrossClueNumber;
 
   return clue;
 }
@@ -175,88 +183,106 @@ function assignClueNumbersToGrid(grid) {
         grid: newGrid,
         getNextClueNumber,
         row,
-        column,
+        column
       });
       newGrid[row][column].clue = clue;
     }
   }
-  
+
   return newGrid;
 }
 
 function measureMyInputText(value) {
-    var tmp = document.createElement("span");
-    tmp.className = "fakeinput noopacity";
-    tmp.innerHTML = value;
-    document.body.appendChild(tmp);
-    var theWidth = tmp.getBoundingClientRect().width;
-    document.body.removeChild(tmp);
-    return theWidth;
+  var tmp = document.createElement("span");
+  tmp.className = "fakeinput noopacity";
+  tmp.innerHTML = value;
+  document.body.appendChild(tmp);
+  var theWidth = tmp.getBoundingClientRect().width;
+  document.body.removeChild(tmp);
+  return theWidth;
 }
 
 function calculateAllClueNumbers(grid) {
-    const inDownWord = grid[0].map(() => false);
-    const labelGrid = [];
-    let inAcrossWord = false;
-    let count = 1;
-    let doubleClueChance = false;
-    const acrossClues = [];
-    const downClues = [];
-    for (let r = 0; r < grid[0].length; r++){
-      labelGrid.push([]);
-      for (let c = 0; c < grid.length; c++){
-        if (!inAcrossWord && !grid[r][c].isBlackSquare && c < grid[0].length - 1 && !grid[r][c+1].isBlackSquare) {
-          acrossClues.push(count++);
-          labelGrid[r].push(count - 1);
-          doubleClueChance = true;
-          inAcrossWord = true;
-        } else if (grid[r][c].isBlackSquare) {
-          inAcrossWord = false;
-          labelGrid[r].push('X');
-        } 
-        if (!inDownWord[c] && !grid[r][c].isBlackSquare && r < grid.length - 1 && !grid[r+1][c].isBlackSquare) {
-          downClues.push(doubleClueChance ? count - 1 : count++);
-          !doubleClueChance ? labelGrid[r].push(count -1) : null;
-          inDownWord[c] = true;
-        } else if (grid[r][c].isBlackSquare) {
-          inDownWord[c] = false;
-        } else if (!doubleClueChance) {
-          labelGrid[r].push('O')
-        }
-        doubleClueChance = false;
+  const inDownWord = grid[0].map(() => false);
+  const labelGrid = [];
+  let inAcrossWord = false;
+  let count = 1;
+  let doubleClueChance = false;
+  const acrossClues = [];
+  const downClues = [];
+  for (let r = 0; r < grid[0].length; r++) {
+    labelGrid.push([]);
+    for (let c = 0; c < grid.length; c++) {
+      if (
+        !inAcrossWord &&
+        !grid[r][c].isBlackSquare &&
+        c < grid[0].length - 1 &&
+        !grid[r][c + 1].isBlackSquare
+      ) {
+        acrossClues.push(count++);
+        labelGrid[r].push(count - 1);
+        doubleClueChance = true;
+        inAcrossWord = true;
+      } else if (grid[r][c].isBlackSquare) {
+        inAcrossWord = false;
+        labelGrid[r].push("X");
       }
-      inAcrossWord = false;
+      if (
+        !inDownWord[c] &&
+        !grid[r][c].isBlackSquare &&
+        r < grid.length - 1 &&
+        !grid[r + 1][c].isBlackSquare
+      ) {
+        downClues.push(doubleClueChance ? count - 1 : count++);
+        !doubleClueChance ? labelGrid[r].push(count - 1) : null;
+        inDownWord[c] = true;
+      } else if (grid[r][c].isBlackSquare) {
+        inDownWord[c] = false;
+      } else if (!doubleClueChance) {
+        labelGrid[r].push("O");
+      }
+      doubleClueChance = false;
     }
-    return { acrossClues, downClues, labelGrid } ;
+    inAcrossWord = false;
   }
+  return { acrossClues, downClues, labelGrid };
+}
 
 function convertPuzzleToJSON(puzzle) {
   let puz = {};
   puz["author"] = puzzle.author;
   puz["title"] = puzzle.title;
   puz["size"] = {
-    "rows": puzzle.grid.length,
-    "cols": puzzle.grid[0].length
+    rows: puzzle.grid.length,
+    cols: puzzle.grid[0].length
   };
   // Translate clues to standard JSON puzzle format
   puz["clues"] = {
-    "across": [],
-    "down": []
+    across: [],
+    down: []
   };
-  
-  const { acrossClues, downClues, labelGrid } = calculateAllClueNumbers(puzzle.grid);
+
+  const { acrossClues, downClues, labelGrid } = calculateAllClueNumbers(
+    puzzle.grid
+  );
   for (let x in acrossClues) {
     puz.clues.across.push(x + "|| " + "(blank clue)");
   }
   for (let x in downClues) {
     puz.clues.down.push(x + "|| " + "(blank clue)");
   }
-  
+
   // Read grid
   puz["grid"] = [];
   for (let i = 0; i < puzzle.grid.length; i++) {
     for (let j = 0; j < puzzle.grid[0].length; j++) {
-      puz.grid.push(puzzle.grid[i][j].isBlackSquare ? '.' : puzzle.grid[i][j].value ? puzzle.grid[i][j].value.toUpperCase() : " " );
+      puz.grid.push(
+        puzzle.grid[i][j].isBlackSquare
+          ? "."
+          : puzzle.grid[i][j].value
+          ? puzzle.grid[i][j].value.toUpperCase()
+          : " "
+      );
     }
   }
   console.log(puz);
@@ -265,7 +291,7 @@ function convertPuzzleToJSON(puzzle) {
 
 class PuzWriter {
   constructor() {
-    this.buf = []
+    this.buf = [];
   }
 
   pad(n) {
@@ -284,52 +310,54 @@ class PuzWriter {
   }
 
   writeString(s) {
-    if (s === undefined) s = '';
+    if (s === undefined) s = "";
     for (var i = 0; i < s.length; i++) {
       var cp = s.codePointAt(i);
       if (cp < 0x100 && cp > 0) {
         this.buf.push(cp);
       } else {
         // TODO: expose this warning through the UI
-        console.log('string "' + s + '" has non-ISO-8859-1 codepoint at offset ' + i);
-        this.buf.push('?'.codePointAt(0));
+        console.log(
+          'string "' + s + '" has non-ISO-8859-1 codepoint at offset ' + i
+        );
+        this.buf.push("?".codePointAt(0));
       }
-      if (cp >= 0x10000) i++;   // advance by one codepoint
+      if (cp >= 0x10000) i++; // advance by one codepoint
     }
     this.buf.push(0);
   }
 
   writeHeader(json) {
     this.pad(2); // placeholder for checksum
-    this.writeString('ACROSS&DOWN');
+    this.writeString("ACROSS&DOWN");
     this.pad(2); // placeholder for cib checksum
     this.pad(8); // placeholder for masked checksum
-    this.version = '1.3';
+    this.version = "1.3";
     this.writeString(this.version);
     this.pad(2); // probably extra space for version string
-    this.writeShort(0);  // scrambled checksum
-    this.pad(12);  // reserved
+    this.writeShort(0); // scrambled checksum
+    this.pad(12); // reserved
     this.w = json.size.cols;
     this.h = json.size.rows;
     this.buf.push(this.w);
     this.buf.push(this.h);
     this.numClues = json.clues.across.length + json.clues.down.length;
     this.writeShort(this.numClues);
-    this.writeShort(1);  // puzzle type
-    this.writeShort(0);  // scrambled tag
+    this.writeShort(1); // puzzle type
+    this.writeShort(0); // scrambled tag
   }
 
   writeFill(json) {
     const grid = json.grid;
-    const BLACK_CP = '.'.codePointAt(0);
+    const BLACK_CP = ".".codePointAt(0);
     this.solution = this.buf.length;
     for (var i = 0; i < grid.length; i++) {
-      this.buf.push(grid[i].codePointAt(0));  // Note: assumes grid is ISO-8859-1
+      this.buf.push(grid[i].codePointAt(0)); // Note: assumes grid is ISO-8859-1
     }
     this.grid = this.buf.length;
     for (var i = 0; i < grid.length; i++) {
       var cp = grid[i].codePointAt(0);
-      if (cp != BLACK_CP) cp = '-'.codePointAt(0);
+      if (cp != BLACK_CP) cp = "-".codePointAt(0);
       this.buf.push(cp);
     }
   }
@@ -343,11 +371,11 @@ class PuzWriter {
     const down = json.clues.down;
     var clues = [];
     for (var i = 0; i < across.length; i++) {
-      const sp = across[i].split('|| ');
+      const sp = across[i].split("|| ");
       clues.push([2 * parseInt(sp[0]), sp[1]]);
     }
     for (var i = 0; i < down.length; i++) {
-      const sp = down[i].split('|| ');
+      const sp = down[i].split("|| ");
       clues.push([2 * parseInt(sp[0]) + 1, sp[1]]);
     }
     clues.sort((a, b) => a[0] - b[0]);
@@ -385,7 +413,7 @@ class PuzWriter {
       cksum = this.checksumRegion(ix, len, cksum);
       ix += len + 1;
     }
-    if (this.version == '1.3') {
+    if (this.version == "1.3") {
       const len = this.strlen(ix);
       if (len) {
         cksum = this.checksumRegion(ix, len + 1, cksum);
