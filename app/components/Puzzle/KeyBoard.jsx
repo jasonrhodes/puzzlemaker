@@ -27,6 +27,8 @@ const KeyBoard = ({ puzzle, mobileView }) => {
         <a class="key" onClick={(e) => hitKey(e,key)}>{key}</a>
       )}
       </div>
+      <div class="blkey"><a class="key" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={16} /></a></div>
+      <div class="brkey"><a class="key" onClick={(e) => hitKey(e,'square')}><ArrowLeftIcon size={16} /></a><ArrowLeftIcon size={16} /></a></div>
     </div>
   );
 }
