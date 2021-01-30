@@ -1,7 +1,7 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
 const Puzzle = require("./Puzzle");
-const { PuzzleContextProvider, PuzzleContext } = require("./PuzzleContext");
+const { PuzzleContextProvider, PuzzleContext } = require("./Puzzle/Context");
 const initGrid = require("../utils/initGrid");
 
 const Builder = function({ location, match }) {
