@@ -3,6 +3,7 @@ const WordCache = new Map();
 const { measureMyInputText, focusOnActive } = require("../../utils/style");
 const { Link } = require("react-router-dom");
 const { ArrowDownIcon, ArrowRightIcon, EyeIcon } = require("@primer/octicons-react");
+const KeyBoard = require("./KeyBoard");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
@@ -167,6 +168,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           </div>
         </div>
       </div>
+      <KeyBoard puzzle={puzzle} />
     );
   } else {
     return (
