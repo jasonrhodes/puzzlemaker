@@ -15,5 +15,5 @@ function measureMyInputText(value) {
 
 function focusOnActive() {
   var active = document.querySelector('.active');
-  active.querySelector('input').focus();
+  active.querySelector('.input').focus();
 }
