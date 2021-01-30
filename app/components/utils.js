@@ -5,7 +5,6 @@ module.exports.findAcross = findAcross;
 module.exports.findDown = findDown;
 module.exports.getCellClue = getCellClue;
 module.exports.measureMyInputText = measureMyInputText;
-module.exports.calculateAllClueNumbers = calculateAllClueNumbers;
 module.exports.assignClueNumbersToGrid = assignClueNumbersToGrid;
 module.exports.convertPuzzleToJSON = convertPuzzleToJSON;
 module.exports.PuzWriter = PuzWriter;
@@ -202,51 +201,51 @@ function measureMyInputText(value) {
   return theWidth;
 }
 
-function calculateAllClueNumbers(grid) {
-  const inDownWord = grid[0].map(() => false);
-  const labelGrid = [];
-  let inAcrossWord = false;
-  let count = 1;
-  let doubleClueChance = false;
-  const acrossClues = [];
-  const downClues = [];
-  for (let r = 0; r < grid[0].length; r++) {
-    labelGrid.push([]);
-    for (let c = 0; c < grid.length; c++) {
-      if (
-        !inAcrossWord &&
-        !grid[r][c].isBlackSquare &&
-        c < grid[0].length - 1 &&
-        !grid[r][c + 1].isBlackSquare
-      ) {
-        acrossClues.push(count++);
-        labelGrid[r].push(count - 1);
-        doubleClueChance = true;
-        inAcrossWord = true;
-      } else if (grid[r][c].isBlackSquare) {
-        inAcrossWord = false;
-        labelGrid[r].push("X");
-      }
-      if (
-        !inDownWord[c] &&
-        !grid[r][c].isBlackSquare &&
-        r < grid.length - 1 &&
-        !grid[r + 1][c].isBlackSquare
-      ) {
-        downClues.push(doubleClueChance ? count - 1 : count++);
-        !doubleClueChance ? labelGrid[r].push(count - 1) : null;
-        inDownWord[c] = true;
-      } else if (grid[r][c].isBlackSquare) {
-        inDownWord[c] = false;
-      } else if (!doubleClueChance) {
-        labelGrid[r].push("O");
-      }
-      doubleClueChance = false;
-    }
-    inAcrossWord = false;
-  }
-  return { acrossClues, downClues, labelGrid };
-}
+// function calculateAllClueNumbers(grid) {
+//   const inDownWord = grid[0].map(() => false);
+//   const labelGrid = [];
+//   let inAcrossWord = false;
+//   let count = 1;
+//   let doubleClueChance = false;
+//   const acrossClues = [];
+//   const downClues = [];
+//   for (let r = 0; r < grid[0].length; r++) {
+//     labelGrid.push([]);
+//     for (let c = 0; c < grid.length; c++) {
+//       if (
+//         !inAcrossWord &&
+//         !grid[r][c].isBlackSquare &&
+//         c < grid[0].length - 1 &&
+//         !grid[r][c + 1].isBlackSquare
+//       ) {
+//         acrossClues.push(count++);
+//         labelGrid[r].push(count - 1);
+//         doubleClueChance = true;
+//         inAcrossWord = true;
+//       } else if (grid[r][c].isBlackSquare) {
+//         inAcrossWord = false;
+//         labelGrid[r].push("X");
+//       }
+//       if (
+//         !inDownWord[c] &&
+//         !grid[r][c].isBlackSquare &&
+//         r < grid.length - 1 &&
+//         !grid[r + 1][c].isBlackSquare
+//       ) {
+//         downClues.push(doubleClueChance ? count - 1 : count++);
+//         !doubleClueChance ? labelGrid[r].push(count - 1) : null;
+//         inDownWord[c] = true;
+//       } else if (grid[r][c].isBlackSquare) {
+//         inDownWord[c] = false;
+//       } else if (!doubleClueChance) {
+//         labelGrid[r].push("O");
+//       }
+//       doubleClueChance = false;
+//     }
+//     inAcrossWord = false;
+//   }
+//   return { acrossClues, downClues, labelGrid };
+// }
 
 function convertPuzzleToJSON(puzzle) {
   let puz = {};

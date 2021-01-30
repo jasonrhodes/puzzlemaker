@@ -4,7 +4,6 @@ const {
   findAcross,
   findDown,
   getSymmetricalCell,
-  calculateAllClueNumbers,
   assignClueNumbersToGrid
 } = require("./utils");
 
@@ -31,14 +30,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const numberedInitialGrid = assignClueNumbersToGrid(initialGrid);
   const [grid, setGrid] = React.useState(numberedInitialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
-  const [labelGrid, setLabelGrid] = React.useState([]);
+  // const [labelGrid, setLabelGrid] = React.useState([]);
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author")
   
-  React.useEffect(() => {
-    const { labelGrid } = calculateAllClueNumbers(grid);
-    setLabelGrid(labelGrid);
-  }, [grid]);
+//   React.useEffect(() => {
+//     const { labelGrid } = calculateAllClueNumbers(grid);
+//     setLabelGrid(labelGrid);
+//   }, [grid]);
   
   React.useEffect(() => {
     setWords(calculateCurrentWords());
@@ -88,33 +87,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     return { across, down };
   };
 
-  const getCluesForCell = (row, column) => {
-    
-//     let acrossNumber = 0;
-//     let downNumber = 0;
-
-//     if (!labelGrid.length || (!row && !column && row !== 0) || grid[row][column].isBlackSquare) {
-//       acrossNumber = "-";
-//       downNumber = "-";
-//       return { acrossNumber, downNumber };
-//     }
-
-//     for (let i = column; i >= 0; i--) {
-//       if (i === 0 || grid[row][i - 1].isBlackSquare) {
-//         acrossNumber = labelGrid[row][i] !== 'O' ? labelGrid[row][i] : '-';
-//         break;
-//       }
-//     }
-
-//     for (let j = row; j >= 0; j--) {
-//       if (j === 0 || grid[j - 1][column].isBlackSquare) {
-//         downNumber = labelGrid[j][column] !== 'O' ? labelGrid[j][column] : '-';
-//         break;
-//       }
-//     }
-
-//     return { acrossNumber, downNumber };
-    
+  const getCluesForCell = (row, column) => {  
     if (row === undefined || column === undefined) {
       return { acrossNumber: "-", downNumber: "-" };
     }
@@ -276,7 +249,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         <code>
           {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
         </code>
-        <code>{JSON.stringify(calculateAllClueNumbers(grid))}</code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
