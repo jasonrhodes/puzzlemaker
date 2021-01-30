@@ -460,14 +460,15 @@ input.inline-content-editable:focus {
   #keyboard > .keyrow > .key {
     flex-grow: 1;
     margin: 1px;
-    height: 21px;
-    position: block;
+    height: 22px;
+    padding-top: 4px;
   }
   #keyboard .key {
     border: 1px solid #777;
     border-radius: 1px;
     text-align: center;
     vertical-align: middle;
+    display: table-cell;
   }
   
   #keyboard .row2 {
@@ -491,9 +492,8 @@ input.inline-content-editable:focus {
   }
   
   #keyboard .brkey .key, #keyboard .blkey .key {
-    width: 39px;
-    height: 25px;
-    display: block;
+    width: 47px;
+    height: 35px;
     background-color: #eee;
   }
   

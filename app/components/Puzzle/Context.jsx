@@ -30,6 +30,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
   const [clues, setClues] = React.useState({ across: {}, down: {} });
+  
+  const setClue = (number, direction, clue) => {
+    setClues({ ...clues, [direction]: { ...clues[direction], [number]: clue }});
+  }
 
   React.useEffect(() => {
     setWords(calculateCurrentWords());
@@ -257,7 +261,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     advanceActiveCell,
     rewindActiveCell,
     setTitle,
-    setAuthor
+    setAuthor,
+    setClue
   };
 
   return (
