@@ -89,6 +89,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const getCluesForCell = (row, column) => {
+    
 //     let acrossNumber = 0;
 //     let downNumber = 0;
 
@@ -114,9 +115,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
 //     return { acrossNumber, downNumber };
     
+    if (row === undefined || column === undefined) {
+      return { acrossNumber: "-", downNumber: "-" };
+    }
     const { clue } = grid[row][column];
-    const { downClueNumber: downNumber, acrossClueNumber: acrossNumber } = clue;
-    return { downNumber, acrossNumber };
+    return { downNumber: clue.downClueNumber || "-", acrossNumber: clue.acrossClueNumber || "-" };
   };
 
   const updateCellValue = (row, column, value) => {
