@@ -45,7 +45,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   React.useEffect(() => {
     savedPuzzleId && savePuzzle(savedPuzzleId);
-  }, [grid, words, savedPuzzleId]);
+  }, [grid, words, author, title, savedPuzzleId]);
 
   React.useEffect(() => {
     const newClues = grid
