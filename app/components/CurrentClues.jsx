@@ -49,7 +49,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     for (let entry of response){
       let word = entry.word.replace(/-/g,'').replace(/ /g,'')
       if (word.length === len && /^[a-zA-Z]+$/.test(word) && !result.includes(word.toUpperCase())) {
-        result.push(word.toUpperCase());
+        result.push({text: word.toUpperCase(), score: entry.tags[0].replace('f:','')});
       }
     }
     return result;
@@ -121,14 +121,16 @@ const CurrentClues = ({ across, down, puzzle }) => {
     var position = ad == 'down' ? (puzzle.activeCell[0] - down.range[0]) : (puzzle.activeCell[1] - across.range[0]);
     let finalresult = [];
     
+    console.log(list);
+    
     for (let word of list) {
-      if (filter && filter != word[position]) {
+      if (filter && filter != word.text[position]) {
         continue;
       }
       if (finalresult.length === 100) {
         break;
       }
-      finalresult.push(word);
+      finalresult.push(word.text);
     }
     return finalresult;
   }
