@@ -34,32 +34,42 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   // const [labelGrid, setLabelGrid] = React.useState([]);
   const [title, setTitle] = React.useState("Untitled");
   const [author, setAuthor] = React.useState("Author");
-  const [clues, setClues] = React.useState({ across: {}, down: {}});
-  
-//   React.useEffect(() => {
-//     const { labelGrid } = calculateAllClueNumbers(grid);
-//     setLabelGrid(labelGrid);
-//   }, [grid]);
-  
+  const [clues, setClues] = React.useState({ across: {}, down: {} });
 
-  
+  //   React.useEffect(() => {
+  //     const { labelGrid } = calculateAllClueNumbers(grid);
+  //     setLabelGrid(labelGrid);
+  //   }, [grid]);
+
   React.useEffect(() => {
     setWords(calculateCurrentWords());
   }, [grid, setWords, activeCell]);
-  
+
   React.useEffect(() => {
     savedPuzzleId && savePuzzle(savedPuzzleId);
   }, [grid, words, savedPuzzleId]);
-  
+
   React.useEffect(() => {
-    const newClues = grid.reduce((acc, row) => [...acc, ...row], []).reduce((c, cell) => {
-      if (cell.clue && cell.clue.isAcrossStart) {
-        c.across[cell.clue.]
-      }
-    }, { across: {}, down: {}});
+    const newClues = grid
+      .reduce((acc, row) => [...acc, ...row], [])
+      .reduce(
+        (c, { clue }) => {
+          if (clue && clue.isAcrossStart) {
+            c.across[clue.acrossClueNumber] =
+              clues.across[clue.acrossClueNumber] || "";
+          }
+          if (clue && clue.isDownStart) {
+            c.down[clue.downClueNumber] = clues.down[clue.downClueNumber] || "";
+          }
+          return c;
+        },
+        { across: {}, down: {} }
+      );
+
+    setClues(newClues);
   }, [grid, setClues]);
-  
-  // Initial instantiation of the saved puzzle and/or the saved puzzle 
+
+  // Initial instantiation of the saved puzzle and/or the saved puzzle
   // id used to save the puzzle going forward
   React.useEffect(() => {
     const savedPuzzle = getSavedPuzzle(puzzleId);
@@ -72,7 +82,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setDirection(savedPuzzle.direction);
       setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
-      setSavedPuzzleId(puzzleId)
+      setSavedPuzzleId(puzzleId);
     } else {
       setSavedPuzzleId(puzzleId);
     }
@@ -92,7 +102,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (grid[row][column].isBlackSquare) {
       return { across: emptyWord, down: emptyWord };
     }
-    
+
     // TODO: findAcross and findDown can be simplified now that
     // clue number state is saved in the grid for each cell
     const across = findAcross(grid[row], column);
@@ -101,17 +111,20 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     return { across, down };
   };
 
-  const getCluesForCell = (row, column) => {  
+  const getCluesForCell = (row, column) => {
     if (row === undefined || column === undefined) {
       return { acrossNumber: "-", downNumber: "-" };
     }
     const { clue } = grid[row][column];
-    return { downNumber: clue.downClueNumber || "-", acrossNumber: clue.acrossClueNumber || "-" };
+    return {
+      downNumber: clue.downClueNumber || "-",
+      acrossNumber: clue.acrossClueNumber || "-"
+    };
   };
 
   const updateCellValue = (row, column, value) => {
     if (!grid[row][column].isBlackSquare) {
-      const newGrid = [...grid];    
+      const newGrid = [...grid];
       newGrid[row][column].value = value;
       setGrid(newGrid);
     }
@@ -193,7 +206,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const getNextClueNumber = () => {
     return (clueNumber += 1);
   };
-  
+
   const isCellInActiveWord = (row, column) => {
     if (!direction || !words[direction]) {
       console.error("Error with checking cell in active word", {
@@ -219,10 +232,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     return row >= min && row <= max;
   };
-  
-  const savePuzzle = (id) => {
+
+  const savePuzzle = id => {
     window.localStorage.setItem(puzzleId, JSON.stringify(value));
-  }
+  };
 
   const value = {
     activeCell,
@@ -263,9 +276,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         <code>
           {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
         </code>
-        <code>
-          {JSON.stringify(calculateAllClueNumbers(grid), null, 2)}
-        </code>
+        <br />
+        <code>{JSON.stringify({ clues })}</code>
+        <br />
+        <code>{JSON.stringify(calculateAllClueNumbers(grid), null, 2)}</code>
+        <br />
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
     </PuzzleContext.Provider>
