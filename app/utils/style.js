@@ -1,7 +1,6 @@
 module.exports = {
   measureMyInputText,
-  focusOnActive,
-  hitKey
+  focusOnActive
 };
 
 function measureMyInputText(value) {
@@ -17,9 +16,4 @@ function measureMyInputText(value) {
 function focusOnActive() {
   var active = document.querySelector('.active');
   active.querySelector('input').focus();
-}
-
-function hitKey(e,key) {
-  e.stopPropagation();
-  document.dispatchEvent(new KeyboardEvent('keypress', {'key': key}));
 }

@@ -430,6 +430,8 @@ input.inline-content-editable:focus {
   
   #keyboard {
     display: block;
+    margin-left: -6px;
+    margin-right: -6px;
   }
   
   pre {
@@ -441,7 +443,10 @@ input.inline-content-editable:focus {
   }
   
   #keyboard > .keyrow > .key {
-    
+    flex-grow: 1;
+    border: 1px solid #777;
+    padding: 4px 4px;
+    margin: 1px
   }
   
   

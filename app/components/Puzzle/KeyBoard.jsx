@@ -1,14 +1,17 @@
 const React = require("react");
-const { hitKey } = require("../../utils/style");
 
 const KeyBoard = ({ puzzle, mobileView }) => {
   const row1 = ['Q','W','E','R','T','Y','U','I','O','P'];
   const row2 = ['A','S','D','F','G','H','J','K','L'];
   const row3 = ['Z','X','C','V','B','N','M'];
   
+  const [activeRow, activeColumn] = puzzle.activeCell;
   
-        puzzle.updateCellValue(activeRow, activeColumn, e.key);
-      puzzle.advanceActiveCell();
+  function hitKey(e,key) {
+    e.stopPropagation();
+    puzzle.updateCellValue(activeRow, activeColumn, key);
+    puzzle.advanceActiveCell();
+  }
   
   return (
     <div id="keyboard" class={mobileView == 'keyboard' ? 'activemobile' : ''}>
