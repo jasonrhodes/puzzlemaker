@@ -144,9 +144,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
   return (
     <div class="current-clues">
       <div id="mobilemenu">
-        <a class={mobileView == 'keyboard' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'keyboard')}><TypographyIcon size={24} /></a>
-        <a  class={mobileView == 'across' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'across')}>{acrossNumber}A: {across.word.toUpperCase()}</a>
-        <a  class={mobileView == 'down' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'down')}>{downNumber}D: {down.word.toUpperCase()}</a>
+        <a class={mobileView == 'keyboard' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'keyboard')}><TypographyIcon size={20} /></a>
+        <a class={mobileView == 'across' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'across')}>{acrossNumber}A: {across.word.toUpperCase()}</a>
+        <a class={mobileView == 'down' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'down')}>{downNumber}D: {down.word.toUpperCase()}</a>
       </div>
       <div id="across" class={mobileView == 'across' ? 'activemobile' : ''}>
         <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" onClick={(e) => e.stopPropagation()} style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + ' clue'} type="text"  /></div>
