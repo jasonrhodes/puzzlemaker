@@ -139,7 +139,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   if (acrossNumber != '-' || downNumber != '-') {
     return (
       <div class="current-clues">
-        <div id="mobilemenu"><a onClick={(e) => set</div>
+        <div id="mobilemenu"><a onClick={(e) => setMobileView('keyboard')}><TypographyIcon size={24} /></a><a onClick={(e) => setMobileView('across')}>Across</a><a onClick={(e) => setMobileView('down')}>Down</a></div>
         <div id="across" class={mobileView == 'across' ? 'activemobile' : ''}>
           <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" onClick={(e) => e.stopPropagation()} style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + ' clue'} type="text"  /></div>
           <div class="current">{across.word.toUpperCase()}<a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replaceAll('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>

@@ -408,7 +408,7 @@ input.inline-content-editable:focus {
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-#keyboard {
+#keyboard, #mobileMenu {
   display: none;
 }
 
@@ -427,6 +427,26 @@ input.inline-content-editable:focus {
   .current-clues > div:not(.activemobile) {
     display: none;
   }
+  
+  #mobilemenu {
+    display: flex;
+    margin-left: -6px;
+    margin-right: -6px;
+    margin-botto
+  }
+  
+  #mobilemenu a:first-child {
+    flex-grow: 1;
+  }
+  
+  #mobilemenu a {
+    flex-grow: 2;
+    border: 1px solid #777;
+    padding: 4px 8px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  
   
   #keyboard {
     display: block;
