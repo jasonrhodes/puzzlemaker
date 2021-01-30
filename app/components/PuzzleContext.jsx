@@ -5,7 +5,7 @@ const {
   findDown,
   getSymmetricalCell,
   assignClueNumbersToGrid
-} = require("./utils");
+} = require("../utils");
 
 function getSavedPuzzle(id) {
   if (!id) {

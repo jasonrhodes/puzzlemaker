@@ -1,5 +1,5 @@
 const React = require("react");
-const { measureMyInputText } = require("./utils");
+const { measureMyInputText } = require("../utils");
 
 const PuzzleTitle = ({ width, title, author, setTitle, setAuthor }) => {
   const [authorWidth, setAuthorWidth] = React.useState(60);
