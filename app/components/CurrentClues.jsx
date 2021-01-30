@@ -33,7 +33,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       setFunc(cached); // don't re-call API for clue pattern we already cached
       return cached;
     }
-    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=1000';
+    const apiString = 'https://api.datamuse.com/words?sp=' + clue.replace(/-/g,'?') + '&max=1000&md=f';
     //console.log(apiString);
     const response = await fetch(apiString);
     const myJson = await response.json(); 
