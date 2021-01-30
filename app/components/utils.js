@@ -190,7 +190,7 @@ function getCellClue({ grid, getNextClueNumber, row, column }) {
 }
 
 function assignClueNumbersToGrid(grid) {
-  let clue = 0;
+  let clue = 1;
   const getNextClueNumber = () => clue++;
   const newGrid = [...grid];
 
