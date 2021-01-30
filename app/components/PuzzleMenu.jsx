@@ -91,7 +91,7 @@ const PuzzleMenu = ({ puzzle }) => {
           <b>Play</b>
         </span>
       </Link>
-      <Link to={{ pathname: "/print" }}>
+      <Link to={"/print/" + puzzle.id}>
         <FileIcon size={24} />
         <span class="pbtip stip">
           <b>PDF</b>
