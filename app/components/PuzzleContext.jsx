@@ -4,7 +4,8 @@ const {
   findAcross,
   findDown,
   getSymmetricalCell,
-  assignClueNumbersToGrid
+  assignClueNumbersToGrid,
+  calculateAllClueNumbers
 } = require("./utils");
 
 function getSavedPuzzle(id) {
@@ -32,7 +33,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [symmetry, setSymmetry] = React.useState(true);
   // const [labelGrid, setLabelGrid] = React.useState([]);
   const [title, setTitle] = React.useState("Untitled");
-  const [author, setAuthor] = React.useState("Author")
+  const [author, setAuthor] = React.useState("Author");
+  const [clues, setClues] = React.useState({ across: {}, down: {}});
   
 //   React.useEffect(() => {
 //     const { labelGrid } = calculateAllClueNumbers(grid);
@@ -46,6 +48,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   React.useEffect(() => {
     savedPuzzleId && savePuzzle(savedPuzzleId);
   }, [grid, words, savedPuzzleId]);
+  
+  React.useEffect(() => {
+    
+  }, [grid, setClues]);
   
   // Initial instantiation of the saved puzzle and/or the saved puzzle 
   // id used to save the puzzle going forward
@@ -80,7 +86,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (grid[row][column].isBlackSquare) {
       return { across: emptyWord, down: emptyWord };
     }
-
+    
+    // TODO: findAcross and findDown can be simplified now that
+    // clue number state is saved in the grid for each cell
     const across = findAcross(grid[row], column);
     const down = findDown(grid, row, column);
 
@@ -117,8 +125,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       newGrid[symRow][symCol].value = "";
       newGrid[symRow][symCol].style = null;
     }
-    assignClueNumbersToGrid(newGrid);
-    setGrid(newGrid);
+    const numberedGrid = assignClueNumbersToGrid(newGrid);
+    setGrid(numberedGrid);
   };
 
   const toggleCircle = (row, column) => {
@@ -248,6 +256,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       <pre>
         <code>
           {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
+        </code>
+        <code>
+          {JSON.stringify(calculateAllClueNumbers(grid), null, 2)}
         </code>
         <code>{JSON.stringify(value, null, 2)}</code>
       </pre>
