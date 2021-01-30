@@ -115,36 +115,11 @@ function findDown(rows, activeRow, activeColumn) {
   return { range: [range.start, range.end], word: range.word };
 }
 
-// function getCellClue({ grid, getNextClueNumber, row, column }) {
-//   const currentCell = grid[row][column];
-//   const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
-//   const prevDownCell = row > 0 ? grid[row - 1][column] : {};
-//   const nextAcrossCell = column < grid[0].length - 1 ? grid[row][column + 1] : {};
-//   const nextDownCell = row < grid.length - 1 ? grid[row + 1][column] : {};
-  
-//   if (currentCell.isBlackSquare) {
-//     return false;
-//   }
-//   if (row === 0 && !nextDownCell.isBlackSquare) {
-//     return getNextClueNumber();
-//   }
-//   if (column === 0 && !nextAcrossCell.isBlackSquare) {
-//     return getNextClueNumber();
-//   }
-//   if (prevAcrossCell.isBlackSquare && column < grid[0].length - 1 && !nextAcrossCell.isBlackSquare) {
-//     return getNextClueNumber();
-//   }
-//   if (prevDownCell.isBlackSquare && row < grid.length - 1 && !nextDownCell.isBlackSquare) {
-//     return getNextClueNumber();
-//   }
-//   return false;
-// };
-
 function isStart({ index, prevCell, nextCell }) {
-  if (index === 0 && !nextCell.isBlackSquare) {
+  if (index === 0 && nextCell && !nextCell.isBlackSquare) {
     return true;
   }
-  if (prevCell.isBlackSquare && !nextCell.isBlackSquare) {
+  if (prevCell.isBlackSquare && nextCell && !nextCell.isBlackSquare) {
     return true;
   }
 }
@@ -154,11 +129,11 @@ function getCellClue({ grid, getNextClueNumber, row, column }) {
     return {};
   }
   const currentCell = grid[row][column];
-  const prevAcrossCell = column > 0 ? grid[row][column - 1] : {};
-  const prevDownCell = row > 0 ? grid[row - 1][column] : {};
+  const prevAcrossCell = column > 0 ? grid[row][column - 1] : false;
+  const prevDownCell = row > 0 ? grid[row - 1][column] : false;
   const nextAcrossCell =
-    column < grid[0].length - 1 ? grid[row][column + 1] : {};
-  const nextDownCell = row < grid.length - 1 ? grid[row + 1][column] : {};
+    column < grid[0].length - 1 ? grid[row][column + 1] : false;
+  const nextDownCell = row < grid.length - 1 ? grid[row + 1][column] : false;
 
   if (currentCell.isBlackSquare) {
     return false;
@@ -181,10 +156,10 @@ function getCellClue({ grid, getNextClueNumber, row, column }) {
     clue.isDownStart || clue.isAcrossStart ? getNextClueNumber() : null;
   clue.downClueNumber = clue.isDownStart
     ? newClueNumber
-    : (prevDownCell.clue && prevDownCell.clue.downClueNumber);
+    : (prevDownCell && prevDownCell.clue && prevDownCell.clue.downClueNumber);
   clue.acrossClueNumber = clue.isAcrossStart
     ? newClueNumber
-    : (prevAcrossCell.clue && prevAcrossCell.clue.acrossClueNumber);
+    : (prevAcrossCell && prevAcrossCell.clue && prevAcrossCell.clue.acrossClueNumber);
 
   return clue;
 }
