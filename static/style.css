@@ -428,6 +428,10 @@ input.inline-content-editable:focus {
     display: none;
   }
   
+  #keyboard.activemobile {
+    display: block;
+  }
+  
   #mobilemenu {
     display: flex;
     margin-left: -6px;
@@ -460,7 +464,6 @@ input.inline-content-editable:focus {
   
   
   #keyboard {
-    display: block;
     margin-left: -6px;
     margin-right: -6px;
   }
@@ -480,6 +483,14 @@ input.inline-content-editable:focus {
     margin: 1px
   }
   
+  #keyboard .row2 {
+    margin-left: 10px;
+    margin-right: 10px
+  }
+  #keyboard .row3 {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
   
   .current-clues {
     position: relative;
