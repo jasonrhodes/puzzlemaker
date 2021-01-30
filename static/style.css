@@ -446,7 +446,7 @@ input.inline-content-editable:focus {
     margin-left: -6px;
     margin-right: -6px;
     position: relative;
-    height: 100px;
+    height: 98px;
   }
   
   pre {
@@ -460,12 +460,14 @@ input.inline-content-editable:focus {
   #keyboard > .keyrow > .key {
     flex-grow: 1;
     margin: 1px;
+    height: 21px;
+    position: block;
   }
   #keyboard .key {
     border: 1px solid #777;
-    padding: 4px 4px;
     border-radius: 1px;
     text-align: center;
+    vertical-align: middle;
   }
   
   #keyboard .row2 {
@@ -480,16 +482,19 @@ input.inline-content-editable:focus {
   #keyboard .blkey {
     position: absolute;
     bottom: 0px;
-    left: 2px;
+    left: 0px;
   }
   #keyboard .brkey {
     position: absolute;
     bottom: 0px;
-    right: 2px;
+    right: 0px;
   }
   
   #keyboard .brkey .key, #keyboard .blkey .key {
-    width: 30px;
+    width: 39px;
+    height: 25px;
+    display: block;
+    background-color: #eee;
   }
   
   .current-clues {

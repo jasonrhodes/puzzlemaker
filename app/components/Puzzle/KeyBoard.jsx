@@ -10,8 +10,20 @@ const KeyBoard = ({ puzzle, mobileView }) => {
   
   function hitKey(e,key) {
     e.stopPropagation();
-    puzzle.updateCellValue(activeRow, activeColumn, key);
-    puzzle.advanceActiveCell();
+    if (key == 'square') {
+      puzzle.toggleBlackSquare(activeRow, activeColumn);
+      return;
+    } else if (key == 'backspace') {
+      if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
+        puzzle.updateCellValue(activeRow, activeColumn, '');
+      }
+      puzzle.rewindActiveCell();
+      return;
+    } else {
+      puzzle.updateCellValue(activeRow, activeColumn, key);
+      puzzle.advanceActiveCell();
+      return;
+    }
   }
   
   return (
@@ -29,8 +41,8 @@ const KeyBoard = ({ puzzle, mobileView }) => {
       )}
       </div>
       
-      <div class="blkey"><a class="key" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={16} /></a></div>
-      <div class="brkey"><a class="key" onClick={(e) => hitKey(e,'square')}><ArrowLeftIcon size={16} /><XIcon size={16} /></a></div>
+      <div class="blkey"><a class="key" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={24} /></a></div>
+      <div class="brkey"><a class="key" onClick={(e) => hitKey(e,'backspace')}><ArrowLeftIcon size={16} /><XIcon size={16} /></a></div>
     </div>
   );
 }
