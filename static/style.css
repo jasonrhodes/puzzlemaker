@@ -400,11 +400,19 @@ input.inline-content-editable:focus {
   .menu {
     position: relative;
     margin-bottom: 5px;
+    float: right;
+    width: auto;
+    margin-top: 0px;
   }
   
   .menu a {
     padding: 6.5px;
   }
+  
+  .menu a.subicon {
+    margin-right: -18px;
+  }
+  
   .puzzle-info {
     margin: 0 0 5px 0;
   }
