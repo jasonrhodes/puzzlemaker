@@ -398,19 +398,31 @@ input.inline-content-editable:focus {
 
 @media only screen and (max-width: 636px) {
   .menu {
-    top: -78px;
+    position: relative;
+    margin-bottom: 5px;
   }
   
   .menu a {
     padding: 6.5px;
   }
+  .puzzle-info {
+    margin: 0 0 5px 0;
+  }
   
   .container {
-    width: 100%;
+    width: calc(100% - 28px);
   }
   
   .title {
     font-size: 1.5em;
+  }
+  
+  .title + div > div.inline {
+    max-width: 100% !important;
+  }
+  
+  .title + div > div.inline > div {
+    margin-right: 0px !important;
   }
   
   .current-clues > div:not(.activemobile) {
