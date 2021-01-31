@@ -51,22 +51,22 @@ const getSuggestions = async (clue, setFunc) => {
   return matches;
 };
 
-const filterSuggestions = (list, filter, ad) => {
-  var filter = filter[1];
-  var position =
-    ad == "down"
-      ? puzzle.activeCell[0] - down.range[0]
-      : puzzle.activeCell[1] - across.range[0];
+const filterSuggestions = (suggestions, position) => {
+  // var filter = filter[1];
+  // var position =
+  //   ad == "down"
+  //     ? puzzle.activeCell[0] - down.range[0]
+  //     : puzzle.activeCell[1] - across.range[0];
   let finalresult = [];
 
-  list.sort(function(a, b) {
+  suggestions.sort(function(a, b) {
     return parseFloat(b.score) - parseFloat(a.score);
   });
 
-  for (let word of list) {
-    if (filter && filter != word.text[position]) {
-      continue;
-    }
+  for (let word of suggestions) {
+    // if (filter && filter != word.text[position]) {
+    //   continue;
+    // }
     if (finalresult.length === 100) {
       break;
     }
@@ -75,10 +75,10 @@ const filterSuggestions = (list, filter, ad) => {
   return finalresult;
 };
 
-function AcrossSuggestions({ puzzle, across }) {
+function AcrossSuggestions({ suggestions }) {
   return (
     <div class="suggestions">
-      {filterSuggestions(acrossSuggestions, "across").map((x, i) => (
+      {filterSuggestions(suggestions, "across").map((x, i) => (
         <div class="inline">
           <div
             onMouseEnter={e => highlightCrosses(e, "across")}

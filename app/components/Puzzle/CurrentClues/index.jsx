@@ -150,7 +150,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <AcrossSuggestions />
+        {/* <AcrossSuggestions /> */}
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
