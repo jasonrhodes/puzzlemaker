@@ -506,18 +506,18 @@ input.inline-content-editable:focus {
     margin: 0 40px;
   }
   
-  .cluenav {
+  .current-clues a.cluenav {
     display: block;
     position: absolute;
-    top: 5px;
+    top: 35px;
   }
   
   .cluenav.prev {
-    left: 5px;
+    left: 0px;
   }
   
   .cluenav.next {
-    right: 5px;
+    right: 0px;
   }
   
   #keyboard > .keyrow {
