@@ -15,7 +15,7 @@ function ClueInput({ clues, direction, number, setClue }) {
     <input
       class="inline-content-editable"
       onClick={e => e.stopPropagation()}
-      onChange=
+      onChange={handleChange}
       style={{ width: measureMyInputText(value) + "px" }}
       value={value}
       type="text"
@@ -31,7 +31,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
-  const [acrossClue, setAcrossClue] = React.useState(puzzle.clues.across[acrossNumber]);
   
   const showNonCrosses = (e, ad) => {
     e.stopPropagation();
@@ -42,13 +41,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
       setAcrossFilter([]);
     }
   };
-
-  const handleChange = (e, direction) => {
-    e.preventDefault();
-    //direction === "across" ? 
-    puzzle.clues[direction][acrossNumber] = e.target.value;
-    setAcrossClue(e.target.value);
-  }
   
   return (
     <div class="current-clues">
@@ -64,14 +56,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         <div class="inline">
           <h3>{acrossNumber} Across:</h3>
-          <input
-            class="inline-content-editable"
-            onClick={e => e.stopPropagation()}
-            onChange={e => handleChange(e,"across")}
-            style={{ width: measureMyInputText(acrossNumber + "clue") + "px" }}
-            value={acrossClue}
-            type="text"
-          />
+          <ClueInput clues={puzzle.clues} direction="across" number={acrossNumber} setClue={puzzle.setClue} />
         </div>
         <div class="current">
           {across.word.toUpperCase()}
