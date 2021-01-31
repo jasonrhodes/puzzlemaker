@@ -54,58 +54,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
     focusOnActive();
   };
 
-  const highlightCrosses = (e, ad) => {
-    if (ad == "down") {
-      setAcrossHighlight(
-        e.currentTarget.textContent[puzzle.activeCell[0] - down.range[0]]
-      );
-    } else {
-      setDownHighlight(
-        e.currentTarget.textContent[puzzle.activeCell[1] - across.range[0]]
-      );
-    }
-  };
-
-  const unHighlightCrosses = e => {
-    setAcrossHighlight(null);
-    setDownHighlight(null);
-  };
-
-  const hideNonCrosses = (e, ad) => {
-    e.stopPropagation();
-    if (ad == "down") {
-      if (acrossFilter[0] == e.currentTarget.previousSibling.textContent) {
-        setAcrossFilter([]);
-      } else {
-        setAcrossFilter([
-          e.currentTarget.previousSibling.textContent,
-          e.currentTarget.previousSibling.textContent[
-            puzzle.activeCell[0] - down.range[0]
-          ]
-        ]);
-      }
-    } else {
-      if (downFilter[0] == e.currentTarget.previousSibling.textContent) {
-        setDownFilter([]);
-      } else {
-        setDownFilter([
-          e.currentTarget.previousSibling.textContent,
-          e.currentTarget.previousSibling.textContent[
-            puzzle.activeCell[1] - across.range[0]
-          ]
-        ]);
-      }
-    }
-  };
-
-  const showNonCrosses = (e, ad) => {
-    e.stopPropagation();
-    if (ad == "down") {
-      setDownFilter([]);
-    } else {
-      setAcrossFilter([]);
-    }
-  };
 
   return (
     <div class="current-clues">
@@ -159,9 +107,47 @@ const CurrentClues = ({ across, down, puzzle }) => {
         </div>
         {/* <AcrossSuggestions /> */}
       </div>
-      
-
-        {/* <DownSuggestions /> */}
+      <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
+        <div class="inline">
+          <h3>{downNumber} Down:</h3>
+          <input
+            class="inline-content-editable"
+            onClick={e => e.stopPropagation()}
+            style={{ width: measureMyInputText(downNumber + "clue") + "px" }}
+            value={downNumber + " clue"}
+            type="text"
+          />
+        </div>
+        <div class="current">
+          {down.word.toUpperCase()}
+          <a
+            target="_blank"
+            href={
+              "http://onelook.com/?w=" +
+              down.word.toUpperCase().replaceAll("-", "?")
+            }
+          >
+            <img
+              style={{ width: "16px" }}
+              src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
+            />
+            <span class="pbtip">
+              <b>Open in OneLook</b>
+            </span>
+          </a>
+          {downFilter[0] ? (
+            <a onClick={e => showNonCrosses(e, "down")}>
+              <EyeIcon size={20} />
+              <span class="pbtip">
+                <b>Unfilter Down crosses</b>
+              </span>
+            </a>
+          ) : (
+            ""
+          )}
+        </div>
+        <SuggestionList ad={"down"} />
+      </div>
       <KeyBoard puzzle={puzzle} mobileView={mobileView} />
     </div>
   );
