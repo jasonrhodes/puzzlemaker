@@ -1,7 +1,11 @@
 const React = require("react");
 const { measureMyInputText } = require("../../../utils/style");
 const { Link } = require("react-router-dom");
-const { EyeIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octicons-react");
+const {
+  EyeIcon,
+  TriangleLeftIcon,
+  TriangleRightIcon
+} = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
@@ -18,7 +22,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [acrossFilter, setAcrossFilter] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
-  
 
   const showNonCrosses = (e, ad) => {
     e.stopPropagation();
@@ -28,25 +31,32 @@ const CurrentClues = ({ across, down, puzzle }) => {
       setAcrossFilter([]);
     }
   };
-  const navClue = (e,ad,mod) => {
+  const navClue = (e, ad, pn) => {
     e.stopPropagation();
-    var wantnumber = ad == 'across' ? acrossNumber + mod : downNumber + mod;
     var newGrid = puzzle.grid;
-    console.log(wantnumber);
-    for (let row = 0; row < newGrid.length; row++) {
-      for (let column = 0; column < newGrid[row].length; column++) {
-        var clue = newGrid[row][column].clue;
-        console.log(clue);
-        console.log(ad == 'across' ? 'is across' : '');
-        console.log(clue.isAcrossStart ? 'is across start' : '');
-        console.log(clue.acrossClueNumber == wantnumber ? 'is wantnumber' : '');
-        if ((ad == 'down' && clue.isDownStart && clue.downClueNumber == wantnumber) || 
-            (ad == 'across' && clue.isAcrossStart && clue.acrossClueNumber == wantnumber)) {
-          console.log('set it!');
-          puzzle.setActiveCell[row,column];
-          break;
+    var terminus = [];
+    if (pn == next) {
+      //find the start with the next highest number
+      for (let row = 0; row < newGrid.length; row++) {
+        for (let column = 0; column < newGrid[row].length; column++) {
+          var clue = newGrid[row][column].clue;
+          if ((ad == "down" && clue.isDownStart && clue.downClueNumber > downNumber) ||
+              (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber > acrossNumber)) {
+            puzzle.setActiveCell([row, column]);
+            break;
+          }
         }
       }
+    } else {
+      //find the start with the next lowest number
+      for (let row = newGrid.length - 1; row >= 0; row--) {
+        for (let column = newGrid[row].length - 1; column >= 0; column--) {
+          var clue = newGrid[row][column].clue;
+          if ((ad == "down" && clue.isDownStart && clue.downClueNumber < downNumber) ||
+              (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber < acrossNumber)) {
+            puzzle.setActiveCell([row, column]);
+            break;
+          }
     }
   };
   return (
@@ -61,8 +71,22 @@ const CurrentClues = ({ across, down, puzzle }) => {
       />
       {acrossNumber !== "-" ? (
         <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
-          <a class="cluenav prev key" onClick={(e) => {navClue(e,'across',-1)}}><TriangleLeftIcon size={24} /></a>
-          <a class="cluenav next key" onClick={(e) => {navClue(e,'across',1)}}><TriangleRightIcon size={24} /></a>
+          <a
+            class="cluenav prev key"
+            onClick={e => {
+              navClue(e, "across", "prev");
+            }}
+          >
+            <TriangleLeftIcon size={24} />
+          </a>
+          <a
+            class="cluenav next key"
+            onClick={e => {
+              navClue(e, "across", "next");
+            }}
+          >
+            <TriangleRightIcon size={24} />
+          </a>
           <div class="inline" onClick={e => e.stopPropagation()}>
             <h3>{acrossNumber}A: </h3>
             <ClueInput direction="across" number={acrossNumber} />
