@@ -12,7 +12,7 @@ const PuzzleTitle = ({ width, title, author, setTitle, setAuthor }) => {
   }
 
   return (
-    <div style={{'margin-right': 'calc(100% - ' + (authorWidth + titleWidth + 200) + 'px)'}}>
+    <div style={{'margin-right': 'calc(100% - ' + (authorWidth + titleWidth + 235) + 'px)'}}>
       <div class="puzzle-info" id="puzzle-info">
         <input id="title" class="inline-content-editable" style={{ width: measureMyInputText(title) + 'px' }} value={title} type="text" onChange={(e) => handleChange(e, setTitle, setTitleWidth)} />
         <span>by </span>

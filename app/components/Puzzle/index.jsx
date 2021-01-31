@@ -21,14 +21,16 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <Title
-            width={puzzle.grid[0].length * 40}
-            title={puzzle.title}
-            author={puzzle.author}
-            setTitle={puzzle.setTitle}
-            setAuthor={puzzle.setAuthor}
-          />
-          <Menu puzzle={puzzle} />
+          <div class={"inline"}>
+            <Title
+              width={puzzle.grid[0].length * 40}
+              title={puzzle.title}
+              author={puzzle.author}
+              setTitle={puzzle.setTitle}
+              setAuthor={puzzle.setAuthor}
+            />
+            <Menu puzzle={puzzle} />
+          </div>
           <div class="puzzle-container">
             <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length)}>
               {puzzle.grid.map((columns, i) => (
