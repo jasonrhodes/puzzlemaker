@@ -410,11 +410,12 @@ input.inline-content-editable:focus {
   }
   
   .container {
-    width: calc(100% - 28px);
+    width: 100%;
   }
   
   .title {
     font-size: 1.5em;
+    margin-bottom: 5px;
   }
   
   .title + div > div.inline {
