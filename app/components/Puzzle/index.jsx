@@ -28,8 +28,8 @@ const Puzzle = ({ initialGrid }) => {
             setTitle={puzzle.setTitle}
             setAuthor={puzzle.setAuthor}
           />
+          <Menu puzzle={puzzle} />
           <div class="puzzle-container">
-            <Menu puzzle={puzzle} />
             <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length)}>
               {puzzle.grid.map((columns, i) => (
                 <Row key={`row-${i}`} row={i} columns={columns} />

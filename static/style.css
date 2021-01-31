@@ -206,8 +206,10 @@ input.inline-content-editable:focus {
 .menu {
   position: absolute;
   top: -32px;
-  right: -20px;
+  left: calc(100% - 200px);
+  width: 220px;
 }
+
 
 .menu a {
   padding: 8.5px;
