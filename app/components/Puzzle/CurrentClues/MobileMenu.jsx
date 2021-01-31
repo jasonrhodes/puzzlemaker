@@ -1,3 +1,4 @@
+const React = require("react");
 const { TypographyIcon } = require("@primer/octicons-react");
 
 module.exports = function MobileMenu({

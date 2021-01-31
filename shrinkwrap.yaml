@@ -5,6 +5,7 @@ dependencies:
   jsx-loader: 0.13.2
   react: 16.8.6
   react-dom: 16.8.6
+  react-feather: 2.0.9
   react-pdf: 5.1.0
   react-router-dom: 5.0.0
   react-tooltip: 4.2.13
@@ -2613,6 +2614,14 @@ packages:
       react: ^16.0.0
     resolution:
       integrity: sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
+  /react-feather/2.0.9:
+    dependencies:
+      prop-types: 15.7.2
+    dev: false
+    peerDependencies:
+      react: ^16.8.6 || ^17
+    resolution:
+      integrity: sha512-yMfCGRkZdXwIs23Zw/zIWCJO3m3tlaUvtHiXlW+3FH7cIT6fiK1iJ7RJWugXq7Fso8ZaQyUm92/GOOHXvkiVUw==
   /react-is/16.8.3:
     dev: false
     resolution:
@@ -3567,6 +3576,7 @@ specifiers:
   jsx-loader: ^0.13.2
   react: ^16.8.6
   react-dom: ^16.8.6
+  react-feather: ^2.0.9
   react-pdf: ^5.1.0
   react-router-dom: ^5.0.0
   react-tooltip: ^4.2.13
