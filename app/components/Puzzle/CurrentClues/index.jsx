@@ -22,12 +22,15 @@ const CurrentClues = ({ across, down, puzzle }) => {
 
   const showNonCrosses = (e, ad) => {
     e.stopPropagation();
-
     if (ad == "down") {
       setDownFilter([]);
     } else {
       setAcrossFilter([]);
     }
+  };
+  const navClue = (e) => {
+    e.stopPropagation();
+    
   };
   return (
     <div class="current-clues">
@@ -41,6 +44,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       />
       {acrossNumber !== "-" ? (
         <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
+          <a class="cluenav prev key" onClick={(e) => {navClue(e,'across',)}}></a>
           <div class="inline" onClick={e => e.stopPropagation()}>
             <h3>{acrossNumber}A: </h3>
             <ClueInput direction="across" number={acrossNumber} />

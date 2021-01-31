@@ -399,7 +399,7 @@ input.inline-content-editable:focus {
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-#keyboard, #mobilemenu {
+#keyboard, #mobilemenu, .cluenav {
   display: none;
 }
 
@@ -503,7 +503,21 @@ input.inline-content-editable:focus {
   }
   
   #across, #down {
-    margin: 0 20px;
+    margin: 0 40px;
+  }
+  
+  .cluenav {
+    display: block;
+    position: absolute;
+    top: 5px;
+  }
+  
+  .cluenav.prev {
+    left: 5px;
+  }
+  
+  .cluenav.next {
+    right: 5px;
   }
   
   #keyboard > .keyrow {
@@ -516,7 +530,7 @@ input.inline-content-editable:focus {
     height: 27px;
     padding-top: 6px;
   }
-  #keyboard .key {
+  .key {
     border: 1px solid #777;
     border-radius: 1px;
     text-align: center;
