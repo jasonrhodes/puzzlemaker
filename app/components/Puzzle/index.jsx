@@ -6,6 +6,17 @@ const Title = require("./Title");
 const CurrentClues = require("./CurrentClues");
 
 const Puzzle = ({ initialGrid }) => {
+  
+  const gridSizeDesc = (length) => {
+    if (length > 18) {
+     return "largegrid";
+    } else if (length > 12) {
+     return "mediumgrid";
+    } else {
+     return "smallgrid";
+    }
+  };
+  
   return (
     <PuzzleContext.Consumer>
       {puzzle => (
@@ -19,7 +30,7 @@ const Puzzle = ({ initialGrid }) => {
           />
           <div class="puzzle-container">
             <Menu puzzle={puzzle} />
-            <div class={"puzzle-grid grid" + puzzle.grid[0].length}>
+            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length)}>
               {puzzle.grid.map((columns, i) => (
                 <Row key={`row-${i}`} row={i} columns={columns} />
               ))}
