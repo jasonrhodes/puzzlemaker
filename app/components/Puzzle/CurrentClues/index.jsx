@@ -8,7 +8,7 @@ const {
 } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
-const { getSuggestions } = require("./suggestions");
+const { getSuggestions, SuggestionsList } = require("./suggestions");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
@@ -117,6 +117,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         downNumber={downNumber}
         downWord={down.word.toUpperCase()}
       />
+      
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         <div class="inline">
           <h3>{acrossNumber} Across:</h3>
@@ -158,47 +159,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
         </div>
         {/* <AcrossSuggestions /> */}
       </div>
-      <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
-        <div class="inline">
-          <h3>{downNumber} Down:</h3>
-          <input
-            class="inline-content-editable"
-            onClick={e => e.stopPropagation()}
-            style={{ width: measureMyInputText(downNumber + "clue") + "px" }}
-            value={downNumber + " clue"}
-            type="text"
-          />
-        </div>
-        <div class="current">
-          {down.word.toUpperCase()}
-          <a
-            target="_blank"
-            href={
-              "http://onelook.com/?w=" +
-              down.word.toUpperCase().replaceAll("-", "?")
-            }
-          >
-            <img
-              style={{ width: "16px" }}
-              src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
-            />
-            <span class="pbtip">
-              <b>Open in OneLook</b>
-            </span>
-          </a>
-          {downFilter[0] ? (
-            <a onClick={e => showNonCrosses(e, "down")}>
-              <EyeIcon size={20} />
-              <span class="pbtip">
-                <b>Unfilter Down crosses</b>
-              </span>
-            </a>
-          ) : (
-            ""
-          )}
-        </div>
+      
+
         {/* <DownSuggestions /> */}
-      </div>
       <KeyBoard puzzle={puzzle} mobileView={mobileView} />
     </div>
   );
