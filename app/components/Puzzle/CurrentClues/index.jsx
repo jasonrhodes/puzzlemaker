@@ -16,6 +16,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
+  const [downSuggestions, setDownSuggestions] = React.useState([]);
+  const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
+  
 
   const showNonCrosses = (e, ad) => {
     e.stopPropagation();
@@ -65,6 +68,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
             myFilter={acrossFilter}
             otherFilter={downFilter}
             setOtherFilter={setDownFilter}
+            mySuggestions={acrossSuggestions}
+            setMySuggestions={setAcrossSuggestions}
+            otherSuggestions={downSuggestions}
           />
         </div>
       ) : (
@@ -102,6 +108,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
             myFilter={downFilter}
             otherFilter={acrossFilter}
             setOtherFilter={setAcrossFilter}
+            mySuggestions={downSuggestions}
+            setMySuggestions={setDownSuggestions}
+            otherSuggestions={acrossSuggestions}
           />
         </div>
       ) : (

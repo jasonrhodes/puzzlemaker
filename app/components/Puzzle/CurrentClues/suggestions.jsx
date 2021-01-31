@@ -64,12 +64,14 @@ function SuggestionsList({
   setOtherHighlight,
   myFilter,
   otherFilter,
-  setOtherFilter
+  setOtherFilter,
+  mySuggestions,
+  setMySuggestions,
+  otherSuggestions
 }) {
   const cur_word = ad == "down" ? puzzle.words.down : puzzle.words.across;
   const active_letter = ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
   const position = active_letter - cur_word.range[0];
-  const [mySuggestions, setMySuggestions] = React.useState([]);
 
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
@@ -144,12 +146,12 @@ function SuggestionsList({
               myHighlight == x[active_letter - cur_word.range[0]] ||
               x == otherFilter[0]
                 ? "suggestion highlighted"
-                : // !otherSuggestions.length ||
-                  //   otherSuggestions
-                  //     .map(
-                  //       s => s.text[puzzle.activeCell[1] - across.range[0]]
-                  //     )
-                  //     .includes(x[puzzle.activeCell[0] - down.range[0]])
+                :  !otherSuggestions.length ||
+                     otherSuggestions
+                       .map(
+                         s => s.text[puzzle.activeCell[1] - across.range[0]]
+                       )
+                       .includes(x[puzzle.activeCell[0] - down.range[0]])
                   // ?
                   "suggestion"
               //: "suggestion unmatched"
