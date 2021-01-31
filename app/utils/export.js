@@ -12,12 +12,14 @@ function convertPuzzleToJSON(puzzle) {
       cols: puzzle.grid[0].length
     },
     clues: {
-      across: Object.keys(puzzle.clues.across).map(key => key + "|| " + "(blank clue)"),
-      down: Object.keys(puzzle.clues.down).map(key => key + "|| " + "(blank clue)")
+      across: Object.entries(puzzle.clues.across).map(pair => pair[0] + "|| " + pair[1]),
+      down: Object.entries(puzzle.clues.down).map(pair => pair[0] + "|| " + pair[1])
     },
     grid: []
   };
 
+  console.log(puzzle.clues.across);
+  
   for (let i = 0; i < puzzle.grid.length; i++) {
     for (let j = 0; j < puzzle.grid[0].length; j++) {
       puz.grid.push(

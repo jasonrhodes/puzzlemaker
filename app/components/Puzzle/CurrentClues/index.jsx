@@ -27,6 +27,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
     }
   };
 
+  const handleChange = (e, direction) => {
+    e.preventDefault();
+    setFunc(e.target.value);
+  }
+  
   return (
     <div class="current-clues">
       <MobileMenu
@@ -44,6 +49,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           <input
             class="inline-content-editable"
             onClick={e => e.stopPropagation()}
+            onChange={e => handleChange(e,"across")}
             style={{ width: measureMyInputText(acrossNumber + "clue") + "px" }}
             value={acrossNumber + " clue"}
             type="text"
