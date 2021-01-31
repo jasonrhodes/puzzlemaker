@@ -74,6 +74,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setAuthor(savedPuzzle.author);
       const numberedGrid = assignClueNumbersToGrid(savedPuzzle.grid);
       setGrid(numberedGrid);
+      setClues(savedPuzzle.clues);
       setActiveCell(savedPuzzle.activeCell);
       setDirection(savedPuzzle.direction);
       setWords(savedPuzzle.words);

@@ -8,21 +8,6 @@ const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
 
-function ClueInput({ clues, direction, number, setClue }) {
-  const value = clues[direction][number];
-  const handleChange = (e) => setClue(number, direction, e.target.value);
-  return (
-    <input
-      class="inline-content-editable"
-      onClick={e => e.stopPropagation()}
-      onChange={handleChange}
-      style={{ width: measureMyInputText(value) + "px" }}
-      value={value}
-      type="text"
-    />
-  );
-}
-
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
@@ -55,7 +40,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         <div class="inline">
-          <h3>{acrossNumber} Across:</h3>
+          <h3>{acrossNumber}a: </h3>
           <ClueInput clues={puzzle.clues} direction="across" number={acrossNumber} setClue={puzzle.setClue} />
         </div>
         <div class="current">
@@ -90,7 +75,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
-          <h3>{downNumber} Down:</h3>
+          <h3>{downNumber}d: </h3>
           <ClueInput clues={puzzle.clues} direction="down" number={downNumber} setClue={puzzle.setClue} />
         </div>
         <div class="current">
