@@ -125,35 +125,30 @@ const filterSuggestions = (suggestions, position) => {
 //   );
 // }
 
-function suggestionsList({ ad, puzzle, suggestions, setSuggestions }) {
+function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighlight, setOtherHighlight, myFilter, otherFilter, setOtherFilter }) {
 
   const cur_word = puzzle.words.across;
+  const active_letter = ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
   
   React.useEffect(() => {
-    //getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
-    //getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+    getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
   }, [cur_word]);
   // end
 
-  const highlightCrosses = (e, ad) => {
-    if (ad == "down") {
-      setAcrossHighlight(
-        e.currentTarget.textContent[puzzle.activeCell[0] - down.range[0]]
-      );
-    } else {
-      setDownHighlight(
-        e.currentTarget.textContent[puzzle.activeCell[1] - across.range[0]]
-      );
-    }
+  const highlightCrosses = (e) => {
+    setOtherHighlight(
+      e.currentTarget.textContent[active_letter - cur_word.range[0]]
+    );
   };
 
   const unHighlightCrosses = e => {
-    setAcrossHighlight(null);
-    setDownHighlight(null);
+    setHighlight(null);
   };
 
   const hideNonCrosses = (e, ad) => {
     e.stopPropagation();
+    
+    
     if (ad == "down") {
       if (acrossFilter[0] == e.currentTarget.previousSibling.textContent) {
         setAcrossFilter([]);
