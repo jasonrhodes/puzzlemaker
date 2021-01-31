@@ -16,12 +16,12 @@ const Puzzle = ({ initialGrid }) => {
      return "smallgrid";
     }
   };
-  
+
   return (
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <div class={"inline"}>
+          <div class={"inline"} style={{'max-width': (puzzle.grid[0].length * 40) + 'px'}}>
             <Title
               width={puzzle.grid[0].length * 40}
               title={puzzle.title}

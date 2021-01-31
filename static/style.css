@@ -555,7 +555,7 @@ input.inline-content-editable:focus {
   .puzzle-cell {
     width: auto;
     height: auto;
-    flex: 1
+    flex: 1;
   }
   
   .puzzle-cell .input {
