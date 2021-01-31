@@ -1,11 +1,39 @@
 const React = require("react");
+const WordCache = new Map();
 
-const filterSuggestions = (list, ad) => {
-  var filter = ad == "down" ? downFilter[1] : acrossFilter[1];
-  var position =
-    ad == "down"
-      ? puzzle.activeCell[0] - down.range[0]
-      : puzzle.activeCell[1] - across.range[0];
+const getSuggestions = async (clue, setFunc) => {
+  const chars = clue.split("");
+  const hasNoDashes = !chars.some(hasDash);
+  const hasAllDashes = chars.every(hasDash);
+  if (hasNoDashes || hasAllDashes) {
+    // if the word is all blank or all filled in, no suggestions needed
+    setFunc([]);
+    return [];
+  }
+  const cached = WordCache.get(clue);
+  if (cached) {
+    setFunc(cached); // don't re-call API for clue pattern we already cached
+    return cached;
+  }
+  const apiString =
+    "https://api.datamuse.com/words?sp=" +
+    clue.replace(/-/g, "?") +
+    "&max=1000&md=f";
+  //console.log(apiString);
+  const response = await fetch(apiString);
+  const myJson = await response.json();
+  const matches = getMatches(myJson, clue.length);
+  WordCache.set(clue, matches);
+  setFunc(matches);
+  return matches;
+};
+
+const filterSuggestions = (list, filter, position) => {
+  var filter = filter[1];
+  // var position =
+  //   ad == "down"
+  //     ? puzzle.activeCell[0] - down.range[0]
+  //     : puzzle.activeCell[1] - across.range[0];
   let finalresult = [];
 
   list.sort(function(a, b) {
@@ -24,36 +52,13 @@ const filterSuggestions = (list, ad) => {
   return finalresult;
 };
 
+const hasDash = char => char === "-"; 
+
 function AcrossSuggestions({ puzzle, across }) {
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   
-  const getSuggestions = async (clue, setFunc) => {
-    const chars = clue.split("");
-    const hasNoDashes = !chars.some(hasDash);
-    const hasAllDashes = chars.every(hasDash);
-    if (hasNoDashes || hasAllDashes) {
-      // if the word is all blank or all filled in, no suggestions needed
-      setFunc([]);
-      return [];
-    }
-    const cached = WordCache.get(clue);
-    if (cached) {
-      setFunc(cached); // don't re-call API for clue pattern we already cached
-      return cached;
-    }
-    const apiString =
-      "https://api.datamuse.com/words?sp=" +
-      clue.replace(/-/g, "?") +
-      "&max=1000&md=f";
-    //console.log(apiString);
-    const response = await fetch(apiString);
-    const myJson = await response.json();
-    const matches = getMatches(myJson, clue.length);
-    WordCache.set(clue, matches);
-    setFunc(matches);
-    return matches;
-  };
+  
   React.useEffect(() => {
     getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
     getSuggestions(down.word.toLowerCase(), setDownSuggestions);

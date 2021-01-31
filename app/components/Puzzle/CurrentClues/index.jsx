@@ -1,5 +1,4 @@
 const React = require("react");
-const WordCache = new Map();
 const { measureMyInputText, focusOnActive } = require("../../utils/style");
 const { Link } = require("react-router-dom");
 const {
@@ -18,7 +17,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [acrossFilter, setAcrossFilter] = React.useState([]);
   const [downHighlight, setDownHighlight] = React.useState(null);
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
-  const hasDash = char => char === "-"; 
+  
   const getMatches = (response, len) => {
     let result = [];
 
