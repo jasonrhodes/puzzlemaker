@@ -2,6 +2,10 @@ const React = require("react");
 const WordCache = new Map();
 const hasDash = char => char === "-";
 const { focusOnActive } = require("../../../utils/style");
+const {
+  ArrowDownIcon,
+  ArrowRightIcon
+} = require("@primer/octicons-react");
 
 module.exports = {
   getSuggestions,
@@ -105,8 +109,6 @@ async function getSuggestions(clue, setFunc) {
 function SuggestionsList({
   ad,
   puzzle,
-  mySuggestions,
-  setMySuggestions,
   myHighlight,
   setOtherHighlight,
   myFilter,
@@ -117,6 +119,7 @@ function SuggestionsList({
   const active_letter =
     ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
   const position = active_letter - cur_word.range[0];
+  const [mySuggestions, setMySuggestions] = React.useState([]);
 
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
@@ -175,8 +178,6 @@ function SuggestionsList({
     setOtherHighlight(null);
     focusOnActive();
   };
-  
-  console.log(mySuggestions);
 
   return (
     <div class="suggestions">
@@ -199,12 +200,12 @@ function SuggestionsList({
                   "suggestion"
               //: "suggestion unmatched"
             }
-            onClick={e => fillWithSuggestion(e, x, "down")}
+            onClick={e => fillWithSuggestion(e, x, ad)}
           >
             {x}
           </div>
-          <a onClick={e => hideNonCrosses(e, "down")}>
-            <ArrowRightIcon size={12} />
+          <a onClick={e => hideNonCrosses(e, ad)}>
+            {ad == 'down' ? <ArrowRightIcon size={12} /> : <ArrowDownIcon size={12} /> }
             <span class="pbtip">
               <b>
                 {x == myFilter[0]

@@ -2,8 +2,6 @@ const React = require("react");
 const { measureMyInputText } = require("../../../utils/style");
 const { Link } = require("react-router-dom");
 const {
-  ArrowDownIcon,
-  ArrowRightIcon,
   EyeIcon
 } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
@@ -14,17 +12,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
   const [mobileView, setMobileView] = React.useState("keyboard");
-  const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
-  const [downSuggestions, setDownSuggestions] = React.useState([]);
   const [downHighlight, setDownHighlight] = React.useState(null);
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
-
-  // Not sure if these need to stay here or can move to the suggestions.jsx file
-  // Also: do we need getSuggestions to re-run in both directions whenever either of
-  // those values update, or do we want across to re-run when across changes and
-  // down to re-run when down updates?
   
   const showNonCrosses = (e, ad) => {
     e.stopPropagation();
@@ -86,7 +77,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <SuggestionsList ad={"across"} puzzle={puzzle} mysuggestions={acrossSuggestions} setMySuggestions={setAcrossSuggestions} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
+        <SuggestionsList ad={"across"} puzzle={puzzle} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
@@ -127,7 +118,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <SuggestionsList ad={"down"} puzzle={puzzle} mysuggestions={downSuggestions} setMySuggestions={setDownSuggestions} myHighlight={downHighlight} setOtherHighlight={setAcrossHighlight} myFilter={downFilter} otherFilter={acrossFilter} setOtherFilter={setAcrossFilter}  />
+        <SuggestionsList ad={"down"} puzzle={puzzle} myHighlight={downHighlight} setOtherHighlight={setAcrossHighlight} myFilter={downFilter} otherFilter={acrossFilter} setOtherFilter={setAcrossFilter}  />
       </div>
       <KeyBoard puzzle={puzzle} mobileView={mobileView} />
     </div>
