@@ -397,8 +397,13 @@ input.inline-content-editable:focus {
   .menu {
     top: -78px;
   }
+  
   .menu a {
     padding: 6.5px;
+  }
+  
+  .container {
+    width: 100%;
   }
   
   .title {
@@ -410,14 +415,16 @@ input.inline-content-editable:focus {
   }
   
   .current-clues h3 {
-    margin: 1px 0;
-    font-size: 18px;
+    margin: 0;
+    font-size: 16px;
+  }
+  input.inline-content-editable, .fakeinput {
+    font-size: 16px
   }
   
   .current-clues .current {
     font-size: 18px;
-    height: 19px;
-    margin-bottom: 3px;
+    margin: -4px 0 3px 0;
   }
   
   #keyboard.activemobile {
