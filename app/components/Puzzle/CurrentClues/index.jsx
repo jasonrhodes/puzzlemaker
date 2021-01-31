@@ -34,8 +34,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const navClue = (e, ad, pn) => {
     e.stopPropagation();
     var newGrid = puzzle.grid;
-    var terminus = [];
-    if (pn == next) {
+    var terminus, termrow, termcol;
+    if (pn == 'next') {
       //find the start with the next highest number
       for (let row = 0; row < newGrid.length; row++) {
         for (let column = 0; column < newGrid[row].length; column++) {
@@ -43,7 +43,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
           if ((ad == "down" && clue.isDownStart && clue.downClueNumber > downNumber) ||
               (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber > acrossNumber)) {
             puzzle.setActiveCell([row, column]);
-            break;
+            return;
+          } else if ((!terminus && ad == "down" && clue.isDownStart) ||
+              (ad == "down" && clue.isDownStart && clue.downClueNumber < terminus) ||
+              (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber < terminus)) {
+            terminus = clue.downClueNumber;
+            termrow = row;
+            termcol = column;
           }
         }
       }
@@ -55,9 +61,19 @@ const CurrentClues = ({ across, down, puzzle }) => {
           if ((ad == "down" && clue.isDownStart && clue.downClueNumber < downNumber) ||
               (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber < acrossNumber)) {
             puzzle.setActiveCell([row, column]);
-            break;
+            return;
+          } else if ((!terminus && ad == "down" && clue.isDownStart) ||
+              (ad == "down" && clue.isDownStart && clue.downClueNumber > terminus) ||
+              (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber > terminus)) {
+            terminus = clue.downClueNumber;
+            termrow = row;
+            termcol = column;
           }
+        }
+      }
     }
+    puzzle.setActiveCell([termrow, termcol]);
+    return;
   };
   return (
     <div class="current-clues">
