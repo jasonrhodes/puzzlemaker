@@ -46,9 +46,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
             <h3>{acrossNumber}A: </h3>
             <ClueInput direction="across" number={acrossNumber} />
           </div> :
-          <div class="inline" >Select input field</div>
+          <h3>Select input field</h3>
         }
-        <div class="current">
+        <div class="current" onClick={(e) => e.stopPropagation()}>
           {across.word.toUpperCase()}
           <OneLookLink word={across.word} />
           {acrossFilter[0] ? (
@@ -70,9 +70,9 @@ const CurrentClues = ({ across, down, puzzle }) => {
             <h3>{downNumber}D: </h3>
             <ClueInput direction="down" number={downNumber} />
           </div> :
-          <div class="inline" >Select input field</div>
+          <h3>Select input field</h3>
         }
-        <div class="current">
+        <div class="current" onClick={(e) => e.stopPropagation()}>
           {down.word.toUpperCase()}
           <OneLookLink word={down.word} />
           {downFilter[0] ? (
