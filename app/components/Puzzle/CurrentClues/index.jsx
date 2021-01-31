@@ -8,7 +8,7 @@ const {
 } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
-const { getSuggestions, SuggestionsList, resetSuggestions } = require("./suggestions");
+const { SuggestionsList } = require("./suggestions");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
@@ -86,7 +86,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <SuggestionList ad={"across"} puzzle={puzzle} mysuggestions={acrossSuggestions} setMySuggestions={setAcrossSuggestions} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
+        <suggestionsList ad={"across"} puzzle={puzzle} mysuggestions={acrossSuggestions} setMySuggestions={setAcrossSuggestions} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
@@ -127,7 +127,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <SuggestionList ad={"down"} puzzle={puzzle} mysuggestions={downSuggestions} setMySuggestions={setDownSuggestions} myHighlight={downHighlight} setOtherHighlight={setAcrossHighlight} myFilter={downFilter} otherFilter={acrossFilter} setOtherFilter={setAcrossFilter}  />
+        <suggestionsList ad={"down"} puzzle={puzzle} mysuggestions={downSuggestions} setMySuggestions={setDownSuggestions} myHighlight={downHighlight} setOtherHighlight={setAcrossHighlight} myFilter={downFilter} otherFilter={acrossFilter} setOtherFilter={setAcrossFilter}  />
       </div>
       <KeyBoard puzzle={puzzle} mobileView={mobileView} />
     </div>

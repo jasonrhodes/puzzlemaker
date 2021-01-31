@@ -51,7 +51,7 @@ async function getSuggestions(clue, setFunc) {
   WordCache.set(clue, matches);
   setFunc(matches);
   return matches;
-};
+}
 
 // function suggestionsList({ suggestions }) {
 //   return (
@@ -102,20 +102,28 @@ async function getSuggestions(clue, setFunc) {
 //   );
 // }
 
-function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighlight, setOtherHighlight, myFilter, otherFilter, setOtherFilter }) {
-
+function suggestionsList({
+  ad,
+  puzzle,
+  mySuggestions,
+  setMySuggestions,
+  myHighlight,
+  setOtherHighlight,
+  myFilter,
+  otherFilter,
+  setOtherFilter
+}) {
   const cur_word = ad == "down" ? puzzle.words.down : puzzle.words.across;
-  const active_letter = ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
+  const active_letter =
+    ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
   const position = active_letter - cur_word.range[0];
-  
+
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
   });
 
-  const highlightCrosses = (e) => {
-    setOtherHighlight(
-      e.currentTarget.textContent[position]
-    );
+  const highlightCrosses = e => {
+    setOtherHighlight(e.currentTarget.textContent[position]);
   };
 
   const unHighlightCrosses = e => {
@@ -129,13 +137,11 @@ function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighli
     } else {
       setOtherFilter([
         e.currentTarget.previousSibling.textContent,
-        e.currentTarget.previousSibling.textContent[
-          position
-        ]
+        e.currentTarget.previousSibling.textContent[position]
       ]);
     }
   };
-  
+
   const filterSuggestions = (suggestions, position) => {
     var filter = myFilter[1];
     let finalresult = [];
@@ -155,25 +161,24 @@ function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighli
     }
     return finalresult;
   };
-  
+
   const fillWithSuggestion = (e, suggestion) => {
     e.stopPropagation();
     const newGrid = [...puzzle.grid];
-    for (let i = cur_word.range[0]; i <= across.range[1]; i++) {
-      newGrid[puzzle.activeCell[0]][i].value =
-        suggestion[i - across.range[0]];
+    for (let i = cur_word.range[0]; i <= cur_word.range[1]; i++) {
+      newGrid[active_letter][i].value = suggestion[i - cur_word.range[0]];
     }
     puzzle.setGrid(newGrid);
-    
+
+    setOtherFilter([]);
     setOtherFilter([]);
     setOtherHighlight(null);
-
     focusOnActive();
   };
-   
-   return (
-      <div class="suggestions">
-       {filterSuggestions(mySuggestions, ad).map((x, i) => (
+
+  return (
+    <div class="suggestions">
+      {filterSuggestions(mySuggestions, ad).map((x, i) => (
         <div class="inline">
           <div
             onMouseEnter={e => highlightCrosses(e, ad)}
@@ -182,16 +187,15 @@ function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighli
               myHighlight == x[active_letter - cur_word.range[0]] ||
               x == otherFilter[0]
                 ? "suggestion highlighted"
-                : 
-                // !otherSuggestions.length ||
-                //   otherSuggestions
-                //     .map(
-                //       s => s.text[puzzle.activeCell[1] - across.range[0]]
-                //     )
-                //     .includes(x[puzzle.activeCell[0] - down.range[0]])
-                // ? 
-                "suggestion"
-                //: "suggestion unmatched"
+                : // !otherSuggestions.length ||
+                  //   otherSuggestions
+                  //     .map(
+                  //       s => s.text[puzzle.activeCell[1] - across.range[0]]
+                  //     )
+                  //     .includes(x[puzzle.activeCell[0] - down.range[0]])
+                  // ?
+                  "suggestion"
+              //: "suggestion unmatched"
             }
             onClick={e => fillWithSuggestion(e, x, "down")}
           >
@@ -201,9 +205,9 @@ function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighli
             <ArrowRightIcon size={12} />
             <span class="pbtip">
               <b>
-                {x == acrossFilter[0]
-                  ? "Unfilter Across crosses"
-                  : "Filter Across crosses"}
+                {x == myFilter[0]
+                  ? "Unfilter " + ad + " crosses"
+                  : "Filter " + ad + " crosses"}
               </b>
             </span>
           </a>
@@ -217,7 +221,7 @@ function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighli
             </span>
           </a>
         </div>
-          ))}
-      </div>
-    )
-  }
+      ))}
+    </div>
+  );
+}
