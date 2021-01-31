@@ -32,28 +32,32 @@ select {
 }
 
 .container {
-  width: auto;
+  width: 100%;
   display: inline-block;
   position: relative;
+  max-width: 1400px;
 }
 
 .puzzle-container {
   position: relative;
+  width: calc(100% - 300px);
 }
 
 .puzzle-grid {
   border: 1px solid black;
   border-bottom-width: 2px;
-  display: inline-grid;
 }
 
 .puzzle-row {
-  display: block;
+  display: flex;
   margin-bottom: -1px;
   line-height: 0;
+  width: 100%;
+  
 }
 
 .puzzle-cell {
+  flex-shrink: 1
   font-size: 20px;
   border: 1px solid black;
   width: 40px;
@@ -389,7 +393,7 @@ input.inline-content-editable:focus {
    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-#keyboard, #mobileMenu {
+#keyboard, #mobilemenu {
   display: none;
 }
 
