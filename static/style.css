@@ -502,6 +502,10 @@ input.inline-content-editable:focus {
     display: none;
   }
   
+  #across, #down {
+    margin: 0 20px;
+  }
+  
   #keyboard > .keyrow {
     display: flex;
   }
