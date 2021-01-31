@@ -28,16 +28,19 @@ const CurrentClues = ({ across, down, puzzle }) => {
       setAcrossFilter([]);
     }
   };
-  const navClue = (e,ad,pn) => {
+  const navClue = (e,ad,mod) => {
     e.stopPropagation();
-    
-    for (let row = 0; row < puzzle.grid.length; row++) {
-      for (let column = 0; column < puzzle.grid[row].length; column++) {
-        if () {
-          puzzlesetActiveCell
+    var wantnumber = ad == 'across' ? acrossNumber + mod : downNumber + mod;
+    var newGrid = puzzle.grid;
+    for (let row = 0; row < newGrid.length; row++) {
+      for (let column = 0; column < newGrid[row].length; column++) {
+        var clue = newGrid[row][column].clue;
+        console.log(clue);
+        if ((ad == 'down' && clue.isDownStart && clue.downClueNumber == wantnumber) || 
+            (ad == 'across' && clue.isAcrossStart && clue.acrossClueNumber == wantnumber)) {
+          puzzle.setActiveCell[row,column];
           break;
         }
-          
       }
     }
   };
@@ -53,8 +56,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
       />
       {acrossNumber !== "-" ? (
         <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
-          <a class="cluenav prev key" onClick={(e) => {navClue(e,'across','prev')}}><TriangleLeftIcon size={24} /></a>
-          <a class="cluenav next key" onClick={(e) => {navClue(e,'across','next')}}><TriangleRightIcon size={24} /></a>
+          <a class="cluenav prev key" onClick={(e) => {navClue(e,'across',-1)}}><TriangleLeftIcon size={24} /></a>
+          <a class="cluenav next key" onClick={(e) => {navClue(e,'across',1)}}><TriangleRightIcon size={24} /></a>
           <div class="inline" onClick={e => e.stopPropagation()}>
             <h3>{acrossNumber}A: </h3>
             <ClueInput direction="across" number={acrossNumber} />
