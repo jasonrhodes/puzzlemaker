@@ -48,7 +48,16 @@ const CurrentClues = ({ across, down, puzzle }) => {
 
     focusOnActive();
   };
-
+  
+  const showNonCrosses = (e, ad) => {
+    e.stopPropagation();
+    
+    if (ad == "down") {
+      setDownFilter([]);
+    } else {
+      setAcrossFilter([]);
+    }
+  };
 
   return (
     <div class="current-clues">
@@ -100,7 +109,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        {/* <AcrossSuggestions /> */}
+        <SuggestionList ad={"across"} puzzle={puzzle} mysuggestions={acrossSuggestions} setMySuggestions={setAcrossSuggestions} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
@@ -141,7 +150,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <SuggestionList ad={"down"} />
+        <SuggestionList ad={"down"} puzzle={puzzle} mysuggestions={downSuggestions} setMySuggestions={setDownSuggestions} myHighlight={downHighlight} setOtherHighlight={setAcrossHighlight} myFilter={downFilter} otherFilter={acrossFilter} setOtherFilter={setAcrossFilter}  />
       </div>
       <KeyBoard puzzle={puzzle} mobileView={mobileView} />
     </div>
