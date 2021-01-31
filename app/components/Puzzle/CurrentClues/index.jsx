@@ -41,8 +41,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
       />
       
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
-        <div class="inline">
-          <h3>{acrossNumber}a: </h3>
+        <div class="inline" onClick={(e) => e.stopPropagation()}>
+          <h3>{acrossNumber}A: </h3>
           <ClueInput direction="across" number={acrossNumber} />
         </div>
         <div class="current">
@@ -62,8 +62,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <SuggestionsList ad={"across"} puzzle={puzzle} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
-        <div class="inline">
-          <h3>{downNumber}d: </h3>
+        <div class="inline"  onClick={(e) => e.stopPropagation()}>
+          <h3>{downNumber}D: </h3>
           <ClueInput direction="down" number={downNumber} />
         </div>
         <div class="current">
