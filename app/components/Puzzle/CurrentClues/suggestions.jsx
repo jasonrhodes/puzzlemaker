@@ -2,10 +2,7 @@ const React = require("react");
 const WordCache = new Map();
 const hasDash = char => char === "-";
 const { focusOnActive } = require("../../../utils/style");
-const {
-  ArrowDownIcon,
-  ArrowRightIcon
-} = require("@primer/octicons-react");
+const { ArrowDownIcon, ArrowRightIcon } = require("@primer/octicons-react");
 
 module.exports = {
   getSuggestions,
@@ -70,8 +67,11 @@ function SuggestionsList({
   otherSuggestions
 }) {
   const cur_word = ad == "down" ? puzzle.words.down : puzzle.words.across;
+  const op_word = ad == "down" ? puzzle.words.across : puzzle.words.down;
   const active_letter = ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
+  const op_active_letter = ad == "down" ? puzzle.activeCell[1] : puzzle.activeCell[0];
   const position = active_letter - cur_word.range[0];
+  const op_position = op_active_letter - op_word.range[0];
 
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
@@ -97,7 +97,7 @@ function SuggestionsList({
     }
   };
 
-  const filterSuggestions = (suggestions) => {
+  const filterSuggestions = suggestions => {
     var filter = myFilter[1];
     let finalresult = [];
 
@@ -120,12 +120,14 @@ function SuggestionsList({
   const fillWithSuggestion = (e, suggestion) => {
     e.stopPropagation();
     const newGrid = [...puzzle.grid];
-    
+
     for (let i = cur_word.range[0]; i <= cur_word.range[1]; i++) {
-      if (ad == 'down') {
-        newGrid[i][puzzle.activeCell[1]].value = suggestion[i - cur_word.range[0]];
+      if (ad == "down") {
+        newGrid[i][puzzle.activeCell[1]].value =
+          suggestion[i - cur_word.range[0]];
       } else {
-        newGrid[puzzle.activeCell[0]][i].value = suggestion[i - cur_word.range[0]];
+        newGrid[puzzle.activeCell[0]][i].value =
+          suggestion[i - cur_word.range[0]];
       }
     }
     puzzle.setGrid(newGrid);
@@ -143,30 +145,33 @@ function SuggestionsList({
             onMouseEnter={e => highlightCrosses(e, ad)}
             onMouseLeave={e => unHighlightCrosses(e)}
             class={
-              myHighlight == x[active_letter - cur_word.range[0]] ||
+              myHighlight == x[position] ||
               x == otherFilter[0]
                 ? "suggestion highlighted"
-                :  !otherSuggestions.length ||
-                     otherSuggestions
-                       .map(
-                         s => s.text[puzzle.activeCell[1] - across.range[0]]
-                       )
-                       .includes(x[puzzle.activeCell[0] - down.range[0]])
-                  // ?
-                  "suggestion"
-              //: "suggestion unmatched"
+                : !otherSuggestions.length ||
+                  otherSuggestions
+                    .map(s => s.text[op_position])
+                    .includes(x[position])
+                ? "suggestion"
+                : "suggestion unmatched"
             }
             onClick={e => fillWithSuggestion(e, x, ad)}
           >
             {x}
           </div>
           <a onClick={e => hideNonCrosses(e, ad)}>
-            {ad == 'down' ? <ArrowRightIcon size={12} /> : <ArrowDownIcon size={12} /> }
+            {ad == "down" ? (
+              <ArrowRightIcon size={12} />
+            ) : (
+              <ArrowDownIcon size={12} />
+            )}
             <span class="pbtip">
               <b>
                 {x == myFilter[0]
-                  ? "Unfilter " + (ad == 'down' ? 'Across' : 'Down') + " crosses"
-                  : "Filter " + (ad == 'down' ? 'Across' : 'Down') + " crosses"}
+                  ? "Unfilter " +
+                    (ad == "down" ? "Across" : "Down") +
+                    " crosses"
+                  : "Filter " + (ad == "down" ? "Across" : "Down") + " crosses"}
               </b>
             </span>
           </a>
