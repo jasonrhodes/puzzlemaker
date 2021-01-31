@@ -7,6 +7,7 @@ const {
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
+const ClueInput = require("./ClueInput");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
@@ -41,7 +42,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         <div class="inline">
           <h3>{acrossNumber}a: </h3>
-          <ClueInput clues={puzzle.clues} direction="across" number={acrossNumber} setClue={puzzle.setClue} />
+          <ClueInput direction="across" number={acrossNumber} />
         </div>
         <div class="current">
           {across.word.toUpperCase()}
@@ -76,7 +77,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
           <h3>{downNumber}d: </h3>
-          <ClueInput clues={puzzle.clues} direction="down" number={downNumber} setClue={puzzle.setClue} />
+          <ClueInput direction="down" number={downNumber} />
         </div>
         <div class="current">
           {down.word.toUpperCase()}
