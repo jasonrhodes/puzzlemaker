@@ -483,8 +483,8 @@ input.inline-content-editable:focus {
   #keyboard > .keyrow > .key {
     flex-grow: 1;
     margin: 1px;
-    height: 22px;
-    padding-top: 4px;
+    height: 27px;
+    padding-top: 6px;
   }
   #keyboard .key {
     border: 1px solid #777;
@@ -516,8 +516,8 @@ input.inline-content-editable:focus {
   
   #keyboard .brkey .key, #keyboard .blkey .key {
     width: 47px;
-    height: 35px;
-    background-color: #eee;
+    height: 33px;
+    background-color: #ddd;
   }
   
   .current-clues {
