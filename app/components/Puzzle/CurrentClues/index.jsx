@@ -5,48 +5,10 @@ const { Link } = require("react-router-dom");
 const {
   ArrowDownIcon,
   ArrowRightIcon,
-  EyeIcon,
-  TypographyIcon
+  EyeIcon
 } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
-const classnames = require("classnames");
-
-const MobileMenu = ({
-  mobileView,
-  setMobileView,
-  acrossNumber,
-  acrossWord,
-  downNumber,
-  downWord
-}) => {
-  const keyBoardSwitch = (e, view) => {
-    e.stopPropagation();
-    setMobileView(view);
-  };
-
-  return (
-    <div id="mobilemenu">
-      <a
-        class={mobileView == "keyboard" ? "activemobile" : ""}
-        onClick={e => keyBoardSwitch(e, "keyboard")}
-      >
-        <TypographyIcon size={20} />
-      </a>
-      <a
-        class={mobileView == "across" ? "activemobile" : ""}
-        onClick={e => keyBoardSwitch(e, "across")}
-      >
-        {acrossNumber}A: {acrossWord}
-      </a>
-      <a
-        class={mobileView == "down" ? "activemobile" : ""}
-        onClick={e => keyBoardSwitch(e, "down")}
-      >
-        {downNumber}D: {downWord}
-      </a>
-    </div>
-  );
-};
+const MobileMenu = require("./MobileMenu");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
