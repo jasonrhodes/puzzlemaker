@@ -42,8 +42,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
       
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         <div class="inline" onClick={(e) => e.stopPropagation()}>
-          <h3>{acrossNumber}A: </h3>
-          <ClueInput direction="across" number={acrossNumber} />
+          {acrossNumber !== '-' && (
+            <h3>{acrossNumber}A: </h3>,
+            <ClueInput direction="across" number={acrossNumber} />
+            )
+           }
         </div>
         <div class="current">
           {across.word.toUpperCase()}
@@ -63,8 +66,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline"  onClick={(e) => e.stopPropagation()}>
-          <h3>{downNumber}D: </h3>
-          <ClueInput direction="down" number={downNumber} />
+          {downNumber !== '-' && (
+            <h3>{downNumber}D: </h3>,
+            <ClueInput direction="down" number={downNumber} />
+            )
+          }
         </div>
         <div class="current">
           {down.word.toUpperCase()}
