@@ -10,7 +10,7 @@ function measureMyInputText(value) {
   document.body.appendChild(tmp);
   var theWidth = tmp.getBoundingClientRect().width;
   document.body.removeChild(tmp);
-  return theWidth;
+  return theWidth < 30 ? 30 : theWidth;
 }
 
 function focusOnActive() {

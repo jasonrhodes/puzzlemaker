@@ -47,7 +47,6 @@ select {
 }
 
 .puzzle-row {
-  display: flex;
   margin-bottom: -1px;
   line-height: 0;
   width: 100%;
@@ -56,7 +55,6 @@ select {
 }
 
 .puzzle-cell {
-  flex: 1;
   font-size: 20px;
   border: 1px solid black;
   width: 40px;
@@ -537,6 +535,7 @@ input.inline-content-editable:focus {
   
   .puzzle-row {
     margin-top: 0px;
+    display: flex;
   }
 
   .puzzle-grid {
@@ -556,6 +555,7 @@ input.inline-content-editable:focus {
   .puzzle-cell {
     width: auto;
     height: auto;
+    flex: 1
   }
   
   .puzzle-cell .input {
