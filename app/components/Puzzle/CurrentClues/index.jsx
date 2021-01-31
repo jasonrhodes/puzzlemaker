@@ -8,6 +8,21 @@ const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
 
+function ClueInput({ clues, direction, number, setClue }) {
+  const value = clues[direction][number];
+  const handleChange = (e) => setClue(number, direction, e.target.value);
+  return (
+    <input
+      class="inline-content-editable"
+      onClick={e => e.stopPropagation()}
+      onChange=
+      style={{ width: measureMyInputText(value) + "px" }}
+      value={value}
+      type="text"
+    />
+  );
+}
+
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
@@ -91,13 +106,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
           <h3>{downNumber} Down:</h3>
-          <input
-            class="inline-content-editable"
-            onClick={e => e.stopPropagation()}
-            style={{ width: measureMyInputText(downNumber + "clue") + "px" }}
-            value={downNumber + " clue"}
-            type="text"
-          />
+          <ClueInput clues={puzzle.clues} direction="down" number={downNumber} setClue={puzzle.setClue} />
         </div>
         <div class="current">
           {down.word.toUpperCase()}
