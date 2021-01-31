@@ -140,6 +140,22 @@ const CurrentClues = ({ across, down, puzzle }) => {
       )}
       {downNumber !== "-" ? (
         <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
+          <a
+            class="cluenav prev key"
+            onClick={e => {
+              navClue(e, "down", "prev");
+            }}
+          >
+            <TriangleLeftIcon size={24} />
+          </a>
+          <a
+            class="cluenav next key"
+            onClick={e => {
+              navClue(e, "down", "next");
+            }}
+          >
+            <TriangleRightIcon size={24} />
+          </a>
           {downNumber !== "-" ? (
             <div class="inline" onClick={e => e.stopPropagation()}>
               <h3>{downNumber}D: </h3>
