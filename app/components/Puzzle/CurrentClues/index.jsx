@@ -32,12 +32,17 @@ const CurrentClues = ({ across, down, puzzle }) => {
     e.stopPropagation();
     var wantnumber = ad == 'across' ? acrossNumber + mod : downNumber + mod;
     var newGrid = puzzle.grid;
+    console.log(wantnumber);
     for (let row = 0; row < newGrid.length; row++) {
       for (let column = 0; column < newGrid[row].length; column++) {
         var clue = newGrid[row][column].clue;
         console.log(clue);
+        console.log(ad == 'across' ? 'is across' : '');
+        console.log(clue.isAcrossStart ? 'is across start' : '');
+        console.log(clue.acrossClueNumber == wantnumber ? 'is wantnumber' : '');
         if ((ad == 'down' && clue.isDownStart && clue.downClueNumber == wantnumber) || 
             (ad == 'across' && clue.isAcrossStart && clue.acrossClueNumber == wantnumber)) {
+          console.log('set it!');
           puzzle.setActiveCell[row,column];
           break;
         }
