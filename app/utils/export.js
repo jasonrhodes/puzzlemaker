@@ -12,8 +12,8 @@ function convertPuzzleToJSON(puzzle) {
       cols: puzzle.grid[0].length
     },
     clues: {
-      across: Object.entries(puzzle.clues.across).map(pair => pair[0] + "|| " + pair[1]),
-      down: Object.entries(puzzle.clues.down).map(pair => pair[0] + "|| " + pair[1])
+      across: Object.entries(puzzle.clues.across).map(pair => pair[0] + "|| " + (pair[1] ? pair[1] : "(blank clue)")),
+      down: Object.entries(puzzle.clues.down).map(pair => pair[0] + "|| " +0 (pair[1] ? pair[1] : "(blank clue)"))
     },
     grid: []
   };
