@@ -32,7 +32,6 @@ select {
 }
 
 .container {
-  width: 100%;
   display: inline-block;
   position: relative;
   max-width: 1400px;
@@ -40,7 +39,6 @@ select {
 
 .puzzle-container {
   position: relative;
-  width: calc(100% - 300px);
 }
 
 .puzzle-grid {
@@ -53,11 +51,12 @@ select {
   margin-bottom: -1px;
   line-height: 0;
   width: 100%;
+  align-items: stretch;
   
 }
 
 .puzzle-cell {
-  flex-shrink: 1
+  flex: 1;
   font-size: 20px;
   border: 1px solid black;
   width: 40px;
@@ -138,6 +137,7 @@ select {
   text-align: center;
   margin-top: 11px;
   position: absolute;
+  font-size: 20px;
   
 }
 
