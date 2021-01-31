@@ -5,7 +5,7 @@ const { focusOnActive } = require("../../../utils/style");
 
 module.exports = {
   getSuggestions,
-  suggestionsList
+  SuggestionsList
 };
 
 const getMatches = (response, len) => {
@@ -102,7 +102,7 @@ async function getSuggestions(clue, setFunc) {
 //   );
 // }
 
-function suggestionsList({
+function SuggestionsList({
   ad,
   puzzle,
   mySuggestions,
@@ -142,7 +142,7 @@ function suggestionsList({
     }
   };
 
-  const filterSuggestions = (suggestions, position) => {
+  const filterSuggestions = (suggestions) => {
     var filter = myFilter[1];
     let finalresult = [];
 
@@ -175,10 +175,12 @@ function suggestionsList({
     setOtherHighlight(null);
     focusOnActive();
   };
+  
+  console.log(mySuggestions);
 
   return (
     <div class="suggestions">
-      {filterSuggestions(mySuggestions, ad).map((x, i) => (
+      {filterSuggestions(mySuggestions).map((x, i) => (
         <div class="inline">
           <div
             onMouseEnter={e => highlightCrosses(e, ad)}

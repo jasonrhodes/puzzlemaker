@@ -86,7 +86,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <suggestionsList ad={"across"} puzzle={puzzle} mysuggestions={acrossSuggestions} setMySuggestions={setAcrossSuggestions} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
+        <SuggestionsList ad={"across"} puzzle={puzzle} mysuggestions={acrossSuggestions} setMySuggestions={setAcrossSuggestions} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
         <div class="inline">
@@ -127,7 +127,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             ""
           )}
         </div>
-        <suggestionsList ad={"down"} puzzle={puzzle} mysuggestions={downSuggestions} setMySuggestions={setDownSuggestions} myHighlight={downHighlight} setOtherHighlight={setAcrossHighlight} myFilter={downFilter} otherFilter={acrossFilter} setOtherFilter={setAcrossFilter}  />
+        <SuggestionsList ad={"down"} puzzle={puzzle} mysuggestions={downSuggestions} setMySuggestions={setDownSuggestions} myHighlight={downHighlight} setOtherHighlight={setAcrossHighlight} myFilter={downFilter} otherFilter={acrossFilter} setOtherFilter={setAcrossFilter}  />
       </div>
       <KeyBoard puzzle={puzzle} mobileView={mobileView} />
     </div>
