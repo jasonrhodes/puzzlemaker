@@ -18,7 +18,7 @@ function convertPuzzleToJSON(puzzle) {
     grid: []
   };
 
-  console.log(puzzle.clues.across);
+  console.log(puz.clues);
   
   for (let i = 0; i < puzzle.grid.length; i++) {
     for (let j = 0; j < puzzle.grid[0].length; j++) {

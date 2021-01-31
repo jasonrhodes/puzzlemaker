@@ -29,7 +29,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
 
   const handleChange = (e, direction) => {
     e.preventDefault();
-    setFunc(e.target.value);
+    //direction === "across" ? 
+    puzzle.clues[direction][acrossNumber] = e.target.value;
   }
   
   return (
@@ -51,7 +52,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             onClick={e => e.stopPropagation()}
             onChange={e => handleChange(e,"across")}
             style={{ width: measureMyInputText(acrossNumber + "clue") + "px" }}
-            value={acrossNumber + " clue"}
+            value={puzzle.clues.across[acrossNumber]}
             type="text"
           />
         </div>
