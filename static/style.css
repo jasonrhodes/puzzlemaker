@@ -526,11 +526,12 @@ input.inline-content-editable:focus {
     width: auto;
   }
   .current-clues .suggestions {
-    height: 80px;
+    height: 100px;
   }
   
   .current-clues .suggestions > div > a {
     display: inline-block;
+    margin-left: 8px;
   } 
   
   .puzzle-row {
@@ -553,8 +554,8 @@ input.inline-content-editable:focus {
   
   .puzzle-cell {
     font-size: 16px;
-    width: 23.6px;
-    height: 23.6px;
+    width: auto;
+    height: auto;
   }
   
   
@@ -563,6 +564,12 @@ input.inline-content-editable:focus {
       font-size: 16px;
       position: absolute;
       margin-top: 6px
+  }
+  
+  .puzzle-cell:before {
+    content:'';
+    float:left;
+    padding-top:100%;
   }
 
 
