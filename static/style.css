@@ -466,10 +466,9 @@ input.inline-content-editable:focus {
   
   
   #keyboard {
-    margin-left: -6px;
-    margin-right: -6px;
     position: relative;
     height: 110px;
+    margin: 0px -6px 20px -6px;
   }
   
   pre {

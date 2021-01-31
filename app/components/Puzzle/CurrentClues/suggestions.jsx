@@ -121,9 +121,9 @@ function SuggestionsList({
     
     for (let i = cur_word.range[0]; i <= cur_word.range[1]; i++) {
       if (ad == 'down') {
-        newGrid[active_letter][i].value = suggestion[i - cur_word.range[0]];
+        newGrid[i][puzzle.activeCell[1]].value = suggestion[i - cur_word.range[0]];
       } else {
-        
+        newGrid[active_letter][i].value = suggestion[i - cur_word.range[0]];
       }
     }
     puzzle.setGrid(newGrid);
@@ -163,8 +163,8 @@ function SuggestionsList({
             <span class="pbtip">
               <b>
                 {x == myFilter[0]
-                  ? "Unfilter " + ad + " crosses"
-                  : "Filter " + ad + " crosses"}
+                  ? "Unfilter " + (ad == 'down' ? 'Across' : 'Down') + " crosses"
+                  : "Filter " + (ad == 'down' ? 'Across' : 'Down') + " crosses"}
               </b>
             </span>
           </a>
