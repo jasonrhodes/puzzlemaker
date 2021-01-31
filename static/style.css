@@ -498,9 +498,9 @@ input.inline-content-editable:focus {
     margin: 0px -6px 20px -6px;
   }
   
-  pre {
+  /*pre {
     display: none;
-  }
+  }*/
   
   #across, #down {
     margin: 0 40px;

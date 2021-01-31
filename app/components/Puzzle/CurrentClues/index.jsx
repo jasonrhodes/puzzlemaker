@@ -1,7 +1,7 @@
 const React = require("react");
 const { measureMyInputText } = require("../../../utils/style");
 const { Link } = require("react-router-dom");
-const { EyeIcon } = require("@primer/octicons-react");
+const { EyeIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
@@ -44,7 +44,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
       />
       {acrossNumber !== "-" ? (
         <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
-          <a class="cluenav prev key" onClick={(e) => {navClue(e,'across',)}}></a>
+          <a class="cluenav prev key" onClick={(e) => {navClue(e,'across','prev')}}><TriangleLeftIcon size={24} /></a>
+          <a class="cluenav next key" onClick={(e) => {navClue(e,'across','next')}}><TriangleLeftIcon size={24} /></a>
           <div class="inline" onClick={e => e.stopPropagation()}>
             <h3>{acrossNumber}A: </h3>
             <ClueInput direction="across" number={acrossNumber} />
