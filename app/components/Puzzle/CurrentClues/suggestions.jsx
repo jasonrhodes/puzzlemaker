@@ -125,9 +125,15 @@ const filterSuggestions = (suggestions, position) => {
 //   );
 // }
 
- function suggestionsList({ ad, puzzle, suggestions }) {
-   
-   
+function suggestionsList({ ad, puzzle, suggestions, setSuggestions }) {
+
+  const cur_word = puzzle.words.across;
+  
+  React.useEffect(() => {
+    //getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
+    //getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+  }, [cur_word]);
+  // end
 
   const highlightCrosses = (e, ad) => {
     if (ad == "down") {

@@ -8,29 +8,23 @@ const {
 } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
-const { getSuggestions, SuggestionsList } = require("./suggestions");
+const { getSuggestions, SuggestionsList, resetSuggestions } = require("./suggestions");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
   const [mobileView, setMobileView] = React.useState("keyboard");
-  const [downFilter, setDownFilter] = React.useState([]);
-  const [acrossFilter, setAcrossFilter] = React.useState([]);
+  const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
+  const [downSuggestions, setDownSuggestions] = React.useState([]);
   const [downHighlight, setDownHighlight] = React.useState(null);
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
-  
+  const [downFilter, setDownFilter] = React.useState([]);
+  const [acrossFilter, setAcrossFilter] = React.useState([]);
+
   // Not sure if these need to stay here or can move to the suggestions.jsx file
   // Also: do we need getSuggestions to re-run in both directions whenever either of
   // those values update, or do we want across to re-run when across changes and
   // down to re-run when down updates?
-  const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
-  const [downSuggestions, setDownSuggestions] = React.useState([]);
-  
-  React.useEffect(() => {
-    getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
-    getSuggestions(down.word.toLowerCase(), setDownSuggestions);
-  }, [across, down]);
-  // end
 
   const fillWithSuggestion = (e, suggestion, direction) => {
     e.stopPropagation();
@@ -46,6 +40,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       }
     }
     puzzle.setGrid(newGrid);
+    resetSuggestions();
     setAcrossFilter([]);
     setDownFilter([]);
     setAcrossHighlight(null);
