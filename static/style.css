@@ -37,6 +37,13 @@ select {
   max-width: 1400px;
 }
 
+.puzzlefocus {
+  opacity: 0;
+  width: 0px;
+  height: 1px;
+  position: absolute;
+}
+
 .puzzle-container {
   position: relative;
 }

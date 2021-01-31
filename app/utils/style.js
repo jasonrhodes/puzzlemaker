@@ -14,8 +14,5 @@ function measureMyInputText(value) {
 }
 
 function focusOnActive() {
-  var active = document.querySelector('.active');
-  console.log(active);
-  console.log(active.querySelector('.input'));
-  active.querySelector('.input').focus();
+  var active = document.querySelector('.active').querySelector('.puzzlefocus').focus();
 }
