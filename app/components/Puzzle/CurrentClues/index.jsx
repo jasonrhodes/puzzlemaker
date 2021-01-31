@@ -41,13 +41,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
       />
       
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
-        <div class="inline" onClick={(e) => e.stopPropagation()}>
-          {acrossNumber !== '-' && (
-            <h3>{acrossNumber}A: </h3>,
+        {acrossNumber !== '-' ?
+          <div class="inline" onClick={(e) => e.stopPropagation()}>
+            <h3>{acrossNumber}A: </h3>
             <ClueInput direction="across" number={acrossNumber} />
-            )
-           }
-        </div>
+          </div> :
+          <div class="inline" >Select input field</div>
+        }
         <div class="current">
           {across.word.toUpperCase()}
           <OneLookLink word={across.word} />
@@ -65,13 +65,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <SuggestionsList ad={"across"} puzzle={puzzle} myHighlight={acrossHighlight} setOtherHighlight={setDownHighlight} myFilter={acrossFilter} otherFilter={downFilter} setOtherFilter={setDownFilter} />
       </div>
       <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
-        <div class="inline"  onClick={(e) => e.stopPropagation()}>
-          {downNumber !== '-' && (
-            <h3>{downNumber}D: </h3>,
+        {downNumber !== '-' ?
+          <div class="inline"  onClick={(e) => e.stopPropagation()}>
+            <h3>{downNumber}D: </h3>
             <ClueInput direction="down" number={downNumber} />
-            )
-          }
-        </div>
+          </div> :
+          <div class="inline" >Select input field</div>
+        }
         <div class="current">
           {down.word.toUpperCase()}
           <OneLookLink word={down.word} />
