@@ -18,7 +18,6 @@ const PuzzleTitle = ({ width, title, author, setTitle, setAuthor }) => {
         <span>by </span>
         <input id="author" class="inline-content-editable" style={{ width: measureMyInputText(author) + 'px' }} value={author} type="text" onChange={(e) => handleChange(e, setAuthor, setAuthorWidth)} />
       </div>
-      {measureMyInputText(author) + measureMyInputText(title) > width - 210 ? <div><br/><br/></div> : null}
     </div>
   );
 }

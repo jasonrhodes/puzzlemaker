@@ -10,7 +10,7 @@ const Puzzle = ({ initialGrid }) => {
   const gridSizeDesc = (length) => {
     if (length > 18) {
      return "largegrid";
-    } else if (length > 12) {
+    } else if (length > 10) {
      return "mediumgrid";
     } else {
      return "smallgrid";
