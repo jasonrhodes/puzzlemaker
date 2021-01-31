@@ -5,6 +5,21 @@ const { Link } = require("react-router-dom");
 const { ArrowDownIcon, ArrowRightIcon, EyeIcon, TypographyIcon } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 
+const MobileMenu = ({ mobileView, setMobileView }) => {
+  const keyBoardSwitch = (e, view) => {
+    e.stopPropagation();
+    setMobileView(view);
+  }
+  
+  return (
+    <div id="mobilemenu">
+      <a class={mobileView == 'keyboard' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e, 'keyboard')}><TypographyIcon size={20} /></a>
+      <a class={mobileView == 'across' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e, 'across')}>{acrossNumber}A: {across.word.toUpperCase()}</a>
+      <a class={mobileView == 'down' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e, 'down')}>{downNumber}D: {down.word.toUpperCase()}</a>
+    </div>
+  );
+}
+
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column)
@@ -117,10 +132,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     }
   }
   
-  const keyBoardSwitch = (e, view) => {
-    e.stopPropagation();
-    setMobileView(view);
-  }
+
   
   const filterSuggestions = (list,ad) => {
     var filter = ad == 'down' ? downFilter[1] : acrossFilter[1];
@@ -143,11 +155,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   return (
     <div class="current-clues">
-      <div id="mobilemenu">
-        <a class={mobileView == 'keyboard' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'keyboard')}><TypographyIcon size={20} /></a>
-        <a class={mobileView == 'across' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'across')}>{acrossNumber}A: {across.word.toUpperCase()}</a>
-        <a class={mobileView == 'down' ? 'activemobile' : ''} onClick={(e) => keyBoardSwitch(e,'down')}>{downNumber}D: {down.word.toUpperCase()}</a>
-      </div>
+      <MobileMenu 
       <div id="across" class={mobileView == 'across' ? 'activemobile' : ''}>
         <div class="inline"><h3>{acrossNumber} Across:</h3><input class="inline-content-editable" onClick={(e) => e.stopPropagation()} style={{ width: measureMyInputText(acrossNumber + 'clue') + 'px' }} value={acrossNumber + ' clue'} type="text"  /></div>
         <div class="current">{across.word.toUpperCase()}<a target="_blank" href={'http://onelook.com/?w=' + across.word.toUpperCase().replaceAll('-','?')}><img style={{width: '16px'}} src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"/><span class="pbtip"><b>Open in OneLook</b></span></a>
