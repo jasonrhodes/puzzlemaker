@@ -8,6 +8,7 @@ const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
 const ClueInput = require("./ClueInput");
+const OneLookLink = require("./OneLookLink");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
@@ -46,21 +47,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         </div>
         <div class="current">
           {across.word.toUpperCase()}
-          <a
-            target="_blank"
-            href={
-              "http://onelook.com/?w=" +
-              across.word.toUpperCase().replaceAll("-", "?")
-            }
-          >
-            <img
-              style={{ width: "16px" }}
-              src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
-            />
-            <span class="pbtip">
-              <b>Open in OneLook</b>
-            </span>
-          </a>
+          <OneLookLink word={across.word} />
           {acrossFilter[0] ? (
             <a onClick={e => showNonCrosses(e, "across")}>
               <EyeIcon size={20} />
@@ -81,21 +68,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         </div>
         <div class="current">
           {down.word.toUpperCase()}
-          <a
-            target="_blank"
-            href={
-              "http://onelook.com/?w=" +
-              down.word.toUpperCase().replaceAll("-", "?")
-            }
-          >
-            <img
-              style={{ width: "16px" }}
-              src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
-            />
-            <span class="pbtip">
-              <b>Open in OneLook</b>
-            </span>
-          </a>
+          <OneLookLink word={down.word} />
           {downFilter[0] ? (
             <a onClick={e => showNonCrosses(e, "down")}>
               <EyeIcon size={20} />
