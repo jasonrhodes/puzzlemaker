@@ -123,7 +123,7 @@ function SuggestionsList({
       if (ad == 'down') {
         newGrid[i][puzzle.activeCell[1]].value = suggestion[i - cur_word.range[0]];
       } else {
-        newGrid[active_letter][i].value = suggestion[i - cur_word.range[0]];
+        newGrid[puzzle.activeCell[0]][i].value = suggestion[i - cur_word.range[0]];
       }
     }
     puzzle.setGrid(newGrid);
