@@ -527,8 +527,12 @@ input.inline-content-editable:focus {
     width: auto;
   }
   .current-clues .suggestions {
-    height: 120px;
+    height: 80px;
   }
+  
+  .current-clues .suggestions > div > a {
+    display: inline-block;
+  } 
   
   .puzzle-row {
     margin-top: 0px;

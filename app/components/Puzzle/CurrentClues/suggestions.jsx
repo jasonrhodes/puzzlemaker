@@ -118,8 +118,13 @@ function SuggestionsList({
   const fillWithSuggestion = (e, suggestion) => {
     e.stopPropagation();
     const newGrid = [...puzzle.grid];
+    
     for (let i = cur_word.range[0]; i <= cur_word.range[1]; i++) {
-      newGrid[active_letter][i].value = suggestion[i - cur_word.range[0]];
+      if (ad == 'down') {
+        newGrid[active_letter][i].value = suggestion[i - cur_word.range[0]];
+      } else {
+        
+      }
     }
     puzzle.setGrid(newGrid);
 
