@@ -16,6 +16,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
+  const [acrossClue, setAcrossClue] = React.useState(puzzle.clues.across[acrossNumber]);
   
   const showNonCrosses = (e, ad) => {
     e.stopPropagation();
@@ -31,6 +32,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     e.preventDefault();
     //direction === "across" ? 
     puzzle.clues[direction][acrossNumber] = e.target.value;
+    setAcrossClue(e.target.value);
   }
   
   return (
@@ -52,7 +54,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             onClick={e => e.stopPropagation()}
             onChange={e => handleChange(e,"across")}
             style={{ width: measureMyInputText(acrossNumber + "clue") + "px" }}
-            value={puzzle.clues.across[acrossNumber]}
+            value={acrossClue}
             type="text"
           />
         </div>
