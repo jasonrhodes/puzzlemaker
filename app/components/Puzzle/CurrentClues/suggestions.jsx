@@ -25,7 +25,7 @@ const getMatches = (response, len) => {
   return result;
 };
 
-const getSuggestions = async (clue, setFunc) => {
+async function getSuggestions(clue, setFunc) {
   const chars = clue.split("");
   const hasNoDashes = !chars.some(hasDash);
   const hasAllDashes = chars.every(hasDash);
@@ -75,101 +75,101 @@ const filterSuggestions = (suggestions, position) => {
   return finalresult;
 };
 
-function AcrossSuggestions({ suggestions }) {
-  return (
-    <div class="suggestions">
-      {filterSuggestions(suggestions, "across").map((x, i) => (
-        <div class="inline">
-          <div
-            onMouseEnter={e => highlightCrosses(e, "across")}
-            onMouseLeave={e => unHighlightCrosses(e)}
-            class={
-              acrossHighlight ==
-                x[puzzle.activeCell[1] - across.range[0]] ||
-              x == downFilter[0]
-                ? "suggestion highlighted"
-                : !downSuggestions.length ||
-                  downSuggestions
-                    .map(s => s.text[puzzle.activeCell[0] - down.range[0]])
-                    .includes(x[puzzle.activeCell[1] - across.range[0]])
-                ? "suggestion"
-                : "suggestion unmatched"
-            }
-            onClick={e => fillWithSuggestion(e, x, "across")}
-          >
-            {x}
-          </div>
-          <a onClick={e => hideNonCrosses(e, "across")}>
-            <ArrowDownIcon size={12} />
-            <span class="pbtip">
-              <b>
-                {x == downFilter[0]
-                  ? "Unfilter Down crosses"
-                  : "Filter Down crosses"}
-              </b>
-            </span>
-          </a>
-          <a target="_blank" href={"http://onelook.com/?w=" + x}>
-            <img
-              style={{ width: "12px" }}
-              src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
-            />
-            <span class="pbtip">
-              <b>Open in OneLook</b>
-            </span>
-          </a>
-        </div>
-      ))}
-    </div>
-  );
-}
+// function AcrossSuggestions({ suggestions }) {
+//   return (
+//     <div class="suggestions">
+//       {filterSuggestions(suggestions, "across").map((x, i) => (
+//         <div class="inline">
+//           <div
+//             onMouseEnter={e => highlightCrosses(e, "across")}
+//             onMouseLeave={e => unHighlightCrosses(e)}
+//             class={
+//               acrossHighlight ==
+//                 x[puzzle.activeCell[1] - across.range[0]] ||
+//               x == downFilter[0]
+//                 ? "suggestion highlighted"
+//                 : !downSuggestions.length ||
+//                   downSuggestions
+//                     .map(s => s.text[puzzle.activeCell[0] - down.range[0]])
+//                     .includes(x[puzzle.activeCell[1] - across.range[0]])
+//                 ? "suggestion"
+//                 : "suggestion unmatched"
+//             }
+//             onClick={e => fillWithSuggestion(e, x, "across")}
+//           >
+//             {x}
+//           </div>
+//           <a onClick={e => hideNonCrosses(e, "across")}>
+//             <ArrowDownIcon size={12} />
+//             <span class="pbtip">
+//               <b>
+//                 {x == downFilter[0]
+//                   ? "Unfilter Down crosses"
+//                   : "Filter Down crosses"}
+//               </b>
+//             </span>
+//           </a>
+//           <a target="_blank" href={"http://onelook.com/?w=" + x}>
+//             <img
+//               style={{ width: "12px" }}
+//               src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
+//             />
+//             <span class="pbtip">
+//               <b>Open in OneLook</b>
+//             </span>
+//           </a>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
-function DownSuggestions({ puzzle, down }) {
-  return (
-    <div class="suggestions">
-      {filterSuggestions(downSuggestions, "down").map((x, i) => (
-        <div class="inline">
-          <div
-            onMouseEnter={e => highlightCrosses(e, "down")}
-            onMouseLeave={e => unHighlightCrosses(e)}
-            class={
-              downHighlight == x[puzzle.activeCell[0] - down.range[0]] ||
-              x == acrossFilter[0]
-                ? "suggestion highlighted"
-                : !acrossSuggestions.length ||
-                  acrossSuggestions
-                    .map(
-                      s => s.text[puzzle.activeCell[1] - across.range[0]]
-                    )
-                    .includes(x[puzzle.activeCell[0] - down.range[0]])
-                ? "suggestion"
-                : "suggestion unmatched"
-            }
-            onClick={e => fillWithSuggestion(e, x, "down")}
-          >
-            {x}
-          </div>
-          <a onClick={e => hideNonCrosses(e, "down")}>
-            <ArrowRightIcon size={12} />
-            <span class="pbtip">
-              <b>
-                {x == acrossFilter[0]
-                  ? "Unfilter Across crosses"
-                  : "Filter Across crosses"}
-              </b>
-            </span>
-          </a>
-          <a target="_blank" href={"http://onelook.com/?w=" + x}>
-            <img
-              style={{ width: "12px" }}
-              src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
-            />
-            <span class="pbtip">
-              <b>Open in OneLook</b>
-            </span>
-          </a>
-        </div>
-      ))}
-    </div>
-  )
-}
+// function DownSuggestions({ puzzle, down }) {
+//   return (
+//     <div class="suggestions">
+//       {filterSuggestions(downSuggestions, "down").map((x, i) => (
+//         <div class="inline">
+//           <div
+//             onMouseEnter={e => highlightCrosses(e, "down")}
+//             onMouseLeave={e => unHighlightCrosses(e)}
+//             class={
+//               downHighlight == x[puzzle.activeCell[0] - down.range[0]] ||
+//               x == acrossFilter[0]
+//                 ? "suggestion highlighted"
+//                 : !acrossSuggestions.length ||
+//                   acrossSuggestions
+//                     .map(
+//                       s => s.text[puzzle.activeCell[1] - across.range[0]]
+//                     )
+//                     .includes(x[puzzle.activeCell[0] - down.range[0]])
+//                 ? "suggestion"
+//                 : "suggestion unmatched"
+//             }
+//             onClick={e => fillWithSuggestion(e, x, "down")}
+//           >
+//             {x}
+//           </div>
+//           <a onClick={e => hideNonCrosses(e, "down")}>
+//             <ArrowRightIcon size={12} />
+//             <span class="pbtip">
+//               <b>
+//                 {x == acrossFilter[0]
+//                   ? "Unfilter Across crosses"
+//                   : "Filter Across crosses"}
+//               </b>
+//             </span>
+//           </a>
+//           <a target="_blank" href={"http://onelook.com/?w=" + x}>
+//             <img
+//               style={{ width: "12px" }}
+//               src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
+//             />
+//             <span class="pbtip">
+//               <b>Open in OneLook</b>
+//             </span>
+//           </a>
+//         </div>
+//       ))}
+//     </div>
+//   )
+// }
