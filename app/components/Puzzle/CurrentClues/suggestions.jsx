@@ -1,5 +1,29 @@
 const React = require("react");
 const WordCache = new Map();
+const hasDash = char => char === "-";
+
+module.exports = {
+  getSuggestions
+};
+
+const getMatches = (response, len) => {
+  let result = [];
+
+  for (let entry of response) {
+    let word = entry.word.replace(/-/g, "").replace(/ /g, "");
+    if (
+      word.length === len &&
+      /^[a-zA-Z]+$/.test(word) &&
+      !result.includes(word.toUpperCase())
+    ) {
+      result.push({
+        text: word.toUpperCase(),
+        score: entry.tags[0].replace("f:", "")
+      });
+    }
+  }
+  return result;
+};
 
 const getSuggestions = async (clue, setFunc) => {
   const chars = clue.split("");
@@ -19,7 +43,6 @@ const getSuggestions = async (clue, setFunc) => {
     "https://api.datamuse.com/words?sp=" +
     clue.replace(/-/g, "?") +
     "&max=1000&md=f";
-  //console.log(apiString);
   const response = await fetch(apiString);
   const myJson = await response.json();
   const matches = getMatches(myJson, clue.length);
@@ -28,12 +51,12 @@ const getSuggestions = async (clue, setFunc) => {
   return matches;
 };
 
-const filterSuggestions = (list, filter, position) => {
+const filterSuggestions = (list, filter, ad) => {
   var filter = filter[1];
-  // var position =
-  //   ad == "down"
-  //     ? puzzle.activeCell[0] - down.range[0]
-  //     : puzzle.activeCell[1] - across.range[0];
+  var position =
+    ad == "down"
+      ? puzzle.activeCell[0] - down.range[0]
+      : puzzle.activeCell[1] - across.range[0];
   let finalresult = [];
 
   list.sort(function(a, b) {
@@ -52,17 +75,7 @@ const filterSuggestions = (list, filter, position) => {
   return finalresult;
 };
 
-const hasDash = char => char === "-"; 
-
 function AcrossSuggestions({ puzzle, across }) {
-  const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
-  const [downSuggestions, setDownSuggestions] = React.useState([]);
-  
-  
-  React.useEffect(() => {
-    getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
-    getSuggestions(down.word.toLowerCase(), setDownSuggestions);
-  }, [across, down]);
   return (
     <div class="suggestions">
       {filterSuggestions(acrossSuggestions, "across").map((x, i) => (

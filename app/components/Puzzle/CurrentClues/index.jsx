@@ -1,5 +1,5 @@
 const React = require("react");
-const { measureMyInputText, focusOnActive } = require("../../utils/style");
+const { measureMyInputText, focusOnActive } = require("../../../utils/style");
 const { Link } = require("react-router-dom");
 const {
   ArrowDownIcon,
@@ -8,6 +8,7 @@ const {
 } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
+const { getSuggestions, AcrossSuggestions, DownSuggestions } = require("./suggestions");
 
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
@@ -17,25 +18,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [acrossFilter, setAcrossFilter] = React.useState([]);
   const [downHighlight, setDownHighlight] = React.useState(null);
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
+  const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
+  const [downSuggestions, setDownSuggestions] = React.useState([]);
   
-  const getMatches = (response, len) => {
-    let result = [];
-
-    for (let entry of response) {
-      let word = entry.word.replace(/-/g, "").replace(/ /g, "");
-      if (
-        word.length === len &&
-        /^[a-zA-Z]+$/.test(word) &&
-        !result.includes(word.toUpperCase())
-      ) {
-        result.push({
-          text: word.toUpperCase(),
-          score: entry.tags[0].replace("f:", "")
-        });
-      }
-    }
-    return result;
-  };
+  React.useEffect(() => {
+    getSuggestions(across.word.toLowerCase(), setAcrossSuggestions);
+    getSuggestions(down.word.toLowerCase(), setDownSuggestions);
+  }, [across, down]);
 
   const fillWithSuggestion = (e, suggestion, direction) => {
     e.stopPropagation();
