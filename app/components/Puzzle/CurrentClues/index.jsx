@@ -1,5 +1,5 @@
 const React = require("react");
-const { measureMyInputText, focusOnActive } = require("../../../utils/style");
+const { measureMyInputText } = require("../../../utils/style");
 const { Link } = require("react-router-dom");
 const {
   ArrowDownIcon,
@@ -25,29 +25,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
   // Also: do we need getSuggestions to re-run in both directions whenever either of
   // those values update, or do we want across to re-run when across changes and
   // down to re-run when down updates?
-
-  const fillWithSuggestion = (e, suggestion, direction) => {
-    e.stopPropagation();
-    const newGrid = [...puzzle.grid];
-    if (direction === "across") {
-      for (let i = across.range[0]; i <= across.range[1]; i++) {
-        newGrid[puzzle.activeCell[0]][i].value =
-          suggestion[i - across.range[0]];
-      }
-    } else if (direction === "down") {
-      for (let i = down.range[0]; i <= down.range[1]; i++) {
-        newGrid[i][puzzle.activeCell[1]].value = suggestion[i - down.range[0]];
-      }
-    }
-    puzzle.setGrid(newGrid);
-    resetSuggestions();
-    setAcrossFilter([]);
-    setDownFilter([]);
-    setAcrossHighlight(null);
-    setDownHighlight(null);
-
-    focusOnActive();
-  };
   
   const showNonCrosses = (e, ad) => {
     e.stopPropagation();

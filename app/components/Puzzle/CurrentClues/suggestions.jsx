@@ -1,6 +1,7 @@
 const React = require("react");
 const WordCache = new Map();
 const hasDash = char => char === "-";
+const { focusOnActive } = require("../../../utils/style");
 
 module.exports = {
   getSuggestions,
@@ -50,30 +51,6 @@ async function getSuggestions(clue, setFunc) {
   WordCache.set(clue, matches);
   setFunc(matches);
   return matches;
-};
-
-const filterSuggestions = (suggestions, position) => {
-  // var filter = filter[1];
-  // var position =
-  //   ad == "down"
-  //     ? puzzle.activeCell[0] - down.range[0]
-  //     : puzzle.activeCell[1] - across.range[0];
-  let finalresult = [];
-
-  suggestions.sort(function(a, b) {
-    return parseFloat(b.score) - parseFloat(a.score);
-  });
-
-  for (let word of suggestions) {
-    // if (filter && filter != word.text[position]) {
-    //   continue;
-    // }
-    if (finalresult.length === 100) {
-      break;
-    }
-    finalresult.push(word.text);
-  }
-  return finalresult;
 };
 
 // function suggestionsList({ suggestions }) {
@@ -127,16 +104,17 @@ const filterSuggestions = (suggestions, position) => {
 
 function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighlight, setOtherHighlight, myFilter, otherFilter, setOtherFilter }) {
 
-  const cur_word = puzzle.words.across;
+  const cur_word = ad == "down" ? puzzle.words.down : puzzle.words.across;
   const active_letter = ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
+  const position = active_letter - cur_word.range[0];
   
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
-  }, [cur_word]);
+  });
 
   const highlightCrosses = (e) => {
     setOtherHighlight(
-      e.currentTarget.textContent[active_letter - cur_word.range[0]]
+      e.currentTarget.textContent[position]
     );
   };
 
@@ -152,10 +130,45 @@ function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighli
       setOtherFilter([
         e.currentTarget.previousSibling.textContent,
         e.currentTarget.previousSibling.textContent[
-          active_letter - cur_word.range[0]
+          position
         ]
       ]);
     }
+  };
+  
+  const filterSuggestions = (suggestions, position) => {
+    var filter = myFilter[1];
+    let finalresult = [];
+
+    suggestions.sort(function(a, b) {
+      return parseFloat(b.score) - parseFloat(a.score);
+    });
+
+    for (let word of suggestions) {
+      if (filter && filter != word.text[position]) {
+        continue;
+      }
+      if (finalresult.length === 100) {
+        break;
+      }
+      finalresult.push(word.text);
+    }
+    return finalresult;
+  };
+  
+  const fillWithSuggestion = (e, suggestion) => {
+    e.stopPropagation();
+    const newGrid = [...puzzle.grid];
+    for (let i = cur_word.range[0]; i <= across.range[1]; i++) {
+      newGrid[puzzle.activeCell[0]][i].value =
+        suggestion[i - across.range[0]];
+    }
+    puzzle.setGrid(newGrid);
+    
+    setOtherFilter([]);
+    setOtherHighlight(null);
+
+    focusOnActive();
   };
    
    return (
@@ -166,17 +179,19 @@ function suggestionsList({ ad, puzzle, mySuggestions, setMySuggestions, myHighli
             onMouseEnter={e => highlightCrosses(e, ad)}
             onMouseLeave={e => unHighlightCrosses(e)}
             class={
-              myHighlight == x[puzzle.activeCell[0] - down.range[0]] ||
-              x == acrossFilter[0]
+              myHighlight == x[active_letter - cur_word.range[0]] ||
+              x == otherFilter[0]
                 ? "suggestion highlighted"
-                : !acrossSuggestions.length ||
-                  acrossSuggestions
-                    .map(
-                      s => s.text[puzzle.activeCell[1] - across.range[0]]
-                    )
-                    .includes(x[puzzle.activeCell[0] - down.range[0]])
-                ? "suggestion"
-                : "suggestion unmatched"
+                : 
+                // !otherSuggestions.length ||
+                //   otherSuggestions
+                //     .map(
+                //       s => s.text[puzzle.activeCell[1] - across.range[0]]
+                //     )
+                //     .includes(x[puzzle.activeCell[0] - down.range[0]])
+                // ? 
+                "suggestion"
+                //: "suggestion unmatched"
             }
             onClick={e => fillWithSuggestion(e, x, "down")}
           >
