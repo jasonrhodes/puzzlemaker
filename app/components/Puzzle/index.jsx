@@ -8,12 +8,14 @@ const CurrentClues = require("./CurrentClues");
 const Puzzle = ({ initialGrid }) => {
   
   const gridSizeDesc = (length) => {
-    if (length > 18) {
+    if (length > 16) {
      return "largegrid";
-    } else if (length > 10) {
+    } else if (length > 12) {
      return "mediumgrid";
-    } else {
+    } else if (length > 8) {
      return "smallgrid";
+    } else {
+     return "xsgrid";
     }
   };
 
@@ -21,7 +23,7 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <div class={"inline"} style={{'max-width': (puzzle.grid[0].length * 40) + 'px'}}>
+          <div class={"inline"} style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
             <Title
               width={puzzle.grid[0].length * 40}
               title={puzzle.title}

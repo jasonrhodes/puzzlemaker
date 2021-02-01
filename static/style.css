@@ -625,6 +625,11 @@ input.inline-content-editable:focus {
   }
   
   .smallgrid .puzzle-cell .input {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  
+  .xsgrid .puzzle-cell .input {
     font-size: 28px;
     margin-top: 12px;
   }
@@ -635,7 +640,13 @@ input.inline-content-editable:focus {
     left: 0px;
   }
   
-  .smallgrid .puzzle-cell .label {
+  .xsgrid .puzzle-cell .label {
+    font-size: 12px;
+    top: 2px;
+    left: 2px;
+  }
+  
+  .xsgrid .puzzle-cell .label {
     font-size: 14px;
     top: 2px;
     left: 3px;
