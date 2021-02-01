@@ -60,16 +60,16 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       return;
     }
     if (e.key === "ArrowRight") {
-      puzzle.nextAcross();
+      puzzle.nextAcrossCell();
     }
     if (e.key === "ArrowLeft") {
-      puzzle.prevAcross();
+      puzzle.prevAcrossCell();
     }
     if (e.key === "ArrowDown") {
-      puzzle.nextDown();
+      puzzle.nextDownCell();
     }
     if (e.key === "ArrowUp") {
-      puzzle.prevDown();
+      puzzle.prevDownCell();
     }
     if (e.key === "Tab") {
       if (e.shiftKey) {

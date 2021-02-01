@@ -6,6 +6,7 @@ const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
 const ClueInput = require("./ClueInput");
+const Current = require("./Current");
 
 
 const CurrentClues = ({ across, down, puzzle }) => {
@@ -19,13 +20,14 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
 
-  const showNonCrosses = (e, ad) => {
+  const showDownNonCrosses = (e) => {
     e.stopPropagation();
-    if (ad == "down") {
-      setDownFilter([]);
-    } else {
-      setAcrossFilter([]);
-    }
+    setDownFilter([]);
+  };
+  
+  const showAcrossNonCrosses = (e) => {
+    e.stopPropagation();
+    setAcrossFilter([]);
   };
   
   return (
@@ -39,26 +41,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
         downWord={down.word.toUpperCase()}
       />
       {acrossNumber !== "-" ? (
-        <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
-          <div class="inline" onClick={e => e.stopPropagation()}>
-            <h3>{acrossNumber}A: </h3>
-            <ClueInput direction="across" number={acrossNumber} />
-          </div>
-
-          <div class="current" onClick={e => e.stopPropagation()}>
-            {across.word.toUpperCase()}
-            <OneLookLink word={across.word} />
-            {acrossFilter[0] ? (
-              <a onClick={e => showNonCrosses(e, "across")}>
-                <EyeIcon size={20} />
-                <span class="pbtip">
-                  <b>Unfilter Across crosses</b>
-                </span>
-              </a>
-            ) : (
-              ""
-            )}
-          </div>
+        <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
+          <Current clueNumber={acrossNumber} word={across.word} filterWord={acrossFilter[0]} showNonCrosses={showDownNonCrosses} />
           <SuggestionsList
             ad="across"
             puzzle={puzzle}
@@ -78,27 +62,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
       {downNumber !== "-" ? (
         <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
           {downNumber !== "-" ? (
-            <div class="inline" onClick={e => e.stopPropagation()}>
-              <h3>{downNumber}D: </h3>
-              <ClueInput direction="down" number={downNumber} />
-            </div>
-          ) : (
-            <h3>Select input field</h3>
-          )}
-          <div class="current" onClick={e => e.stopPropagation()}>
-            {down.word.toUpperCase()}
-            <OneLookLink word={down.word} />
-            {downFilter[0] ? (
-              <a onClick={e => showNonCrosses(e, "down")}>
-                <EyeIcon size={20} />
-                <span class="pbtip">
-                  <b>Unfilter Down crosses</b>
-                </span>
-              </a>
-            ) : (
-              ""
-            )}
-          </div>
+            
+            <Current clueNumber={acrossNumber} word={across.word} filterWord={acrossFilter[0]} showNonCrosses={showDownNonCrosses} />
           <SuggestionsList
             ad="down"
             puzzle={puzzle}
