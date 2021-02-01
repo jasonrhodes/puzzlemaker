@@ -25,7 +25,10 @@ const Puzzle = ({ initialGrid }) => {
         <div>
           <div class={"inline"} style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
             <Title
-              width={puzzle.grid[0].length * 40}
+              titleWidth={puzzle.titleWidth}
+              authorWidth={puzzle.authorWidth}
+              setTitleWidth={puzzle.setTitleWidth}
+              setAuthorWidth={puzzle.setAuthorWidth}
               title={puzzle.title}
               author={puzzle.author}
               setTitle={puzzle.setTitle}
