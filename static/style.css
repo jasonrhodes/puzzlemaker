@@ -17,6 +17,10 @@ select {
   border-bottom: 2px solid rgb(34, 188, 172);
 }
 
+.left {
+  float: left;
+  margin-top: -5px;
+}
 
 .btn {
   background-color: rgba(34, 188, 172);
@@ -46,6 +50,7 @@ select {
 
 .puzzle-container {
   position: relative;
+  clear: both;
 }
 
 .puzzle-grid {
@@ -213,13 +218,9 @@ input.inline-content-editable:focus {
   position: relative;
   float: right;
   width: auto;
-  margin-top: 10px;
-  margin-right: -10px;
-}
-.menu:after {
-  content: "";
-  display: table;
-  clear: both;
+  margin-top: 5px;
+  margin-right: -15px;
+  margin-bottom: 5px;
 }
 
 .menu a {
