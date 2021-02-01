@@ -26,13 +26,13 @@ module.exports = function MobileMenu({
         class={mobileView == "across" ? "activemobile" : ""}
         onClick={e => keyBoardSwitch(e, "across")}
       >
-        {acrossNumber}A: {acrossWord}
+        {acrossNumber !== '-' ? acrossNumber + 'A: ' + acrossWord : '-' }
       </a>
       <a
         class={mobileView == "down" ? "activemobile" : ""}
         onClick={e => keyBoardSwitch(e, "down")}
       >
-        {downNumber}D: {downWord}
+        {downNumber !== '-' ? downNumber + 'A: ' + downWord : '-' }
       </a>
     </div>
   );

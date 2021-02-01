@@ -45,9 +45,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
             puzzle.setActiveCell([row, column]);
             return;
           } else if ((!terminus && ad == "down" && clue.isDownStart) ||
-              (ad == "down" && clue.isDownStart && clue.downClueNumber < terminus) ||
-              (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber < terminus)) {
-            terminus = ad == "down" ? clue.downClueNumber;
+                     (!terminus && ad == "across" && clue.isAcrossStart) ||
+                     (ad == "down" && clue.isDownStart && clue.downClueNumber < terminus) ||
+                     (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber < terminus)) {
+            terminus = ad == "down" ? clue.downClueNumber : clue.acrossClueNumber;
             termrow = row;
             termcol = column;
           }
@@ -63,15 +64,19 @@ const CurrentClues = ({ across, down, puzzle }) => {
             puzzle.setActiveCell([row, column]);
             return;
           } else if ((!terminus && ad == "down" && clue.isDownStart) ||
-              (ad == "down" && clue.isDownStart && clue.downClueNumber > terminus) ||
-              (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber > terminus)) {
-            terminus = clue.downClueNumber;
+                     (!terminus && ad == "across" && clue.isAcrossStart) ||
+                     (ad == "down" && clue.isDownStart && clue.downClueNumber < terminus) ||
+                     (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber < terminus)) {
+            terminus = ad == "down" ? clue.downClueNumber : clue.acrossClueNumber;
             termrow = row;
             termcol = column;
           }
         }
       }
     }
+    console.log(terminus);
+    console.log(row);
+    console.log(column);
     puzzle.setActiveCell([termrow, termcol]);
     return;
   };
