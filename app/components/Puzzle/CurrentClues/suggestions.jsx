@@ -145,10 +145,10 @@ function SuggestionsList({
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
       if (ad == "down") {
-        newGrid[cur_word.range[0] + letter][puzzle.activeCell[1]].value =
+        newGrid[cur_word.range[0] + letter][puzzle.activeCell[1]].pencil =
           suggestion[letter];
       } else {
-        newGrid[puzzle.activeCell[0]][cur_word.range[0] + letter].value =
+        newGrid[puzzle.activeCell[0]][cur_word.range[0] + letter].pencil =
           suggestion[letter];
       }
     }
@@ -159,9 +159,9 @@ function SuggestionsList({
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
       if (ad == "down") {
-        newGrid[cur_word.range[0] + letter][puzzle.activeCell[1]].value = "";
+        newGrid[cur_word.range[0] + letter][puzzle.activeCell[1]].pencil = "";
       } else {
-        newGrid[puzzle.activeCell[0]][cur_word.range[0] + letter].value = "";
+        newGrid[puzzle.activeCell[0]][cur_word.range[0] + letter].pencil = "";
       }
     }
     puzzle.setGrid(newGrid);
