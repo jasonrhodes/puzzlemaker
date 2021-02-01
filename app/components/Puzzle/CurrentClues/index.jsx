@@ -31,7 +31,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     e.stopPropagation();
     var newGrid = puzzle.grid;
     var terminus, termrow, termcol;
-    var ad = 'down';
+    var ad = puzzle.direction;
     if (pn == 'next') {
       //find the start with the next highest number
       for (let row = 0; row < newGrid.length; row++) {
@@ -110,7 +110,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             )}
           </div>
           <SuggestionsList
-            ad={"across"}
+            ad="across"
             puzzle={puzzle}
             myHighlight={acrossHighlight}
             setOtherHighlight={setDownHighlight}
@@ -150,7 +150,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
             )}
           </div>
           <SuggestionsList
-            ad={"down"}
+            ad="down"
             puzzle={puzzle}
             myHighlight={downHighlight}
             setOtherHighlight={setAcrossHighlight}

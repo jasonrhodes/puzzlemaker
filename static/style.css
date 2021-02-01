@@ -468,12 +468,12 @@ input.inline-content-editable:focus {
     border-bottom: 1px solid #777;
   }
   
-  #mobilemenu a:first-child {
-    flex-grow: 1;
+  #mobilemenu a:nth-child(2) {
+    flex-grow: 1 !important;
     text-align: center;
   }
   
-  #mobilemenu a {
+  #mobilemenu a:not(:first-child):not(:last-child) {
     flex-grow: 4;
     border: 1px solid #333;
     padding: 3px 8px;
@@ -486,9 +486,15 @@ input.inline-content-editable:focus {
   }
   
   #mobilemenu > a.activemobile {
-    border-bottom: 2px solid #fff;
-    background-color: #fff;
-    color: #000;
+    border-bottom: 2px solid #fff !important;
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+  
+  #mobilemenu a.cluenav {
+    display: flex;
+    width: 30px;
+    text-align: center;
   }
   
   
@@ -504,20 +510,6 @@ input.inline-content-editable:focus {
   
   #across, #down {
     margin: 0 40px;
-  }
-  
-  .current-clues a.cluenav {
-    display: block;
-    position: absolute;
-    top: 35px;
-  }
-  
-  .cluenav.prev {
-    left: 0px;
-  }
-  
-  .cluenav.next {
-    right: 0px;
   }
   
   #keyboard > .keyrow {
