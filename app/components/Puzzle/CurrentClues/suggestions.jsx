@@ -72,6 +72,10 @@ function SuggestionsList({
   const op_active_letter = ad == "down" ? puzzle.activeCell[1] : puzzle.activeCell[0];
   const position = active_letter - cur_word.range[0];
   const op_position = op_active_letter - op_word.range[0];
+  const emptyLetters = [];
+  for (let i=0; i < cur_word.word.length; i++) {
+    if (cur_word.word[i] === "-") emptyLetters.push(i);
+  }
 
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
@@ -138,10 +142,29 @@ function SuggestionsList({
   };
   
   const pencilInSuggestion = (e, suggestion) => {
-    const emptyLetters = [];
-    for (let i=0; i < cur_word.word.length; i++) {
-      letter === "-" ? emptyLetters.push
+    const newGrid = [...puzzle.grid];
+    for (let letter of emptyLetters) {
+      if (ad == "down") {
+        newGrid[cur_word.range[0] + letter][puzzle.activeCell[1]].value =
+          suggestion[letter];
+      } else {
+        newGrid[puzzle.activeCell[0]][cur_word.range[0] + letter].value =
+          suggestion[letter];
+      }
     }
+    puzzle.setGrid(newGrid);
+  }
+  
+  const pencilOut = (e) => {
+    const newGrid = [...puzzle.grid];
+    for (let letter of emptyLetters) {
+      if (ad == "down") {
+        newGrid[cur_word.range[0] + letter][puzzle.activeCell[1]].value = "";
+      } else {
+        newGrid[puzzle.activeCell[0]][cur_word.range[0] + letter].value = "";
+      }
+    }
+    puzzle.setGrid(newGrid);
   }
 
   return (
@@ -166,7 +189,10 @@ function SuggestionsList({
           >
             {x}
           </div>
-          <a onClick={e => hideNonCrosses(e, ad)}>
+          <a 
+            onMouseEnter={e => pencilInSuggestion(e, x)}
+            onMouseLeave={e => pencilOut(e)}
+            onClick={e => hideNonCrosses(e, ad)}>
             {ad == "down" ? (
               <ArrowRightIcon size={12} />
             ) : (
