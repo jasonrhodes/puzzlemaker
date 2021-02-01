@@ -47,7 +47,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           } else if ((!terminus && ad == "down" && clue.isDownStart) ||
               (ad == "down" && clue.isDownStart && clue.downClueNumber < terminus) ||
               (ad == "across" && clue.isAcrossStart && clue.acrossClueNumber < terminus)) {
-            terminus = clue.downClueNumber;
+            terminus = ad == "down" ? clue.downClueNumber;
             termrow = row;
             termcol = column;
           }

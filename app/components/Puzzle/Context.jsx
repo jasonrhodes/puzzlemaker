@@ -109,14 +109,15 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const getCluesForCell = (row, column) => {
-    if (! grid || row === undefined || column === undefined) {
+    if (! grid || row === undefined || column === undefined || (!row && row !== 0) || (!column && column !== 0)) {
       return { acrossNumber: "-", downNumber: "-" };
+    } else {
+      const { clue } = grid[row][column];
+      return {
+        downNumber: clue.downClueNumber || "-",
+        acrossNumber: clue.acrossClueNumber || "-"
+      };
     }
-    const { clue } = grid[row][column];
-    return {
-      downNumber: clue.downClueNumber || "-",
-      acrossNumber: clue.acrossClueNumber || "-"
-    };
   };
 
   const updateCellValue = (row, column, value) => {
