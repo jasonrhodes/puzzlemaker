@@ -25,7 +25,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (row === activeRow && column === activeColumn) {
       puzzle.toggleDirection();
     } else {
-      const isPencil = false;
+      const isPencil = true;
       if (activeRow && activeColumn){
         const isPencil = grid[activeRow][activeColumn].pencil ? true : false;
       }
