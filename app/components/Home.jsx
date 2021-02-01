@@ -29,6 +29,8 @@ module.exports = () => {
           <option disabled={true} selected={true}>-- Choose a grid size --</option>
           <option value="15 x 15">15 x 15 (standard NYT, Mon-Sat)</option>
           <option value="21 x 21">21 x 21 (standard NYT, Sun)</option>
+          <option value="5 x 5">5 x 5 (standard NYT Mini, Mon-Fri)</option>
+          <option value="7 x 7">7 x 7 (standard NYT Mini, Sat-Sun)</option>
           <option value="8 x 8">8 x 8</option>
           <option value="9 x 9">9 x 9</option>
           <option value="10 x 10">10 x 10</option>
@@ -42,7 +44,7 @@ module.exports = () => {
           <option value="19 x 19">19 x 19</option>
           <option value="20 x 20">20 x 20</option>
         </select>
-        <div>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
+        <div style={{'margin-top': '10px'}}>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
       </div>
       <br/>
       <div>

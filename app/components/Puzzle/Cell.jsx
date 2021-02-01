@@ -1,6 +1,6 @@
 const React = require("react");
 const classnames = require("classnames");
-const { getCellClue } = require("./utils");
+const { getCellClue } = require("../../utils/clues");
 
 const PuzzleCell = ({ cell, row, column, puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
@@ -11,17 +11,36 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     active: activeRow === row && activeColumn === column,
     highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column),
     marked: cell.style === 'marked',
-    circled: cell.style === 'circled'
+    circled: cell.style === 'circled',
+    "disable-select": true
   });
   
   const { grid, getNextClueNumber } = puzzle;
-  const label = getCellClue({ row, column, grid, getNextClueNumber });
+  const currentCell = grid[row][column];
+  const clue = currentCell.clue || {};
+  const label = (clue.isAcrossStart && clue.acrossClueNumber) || (clue.isDownStart && clue.downClueNumber);
 
   const handleClick = e => {
     const [activeRow, activeColumn] = puzzle.activeCell;
     if (row === activeRow && column === activeColumn) {
       puzzle.toggleDirection();
     } else {
+      let isPencil = true;
+      //if (activeRow.length && activeColumn-length){
+      //  isPencil = (grid[row][column].pencil || grid[row][column].value ? true : false);
+      //}
+      if (row === activeRow){
+        puzzle.pencilOut("down", puzzle.downFilter.length > 0);
+        puzzle.setAcrossFilter([]);
+      } else if (column === activeColumn) {
+        puzzle.pencilOut("across", puzzle.acrossFilter.length > 0);
+        puzzle.setDownFilter([]);
+      } else {
+        puzzle.pencilOut("down", false);
+        puzzle.pencilOut("across", false);
+        puzzle.setDownFilter([]);
+        puzzle.setAcrossFilter([]);
+      }
       puzzle.setActiveCell([row, column]);
     }
     if (e.metaKey || e.ctrlKey) {
@@ -57,22 +76,22 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       return;
     }
     if (e.key === "ArrowRight") {
-      puzzle.nextAcross();
+      puzzle.nextAcrossCell();
     }
     if (e.key === "ArrowLeft") {
-      puzzle.prevAcross();
+      puzzle.prevAcrossCell();
     }
     if (e.key === "ArrowDown") {
-      puzzle.nextDown();
+      puzzle.nextDownCell();
     }
     if (e.key === "ArrowUp") {
-      puzzle.prevDown();
+      puzzle.prevDownCell();
     }
     if (e.key === "Tab") {
       if (e.shiftKey) {
-        puzzle.rewindActiveCell();
+        puzzle.rewindActiveClue();
       } else {
-        puzzle.advanceActiveCell();
+        puzzle.advanceActiveClue();
       }
     }
     if (e.key === "Backspace") {
@@ -86,7 +105,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
         puzzle.updateCellValue(activeRow, activeColumn, '');
       }
     }
-    if (/^[a-z0-9]$/.test(e.key)) {
+    if (/^[a-zA-Z0-9]$/.test(e.key)) {
       puzzle.updateCellValue(activeRow, activeColumn, e.key);
       puzzle.advanceActiveCell();
     }
@@ -98,11 +117,11 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex="0"
-    >
-      <div class="input">
-        {cell.value.toUpperCase()}
-      </div>
+    > 
+      <input class="puzzlefocus" />
+      <div class={"input"}>{cell.value.toUpperCase()}</div>
       {cell.style === 'circled' ? <div class="circle"/>: null}
+      {cell.pencil ? <div class="pencil">{cell.pencil}</div>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
     </div>
   );
