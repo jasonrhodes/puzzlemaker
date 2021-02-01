@@ -136,6 +136,13 @@ function SuggestionsList({
     setOtherHighlight(null);
     focusOnActive();
   };
+  
+  const pencilInSuggestion = (e, suggestion) => {
+    const emptyLetters = [];
+    for (let i=0; i < cur_word.word.length; i++) {
+      letter === "-" ? emptyLetters.push
+    }
+  }
 
   return (
     <div class="suggestions">
