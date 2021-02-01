@@ -204,6 +204,14 @@ input.inline-content-editable:focus {
   outline: none;
 }
 
+#title {
+  min-width: 70px;
+}
+
+#author {
+  min-width: 70px;
+}
+
 .puzzle-info {
   margin: 10px 0 5px 0;
 }

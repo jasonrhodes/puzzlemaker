@@ -11,10 +11,10 @@ const PuzzleTitle = ({ titleWidth, authorWidth, setTitleWidth, setAuthorWidth, t
 
   return (
     <div>
-      <div class="puzzle-info" id="puzzle-info">
-        <input id="title" placeholder="Untitled" class="inline-content-editable" style={{ width: titleWidth + 'px' }} value={title} type="text" onChange={(e) => handleChange(e, setTitle, setTitleWidth)} />
+      <div class="puzzle-info" id="puzzle-info">{ titleWidth } { authorWidth }
+        <input id="title" placeholder="Untitled" class="inline-content-editable" style={{ width: ((title && title.length > 8) ? measureMyInputText(title) : measureMyInputText("Untitled"))+ "px" }} value={title} type="text" onChange={(e) => handleChange(e, setTitle, setTitleWidth)} />
         <span>by </span>
-        <input id="author" placeholder="Author" class="inline-content-editable" style={{ width: authorWidth + 'px' }} value={author} type="text" onChange={(e) => handleChange(e, setAuthor, setAuthorWidth)} />
+        <input id="author" placeholder="Author" class="inline-content-editable" style={{ width: ((author && author.length > 6) ? measureMyInputText(author) : measureMyInputText("Author"))+ "px" }} value={author} type="text" onChange={(e) => handleChange(e, setAuthor, setAuthorWidth)} />
       </div>
     </div>
   );
