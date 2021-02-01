@@ -30,14 +30,16 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       //  isPencil = (grid[row][column].pencil || grid[row][column].value ? true : false);
       //}
       if (row === activeRow){
-        puzzle.pencilOut("down", puzzle.acrossFilter.length > 0);
-        puzzle.setDownFilter([]);
+        puzzle.pencilOut("down", puzzle.downFilter.length > 0);
+        puzzle.setAcrossFilter([]);
       } else if (column === activeColumn) {
-        puzzle.pencilOut("across", puzzle.downFilter.length > 0);
-        puzzle.setAcrossFilter([])
+        puzzle.pencilOut("across", puzzle.acrossFilter.length > 0);
+        puzzle.setDownFilter([]);
       } else {
         puzzle.pencilOut("down", false);
         puzzle.pencilOut("across", false);
+        puzzle.setDownFilter([]);
+        puzzle.setAcrossFilter([]);
       }
       puzzle.setActiveCell([row, column]);
     }
