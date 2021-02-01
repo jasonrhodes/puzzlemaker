@@ -22,11 +22,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const showDownNonCrosses = (e) => {
     e.stopPropagation();
     setDownFilter([]);
+    puzzle.pencilOut("across");
   };
   
   const showAcrossNonCrosses = (e) => {
     e.stopPropagation();
     setAcrossFilter([]);
+    puzzle.pencilOut("down");
   };
   
   return (

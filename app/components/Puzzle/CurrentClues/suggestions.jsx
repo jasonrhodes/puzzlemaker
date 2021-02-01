@@ -123,7 +123,7 @@ function SuggestionsList({
 
   const fillWithSuggestion = (e, suggestion) => {
     e.stopPropagation();
-    pencilOut();
+    puzzle.pencilOut(ad);
     const newGrid = [...puzzle.grid];
 
     for (let i = cur_word.range[0]; i <= cur_word.range[1]; i++) {
@@ -182,7 +182,7 @@ function SuggestionsList({
       unHighlightCrosses(e);
     }
     if (!otherFilter[0]){
-      pencilOut();
+      puzzle.pencilOut(ad);
     }
   }
 

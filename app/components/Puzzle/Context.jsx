@@ -330,6 +330,18 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const savePuzzle = id => {
     window.localStorage.setItem(puzzleId, JSON.stringify(value));
   };
+  
+  const pencilOut = (direction) => { 
+    const newGrid = [...grid];
+    for (let i = words[direction].range[0]; i < words[direction].range[1]; i++) {
+      if (direction == "down") {
+        newGrid[i][activeCell[1]].pencil = "";
+      } else {
+        newGrid[activeCell[0]][i].pencil = "";
+      }
+    }
+    setGrid(newGrid);
+  }
 
   const value = {
     activeCell,
@@ -363,7 +375,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     rewindActiveClue,
     setTitle,
     setAuthor,
-    setClue
+    setClue,
+    pencilOut
   };
 
   return (
