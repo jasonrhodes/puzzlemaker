@@ -156,15 +156,6 @@ select {
   text-decoration: none;
 }
 
-.title + div > div.inline {
-  max-width: 100% !important;
-}
-
-.title + div > div.inline > div {
-  margin-right: 0px !important;
-}
-  
-
 .accent-text {
   color: rgb(34, 188, 172);
 }
