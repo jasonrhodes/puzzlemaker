@@ -193,15 +193,23 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     while (true) {
       const [nextRow, nextColumn] = getNextAcrossCoords(row, column);
       if (nextRow === row && nextColumn === column) {
+        console.log("at the end of the puzzle");
         break;
       }
       const nextCell = grid[nextRow][nextColumn];
-      if (currentCell.isBlackSquare && nextCell.isBlackSquare) {
+      if (nextCell.isBlackSquare) {
+        console.log("another black square");
+        continue;
+      }
+      if (currentCell.isBlackSquare) {
+        console.log("found next clue after black square");
         break;
       }
-      if (!nextCell.isBlackSquare && currentCell.clue.acrossClueNumber !== nextCell.clue.acrossClueNumber) {
+      if (currentCell.clue.acrossClueNumber !== nextCell.clue.acrossClueNumber) {
+        console.log("found the next clue");
         break;
       }
+      console.log("moving to next")
       row = nextRow;
       column = nextColumn;
     }

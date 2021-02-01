@@ -496,7 +496,7 @@ input.inline-content-editable:focus {
   
   #mobilemenu a.cluenav {
     display: flex;
-    padding: 2px 6px;
+    padding: 4px 6px;
     text-align: center;
     border-radius: 2px;
   }
