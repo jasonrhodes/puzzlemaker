@@ -156,6 +156,15 @@ select {
   text-decoration: none;
 }
 
+.title + div > div.inline {
+  max-width: 100% !important;
+}
+
+.title + div > div.inline > div {
+  margin-right: 0px !important;
+}
+  
+
 .accent-text {
   color: rgb(34, 188, 172);
 }
@@ -208,10 +217,13 @@ input.inline-content-editable:focus {
   margin: 10px 0 5px 0;
 }
 
+
 .menu {
-  position: absolute;
+  position: relative;
+  float: right;
+  width: auto;
   margin-top: 10px;
-  width: 220px;
+  margin-right: -10px;
 }
 
 
@@ -431,14 +443,6 @@ input.inline-content-editable:focus {
   .title {
     font-size: 1.5em;
     margin-bottom: 5px;
-  }
-  
-  .title + div > div.inline {
-    max-width: 100% !important;
-  }
-  
-  .title + div > div.inline > div {
-    margin-right: 0px !important;
   }
   
   .current-clues > div:not(.activemobile) {

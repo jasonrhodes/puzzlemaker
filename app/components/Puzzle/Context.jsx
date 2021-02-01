@@ -191,6 +191,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     let [row, column] = activeCell;
     const currentCell = grid[row][column];
     while (true) {
+      console.log("checking cell", { row, column });
       const [nextRow, nextColumn] = getNextAcrossCoords(row, column);
       if (nextRow === row && nextColumn === column) {
         console.log("at the end of the puzzle");
