@@ -123,6 +123,7 @@ function SuggestionsList({
 
   const fillWithSuggestion = (e, suggestion) => {
     e.stopPropagation();
+    pencilOut();
     const newGrid = [...puzzle.grid];
 
     for (let i = cur_word.range[0]; i <= cur_word.range[1]; i++) {
