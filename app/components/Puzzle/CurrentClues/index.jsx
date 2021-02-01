@@ -65,7 +65,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
           {downNumber !== "-" ? (
           <React.Fragment>
-            <Current clueNumber={downNumber} word={down.word} filterWord={downFilter[0]} showNonCrosses={showDownNonCrosses} ad={"across"} />
+            <Current clueNumber={downNumber} word={down.word} filterWord={downFilter[0]} showNonCrosses={showDownNonCrosses} ad={"down"} />
             <SuggestionsList
               ad="down"
               puzzle={puzzle}

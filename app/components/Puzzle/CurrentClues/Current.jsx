@@ -7,7 +7,7 @@ const Current = ({ clueNumber, word, filterWord, showNonCrosses, ad }) => {
   return (
     <React.Fragment>
       <div class="inline" onClick={e => e.stopPropagation()}>
-        <h3>{clueNumber}A: </h3>
+        <h3>{clueNumber}{ad == 'across' ? 'A' : 'D'}: </h3>
         <ClueInput direction={ad} number={clueNumber} />
       </div>
       <div class="current" onClick={e => e.stopPropagation()}>
