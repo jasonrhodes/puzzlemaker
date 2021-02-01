@@ -211,12 +211,16 @@ input.inline-content-editable:focus {
 
 .menu {
   position: relative;
-  /*float: right;*/
+  float: right;
   width: auto;
   margin-top: 10px;
   margin-right: -10px;
 }
-
+.menu:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
 .menu a {
   padding: 8.5px;
