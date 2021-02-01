@@ -265,6 +265,7 @@ input.inline-content-editable:focus {
 
 .current-clues h3 {
   margin: 5px 0;
+  margin-right: 0.3em;
 }
 
 .current-clues img {
