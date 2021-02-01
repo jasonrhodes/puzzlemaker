@@ -5,12 +5,11 @@ const { EyeIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octico
 
 const Current = ({ clueNumber, word, filterWord, showNonCrosses }) => {
   return (
-    <React.fragment>
+    <React.Fragment>
       <div class="inline" onClick={e => e.stopPropagation()}>
         <h3>{clueNumber}A: </h3>
         <ClueInput direction="across" number={clueNumber} />
       </div>
-
       <div class="current" onClick={e => e.stopPropagation()}>
         {word.toUpperCase()}
         <OneLookLink word={word} />
@@ -23,7 +22,7 @@ const Current = ({ clueNumber, word, filterWord, showNonCrosses }) => {
           </a>
         ) : ( "" )}
       </div>
-    </React.fragment>
+    </React.Fragment>
   );
 }
 
