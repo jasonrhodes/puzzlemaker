@@ -32,6 +32,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [titleWidth, setTitleWidth] = React.useState("");
   const [authorWidth, setAuthorWidth] = React.useState("");
   const [clues, setClues] = React.useState({ across: {}, down: {} });
+  const [downFilter, setDownFilter] = React.useState([]);
+  const [acrossFilter, setAcrossFilter] = React.useState([]);
   
   const setClue = (number, direction, clue) => {
     setClues({ ...clues, [direction]: { ...clues[direction], [number]: clue }});
@@ -378,7 +380,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setTitle,
     setAuthor,
     setClue,
-    pencilOut
+    pencilOut,
+    downFilter, 
+    setDownFilter,
+    acrossFilter,
+    setAcrossFilter
   };
 
   return (

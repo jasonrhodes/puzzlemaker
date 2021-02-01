@@ -26,14 +26,15 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       puzzle.toggleDirection();
     } else {
       let isPencil = true;
-      if (activeRow && activeColumn){
-        console.log(grid[row][column].pencil);
-        isPencil = (grid[row][column].pencil ? true : false);
-      }
+      //if (activeRow.length && activeColumn-length){
+      //  isPencil = (grid[row][column].pencil || grid[row][column].value ? true : false);
+      //}
       if (row === activeRow){
-        puzzle.pencilOut("down", isPencil);
+        puzzle.pencilOut("down", puzzle.acrossFilter.length > 0);
+        puzzle.setDownFilter([]);
       } else if (column === activeColumn) {
-        puzzle.pencilOut("across", isPencil);
+        puzzle.pencilOut("across", puzzle.downFilter.length > 0);
+        puzzle.setAcrossFilter([])
       } else {
         puzzle.pencilOut("down", false);
         puzzle.pencilOut("across", false);

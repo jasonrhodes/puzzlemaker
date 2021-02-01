@@ -14,20 +14,18 @@ const CurrentClues = ({ across, down, puzzle }) => {
   const [mobileView, setMobileView] = React.useState("keyboard");
   const [downHighlight, setDownHighlight] = React.useState(null);
   const [acrossHighlight, setAcrossHighlight] = React.useState(null);
-  const [downFilter, setDownFilter] = React.useState([]);
-  const [acrossFilter, setAcrossFilter] = React.useState([]);
   const [downSuggestions, setDownSuggestions] = React.useState([]);
   const [acrossSuggestions, setAcrossSuggestions] = React.useState([]);
 
   const showDownNonCrosses = (e) => {
     e.stopPropagation();
-    setDownFilter([]);
+    puzzle.setDownFilter([]);
     puzzle.pencilOut("across");
   };
   
   const showAcrossNonCrosses = (e) => {
     e.stopPropagation();
-    setAcrossFilter([]);
+    puzzle.setAcrossFilter([]);
     puzzle.pencilOut("down");
   };
   
@@ -44,15 +42,15 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         {acrossNumber !== "-" ? (
           <React.Fragment>
-            <Current clueNumber={acrossNumber} word={across.word} filterWord={acrossFilter[0]} showNonCrosses={showAcrossNonCrosses} ad={"across"} />
+            <Current clueNumber={acrossNumber} word={across.word} filterWord={puzzle.acrossFilter[0]} showNonCrosses={showAcrossNonCrosses} ad={"across"} />
             <SuggestionsList
               ad="across"
               puzzle={puzzle}
               myHighlight={acrossHighlight}
               setOtherHighlight={setDownHighlight}
-              myFilter={acrossFilter}
-              otherFilter={downFilter}
-              setOtherFilter={setDownFilter}
+              myFilter={puzzle.acrossFilter}
+              otherFilter={puzzle.downFilter}
+              setOtherFilter={puzzle.setDownFilter}
               mySuggestions={acrossSuggestions}
               setMySuggestions={setAcrossSuggestions}
               otherSuggestions={downSuggestions}
@@ -65,15 +63,15 @@ const CurrentClues = ({ across, down, puzzle }) => {
         <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
           {downNumber !== "-" ? (
           <React.Fragment>
-            <Current clueNumber={downNumber} word={down.word} filterWord={downFilter[0]} showNonCrosses={showDownNonCrosses} ad={"down"} />
+            <Current clueNumber={downNumber} word={down.word} filterWord={puzzle.downFilter[0]} showNonCrosses={showDownNonCrosses} ad={"down"} />
             <SuggestionsList
               ad="down"
               puzzle={puzzle}
               myHighlight={downHighlight}
               setOtherHighlight={setAcrossHighlight}
-              myFilter={downFilter}
-              otherFilter={acrossFilter}
-              setOtherFilter={setAcrossFilter}
+              myFilter={puzzle.downFilter}
+              otherFilter={puzzle.acrossFilter}
+              setOtherFilter={puzzle.setAcrossFilter}
               mySuggestions={downSuggestions}
               setMySuggestions={setDownSuggestions}
               otherSuggestions={acrossSuggestions}
