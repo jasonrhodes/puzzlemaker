@@ -168,36 +168,55 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setGrid(newGrid);
   };
 
-  const nextAcross = () => {
-    const [activeRow, activeColumn] = activeCell;
-    const nextColumn = Math.min(activeColumn + 1, grid[0].length - 1);
+  const nextAcrossCell = () => {
+    let [activeRow, activeColumn] = activeCell;
+    // const nextColumn = Math.min(activeColumn + 1, grid[0].length - 1);
+    let nextColumn = activeColumn + 1;
+    if (nextColumn === grid[0].length) {
+      activeRow++;
+      nextColumn = 0;
+    }
     setActiveCell([activeRow, nextColumn]);
   };
+  
+  // const nextAcrossClue = () => {
+  //   const [activeRow, activeColumn] = activeCell;
+  //   const { clue } = grid[activeRow][activeColumn];
+  // }
 
-  const prevAcross = () => {
-    const [activeRow, activeColumn] = activeCell;
-    const prevColumn = Math.max(activeColumn - 1, 0);
+  const prevAcrossCell = () => {
+    let [activeRow, activeColumn] = activeCell;
+    let prevColumn = activeColumn - 1;
+    if (prevColumn < 0) {
+      activeRow = activeRow - 1;
+      if (activeRow < 0) {
+        activeRow = 0;
+        prevColumn = 0;
+      } else {
+        prevColumn = grid[0].length - 1;
+      } 
+    }
     setActiveCell([activeRow, prevColumn]);
   };
 
-  const nextDown = () => {
+  const nextDownCell = () => {
     const [activeRow, activeColumn] = activeCell;
     const nextRow = Math.min(activeRow + 1, grid.length - 1);
     setActiveCell([nextRow, activeColumn]);
   };
 
-  const prevDown = () => {
+  const prevDownCell = () => {
     const [activeRow, activeColumn] = activeCell;
     const prevRow = Math.max(activeRow - 1, 0);
     setActiveCell([prevRow, activeColumn]);
   };
 
   const advanceActiveCell = () => {
-    direction === "across" ? nextAcross() : nextDown();
+    direction === "across" ? nextAcrossCell() : nextDownCell();
   };
 
   const rewindActiveCell = () => {
-    direction === "across" ? prevAcross() : prevDown();
+    direction === "across" ? prevAcrossCell() : prevDownCell();
   };
 
   let clueNumber = 0;

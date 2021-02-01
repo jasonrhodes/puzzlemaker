@@ -76,7 +76,7 @@ module.exports = function MobileMenu({
   return (
     <div id="mobilemenu">
       <a class="cluenav prev key" onClick={handlePrevClueClick}>
-        <TriangleLeftIcon size={24} />
+        <TriangleLeftIcon size={20} />
       </a>
       <a class={mobileView == "keyboard" ? "activemobile" : ""}onClick={e => keyBoardSwitch(e, "keyboard")}>
         <TypographyIcon size={20} />
@@ -94,7 +94,7 @@ module.exports = function MobileMenu({
         {downNumber !== '-' ? downNumber + 'A: ' + downWord : '-' }
       </a>
       <a class="cluenav next key" onClick={handleNextClueClick}>
-        <TriangleRightIcon size={24} />
+        <TriangleRightIcon size={20} />
       </a>
     </div>
   );
