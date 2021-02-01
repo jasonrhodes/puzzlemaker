@@ -1,7 +1,7 @@
 const React = require("react");
 const OneLookLink = require("./OneLookLink");
 const { EyeIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octicons-react");
-
+const ClueInput = require("./ClueInput");
 
 const Current = ({ clueNumber, word, filterWord, showNonCrosses }) => {
   return (

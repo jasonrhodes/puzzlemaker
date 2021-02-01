@@ -73,9 +73,9 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     }
     if (e.key === "Tab") {
       if (e.shiftKey) {
-        puzzle.rewindActiveCell();
+        puzzle.rewindActiveClue();
       } else {
-        puzzle.advanceActiveCell();
+        puzzle.advanceActiveClue();
       }
     }
     if (e.key === "Backspace") {

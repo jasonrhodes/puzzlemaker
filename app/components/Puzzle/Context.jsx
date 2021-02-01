@@ -199,7 +199,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       if (currentCell.isBlackSquare && nextCell.isBlackSquare) {
         break;
       }
-      if (!nextCell.isBlackSquare && currentCell.clue.across.number !== nextCell.clue.across.number) {
+      if (!nextCell.isBlackSquare && currentCell.clue.acrossClueNumber !== nextCell.clue.acrossClueNumber) {
         break;
       }
       row = nextRow;
@@ -253,8 +253,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     row--;
     if (row < 0) {
-      // too far up, go to next column bottom cell
-      column++;
+      // too far up, go to prev column bottom cell
+      column--;
       row = grid.length - 1;
     }
     return [row, column];
@@ -274,10 +274,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
   
   const advanceActiveClue = () => {
+    // TODO: replace nextDownCell with new nextDownClue
     direction === "across" ? nextAcrossClue() : nextDownCell();
   }
   
-  
+  const rewindActiveClue = () => {
+    // TODO: replace prevAcrossCell and prevDownCell with prevAcrossClue and prevDownClue
+    direction === "across" ? prevAcrossCell() : prevDownCell();
+  }
 
   let clueNumber = 0;
   const getNextClueNumber = () => {
@@ -341,7 +345,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     nextDownCell,
     prevDownCell,
     advanceActiveCell,
+    advanceActiveClue,
     rewindActiveCell,
+    rewindActiveClue,
     setTitle,
     setAuthor,
     setClue
