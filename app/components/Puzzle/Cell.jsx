@@ -25,6 +25,9 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (row === activeRow && column === activeColumn) {
       puzzle.toggleDirection();
     } else {
+      if (row !== activeRow){
+        puzzle.pencilOut("across")
+      }
       puzzle.setActiveCell([row, column]);
     }
     if (e.metaKey || e.ctrlKey) {
