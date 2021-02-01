@@ -331,12 +331,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     window.localStorage.setItem(puzzleId, JSON.stringify(value));
   };
   
-  const pencilOut = (direction) => { 
+  const pencilOut = (direction, skip_flag) => { 
     const newGrid = [...grid];
-    for (let i = words[direction].range[0]; i < words[direction].range[1]; i++) {
+    for (let i = words[direction].range[0]; i <= words[direction].range[1]; i++) {
       if (direction == "down") {
+        if (skip_flag && i === activeCell[0]) continue;
         newGrid[i][activeCell[1]].pencil = "";
       } else {
+        if (skip_flag && i === activeCell[1]) continue;
         newGrid[activeCell[0]][i].pencil = "";
       }
     }

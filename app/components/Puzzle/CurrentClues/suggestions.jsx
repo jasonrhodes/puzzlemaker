@@ -182,7 +182,7 @@ function SuggestionsList({
       unHighlightCrosses(e);
     }
     if (!otherFilter[0]){
-      puzzle.pencilOut(ad);
+      myFilter[0] ? puzzle.pencilOut(ad, true) : puzzle.pencilOut(ad, false);
     }
   }
 
