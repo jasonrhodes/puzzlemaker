@@ -3,12 +3,12 @@ const OneLookLink = require("./OneLookLink");
 const { EyeIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octicons-react");
 const ClueInput = require("./ClueInput");
 
-const Current = ({ clueNumber, word, filterWord, showNonCrosses }) => {
+const Current = ({ clueNumber, word, filterWord, showNonCrosses, ad }) => {
   return (
     <React.Fragment>
       <div class="inline" onClick={e => e.stopPropagation()}>
         <h3>{clueNumber}A: </h3>
-        <ClueInput direction="across" number={clueNumber} />
+        <ClueInput direction={ad} number={clueNumber} />
       </div>
       <div class="current" onClick={e => e.stopPropagation()}>
         {word.toUpperCase()}
