@@ -22,7 +22,7 @@ const Puzzle = ({ initialGrid }) => {
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <div class="left" style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
+          <div style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
             <Title
               titleWidth={puzzle.titleWidth}
               authorWidth={puzzle.authorWidth}

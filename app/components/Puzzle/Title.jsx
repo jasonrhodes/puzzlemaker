@@ -10,7 +10,7 @@ const PuzzleTitle = ({ titleWidth, authorWidth, setTitleWidth, setAuthorWidth, t
   }
 
   return (
-    <div>
+    <div class="infoblock">
       <div class="puzzle-info" id="puzzle-info">{ titleWidth } { authorWidth }
         <input id="title" placeholder="Untitled" class="inline-content-editable" style={{ width: (title.length ? measureMyInputText(title) : measureMyInputText("Untitled"))+ "px" }} value={title} type="text" onChange={(e) => handleChange(e, setTitle, setTitleWidth)} />
         <span>by </span>

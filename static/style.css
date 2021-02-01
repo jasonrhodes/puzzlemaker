@@ -17,7 +17,7 @@ select {
   border-bottom: 2px solid rgb(34, 188, 172);
 }
 
-.left {
+.infoblock {
   float: left;
   margin-top: -5px;
 }
@@ -413,11 +413,7 @@ input.inline-content-editable:focus {
 
 @media only screen and (max-width: 636px) {
   .menu {
-    position: relative;
-    margin-bottom: 5px;
-    float: right;
-    width: auto;
-    margin-top: 0px;
+    margin-right: -5px;
   }
   
   .menu a {
@@ -426,10 +422,6 @@ input.inline-content-editable:focus {
   
   .menu a.subicon {
     margin-right: -18px;
-  }
-  
-  .puzzle-info {
-    margin: 0 0 5px 0;
   }
   
   .container {
