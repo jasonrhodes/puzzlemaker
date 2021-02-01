@@ -199,6 +199,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       const nextCell = grid[nextRow][nextColumn];
       if (nextCell.isBlackSquare) {
         console.log("another black square");
+        row = nextRow;
+        column = nextColumn;
         continue;
       }
       if (currentCell.isBlackSquare) {
@@ -209,7 +211,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         console.log("found the next clue");
         break;
       }
-      console.log("moving to next")
+      console.log("moving to next", { row, column, nextRow, nextColumn });
       row = nextRow;
       column = nextColumn;
     }
