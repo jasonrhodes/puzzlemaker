@@ -1,11 +1,7 @@
 const React = require("react");
 const { measureMyInputText } = require("../../../utils/style");
 const { Link } = require("react-router-dom");
-const {
-  EyeIcon,
-  TriangleLeftIcon,
-  TriangleRightIcon
-} = require("@primer/octicons-react");
+const { EyeIcon } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
@@ -31,10 +27,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
       setAcrossFilter([]);
     }
   };
-  const navClue = (e, ad, pn) => {
+  const navClue = (e, pn) => {
     e.stopPropagation();
     var newGrid = puzzle.grid;
     var terminus, termrow, termcol;
+    var ad = 'down';
     if (pn == 'next') {
       //find the start with the next highest number
       for (let row = 0; row < newGrid.length; row++) {
@@ -89,25 +86,10 @@ const CurrentClues = ({ across, down, puzzle }) => {
         acrossWord={across.word.toUpperCase()}
         downNumber={downNumber}
         downWord={down.word.toUpperCase()}
+        navClue={navClue}
       />
       {acrossNumber !== "-" ? (
         <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
-          <a
-            class="cluenav prev key"
-            onClick={e => {
-              navClue(e, "across", "prev");
-            }}
-          >
-            <TriangleLeftIcon size={24} />
-          </a>
-          <a
-            class="cluenav next key"
-            onClick={e => {
-              navClue(e, "across", "next");
-            }}
-          >
-            <TriangleRightIcon size={24} />
-          </a>
           <div class="inline" onClick={e => e.stopPropagation()}>
             <h3>{acrossNumber}A: </h3>
             <ClueInput direction="across" number={acrossNumber} />
@@ -145,22 +127,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
       )}
       {downNumber !== "-" ? (
         <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
-          <a
-            class="cluenav prev key"
-            onClick={e => {
-              navClue(e, "down", "prev");
-            }}
-          >
-            <TriangleLeftIcon size={24} />
-          </a>
-          <a
-            class="cluenav next key"
-            onClick={e => {
-              navClue(e, "down", "next");
-            }}
-          >
-            <TriangleRightIcon size={24} />
-          </a>
           {downNumber !== "-" ? (
             <div class="inline" onClick={e => e.stopPropagation()}>
               <h3>{downNumber}D: </h3>
