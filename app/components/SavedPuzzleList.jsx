@@ -10,7 +10,7 @@ module.exports = function SavedPuzzleList() {
       return {
         id,
         title: puzzle.title || "Untitled",
-        author: puzzle.author || "Nobody"
+        author: puzzle.author || "Author"
       }
     }));
   }, []);
