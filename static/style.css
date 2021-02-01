@@ -466,10 +466,15 @@ input.inline-content-editable:focus {
   #mobilemenu a:nth-child(2) {
     flex-grow: 1 !important;
     text-align: center;
+    min-width: 20px;
   }
   
   #mobilemenu a {
     margin: 0 1px -1px 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
   }
   
   #mobilemenu a:not(:first-child):not(:last-child) {
@@ -626,7 +631,7 @@ input.inline-content-editable:focus {
   
   .smallgrid .puzzle-cell .input {
     font-size: 24px;
-    margin-top: 10px;
+    margin-top: 9px;
   }
   
   .xsgrid .puzzle-cell .input {
