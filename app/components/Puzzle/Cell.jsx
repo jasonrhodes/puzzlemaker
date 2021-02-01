@@ -27,7 +27,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     } else {
       const isPencil = true;
       if (activeRow && activeColumn){
-        const isPencil = grid[activeRow][activeColumn].pencil ? true : false;
+        console.log(grid[row][column].pencil);
+        isPencil = grid[row][column].pencil ? true : false;
       }
       if (row === activeRow){
         puzzle.pencilOut("down", isPencil);
