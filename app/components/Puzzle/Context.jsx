@@ -167,12 +167,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     setGrid(newGrid);
   };
-
-  const nextAcrossCell = () => {
+  
+  const getNextAcrossCoords = () => {
     let [row, column] = activeCell;
     if (row === grid.length - 1 && column === grid[0].length - 1) {
       // we are in the bottom right cell, do nothing
-      return;
+      return [row, column];
     }
     column++;
     if (column === grid[0].length) {
@@ -180,19 +180,31 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       row++;
       column = 0;
     }
-    setActiveCell([row, column]);
+    return [row, column];
+  }
+  
+  const nextAcrossClue = () => {
+    let [row, column] = activeCell;
+    const currentCell = grid[row][column];
+    while (true) {
+      
+    }
+  }
+
+  const nextAcrossCell = () => {
+    setActiveCell(getNextAcrossCoords());
   };
   
   // const nextAcrossClue = () => {
   //   const [activeRow, activeColumn] = activeCell;
   //   const { clue } = grid[activeRow][activeColumn];
   // }
-
-  const prevAcrossCell = () => {
+  
+  const getPrevAcrossCoords = () => {
     let [row, column] = activeCell;
     if (row === 0 && column === 0) {
       // we are in the top left cell, do nothing
-      return;
+      return [row, column];
     }
     column--;
     if (column < 0) {
@@ -200,14 +212,18 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       row--;
       column = grid[0].length - 1;
     }
-    setActiveCell([row, column]);
-  };
+    return [row, column];
+  }
 
-  const nextDownCell = () => {
+  const prevAcrossCell = () => {
+    setActiveCell(getPrevAcrossCoords());
+  };
+  
+  const getNextDownCellCoords = () => {
     let [row, column] = activeCell;
     if (row === grid.length - 1 && column === grid[0].length - 1) {
       // we are in the bottom right cell, do nothing
-      return;
+      return [row, column];
     }
     row++;
     if (row === grid.length) {
@@ -215,14 +231,18 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       column++;
       row = 0;
     }
-    setActiveCell([row, column]);
-  };
+    return [row, column];
+  }
 
-  const prevDownCell = () => {
+  const nextDownCell = () => {
+    setActiveCell(getNextDownCellCoords());
+  };
+  
+  const getPrevDownCellCoords = () => {
     const [row, column] = activeCell;
     if (row === 0 && column === 0) {
       // we are in the top left cell, do nothing
-      return;
+      return [row, column];
     }
     row--;
     if (row < 0) {
@@ -230,8 +250,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       column++;
       row = grid.length - 1;
     }
-    
-    setActiveCell([row, column]);
+    return [row, column];
+  }
+
+  const prevDownCell = () => {
+    setActiveCell(getPrevDownCellCoords());
   };
 
   const advanceActiveCell = () => {
