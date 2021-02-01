@@ -141,7 +141,7 @@ function SuggestionsList({
     focusOnActive();
   };
   
-  const pencilInSuggestion = (e, suggestion) => {
+  const pencilInSuggestion = (suggestion) => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
       if (ad == "down") {
@@ -155,7 +155,7 @@ function SuggestionsList({
     puzzle.setGrid(newGrid);
   }
   
-  const pencilOut = (e) => {
+  const pencilOut = () => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
       if (ad == "down") {
@@ -166,14 +166,32 @@ function SuggestionsList({
     }
     puzzle.setGrid(newGrid);
   }
+  
+  const handleMouseEnter = (e, suggestion, type) => {
+    if (!type) {
+      highlightCrosses(e, ad);
+    }
+    if (!otherFilter[0]){
+      pencilInSuggestion(suggestion);
+    }
+  }
+  
+  const handleMouseOut = (e, type) => {
+    if (!type) {
+      unHighlightCrosses(e);
+    }
+    if (!otherFilter[0]){
+      pencilOut();
+    }
+  }
 
   return (
     <div class="suggestions">
       {filterSuggestions(mySuggestions).map((x, i) => (
         <div class="inline">
           <div
-            onMouseEnter={e => highlightCrosses(e, ad)}
-            onMouseLeave={e => unHighlightCrosses(e)}
+            onMouseEnter={e => handleMouseEnter(e, x)}
+            onMouseLeave={e => handleMouseOut(e)}
             class={
               myHighlight == x[position] ||
               x == otherFilter[0]
@@ -190,8 +208,8 @@ function SuggestionsList({
             {x}
           </div>
           <a 
-            onMouseEnter={e => pencilInSuggestion(e, x)}
-            onMouseLeave={e => pencilOut(e)}
+            onMouseEnter={e => handleMouseEnter(e, x, "arrow")}
+            onMouseLeave={e => handleMouseOut(e, "arrow")}
             onClick={e => hideNonCrosses(e, ad)}>
             {ad == "down" ? (
               <ArrowRightIcon size={12} />
