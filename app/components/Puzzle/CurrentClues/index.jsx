@@ -42,7 +42,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         {acrossNumber !== "-" ? (
           <React.Fragment>
-            <Current clueNumber={acrossNumber} word={across.word} filterWord={puzzle.acrossFilter[0]} showNonCrosses={showAcrossNonCrosses} ad={"across"} />
+            <Current clueNumber={acrossNumber} word={across.word} filterWord={puzzle.acrossFilter[0]} showNonCrosses={showAcrossNonCrosses} direction="across" />
             <SuggestionsList
               ad="across"
               puzzle={puzzle}
@@ -56,14 +56,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
               otherSuggestions={downSuggestions}
             />
           </React.Fragment>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
         <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
           {downNumber !== "-" ? (
           <React.Fragment>
-            <Current clueNumber={downNumber} word={down.word} filterWord={puzzle.downFilter[0]} showNonCrosses={showDownNonCrosses} ad={"down"} />
+            <Current clueNumber={downNumber} word={down.word} filterWord={puzzle.downFilter[0]} showNonCrosses={showDownNonCrosses} direction="down" />
             <SuggestionsList
               ad="down"
               puzzle={puzzle}
@@ -77,9 +75,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
               otherSuggestions={acrossSuggestions}
             />
           </React.Fragment>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
       <KeyBoard puzzle={puzzle} mobileView={mobileView} />
     </div>
