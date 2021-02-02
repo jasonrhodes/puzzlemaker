@@ -19,7 +19,7 @@ const AltPrint = function({ location, match }) {
               <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
               <Puzzle initialGrid={grid} />
             </div>
-            <Puzzle initialGrid={grid} />
+            <ClueList clues={puzzle.clues} />
           </div>
         )}
       </PuzzleContext.Consumer>
