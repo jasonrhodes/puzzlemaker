@@ -687,13 +687,30 @@ input.inline-content-editable:focus {
 }
 
 @media print {
-  .menu, .current-clues, pre {
+  .menu, .current-clues, pre, .input {
     display: none;
   }
   
   .page {
-  -webkit-column-width: 300px;
-     -moz-column-width: 300px;
-          column-width: 300px;
+    column-width: 290px;
+    column-count: 2;
+  }
+  
+  .puzzle-grid {
+    border: 0;
+  }
+  
+  .puzzle-cell.highlighted {
+      border-color: #000;
+      background-color: #fff;
+  }
+
+  .puzzle-cell.active {
+      border-color: #000;
+      box-shadow: none;
+  }
+  
+  .cluedata {
+    padding-top: 70px;
   }
 }
