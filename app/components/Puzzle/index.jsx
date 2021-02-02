@@ -5,7 +5,7 @@ const { PuzzleContext } = require("./Context");
 const Title = require("./Title");
 const CurrentClues = require("./CurrentClues");
 
-const Puzzle = ({ initialGrid }) => {
+const Puzzle = () => {
   const gridSizeDesc = (length) => {
     if (length > 16) {
      return "largegrid";

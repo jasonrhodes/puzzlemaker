@@ -3,6 +3,16 @@ const PuzzleContext = React.createContext();
 const { assignClueNumbersToGrid } = require("../../utils/clues");
 const getSymmetricalCell = require("../../utils/getSymmetricalCell");
 const { findAcross, findDown } = require("../../utils/currentWordFinders");
+const {
+  getNextAcrossCellCoords,
+  getNextAcrossClueStart,
+  getPrevAcrossCellCoords,
+  getPrevAcrossClueStart,
+  getNextDownCellCoords,
+  getNextDownClueStart,
+  getPrevDownCellCoords,
+  getPrevDownClueStart,
+} = require("../../utils/cellNavigation");
 
 function getSavedPuzzle(id) {
   if (!id) {
@@ -18,7 +28,7 @@ function getSavedPuzzle(id) {
 const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const emptyWord = { range: [], word: "" };
   const [savedPuzzleId, setSavedPuzzleId] = React.useState(null);
-  const [activeCell, setActiveCell] = React.useState([]);
+  const [activeCell, _setActiveCell] = React.useState([]);
   const [direction, setDirection] = React.useState("across");
   const [words, setWords] = React.useState({
     across: emptyWord,
@@ -29,11 +39,19 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [symmetry, setSymmetry] = React.useState(true);
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
-  const [titleWidth, setTitleWidth] = React.useState("");
-  const [authorWidth, setAuthorWidth] = React.useState("");
   const [clues, setClues] = React.useState({ across: {}, down: {} });
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
+  
+  const setActiveCell = ([row, column]) => {
+    if (row >= grid.length) {
+      throw new Error(`Cannot set active cell row (${row}) larger than max (${grid.length - 1})`);
+    }
+    if (column >= grid[0].length) {
+      throw new Error(`Cannot set active cell column (${column}) larger than max (${grid[0].length - 1})`);
+    }
+    return _setActiveCell([row, column]);
+  }
   
   const setClue = (number, direction, clue) => {
     setClues({ ...clues, [direction]: { ...clues[direction], [number]: clue }});
@@ -179,8 +197,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
   };
 
-  const updateCellClue = (row, column, clue) => {};
-
   const toggleBlackSquare = (row, column) => {
     const currentValue = grid[row][column].isBlackSquare;
     const newGrid = [...grid];
@@ -218,113 +234,45 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     setGrid(newGrid);
   };
-  
-  const getNextAcrossCoords = (row, column) => {
-    if (row === grid.length - 1 && column === grid[0].length - 1) {
-      // we are in the bottom right cell, do nothing
-      return [row, column];
-    }
-    column++;
-    if (column === grid[0].length) {
-      // too far right, go to next row
-      row++;
-      column = 0;
-    }
-    return [row, column];
-  }
 
   const nextAcrossCell = () => {
     const [row, column] = activeCell;
-    setActiveCell(getNextAcrossCoords(row, column));
+    setActiveCell(getNextAcrossCellCoords(row, column, grid));
   };
   
   const nextAcrossClue = () => {
     let [row, column] = activeCell;
-    const currentCell = grid[row][column];
-    while (true) {
-      console.log("checking cell", { row, column });
-      const [nextRow, nextColumn] = getNextAcrossCoords(row, column);
-      if (nextRow === row && nextColumn === column) {
-        console.log("at the end of the puzzle");
-        break;
-      }
-      const nextCell = grid[nextRow][nextColumn];
-      if (nextCell.isBlackSquare) {
-        console.log("another black square");
-        row = nextRow;
-        column = nextColumn;
-        continue;
-      }
-      if (currentCell.isBlackSquare) {
-        console.log("found next clue after black square");
-        break;
-      }
-      if (currentCell.clue.acrossClueNumber !== nextCell.clue.acrossClueNumber) {
-        console.log("found the next clue");
-        break;
-      }
-      console.log("moving to next", { row, column, nextRow, nextColumn });
-      row = nextRow;
-      column = nextColumn;
-    }
-    setActiveCell([row, column]);
-  }
-  
-  const getPrevAcrossCoords = (row, column) => {
-    if (row === 0 && column === 0) {
-      // we are in the top left cell, do nothing
-      return [row, column];
-    }
-    column--;
-    if (column < 0) {
-      // too far left, go to prev row
-      row--;
-      column = grid[0].length - 1;
-    }
-    return [row, column];
+    setActiveCell(getNextAcrossClueStart(row, column, grid));
   }
 
   const prevAcrossCell = () => {
     const [row, column] = activeCell;
-    setActiveCell(getPrevAcrossCoords(row, column));
+    setActiveCell(getPrevAcrossCellCoords(row, column, grid));
   };
-  
-  const getNextDownCellCoords = (row, column) => {
-    if (row === grid.length - 1 && column === grid[0].length - 1) {
-      // we are in the bottom right cell, do nothing
-      return [row, column];
-    }
-    row++;
-    if (row === grid.length) {
-      // too far down, go to next column top cell
-      column++;
-      row = 0;
-    }
-    return [row, column];
-  }
+
+  const prevAcrossClue = () => {
+    const [row, column] = activeCell;
+    setActiveCell(getPrevAcrossClueStart(row, column, grid));
+  };
 
   const nextDownCell = () => {
     const [row, column] = activeCell;
-    setActiveCell(getNextDownCellCoords(row, column));
+    setActiveCell(getNextDownCellCoords(row, column, grid));
   };
-  
-  const getPrevDownCellCoords = (row, column) => {
-    if (row === 0 && column === 0) {
-      // we are in the top left cell, do nothing
-      return [row, column];
-    }
-    row--;
-    if (row < 0) {
-      // too far up, go to prev column bottom cell
-      column--;
-      row = grid.length - 1;
-    }
-    return [row, column];
-  }
+
+  const nextDownClue = () => {
+    const [row, column] = activeCell;
+    setActiveCell(getNextDownClueStart(row, column, grid));
+  };
 
   const prevDownCell = () => {
     const [row, column] = activeCell;
-    setActiveCell(getPrevDownCellCoords(row, column));
+    setActiveCell(getPrevDownCellCoords(row, column, grid));
+  };
+
+  const prevDownClue = () => {
+    const [row, column] = activeCell;
+    setActiveCell(getPrevDownClueStart(row, column, grid));
   };
 
   const advanceActiveCell = () => {
@@ -336,13 +284,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
   
   const advanceActiveClue = () => {
-    // TODO: replace nextDownCell with new nextDownClue
-    direction === "across" ? nextAcrossClue() : nextDownCell();
+    direction === "across" ? nextAcrossClue() : nextDownClue();
   }
   
   const rewindActiveClue = () => {
-    // TODO: replace prevAcrossCell and prevDownCell with prevAcrossClue and prevDownClue
-    direction === "across" ? prevAcrossCell() : prevDownCell();
+    direction === "across" ? prevAcrossClue() : prevDownClue();
   }
   
   const pencilHandling = (field, dir, forward) => {
@@ -405,7 +351,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const savePuzzle = id => {
-    window.localStorage.setItem(puzzleId, JSON.stringify(value));
+    window.localStorage.setItem(id, JSON.stringify(value));
   };
   
   const clearAll = (prev_flag) => {
