@@ -330,17 +330,20 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     let otherDir;
     let filter;
     let setFilter;
+    let otherFilter;
     let setOtherFilter;
     const index = (forward ? 1 : 0);
     if (dir === "down") {
       otherDir = "across";
       filter = downFilter;
       setFilter = setDownFilter;
+      otherFilter = acrossFilter;
       setOtherFilter = setAcrossFilter;
     } else {
       otherDir = "down";
       filter = acrossFilter;
       setFilter = setAcrossFilter;
+      otherFilter = downFilter;
       setOtherFilter = setDownFilter;
     }
     pencilOut(otherDir, otherFilter.length > 0);
