@@ -196,8 +196,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     column++;
     if (column === grid[0].length) {
       // too far right, go to next row
-      pencilOut("across", false);
-      setDownFilter([]);
       row++;
       column = 0;
     }
@@ -206,8 +204,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const nextAcrossCell = () => {
     const [row, column] = activeCell;
-    pencilOut("down", downFilter.length > 0);
-    setAcrossFilter([]);
+    
+    pencilHandling(column, "across", true);
+    
     setActiveCell(getNextAcrossCoords(row, column));
   };
   
@@ -251,8 +250,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     column--;
     if (column < 0) {
       // too far left, go to prev row
-      pencilOut("across", false);
-      setDownFilter([]);
       row--;
       column = grid[0].length - 1;
     }
@@ -261,8 +258,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const prevAcrossCell = () => {
     const [row, column] = activeCell;
-    pencilOut("down", downFilter.length > 0);
-    setAcrossFilter([]);
+    
+    pencilHandling(column, "across", false);
+    
     setActiveCell(getPrevAcrossCoords(row, column));
   };
   
@@ -274,8 +272,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     row++;
     if (row === grid.length) {
       // too far down, go to next column top cell
-      pencilOut("down", false);
-      setAcrossFilter([]);
       column++;
       row = 0;
     }
@@ -284,8 +280,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const nextDownCell = () => {
     const [row, column] = activeCell;
-    pencilOut("across", acrossFilter.length > 0);
-    setDownFilter([]);
+    
+    pencilHandling(row, "down", true);
+    
     setActiveCell(getNextDownCellCoords(row, column));
   };
   
@@ -297,8 +294,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     row--;
     if (row < 0) {
       // too far up, go to prev column bottom cell
-      pencilOut("down", false);
-      setAcrossFilter([]);
       column--;
       row = grid.length - 1;
     }
@@ -307,8 +302,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const prevDownCell = () => {
     const [row, column] = activeCell;
-    pencilOut("across", acrossFilter.length > 0);
-    setDownFilter([]);
+    
+    pencilHandling(row, "down", false);
+    
     setActiveCell(getPrevDownCellCoords(row, column));
   };
 
@@ -330,13 +326,28 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     direction === "across" ? prevAcrossCell() : prevDownCell();
   }
   
-  const pencilHandling = (dir, forward) => {
-    dir === "across" setFunc
-    pencilOut(dir, downFilter.length > 0);
-    setAcrossFilter([]);
-    if (column === words.across.range[1]){
-      pencilOut("across", false);
-      setDownFilter([]);
+  const pencilHandling = (field, dir, forward) => {
+    let otherDir;
+    let filter;
+    let setFilter;
+    let setOtherFilter;
+    const index = (forward ? 1 : 0);
+    if (dir === "down") {
+      otherDir = "across";
+      filter = downFilter;
+      setFilter = setDownFilter;
+      setOtherFilter = setAcrossFilter;
+    } else {
+      otherDir = "down";
+      filter = acrossFilter;
+      setFilter = setAcrossFilter;
+      setOtherFilter = setDownFilter;
+    }
+    pencilOut(otherDir, otherFilter.length > 0);
+    setFilter([]);
+    if (field === words[dir].range[index]){
+      pencilOut(dir, false);
+      setOtherFilter([]);
     }
   }
 
