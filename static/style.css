@@ -685,3 +685,15 @@ input.inline-content-editable:focus {
   }
 
 }
+
+@media print {
+  .menu, .current-clues, pre {
+    display: none;
+  }
+  
+  .page {
+  -webkit-column-width: 300px;
+     -moz-column-width: 300px;
+          column-width: 300px;
+  }
+}

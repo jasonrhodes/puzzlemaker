@@ -14,12 +14,12 @@ const AltPrint = function({ location, match }) {
     <PuzzleContextProvider initialGrid={grid} puzzleId={match.params.puzzleId}>
       <PuzzleContext.Consumer>
         {puzzle => (
-          <div class="page">
-            <div class="container">
-              <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
+          <div class="container">
+            <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
+            <div class="page">
               <Puzzle initialGrid={grid} />
+              <ClueList clues={puzzle.clues} />
             </div>
-            <ClueList clues={puzzle.clues} />
           </div>
         )}
       </PuzzleContext.Consumer>

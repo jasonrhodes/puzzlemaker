@@ -5,14 +5,14 @@ const ClueList = ({
 }) => {
   return (
     <div class="cluedata">
-      <h4>Across</h4>
+      <b>Across</b>
       {Object.keys(clues.across).map(key => (
         <div class="listclue">
           <b>{key}</b> {clues.across[key]}
         </div>
       ))}
       <br/>
-      <h4>Down</h4>
+      <b>Down</b>
       {Object.keys(clues.down).map(key => (
         <div class="listclue">
           <b>{key}</b> {clues.down[key]}
