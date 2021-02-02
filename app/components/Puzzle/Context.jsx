@@ -69,7 +69,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   
   // all pencil/locked suggestions are updated after a change to the activeCell
   React.useEffect(() => {
-    if (activeCell.length && prevCell.length && activeCell[0] !== null && prevCell[0] !== null && activeCell !== prevCell) {
+    if (activeCell.length && prevCell.length && activeCell[0] !== undefined && prevCell[0] !== undefined && activeCell !== prevCell) {
+      console.log("Active cell: ", activeCell);
+      console.log("Prev. cell: ", prevCell);
       if (activeCell[0] === prevCell[0]){
         if (grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !== grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber){
             clearAll(true);
