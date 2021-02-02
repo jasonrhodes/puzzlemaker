@@ -1,6 +1,6 @@
 const React = require("react");
 const Puzzle = require("./Puzzle");
-const ClueList = require("./ClueList");
+const ClueList = require("./Puzzle/ClueList");
 const { PuzzleContextProvider, PuzzleContext } = require("./Puzzle/Context");
 const initGrid = require("../utils/initGrid");
 

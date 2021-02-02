@@ -1,25 +1,18 @@
 const React = require("react");
 
-
-const PuzzleRow = ({
-  row,
-  columns
+const ClueList = ({
+  clues
 }) => {
   return (
-    <div class="puzzle-row">
-      <PuzzleContext.Consumer>
-        {puzzle => columns.map((cell, i) => (
-          <Cell
-            key={`cell-${row}-${i}`}
-            row={row}
-            column={i}
-            cell={cell}
-            puzzle={puzzle}
-          />
-        ))}
-      </PuzzleContext.Consumer>
+    <div class="cluedata">
+      <h4>Across</h4>
+      {clues.across.map((x, i) => (
+        <div class="listclue">
+          {x} {i} 
+        </div>
+      ))}
     </div>
   );
 };
 
-module.exports = PuzzleRow;
+module.exports = ClueList;
