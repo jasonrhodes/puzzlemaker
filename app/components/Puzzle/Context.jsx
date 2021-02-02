@@ -137,10 +137,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         pencilOut("down", false);
         setAcrossFilter([]);
         setDownFilter([]);
+      }
       if (!value && direction === "across" && downFilter.length) {
-        newGrid[row][column].pencil = downFilter[activeCell[1] - words.across.range[0]];
+        newGrid[row][column].pencil = downFilter[0][activeCell[1] - words.across.range[0]];
       } else if (!value && direction === "down" && acrossFilter.length) {
-        newGrid[row][column].pencil = acrossFilter[activeCell[0] - words.down.range[0]];
+        newGrid[row][column].pencil = acrossFilter[0][activeCell[0] - words.down.range[0]];
       }
         
       setGrid(newGrid);
