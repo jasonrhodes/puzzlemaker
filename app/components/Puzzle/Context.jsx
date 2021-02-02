@@ -400,7 +400,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     downFilter, 
     setDownFilter,
     acrossFilter,
-    setAcrossFilter
+    setAcrossFilter,
+    savedPuzzleId
   };
 
   return (
