@@ -182,10 +182,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       if (newGrid[row][column].pencil === value.toUpperCase()){
         newGrid[row][column].pencil = "";
       } else if (newGrid[row][column].pencil) {
-        pencilOut("across", false);
-        pencilOut("down", false);
-        setAcrossFilter([]);
-        setDownFilter([]);
+        clearAll(false);
       }
       if (!value && direction === "across" && downFilter.length) {
         newGrid[row][column].pencil = downFilter[0][activeCell[1] - words.across.range[0]];
