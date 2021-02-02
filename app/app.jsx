@@ -9,6 +9,7 @@ const Builder = require('./components/Builder');
 const Home = require('./components/Home');
 const Solver = require('./components/Solver');
 const Print = require('./components/Print');
+const AltPrint = require('./components/AltPrint');
 
 ReactDOM.render((
   <BrowserRouter>
@@ -20,6 +21,7 @@ ReactDOM.render((
       <Route exact path="/play/:puzzleId" component={Solver} />
       <Route exact path="/print" component={Print} />
       <Route exact path="/print/:puzzleId" component={Print} />
+      <Route exact path="/altprint/:puzzleId" component={AltPrint} />
       
     </div>
   </BrowserRouter>), document.getElementById('main'));

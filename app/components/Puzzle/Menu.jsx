@@ -83,13 +83,13 @@ const PuzzleMenu = ({ puzzle }) => {
           <i>"/" or "-"</i> to toggle shaded square
         </span>
       </a>
-      <Link to={{ pathname: "/play/" + puzzle.id }}>
+      <Link to={{ pathname: "/play/" + match.params.puzzleId }}>
         <PlayIcon size={24} />
         <span class="pbtip stip">
           <b>Play</b>
         </span>
       </Link>
-      <Link to={"/print/" + puzzle.id}>
+      <Link to={"/altprint/" + match.params.puzzleId}>
         <FileIcon size={24} />
         <span class="pbtip stip">
           <b>PDF</b>
