@@ -95,6 +95,7 @@ function SuggestionsList({
       setOtherFilter([]);
       puzzle.pencilOut(ad, myFilter.length > 0);
     } else {
+      pencilInSuggestion(e.currentTarget.previousSibling.textContent);
       setOtherFilter([
         e.currentTarget.previousSibling.textContent,
         e.currentTarget.previousSibling.textContent[position]
