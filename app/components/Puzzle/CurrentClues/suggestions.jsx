@@ -93,7 +93,7 @@ function SuggestionsList({
     e.stopPropagation();
     if (otherFilter[0] == e.currentTarget.previousSibling.textContent) {
       setOtherFilter([]);
-      pencilOut();
+      puzzle.pencilOut(ad, myFilter.length > 0);
     } else {
       setOtherFilter([
         e.currentTarget.previousSibling.textContent,
