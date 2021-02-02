@@ -184,9 +184,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       } else if (newGrid[row][column].pencil) {
         clearAll(false);
       }
-      if (!value && direction === "across" && downFilter.length) {
+      if (!value && downFilter.length) {
         newGrid[row][column].pencil = downFilter[0][activeCell[1] - words.across.range[0]];
-      } else if (!value && direction === "down" && acrossFilter.length) {
+      } else if (!value && acrossFilter.length) {
         newGrid[row][column].pencil = acrossFilter[0][activeCell[0] - words.down.range[0]];
       }
         
@@ -200,11 +200,13 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     newGrid[row][column].isBlackSquare = !currentValue;
     newGrid[row][column].value = "";
     newGrid[row][column].style = null;
+    newGrid[row][column].pencil = "";
     if (symmetry) {
       const [symRow, symCol] = getSymmetricalCell(grid, row, column);
       newGrid[symRow][symCol].isBlackSquare = !currentValue;
       newGrid[symRow][symCol].value = "";
       newGrid[symRow][symCol].style = null;
+      newGrid[symRow][symCol].pencil = "";
     }
     const numberedGrid = assignClueNumbersToGrid(newGrid);
     setGrid(numberedGrid);
