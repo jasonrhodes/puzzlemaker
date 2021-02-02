@@ -29,10 +29,10 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       //if (activeRow.length && activeColumn-length){
       //  isPencil = (grid[row][column].pencil || grid[row][column].value ? true : false);
       //}
-      if (row === activeRow){
+      if (row === activeRow && column >= puzzle.words.across.range[0] && column <= puzzle.words.across.range[1]){
         puzzle.pencilOut("down", puzzle.downFilter.length > 0);
         puzzle.setAcrossFilter([]);
-      } else if (column === activeColumn) {
+      } else if (column === activeColumn && row >= puzzle.words.down.range[0] && row <= puzzle.words.down.range[1]) {
         puzzle.pencilOut("across", puzzle.acrossFilter.length > 0);
         puzzle.setDownFilter([]);
       } else {

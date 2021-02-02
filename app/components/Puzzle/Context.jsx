@@ -329,6 +329,16 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     // TODO: replace prevAcrossCell and prevDownCell with prevAcrossClue and prevDownClue
     direction === "across" ? prevAcrossCell() : prevDownCell();
   }
+  
+  const pencilHandling = (dir, forward) => {
+    dir === "across" setFunc
+    pencilOut(dir, downFilter.length > 0);
+    setAcrossFilter([]);
+    if (column === words.across.range[1]){
+      pencilOut("across", false);
+      setDownFilter([]);
+    }
+  }
 
   let clueNumber = 0;
   const getNextClueNumber = () => {
