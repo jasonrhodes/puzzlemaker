@@ -158,7 +158,7 @@ function SuggestionsList({
     puzzle.setGrid(newGrid);
   }
   
-  const pencilOut = () => {
+  /*const pencilOut = () => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
       if (ad == "down") {
@@ -168,7 +168,7 @@ function SuggestionsList({
       }
     }
     puzzle.setGrid(newGrid);
-  }
+  }*/
   
   const handleMouseEnter = (e, suggestion, type) => {
     if (!type) {
