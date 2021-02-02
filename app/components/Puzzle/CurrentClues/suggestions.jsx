@@ -79,7 +79,7 @@ function SuggestionsList({
 
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
-  });
+  },[cur_word]);
 
   const highlightCrosses = e => {
     setOtherHighlight(e.currentTarget.textContent[position]);
