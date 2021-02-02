@@ -54,27 +54,18 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (activeCell && prevCell && activeCell !== prevCell) {
       if (activeCell[0] === prevCell[0]){
         if (grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !== grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber){
-            pencilOut("down", false, true);
-            pencilOut("across", false, true);
-            setDownFilter([]);
-            setAcrossFilter([]);
+            clearAll(true);
         } else {
             pencilHandling(prevCell[1], "across", activeCell[1] > prevCell[1]);
         }
       } else if (activeCell[1] === prevCell[1]){
         if (grid[activeCell[0]][activeCell[1]].clue.downClueNumber !== grid[prevCell[0]][prevCell[1]].clue.downClueNumber){
-            pencilOut("down", false, true);
-            pencilOut("across", false, true);
-            setDownFilter([]);
-            setAcrossFilter([]);
+            clearAll(true);
         } else {
             pencilHandling(prevCell[0], "down", activeCell[0] > prevCell[0]);
         }
       } else {
-        pencilOut("down", false, true);
-        pencilOut("across", false, true);
-        setDownFilter([]);
-        setAcrossFilter([]);
+        clearAll(true);
       }
     }
   }, [activeCell]);
@@ -417,6 +408,13 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     window.localStorage.setItem(puzzleId, JSON.stringify(value));
   };
   
+  const clearAll = (prev_flag) => {
+    pencilOut("down", false, prev_flag);
+    pencilOut("across", false, prev_flag);
+    setDownFilter([]);
+    setAcrossFilter([]);
+  }
+  
   const pencilOut = (direction, skip_flag, prev_flag) => { 
     const cell = (prev_flag ? prevCell : activeCell);
     if (cell.length){
@@ -473,7 +471,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     acrossFilter,
     setAcrossFilter,
     savedPuzzleId,
-    prevCell
+    prevCell,
+    clearAll
   };
 
   return (
