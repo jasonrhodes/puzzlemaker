@@ -127,14 +127,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const updateCellValue = (row, column, value) => {
     if (!grid[row][column].isBlackSquare) {
       const newGrid = [...grid];
-      newGrid[row][column].value = value;
-      if (newGrid[row][column].pencil === value){
+      newGrid[row][column].value = value.toUpperCase();
+      if (newGrid[row][column].pencil === value.toUpperCase()){
         newGrid[row][column].pencil = "";
       } else if (newGrid[row][column].pencil) {
-        if (direction === "across"){
-          pencilOut("across", false);
-          setDownFilter([]);
-        }
+        pencilOut("across", false);
+        pencilOut("down", false);
+        setAcrossFilter([]);
+        setDownFilter([]);
       }
       setGrid(newGrid);
     }
