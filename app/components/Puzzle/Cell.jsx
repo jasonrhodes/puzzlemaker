@@ -121,7 +121,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       <input class="puzzlefocus" />
       <div class={"input"}>{cell.value.toUpperCase()}</div>
       {cell.style === 'circled' ? <div class="circle"/>: null}
-      {cell.pencil ? <div class="pencil">{cell.pencil}</div>: null}
+      {cell.pencil ? <div class="input pencil">{cell.pencil}</div>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
     </div>
   );
