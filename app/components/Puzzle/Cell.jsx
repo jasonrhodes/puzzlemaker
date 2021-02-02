@@ -25,22 +25,6 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (row === activeRow && column === activeColumn) {
       puzzle.toggleDirection();
     } else {
-      let isPencil = true;
-      //if (activeRow.length && activeColumn-length){
-      //  isPencil = (grid[row][column].pencil || grid[row][column].value ? true : false);
-      //}
-      if (row === activeRow && column >= puzzle.words.across.range[0] && column <= puzzle.words.across.range[1]){
-        puzzle.pencilOut("down", puzzle.downFilter.length > 0);
-        puzzle.setAcrossFilter([]);
-      } else if (column === activeColumn && row >= puzzle.words.down.range[0] && row <= puzzle.words.down.range[1]) {
-        puzzle.pencilOut("across", puzzle.acrossFilter.length > 0);
-        puzzle.setDownFilter([]);
-      } else {
-        puzzle.pencilOut("down", false);
-        puzzle.pencilOut("across", false);
-        puzzle.setDownFilter([]);
-        puzzle.setAcrossFilter([]);
-      }
       puzzle.setActiveCell([row, column]);
     }
     if (e.metaKey || e.ctrlKey) {

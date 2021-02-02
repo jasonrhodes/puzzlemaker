@@ -39,6 +39,46 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setClues({ ...clues, [direction]: { ...clues[direction], [number]: clue }});
   }
 
+  function usePrevious(value) {
+      const ref = React.useRef();
+      React.useEffect(() => {
+        ref.current = value;
+      });
+  return ref.current;
+  } 
+  
+  const prevCell = usePrevious(activeCell);
+  
+  // all pencil/locked suggestions are updated after a change to the activeCell
+  React.useEffect(() => {
+    if (activeCell && prevCell && activeCell !== prevCell) {
+      if (activeCell[0] === prevCell[0]){
+        if (grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !== grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber){
+            pencilOut("down", false, true);
+            pencilOut("across", false, true);
+            setDownFilter([]);
+            setAcrossFilter([]);
+        } else {
+            pencilHandling(prevCell[1], "across", activeCell[1] > prevCell[1]);
+        }
+      } else if (activeCell[1] === prevCell[1]){
+        if (grid[activeCell[0]][activeCell[1]].clue.downClueNumber !== grid[prevCell[0]][prevCell[1]].clue.downClueNumber){
+            pencilOut("down", false, true);
+            pencilOut("across", false, true);
+            setDownFilter([]);
+            setAcrossFilter([]);
+        } else {
+            pencilHandling(prevCell[0], "down", activeCell[0] > prevCell[0]);
+        }
+      } else {
+        pencilOut("down", false, true);
+        pencilOut("across", false, true);
+        setDownFilter([]);
+        setAcrossFilter([]);
+      }
+    }
+  }, [activeCell]);
+  
   React.useEffect(() => {
     setWords(calculateCurrentWords());
   }, [grid, setWords, activeCell]);
@@ -204,9 +244,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const nextAcrossCell = () => {
     const [row, column] = activeCell;
-    
-    pencilHandling(column, "across", true);
-    
     setActiveCell(getNextAcrossCoords(row, column));
   };
   
@@ -258,9 +295,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const prevAcrossCell = () => {
     const [row, column] = activeCell;
-    
-    pencilHandling(column, "across", false);
-    
     setActiveCell(getPrevAcrossCoords(row, column));
   };
   
@@ -280,9 +314,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const nextDownCell = () => {
     const [row, column] = activeCell;
-    
-    pencilHandling(row, "down", true);
-    
     setActiveCell(getNextDownCellCoords(row, column));
   };
   
@@ -302,9 +333,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const prevDownCell = () => {
     const [row, column] = activeCell;
-    
-    pencilHandling(row, "down", false);
-    
     setActiveCell(getPrevDownCellCoords(row, column));
   };
 
@@ -346,10 +374,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       otherFilter = downFilter;
       setOtherFilter = setDownFilter;
     }
-    pencilOut(otherDir, otherFilter.length > 0);
+    pencilOut(otherDir, otherFilter.length > 0, true);
     setFilter([]);
     if (field === words[dir].range[index]){
-      pencilOut(dir, false);
+      pencilOut(dir, false, true);
       setOtherFilter([]);
     }
   }
@@ -389,18 +417,21 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     window.localStorage.setItem(puzzleId, JSON.stringify(value));
   };
   
-  const pencilOut = (direction, skip_flag) => { 
-    const newGrid = [...grid];
-    for (let i = words[direction].range[0]; i <= words[direction].range[1]; i++) {
-      if (direction == "down") {
-        if (skip_flag && i === activeCell[0]) continue;
-        newGrid[i][activeCell[1]].pencil = "";
-      } else {
-        if (skip_flag && i === activeCell[1]) continue;
-        newGrid[activeCell[0]][i].pencil = "";
-      }
+  const pencilOut = (direction, skip_flag, prev_flag) => { 
+    const cell = (prev_flag ? prevCell : activeCell);
+    if (cell.length){
+        const newGrid = [...grid];
+        for (let i = words[direction].range[0]; i <= words[direction].range[1]; i++) {
+          if (direction == "down") {
+            if (skip_flag && i === cell[0]) continue;
+            newGrid[i][cell[1]].pencil = "";
+          } else {
+            if (skip_flag && i === cell[1]) continue;
+            newGrid[cell[0]][i].pencil = "";
+          }
+        }
+        setGrid(newGrid);
     }
-    setGrid(newGrid);
   }
 
   const value = {
@@ -441,7 +472,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setDownFilter,
     acrossFilter,
     setAcrossFilter,
-    savedPuzzleId
+    savedPuzzleId,
+    prevCell
   };
 
   return (
