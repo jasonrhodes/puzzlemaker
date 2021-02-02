@@ -128,6 +128,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (!grid[row][column].isBlackSquare) {
       const newGrid = [...grid];
       newGrid[row][column].value = value.toUpperCase();
+      
+      // new block for proper pencil behaviour during typing/deleting letters 
       if (newGrid[row][column].pencil === value.toUpperCase()){
         newGrid[row][column].pencil = "";
       } else if (newGrid[row][column].pencil) {
@@ -135,7 +137,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         pencilOut("down", false);
         setAcrossFilter([]);
         setDownFilter([]);
+      if (!value && direction === "across" && downFilter.length) {
+        newGrid[row][column].pencil = downFilter[activeCell[1] - words.across.range[0]];
+      } else if (!value && direction === "down" && acrossFilter.length) {
+        newGrid[row][column].pencil = acrossFilter[activeCell[0] - words.down.range[0]];
       }
+        
       setGrid(newGrid);
     }
   };
