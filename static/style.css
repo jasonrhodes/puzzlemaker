@@ -18,7 +18,6 @@ select {
 }
 
 .infoblock {
-  float: left;
   margin-top: -5px;
 }
 
@@ -225,6 +224,9 @@ input.inline-content-editable:focus {
   margin: 10px 0 5px 0;
 }
 
+.puzzle-info > * {
+  float: left;
+}
 
 .menu {
   position: relative;
@@ -332,7 +334,7 @@ input.inline-content-editable:focus {
 
 .current-clues .suggestions > div > a {
   display:none;
-  margin-left: 4px;
+  padding-left: 4px;
 }
 
 

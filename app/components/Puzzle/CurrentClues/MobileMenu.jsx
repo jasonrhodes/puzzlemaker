@@ -85,13 +85,13 @@ module.exports = function MobileMenu({
         class={mobileView == "across" ? "activemobile" : ""}
         onClick={e => keyBoardSwitch(e, "across")}
       >
-        {acrossNumber !== '-' ? acrossNumber + 'A: ' + acrossWord : '-' }
+        {acrossNumber !== '-' ? acrossNumber + 'a: ' + acrossWord : '-' }
       </a>
       <a
         class={mobileView == "down" ? "activemobile" : ""}
         onClick={e => keyBoardSwitch(e, "down")}
       >
-        {downNumber !== '-' ? downNumber + 'A: ' + downWord : '-' }
+        {downNumber !== '-' ? downNumber + 'd: ' + downWord : '-' }
       </a>
       <a class="cluenav next key" onClick={handleNextClueClick}>
         <TriangleRightIcon size={20} />
