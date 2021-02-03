@@ -28,24 +28,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
     puzzle.setAcrossFilter([]);
     puzzle.pencilOut("down");
   };
-  
-  var isScrolling;
 
-// Listen for scroll events
-window.addEventListener('scroll', function ( event ) {
-
-	// Clear our timeout throughout the scroll
-	window.clearTimeout( isScrolling );
-
-	// Set a timeout to run after scrolling ends
-	isScrolling = setTimeout(function() {
-
-		// Run the callback
-		console.log( 'Scrolling has stopped.' );
-
-	}, 66);
-
-}, false);
   var isScrolling;
   
   window.addEventListener('scroll', function(e){ 
@@ -57,7 +40,7 @@ window.addEventListener('scroll', function ( event ) {
         cc.style.opacity = 1;
         cc.style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
         cc.style.left = window.pageXOffset + 'px';
-        cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
+        cc.style.bottom = window.scrollY + window.innerHeight + 'px';
       }, 100);
     }
   });
