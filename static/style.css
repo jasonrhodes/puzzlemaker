@@ -455,7 +455,6 @@ input.inline-content-editable:focus {
   
   .container {
     width: 100%;
-    margin-bottom: 300px;
   }
   
   .title {
@@ -486,7 +485,7 @@ input.inline-content-editable:focus {
   
   #mobilemenu {
     display: flex;
-    margin: 0px -6px 4px -6px;
+    margin: 0px -6px 14px -6px;
     border-bottom: 1px solid #777;
   }
   
@@ -536,7 +535,10 @@ input.inline-content-editable:focus {
   }
   
   pre {
+    width: 100%;
+    height: 300px;
     display: none;
+    overflow: hide;
   }
   
   #across, #down {

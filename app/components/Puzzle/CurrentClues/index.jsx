@@ -29,11 +29,36 @@ const CurrentClues = ({ across, down, puzzle }) => {
     puzzle.pencilOut("down");
   };
   
+  var isScrolling;
+
+// Listen for scroll events
+window.addEventListener('scroll', function ( event ) {
+
+	// Clear our timeout throughout the scroll
+	window.clearTimeout( isScrolling );
+
+	// Set a timeout to run after scrolling ends
+	isScrolling = setTimeout(function() {
+
+		// Run the callback
+		console.log( 'Scrolling has stopped.' );
+
+	}, 66);
+
+}, false);
+  var isScrolling;
+  
   window.addEventListener('scroll', function(e){ 
     if (window.innerWidth < 636) {
-      document.getElementById('current-clues').style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
-      document.getElementById('current-clues').style.left = window.pageXOffset + 'px';
-      document.getElementById('current-clues').style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
+      var cc = document.getElementById('current-clues');
+      window.clearTimeout( isScrolling );
+      cc.style.opacity = 0;
+      isScrolling = setTimeout(function() {
+        cc.style.opacity = 1;
+        cc.style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
+        cc.style.left = window.pageXOffset + 'px';
+        cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
+      }, 100);
     }
   });
   
