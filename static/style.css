@@ -45,6 +45,8 @@ select {
   width: 0px;
   height: 1px;
   position: absolute;
+  font-size: 30px;
+  pointer-events: none;
 }
 
 .puzzle-container {
