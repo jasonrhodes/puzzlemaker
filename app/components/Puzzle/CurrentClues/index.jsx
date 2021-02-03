@@ -41,7 +41,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         cc.style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
         cc.style.left = window.pageXOffset + 'px';
         //cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
-        //cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
+        cc.style.bottom = (document.body.scrollHeight - 100) - (window.pageYOffset + window.innerHeight) + 'px';
       }, 100);
     }
   });
