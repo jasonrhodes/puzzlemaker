@@ -49,7 +49,7 @@ const PuzzleMenu = ({ puzzle }) => {
     let filename = puzzle.title ? puzzle.title+'.puz' : 'myPuz.puz';
     let serialized = convertPuzzleToJSON(puzzle);
     let fileContents = new PuzWriter().toPuz(serialized);
-    let file = new File([fileContents], filename);
+    let file = new Blob([fileContents], filename);
 
     element.href = URL.createObjectURL(file);
     //element.download = "myPuz.puz";
