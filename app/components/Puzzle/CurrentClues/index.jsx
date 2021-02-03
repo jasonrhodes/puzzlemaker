@@ -30,10 +30,12 @@ const CurrentClues = ({ across, down, puzzle }) => {
   };
   
   window.addEventListener('scroll', function(e){ 
-    console.log('on scroll'); 
-overlay.style.left = window.pageXOffset + 'px';
-overlay.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
-    document.getElementById('current-clues').style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
+    if (window.innerWidth < 636) {
+      console.log('on scroll'); 
+      document.getElementById('current-clues').style.left = window.pageXOffset + 'px';
+      document.getElementById('current-clues').style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
+      document.getElementById('current-clues').style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
+    }
   });
   
   return (

@@ -585,13 +585,14 @@ input.inline-content-editable:focus {
   .current-clues {
     position: fixed;
     top: inherit;
-    right: 0px;
+    right: inherit;
     left: 0px;
     z-index: 101;
     bottom: 0px;
     background-color: #fff;
     padding: 0px 8px;
     transform-origin: bottom center;
+    width: 100%;
   }
   .current-clues .suggestions {
     height: 100px;
