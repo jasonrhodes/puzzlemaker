@@ -45,6 +45,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
     if (e.key === ".") {
+      puzzle.clearAll(false);
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
