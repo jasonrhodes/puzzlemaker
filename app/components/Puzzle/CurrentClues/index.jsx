@@ -34,16 +34,22 @@ const CurrentClues = ({ across, down, puzzle }) => {
   window.addEventListener('scroll', function(e){ 
     if (window.innerWidth < 636) {
       var cc = document.getElementById('current-clues');
-      window.clearTimeout( isScrolling );
-      cc.style.opacity = 0;
-      isScrolling = setTimeout(function() {
-        cc.style.opacity = 1;
-        var scale = window.innerWidth/document.documentElement.clientWidth;
-        cc.style["transform"] = "scale(" + scale + ")";
-        cc.style.left = window.pageXOffset + 'px';
-        //cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
-        cc.style.bottom = scale > 0.99 ? 0 : (document.documentElement.clientHeight) - (window.pageYOffset + window.innerHeight) + 'px';
-      }, 100);
+      var scale = window.innerWidth/document.documentElement.clientWidth;
+      if (scale == 1) {
+        if (cc.style.bottom != 0) { cc.style.bottom = 0; }
+        if (cc.style.left != 0) { cc.style.left = 0; }
+        if (cc.style["transform"] != "scale(1)") { cc.style["transform"] = "scale(1)"; }
+      } else {
+        window.clearTimeout( isScrolling );
+        cc.style.opacity = 0;
+        isScrolling = setTimeout(function() {
+          cc.style.opacity = 1;
+          cc.style["transform"] = "scale(" + scale + ")";
+          cc.style.left = window.pageXOffset + 'px';
+          cc.style.bottom = (document.documentElement.clientHeight) - (window.pageYOffset + window.innerHeight) + 'px';
+        }, 100);
+      }
+
     }
   });
   
