@@ -29,13 +29,16 @@ const CurrentClues = ({ across, down, puzzle }) => {
     puzzle.pencilOut("down");
   };
 
+  //Pauly's thing that resizes the keyboard on mobile only. 
+  //Probably a better way to do this.
+  //And should maybe go somewhere else.
   var isScrolling;
-  
   window.addEventListener('scroll', function(e){ 
     if (window.innerWidth < 636) {
       var cc = document.getElementById('current-clues');
       var scale = window.innerWidth/document.documentElement.clientWidth;
       if (scale == 1) {
+        window.clearTimeout( isScrolling );
         if (cc.style.bottom != 0) { cc.style.bottom = 0; }
         if (cc.style.left != 0) { cc.style.left = 0; }
         if (cc.style["transform"] != "scale(1)") { cc.style["transform"] = "scale(1)"; }
@@ -49,7 +52,6 @@ const CurrentClues = ({ across, down, puzzle }) => {
           cc.style.bottom = (document.documentElement.clientHeight) - (window.pageYOffset + window.innerHeight) + 'px';
         }, 100);
       }
-
     }
   });
   
