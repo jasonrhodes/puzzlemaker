@@ -566,7 +566,7 @@ input.inline-content-editable:focus {
     margin-right: 10px
   }
   
-  #keyboard .toolkey, #keyboard .toolkey {
+  #keyboard .toolkey {
     width: 47px;
     height: 33px;
     background-color: #ddd;
