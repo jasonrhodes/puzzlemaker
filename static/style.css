@@ -453,6 +453,10 @@ input.inline-content-editable:focus {
     margin-bottom: 5px;
   }
   
+  .title + div > div {
+    max-width: 100% !important;
+  }
+  
   .current-clues > div:not(.activemobile) {
     display: none;
   }
@@ -621,10 +625,10 @@ input.inline-content-editable:focus {
   }
   
   .puzzle-grid .puzzle-cell {
-    font-size: 18px;
+    font-size: 16px;
   }
   .puzzle-grid.zoomed .puzzle-cell {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .puzzle-cell .label {
@@ -644,8 +648,8 @@ input.inline-content-editable:focus {
   .puzzle-cell .input {
     width: 100%;
     position: absolute;
-    margin-top: calc(50% - 0.5em);
-    margin-bottom: calc(50% - 0.5em);
+    margin-top: calc(55% - 0.5em);
+    margin-bottom: calc(45% - 0.5em);
     font-size: inherit;
   }
   
@@ -665,17 +669,14 @@ input.inline-content-editable:focus {
   
   .largegrid .puzzle-cell .input {
     font-size: 0.77em;
-    margin-top: 3px;
   }
   
   .smallgrid .puzzle-cell .input {
     font-size: 1.33em;
-    margin-top: 9px;
   }
   
   .xsgrid .puzzle-cell .input {
-    font-size: 1.55em;
-    margin-top: 12px;
+    font-size: 1.5em;
   }
   
   .largegrid .puzzle-cell .label {
