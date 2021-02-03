@@ -621,14 +621,14 @@ input.inline-content-editable:focus {
   }
   
   .puzzle-grid .puzzle-cell {
-    font-size: 2em;
+    font-size: 18px;
   }
   .puzzle-grid.zoomed .puzzle-cell {
-    font-size: 2em;
+    font-size: 36px;
   }
 
   .puzzle-cell .label {
-    font-size: 8px;
+    font-size: 0.44em;
     border: 0;
     position: absolute;
     top: 1px;
@@ -642,10 +642,11 @@ input.inline-content-editable:focus {
   }
   
   .puzzle-cell .input {
-      width: 100%;
-      font-size: 16px;
-      position: absolute;
-      margin-top: 6px;
+    width: 100%;
+    position: absolute;
+    margin-top: calc(50% - 0.5em);
+    margin-bottom: calc(50% - 0.5em);
+    font-size: inherit;
   }
   
   .puzzle-cell:before {
@@ -654,46 +655,43 @@ input.inline-content-editable:focus {
     padding-top:100%;
   }
 
-  
-
   .puzzle-cell .label {
-    font-size: 8px;
+    font-size: 0.5em;
     border: 0;
     position: absolute;
     top: 1px;
     left: 1px;
   }
   
-  
   .largegrid .puzzle-cell .input {
-    font-size: 14px;
+    font-size: 0.77em;
     margin-top: 3px;
   }
   
   .smallgrid .puzzle-cell .input {
-    font-size: 24px;
+    font-size: 1.33em;
     margin-top: 9px;
   }
   
   .xsgrid .puzzle-cell .input {
-    font-size: 28px;
+    font-size: 1.55em;
     margin-top: 12px;
   }
   
   .largegrid .puzzle-cell .label {
-    font-size: 7px;
+    font-size: 0.38em;
     top: 1px;
     left: 0px;
   }
   
-  .xsgrid .puzzle-cell .label {
-    font-size: 12px;
+  .smallgrid .puzzle-cell .label {
+    font-size: 0.67em;
     top: 2px;
     left: 2px;
   }
   
   .xsgrid .puzzle-cell .label {
-    font-size: 14px;
+    font-size: 1em;
     top: 2px;
     left: 3px;
   }
