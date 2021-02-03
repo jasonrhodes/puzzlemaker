@@ -22,6 +22,16 @@ const KeyBoard = ({ puzzle, mobileView }) => {
     } else if (key == 'circle') {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
+    } else if (key == 'rotate') {
+      puzzle.toggleDirection();
+      return;
+    } else if (key == 'zoom') {
+      if (puzzle.zoomed == 'zoomed') { 
+        puzzle.setZoomed("");
+      } else {
+        puzzle.setZoomed("zoomed");
+      }
+      return;
     } else if (key == 'backspace') {
       if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
         puzzle.updateCellValue(activeRow, activeColumn, '');
@@ -53,7 +63,7 @@ const KeyBoard = ({ puzzle, mobileView }) => {
         <a class="key toolkey" onClick={(e) => hitKey(e,'backspace')}><ArrowLeftIcon size={16} /><XIcon size={16} /></a>
       </div>
       <div class="row4 keyrow">
-        <a class="key toolkey" onClick={(e) => hitKey(e,'square')}><SquareFillIcon style={{opacity: 0.5}} size={24} /></a>
+        <a class="key toolkey shadekey" onClick={(e) => hitKey(e,'shaded')}><SquareFillIcon style={{opacity: 0.5}} size={24} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><CircleIcon size={24} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><SyncIcon size={24} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'zoom')}><EyeIcon size={24} /></a>

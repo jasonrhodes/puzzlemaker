@@ -39,6 +39,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [symmetry, setSymmetry] = React.useState(true);
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
+  const [zoomed, setZoomed] = React.useState("");
   const [clues, setClues] = React.useState({ across: {}, down: {} });
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
@@ -435,7 +436,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setAcrossFilter,
     savedPuzzleId,
     prevCell,
-    clearAll
+    clearAll,
+    zoomed,
+    setZoomed
   };
 
   return (

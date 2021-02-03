@@ -36,7 +36,7 @@ const Puzzle = () => {
             <Menu puzzle={puzzle} />
           </div>
           <div class="puzzle-container">
-            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length)}>
+            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length) + " " + puzzle.zoomed}>
               {puzzle.grid.map((columns, i) => (
                 <Row key={`row-${i}`} row={i} columns={columns} />
               ))}
