@@ -38,6 +38,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         acrossWord={across.word.toUpperCase()}
         downNumber={downNumber}
         downWord={down.word.toUpperCase()}
+        puzzle={puzzle}
       />
       <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
         {acrossNumber !== "-" ? (
