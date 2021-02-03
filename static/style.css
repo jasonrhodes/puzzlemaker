@@ -480,7 +480,7 @@ input.inline-content-editable:focus {
   
   #mobilemenu {
     display: flex;
-    margin: 3px -6px 4px -6px;
+    margin: 0px -6px 4px -6px;
     border-bottom: 1px solid #777;
   }
   
@@ -585,10 +585,12 @@ input.inline-content-editable:focus {
     position: fixed;
     top: inherit;
     right: inherit;
-    width: calc(100% - 32px);
+    width: calc(100% - 16px);
     z-index: 101;
     bottom: 0px;
     background-color: #fff;
+    padding: 0px 8px;
+    margin-left: -8px;
   }
   .current-clues .suggestions {
     height: 100px;
