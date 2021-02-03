@@ -1,6 +1,7 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
 const { convertPuzzleToJSON, PuzWriter } = require("../../utils/export");
+const PDFLink = require("../PDF/Link");
 
 const {
   DesktopDownloadIcon,
@@ -89,12 +90,12 @@ const PuzzleMenu = ({ puzzle }) => {
           <b>Play</b>
         </span>
       </Link>
-      <Link to={"/altprint/" + puzzle.savedPuzzleId}>
+      <PDFLink puzzle={puzzle}>
         <FileIcon size={24} />
         <span class="pbtip stip">
           <b>PDF</b>
         </span>
-      </Link>
+      </PDFLink>
       <a onClick={downloadFile}>
         <DesktopDownloadIcon size={24} />
         <span class="pbtip">
