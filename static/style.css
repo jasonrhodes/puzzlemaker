@@ -454,6 +454,7 @@ input.inline-content-editable:focus {
   
   .container {
     width: 100%;
+    margin-bottom: 200px;
   }
   
   .title {
@@ -537,10 +538,7 @@ input.inline-content-editable:focus {
   }
   
   pre {
-    width: 100%;
-    height: 100px;
-    overflow: hidden;
-    opacity: 0;
+    display: none;
   }
   
   #across, #down {

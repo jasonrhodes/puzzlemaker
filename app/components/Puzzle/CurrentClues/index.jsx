@@ -38,10 +38,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
       cc.style.opacity = 0;
       isScrolling = setTimeout(function() {
         cc.style.opacity = 1;
-        cc.style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
+        var scale = window.innerWidth/document.documentElement.clientWidth;
+        cc.style["transform"] = "scale(" + scale + ")";
         cc.style.left = window.pageXOffset + 'px';
         //cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
-        cc.style.bottom = (document.documentElement.clientHeight) - (window.pageYOffset + window.innerHeight) + 'px';
+        cc.style.bottom = scale > 0.99 ? 0 : (document.documentElement.clientHeight) - (window.pageYOffset + window.innerHeight) + 'px';
       }, 100);
     }
   });
