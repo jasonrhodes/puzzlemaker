@@ -240,8 +240,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
   
   const nextAcrossClue = () => {
-    let [row, column] = activeCell;
-    setActiveCell(getNextAcrossClueStart(row, column, grid));
+    const [row, column] = activeCell;
+    const [nextRow, nextColumn] = getNextAcrossClueStart(row, column, grid);
+    if (nextRow < row && nextColumn < column) {
+      toggleDirection();
+    }
+    setActiveCell([nextRow, nextColumn]);
   }
 
   const prevAcrossCell = () => {
@@ -251,7 +255,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const prevAcrossClue = () => {
     const [row, column] = activeCell;
-    setActiveCell(getPrevAcrossClueStart(row, column, grid));
+    let [prevRow, prevColumn] = getPrevAcrossClueStart(row, column, grid);
+    if (prevRow > row && prevColumn > column) {
+      toggleDirection();
+      [prevRow, prevColumn] = getPrevDownClueStart(row, column, grid);
+    }
+    setActiveCell([prevRow, prevColumn]);
   };
 
   const nextDownCell = () => {
@@ -261,7 +270,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const nextDownClue = () => {
     const [row, column] = activeCell;
-    setActiveCell(getNextDownClueStart(row, column, grid));
+    const [nextRow, nextColumn] = getNextDownClueStart(row, column, grid);
+    if (nextRow < row && nextColumn < column) {
+      toggleDirection();
+    }
+    setActiveCell([nextRow, nextColumn]);
   };
 
   const prevDownCell = () => {
@@ -271,7 +284,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   const prevDownClue = () => {
     const [row, column] = activeCell;
-    setActiveCell(getPrevDownClueStart(row, column, grid));
+    let [prevRow, prevColumn] = getPrevDownClueStart(row, column, grid);
+    if (prevRow > row && prevColumn > column) {
+      toggleDirection();
+      [prevRow, prevColumn] = getPrevAcrossClueStart(row, column, grid);
+    }
+    setActiveCell([prevRow, prevColumn]);
   };
 
   const advanceActiveCell = () => {

@@ -449,6 +449,7 @@ input.inline-content-editable:focus {
   
   .container {
     width: 100%;
+    margin-bottom: 200px;
   }
   
   .title {
@@ -585,6 +586,9 @@ input.inline-content-editable:focus {
     top: inherit;
     right: inherit;
     width: calc(100% - 32px);
+    z-index: 101;
+    bottom: 0px;
+    background-color: #fff;
   }
   .current-clues .suggestions {
     height: 100px;
