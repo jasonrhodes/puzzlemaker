@@ -31,6 +31,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
   
   window.addEventListener('scroll', function(e){ 
     console.log('on scroll'); 
+overlay.style.left = window.pageXOffset + 'px';
+overlay.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
     document.getElementById('current-clues').style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
   });
   
