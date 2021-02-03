@@ -40,7 +40,8 @@ const CurrentClues = ({ across, down, puzzle }) => {
         cc.style.opacity = 1;
         cc.style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
         cc.style.left = window.pageXOffset + 'px';
-        cc.style.bottom = window.scrollY + window.innerHeight + 'px';
+        //cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
+        //cc.style.bottom = document.documentElement.clientHeight - (window.pageYOffset + window.innerHeight) + 'px';
       }, 100);
     }
   });
