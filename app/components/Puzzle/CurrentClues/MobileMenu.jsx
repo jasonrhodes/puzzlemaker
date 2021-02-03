@@ -11,19 +11,26 @@ module.exports = function MobileMenu({
   downWord,
   puzzle
 }) {
+  
+  window.addEventListener('scroll', function(e){ 
+    console.log('on scroll'); 
+    document.
+    el.style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
+  });
+  
   const keyBoardSwitch = (e, view) => {
     e.stopPropagation();
     setMobileView(view);
   };
-  
+
   const handlePrevClueClick = e => {
     e.stopPropagation();
-    prevClue();
+    puzzle.rewindActiveClue();
   };
   
   const handleNextClueClick = e => {
     e.stopPropagation();
-    nextClue();
+    puzzle.advanceActiveClue();
   };
 
   return (
