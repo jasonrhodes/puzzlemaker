@@ -473,17 +473,21 @@ input.inline-content-editable:focus {
     font-size: 18px;
     margin: -4px 0 3px 0;
   }
-
+  
+  .current-clues > div {
+    height: 150px;
+  }
   
   
   #keyboard.activemobile {
     display: block;
   }
   
-  #mobilemenu {
+  .current-clues #mobilemenu {
     display: flex;
     margin: 0px 0px 14px 0px;
     border-bottom: 1px solid #777;
+    height: 30px;
   }
   
   #mobilemenu a:nth-child(2) {
@@ -527,7 +531,6 @@ input.inline-content-editable:focus {
   
   #keyboard {
     position: relative;
-    height: 110px;
     margin: 0px 0px 10px 0px;
     padding: 0px 2px 0px 2px;
   }
@@ -562,23 +565,8 @@ input.inline-content-editable:focus {
     margin-left: 10px;
     margin-right: 10px
   }
-  #keyboard .row3 {
-    margin-left: 50px;
-    margin-right: 50px;
-  }
   
-  #keyboard .blkey {
-    position: absolute;
-    bottom: 0px;
-    left: 2px;
-  }
-  #keyboard .brkey {
-    position: absolute;
-    bottom: 0px;
-    right: 2px;
-  }
-  
-  #keyboard .brkey .key, #keyboard .blkey .key {
+  #keyboard .toolkey, #keyboard .toolkey {
     width: 47px;
     height: 33px;
     background-color: #ddd;

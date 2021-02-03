@@ -1,5 +1,5 @@
 const React = require("react");
-const { XIcon, ArrowLeftIcon, SquareFillIcon } = require("@primer/octicons-react");
+const { XIcon, ArrowLeftIcon, SquareFillIcon, SyncIcon, CircleIcon } = require("@primer/octicons-react");
 
 const KeyBoard = ({ puzzle, mobileView }) => {
   const row1 = ['Q','W','E','R','T','Y','U','I','O','P'];
@@ -36,13 +36,17 @@ const KeyBoard = ({ puzzle, mobileView }) => {
         <a class="key" onClick={(e) => hitKey(e,key)}>{key}</a>
       )}
       </div>
-      <div class="row3 keyrow">{row3.map((key, i) => 
-        <a class="key" onClick={(e) => hitKey(e,key)}>{key}</a>
-      )}
+      <div class="row3 keyrow">
+        <a class="key toolkey" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={24} /></a>
+        {row3.map((key, i) => 
+          <a class="key" onClick={(e) => hitKey(e,key)}>{key}</a>
+        )}
+        <a class="key toolkey" onClick={(e) => hitKey(e,'backspace')}><ArrowLeftIcon size={16} /><XIcon size={16} /></a>
       </div>
-      
-      <div class="blkey"><a class="key" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={24} /></a></div>
-      <div class="brkey"><a class="key" onClick={(e) => hitKey(e,'backspace')}><ArrowLeftIcon size={16} /><XIcon size={16} /></a></div>
+      <div class="row4 keyrow">
+        <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><CircleIcon size={24} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><SyncIcon size={24} /></a>
+      </div>
     </div>
   );
 }
