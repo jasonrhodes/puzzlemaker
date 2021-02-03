@@ -437,6 +437,10 @@ input.inline-content-editable:focus {
 }
 
 @media only screen and (max-width: 636px) {
+  body {
+    overscroll-behavior: none;
+  }
+  
   .menu {
     margin-right: -5px;
   }
@@ -451,6 +455,7 @@ input.inline-content-editable:focus {
   
   .container {
     width: 100%;
+    margin-bottom: 300px;
   }
   
   .title {
@@ -590,7 +595,6 @@ input.inline-content-editable:focus {
     z-index: 101;
     bottom: 0px;
     background-color: #fff;
-    padding: 0px 8px;
     transform-origin: bottom left;
     width: 100%;
   }
