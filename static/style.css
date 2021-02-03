@@ -609,7 +609,22 @@ input.inline-content-editable:focus {
   .puzzle-grid {
     margin: 0 0px 0 0px;
     border: 0;
-    overflow-x: show;
+  }
+  
+  .puzzle-grid.zoomed {
+    overflow: scroll;
+    max-width: 100%
+  } 
+  
+  .puzzle-grid.zoomed .puzzle-row {
+    width: 200%;
+  }
+  
+  .puzzle-grid .puzzle-cell {
+    font-size: 2em;
+  }
+  .puzzle-grid.zoomed .puzzle-cell {
+    font-size: 2em;
   }
 
   .puzzle-cell .label {
