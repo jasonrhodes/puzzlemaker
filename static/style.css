@@ -528,9 +528,9 @@ input.inline-content-editable:focus {
     margin: 0px -6px 20px -6px;
   }
   
-  /*pre {
+  pre {
     display: none;
-  }*/
+  }
   
   #across, #down {
     margin: 0 40px;
@@ -581,10 +581,10 @@ input.inline-content-editable:focus {
   }
   
   .current-clues {
-    position: relative;
-    top: 0;
-    right: 0;
-    width: auto;
+    position: fixed;
+    top: inherit;
+    right: inherit;
+    width: calc(100% - 32px);
   }
   .current-clues .suggestions {
     height: 100px;
