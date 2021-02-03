@@ -213,7 +213,10 @@ function SuggestionsList({
           <a 
             onMouseEnter={e => handleMouseEnter(e, x, "arrow")}
             onMouseLeave={e => handleMouseOut(e, "arrow")}
-            onClick={e => hideNonCrosses(e, ad)}>
+            onClick={e => {
+              hideNonCrosses(e, ad);
+              focusOnActive();
+            }}>
             {ad == "down" ? (
               <ArrowRightIcon size={12} />
             ) : (
