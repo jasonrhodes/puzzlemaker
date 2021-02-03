@@ -695,6 +695,11 @@ input.inline-content-editable:focus {
     float:left;
     padding-top:100%;
   }
+  
+  .circle {
+    width: 100%;
+    height: 100%;
+  }
 
 }
 
