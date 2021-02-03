@@ -29,8 +29,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
     puzzle.pencilOut("down");
   };
   
+  window.addEventListener('scroll', function(e){ 
+    console.log('on scroll'); 
+    document.getElementById('current-clues').style["transform"] = "scale(" + window.innerWidth/document.documentElement.clientWidth + ")";
+  });
+  
   return (
-    <div class="current-clues">
+    <div class="current-clues" id="current-clues">
       <MobileMenu
         mobileView={mobileView}
         setMobileView={setMobileView}
