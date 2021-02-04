@@ -26,14 +26,7 @@ const KeyBoard = ({ puzzle, mobileView }) => {
       puzzle.toggleDirection();
       return;
     } else if (key == 'zoom') {
-      if (puzzle.zoomed == 'zoomed') { 
-        puzzle.setZoomed("");
-        
-        html, body {width: auto!important; overflow-x: hidden!important}
-      } else {
-        puzzle.setZoomed("zoomed");
-      }
-      return;
+      puzzle.toggleZoom();
     } else if (key == 'backspace') {
       if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
         puzzle.updateCellValue(activeRow, activeColumn, '');

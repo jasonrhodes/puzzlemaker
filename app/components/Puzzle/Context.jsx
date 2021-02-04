@@ -143,6 +143,24 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setDirection(direction === "across" ? "down" : "across");
 
   const toggleSymmetry = () => setSymmetry(!symmetry);
+  
+  const toggleZoom = () => {
+    if (zoomed == 'zoomed') { 
+      setZoomed("");
+      document.body.style.removeProperty('height');
+      document.body.style.removeProperty('overflow-y');
+      document.html.style.removeProperty('height');
+      document.html.style.removeProperty('overflow-y');
+    } else {
+      setZoomed("zoomed");
+      window.scrollTo(0,0);
+      document.body.style.height = 'auto !important';
+      document.body.style['overflow-y'] = 'hidden !important';
+      document.html.style.height = 'auto !important';
+      document.html.style['overflow-y'] = 'hidden !important';
+    }
+    return;
+  }
 
   const calculateCurrentWords = () => {
     const [row, column] = activeCell;
