@@ -459,7 +459,7 @@ input.inline-content-editable:focus {
     margin-bottom: 5px;
   }
   
-  .title + div > div {
+  .infomenublock {
     max-width: 100% !important;
   }
   

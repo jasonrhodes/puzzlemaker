@@ -17,12 +17,16 @@ const Puzzle = () => {
      return "xsgrid";
     }
   };
+  
+  const gridheight = () => {
+    return window.innerHeight - document.getElementsByClassName("infomenublock").offsetHeight;
+  }
 
   return (
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <div style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
+          <div class="infomenublock" style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
             <Title
               titleWidth={puzzle.titleWidth}
               authorWidth={puzzle.authorWidth}
@@ -36,7 +40,7 @@ const Puzzle = () => {
             <Menu puzzle={puzzle} />
           </div>
           <div class="puzzle-container">
-            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length) + " " + puzzle.zoomed}>
+            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length) + " " + puzzle.zoomed} style={{height: puzzle.zoomed ? gridheight : 'auto'}}>
               {puzzle.grid.map((columns, i) => (
                 <Row key={`row-${i}`} row={i} columns={columns} />
               ))}
