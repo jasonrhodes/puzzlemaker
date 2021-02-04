@@ -621,7 +621,7 @@ input.inline-content-editable:focus {
     overflow: scroll;
     max-width: 100%;
     border-top: 1px solid #ooo;
-    height: 0;
+    height: auto;
     padding-bottom: 100%
   } 
   

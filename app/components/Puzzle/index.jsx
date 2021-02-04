@@ -18,12 +18,6 @@ const Puzzle = () => {
     }
   };
   
-  const gridheight = () => {
-    return window.innerHeight - 
-      (document.getElementsByClassName("infomenublock")[0].offsetHeight +
-       document.getElementsByClassName("current-clues")[0].offsetHeight);
-  }
-
   return (
     <PuzzleContext.Consumer>
       {puzzle => (
@@ -42,7 +36,7 @@ const Puzzle = () => {
             <Menu puzzle={puzzle} />
           </div>
           <div class="puzzle-container">
-            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length) + " " + puzzle.zoomed} style={{height: (puzzle.zoomed == 'zoomed' ? gridheight + 'px' : 'auto')}}>
+            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length) + " " + puzzle.zoomed}>
               {puzzle.grid.map((columns, i) => (
                 <Row key={`row-${i}`} row={i} columns={columns} />
               ))}
