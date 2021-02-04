@@ -435,6 +435,8 @@ input.inline-content-editable:focus {
     overflow-y: hidden !important;
   }
   
+  
+  
   .menu {
     margin-right: -5px;
   }
@@ -459,6 +461,10 @@ input.inline-content-editable:focus {
   
   .title + div > div {
     max-width: 100% !important;
+  }
+  
+  body.zoomed .title {
+    display: none;
   }
   
   .current-clues > div:not(.activemobile) {
@@ -620,16 +626,16 @@ input.inline-content-editable:focus {
   } 
   
   .puzzle-grid.zoomed .puzzle-row {
-    width: 200%;
+     width: 200%; 
   }
   
   .puzzle-grid .puzzle-cell {
     font-size: 16px;
   }
-  .puzzle-grid.zoomed .puzzle-cell {
+   .puzzle-grid.zoomed .puzzle-cell {
     font-size: 32px;
   }
-  
+   
   .puzzle-grid.zoomed .puzzle-row:last-child {
     margin-bottom: -350px;
   }

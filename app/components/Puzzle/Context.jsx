@@ -151,7 +151,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     } else {
       setZoomed("zoomed");
       window.scrollTo(0,0);
-      document.body.style.transform = 'scale(1)';
+      
       document.body.classList.add("zoomed");
     }
     return;
