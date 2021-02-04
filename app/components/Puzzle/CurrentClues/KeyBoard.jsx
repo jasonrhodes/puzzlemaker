@@ -28,6 +28,8 @@ const KeyBoard = ({ puzzle, mobileView }) => {
     } else if (key == 'zoom') {
       if (puzzle.zoomed == 'zoomed') { 
         puzzle.setZoomed("");
+        
+        html, body {width: auto!important; overflow-x: hidden!important}
       } else {
         puzzle.setZoomed("zoomed");
       }
