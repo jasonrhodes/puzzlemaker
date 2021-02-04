@@ -1,5 +1,5 @@
 const React = require("react");
-const { XIcon, ArrowLeftIcon, SquareFillIcon, SyncIcon, CircleIcon, EyeIcon } = require("@primer/octicons-react");
+const { XIcon, ArrowLeftIcon, SquareFillIcon, SyncIcon, CircleIcon, EyeIcon, NoteIcon } = require("@primer/octicons-react");
 
 const KeyBoard = ({ puzzle, mobileView }) => {
   const row1 = ['Q','W','E','R','T','Y','U','I','O','P'];
@@ -19,8 +19,8 @@ const KeyBoard = ({ puzzle, mobileView }) => {
     } else if (key == 'shaded') {
       puzzle.toggleShaded(activeRow, activeColumn);
       return;
-    } else if (key == 'circle') {
-      puzzle.toggleBlackSquare(activeRow, activeColumn);
+    } else if (key == 'rebus') {
+      // Rebus support here
       return;
     } else if (key == 'rotate') {
       puzzle.toggleDirection();
@@ -58,6 +58,7 @@ const KeyBoard = ({ puzzle, mobileView }) => {
         <a class="key toolkey" onClick={(e) => hitKey(e,'backspace')}><ArrowLeftIcon size={16} /><XIcon size={16} /></a>
       </div>
       <div class="row4 keyrow">
+        <a class="key toolkey" onClick={(e) => hitKey(e,'rebus')}><NoteIcon size={24} /></a>
         <a class="key toolkey shadekey" onClick={(e) => hitKey(e,'shaded')}><SquareFillIcon style={{opacity: 0.5}} size={24} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><CircleIcon size={24} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><SyncIcon size={24} /></a>
