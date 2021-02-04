@@ -10,7 +10,8 @@
     "build": "webpack",
     "build-watch": "webpack --watch",
     "start": "webpack && node server.js",
-    "serve": "node server.js"
+    "serve": "node server.js",
+    "test": "jest --watch"
   },
   "dependencies": {
     "express": "^4.16.4",
