@@ -1,6 +1,6 @@
 const React = require("react");
 const { PDFDownloadLink } = require("@react-pdf/renderer");
-const PDFPuzzleDocument = require("./PDF/PuzzleDocument");
+const PDFPuzzleDocument = require("./PuzzleDocument");
 
 module.exports = function PDFLink({ puzzle, children }) {
   return (
