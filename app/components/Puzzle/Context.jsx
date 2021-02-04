@@ -147,17 +147,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const toggleZoom = () => {
     if (zoomed == 'zoomed') { 
       setZoomed("");
-      document.body.style.removeProperty('height');
-      document.body.style.removeProperty('overflow-y');
-      document.html.style.removeProperty('height');
-      document.html.style.removeProperty('overflow-y');
+      document.body.classList.remove("zoomed");
     } else {
       setZoomed("zoomed");
       window.scrollTo(0,0);
-      document.body.style.height = 'auto !important';
-      document.body.style['overflow-y'] = 'hidden !important';
-      document.html.style.height = 'auto !important';
-      document.html.style['overflow-y'] = 'hidden !important';
+      document.body.style.transform = 'scale(1)';
+      document.body.classList.add("zoomed");
     }
     return;
   }

@@ -431,6 +431,8 @@ input.inline-content-editable:focus {
   
   html, body {width: auto!important; overflow-x: hidden!important}
   
+  body.zoomed {overflow-y: hidden!important}
+  
   .menu {
     margin-right: -5px;
   }
@@ -610,6 +612,7 @@ input.inline-content-editable:focus {
   .puzzle-grid.zoomed {
     overflow: scroll;
     max-width: 100%
+      
   } 
   
   .puzzle-grid.zoomed .puzzle-row {
