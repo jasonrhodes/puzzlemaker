@@ -3,12 +3,12 @@ const OneLookLink = require("./OneLookLink");
 const { EyeIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octicons-react");
 const ClueInput = require("./ClueInput");
 
-const Current = ({ clueNumber, word, filterWord, showNonCrosses, ad }) => {
+const Current = ({ clueNumber, word, filterWord, showNonCrosses, direction }) => {
   return (
     <React.Fragment>
       <div class="inline" onClick={e => e.stopPropagation()}>
-        <h3>{clueNumber}{ad == 'across' ? 'A' : 'D'}: </h3>
-        <ClueInput direction={ad} number={clueNumber} />
+        <h3>{clueNumber}{direction == 'across' ? 'a' : 'd'}: </h3>
+        <ClueInput direction={direction} number={clueNumber} />
       </div>
       <div class="current" onClick={e => e.stopPropagation()}>
         {word.toUpperCase()}
@@ -20,7 +20,7 @@ const Current = ({ clueNumber, word, filterWord, showNonCrosses, ad }) => {
               <b>Unfilter Across crosses</b>
             </span>
           </a>
-        ) : ( "" )}
+        ) : null}
       </div>
     </React.Fragment>
   );

@@ -5,7 +5,7 @@ const { PuzzleContext } = require("./Context");
 const Title = require("./Title");
 const CurrentClues = require("./CurrentClues");
 
-const Puzzle = ({ initialGrid }) => {
+const Puzzle = () => {
   const gridSizeDesc = (length) => {
     if (length > 16) {
      return "largegrid";
@@ -17,12 +17,12 @@ const Puzzle = ({ initialGrid }) => {
      return "xsgrid";
     }
   };
-
+  
   return (
     <PuzzleContext.Consumer>
       {puzzle => (
         <div>
-          <div style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
+          <div class="infomenublock" style={{'max-width': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
             <Title
               titleWidth={puzzle.titleWidth}
               authorWidth={puzzle.authorWidth}
@@ -36,7 +36,7 @@ const Puzzle = ({ initialGrid }) => {
             <Menu puzzle={puzzle} />
           </div>
           <div class="puzzle-container">
-            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length)}>
+            <div class={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length) + " " + puzzle.zoomed}>
               {puzzle.grid.map((columns, i) => (
                 <Row key={`row-${i}`} row={i} columns={columns} />
               ))}

@@ -25,25 +25,10 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (row === activeRow && column === activeColumn) {
       puzzle.toggleDirection();
     } else {
-      let isPencil = true;
-      //if (activeRow.length && activeColumn-length){
-      //  isPencil = (grid[row][column].pencil || grid[row][column].value ? true : false);
-      //}
-      if (row === activeRow){
-        puzzle.pencilOut("down", puzzle.downFilter.length > 0);
-        puzzle.setAcrossFilter([]);
-      } else if (column === activeColumn) {
-        puzzle.pencilOut("across", puzzle.acrossFilter.length > 0);
-        puzzle.setDownFilter([]);
-      } else {
-        puzzle.pencilOut("down", false);
-        puzzle.pencilOut("across", false);
-        puzzle.setDownFilter([]);
-        puzzle.setAcrossFilter([]);
-      }
       puzzle.setActiveCell([row, column]);
     }
     if (e.metaKey || e.ctrlKey) {
+      puzzle.clearAll(false);
       puzzle.toggleBlackSquare(row, column);
     }
     if (e.altKey ) {
@@ -60,6 +45,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     const [activeRow, activeColumn] = puzzle.activeCell;
     e.preventDefault();
     if (e.key === ".") {
+      puzzle.clearAll(false);
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
@@ -118,10 +104,10 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       onKeyDown={handleKeyDown}
       tabIndex="0"
     > 
-      <input class="puzzlefocus" />
+      <input class="puzzlefocus" readonly="readonly" />
       <div class={"input"}>{cell.value.toUpperCase()}</div>
       {cell.style === 'circled' ? <div class="circle"/>: null}
-      {cell.pencil ? <div class="pencil">{cell.pencil}</div>: null}
+      {cell.pencil ? <div class="input pencil">{cell.pencil}</div>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
     </div>
   );

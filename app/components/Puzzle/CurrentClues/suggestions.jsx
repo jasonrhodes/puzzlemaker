@@ -79,7 +79,7 @@ function SuggestionsList({
 
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
-  });
+  },[cur_word]);
 
   const highlightCrosses = e => {
     setOtherHighlight(e.currentTarget.textContent[position]);
@@ -93,7 +93,9 @@ function SuggestionsList({
     e.stopPropagation();
     if (otherFilter[0] == e.currentTarget.previousSibling.textContent) {
       setOtherFilter([]);
+      puzzle.pencilOut(ad, myFilter.length > 0);
     } else {
+      pencilInSuggestion(e.currentTarget.previousSibling.textContent);
       setOtherFilter([
         e.currentTarget.previousSibling.textContent,
         e.currentTarget.previousSibling.textContent[position]
@@ -156,7 +158,7 @@ function SuggestionsList({
     puzzle.setGrid(newGrid);
   }
   
-  const pencilOut = () => {
+  /*const pencilOut = () => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
       if (ad == "down") {
@@ -166,7 +168,7 @@ function SuggestionsList({
       }
     }
     puzzle.setGrid(newGrid);
-  }
+  }*/
   
   const handleMouseEnter = (e, suggestion, type) => {
     if (!type) {
@@ -211,7 +213,10 @@ function SuggestionsList({
           <a 
             onMouseEnter={e => handleMouseEnter(e, x, "arrow")}
             onMouseLeave={e => handleMouseOut(e, "arrow")}
-            onClick={e => hideNonCrosses(e, ad)}>
+            onClick={e => {
+              hideNonCrosses(e, ad);
+              focusOnActive();
+            }}>
             {ad == "down" ? (
               <ArrowRightIcon size={12} />
             ) : (

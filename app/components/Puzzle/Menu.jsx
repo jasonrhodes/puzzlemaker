@@ -1,6 +1,7 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
 const { convertPuzzleToJSON, PuzWriter } = require("../../utils/export");
+const PDFLink = require("../PDF/Link");
 
 const {
   DesktopDownloadIcon,
@@ -49,10 +50,10 @@ const PuzzleMenu = ({ puzzle }) => {
     let filename = puzzle.title ? puzzle.title+'.puz' : 'myPuz.puz';
     let serialized = convertPuzzleToJSON(puzzle);
     let fileContents = new PuzWriter().toPuz(serialized);
-    let file = new File([fileContents], filename);
+    let file = new Blob([fileContents], {type: 'application/octet-stream'});
 
     element.href = URL.createObjectURL(file);
-    //element.download = "myPuz.puz";
+    element.download = filename;
     document.body.appendChild(element);
     element.click();
   };
@@ -83,18 +84,18 @@ const PuzzleMenu = ({ puzzle }) => {
           <i>"/" or "-"</i> to toggle shaded square
         </span>
       </a>
-      <Link to={{ pathname: "/play/" + puzzle.id }}>
+      <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
         <PlayIcon size={24} />
         <span class="pbtip stip">
           <b>Play</b>
         </span>
       </Link>
-      <Link to={"/print/" + puzzle.id}>
+      <PDFLink puzzle={puzzle}>
         <FileIcon size={24} />
         <span class="pbtip stip">
           <b>PDF</b>
         </span>
-      </Link>
+      </PDFLink>
       <a onClick={downloadFile}>
         <DesktopDownloadIcon size={24} />
         <span class="pbtip">

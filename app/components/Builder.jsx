@@ -9,7 +9,9 @@ const Builder = function({ location, match }) {
   const grid = initGrid({ rows: rows || 15, columns: columns || 15 });
   
   const handleClick = (puzzle) => {
-    puzzle.setActiveCell([]); // TODO: this also makes the clues on the right go away, do we want that?
+    if (puzzle.activeCell.length && puzzle.activeCell[0] !== undefined) {
+      puzzle.setActiveCell([]); // TODO: this also makes the clues on the right go away, do we want that?
+    }
   }
   
   return (
