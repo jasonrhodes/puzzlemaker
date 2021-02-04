@@ -426,6 +426,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setActiveCell,
     setGrid,
     toggleDirection,
+    toggleZoom,
     getNextClueNumber,
     getCluesForCell,
     isCellInActiveWord,
