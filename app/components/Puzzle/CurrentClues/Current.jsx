@@ -15,7 +15,7 @@ const Current = ({ clueNumber, word, filterWord, showNonCrosses, direction }) =>
         <OneLookLink word={word} />
         {filterWord ? (
           <a onClick={e => showNonCrosses(e, "across")}>
-            <Filter size={20} />
+            <Filter size={16} />
             <span class="pbtip">
               <b>Unfilter Across crosses</b>
             </span>

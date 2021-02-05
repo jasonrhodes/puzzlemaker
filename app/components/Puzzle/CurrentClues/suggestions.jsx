@@ -218,9 +218,9 @@ function SuggestionsList({
               focusOnActive();
             }}>
             {ad == "down" ? (
-              <ArrowRight size={12} />
+              <ArrowRight size={10} />
             ) : (
-              <ArrowDown size={12} />
+              <ArrowDown size={10} />
             )}
             <span class="pbtip">
               <b>

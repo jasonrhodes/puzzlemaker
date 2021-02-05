@@ -52,19 +52,19 @@ const KeyBoard = ({ puzzle, mobileView }) => {
       )}
       </div>
       <div class="row3 keyrow">
-        <a class="key toolkey" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={24} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={18} /></a>
         {row3.map((key, i) => 
           <a class="key" onClick={(e) => hitKey(e,key)}>{key}</a>
         )}
-        <a class="key toolkey" onClick={(e) => hitKey(e,'backspace')}><Delete size={24} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'backspace')}><Delete size={18} /></a>
       </div>
       <div class="row4 keyrow">
     
-        <a class="key toolkey shadekey" onClick={(e) => hitKey(e,'shaded')}><SquareFillIcon style={{opacity: 0.5}} size={24} /></a>
-        <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><Circle size={24} /></a>
-        <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><RefreshCw size={24} /></a>
-        <a class="key toolkey" onClick={(e) => hitKey(e,'rebus')}><MinusSquare size={24} /></a>
-        <a class="key toolkey" onClick={(e) => hitKey(e,'zoom')}>{puzzle.zoomed ? <ZoomOut size={24} /> : <ZoomIn size={24} /> }</a>
+        <a class="key toolkey shadekey" onClick={(e) => hitKey(e,'shaded')}><SquareFillIcon style={{opacity: 0.5}} size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><Circle size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><RefreshCw size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'rebus')}><MinusSquare size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'zoom')}>{puzzle.zoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} /> }</a>
         <a class="keyspacer"></a>
       </div>
     </div>

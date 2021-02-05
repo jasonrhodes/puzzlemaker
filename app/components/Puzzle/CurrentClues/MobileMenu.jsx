@@ -29,10 +29,10 @@ module.exports = function MobileMenu({
   return (
     <div id="mobilemenu">
       <a class="cluenav prev key" onClick={handlePrevClueClick}>
-        <ChevronLeft size={20} />
+        <ChevronLeft size={16} />
       </a>
       <a class={mobileView == "keyboard" ? "activemobile" : ""}onClick={e => keyBoardSwitch(e, "keyboard")}>
-        <Type size={20} />
+        <Type size={16} />
       </a>
       <a
         class={mobileView == "across" ? "activemobile" : ""}
@@ -47,7 +47,7 @@ module.exports = function MobileMenu({
         {downNumber !== '-' ? downNumber + 'd: ' + downWord : '-' }
       </a>
       <a class="cluenav next key" onClick={handleNextClueClick}>
-        <ChevronRight size={20} />
+        <ChevronRight size={16} />
       </a>
     </div>
   );
