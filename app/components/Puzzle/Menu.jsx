@@ -13,6 +13,8 @@ const {
   FileIcon
 } = require("@primer/octicons-react");
 
+
+
 const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   const toggleLock = e => {
     toggleSymmetry();
