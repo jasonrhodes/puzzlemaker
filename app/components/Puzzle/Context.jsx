@@ -217,12 +217,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     newGrid[row][column].value = "";
     newGrid[row][column].style = null;
     newGrid[row][column].pencil = "";
+    newGrid[row][column].isRebus = false;
     if (symmetry) {
       const [symRow, symCol] = getSymmetricalCell(grid, row, column);
       newGrid[symRow][symCol].isBlackSquare = !currentValue;
       newGrid[symRow][symCol].value = "";
       newGrid[symRow][symCol].style = null;
       newGrid[symRow][symCol].pencil = "";
+      newGrid[symRow][symCol].isRebus = false;
     }
     const numberedGrid = assignClueNumbersToGrid(newGrid);
     setGrid(numberedGrid);
