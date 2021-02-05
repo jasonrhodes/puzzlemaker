@@ -150,7 +150,8 @@ select {
 .puzzle-cell .input {
   width: 100%;
   text-align: center;
-  margin-top: 11px;
+  margin-top: calc(60% - 0.5em);
+  margin-bottom: calc(40% - 0.5em);
   position: absolute;
   font-size: 20px;
   
@@ -537,7 +538,9 @@ input.inline-content-editable:focus {
     text-align: center;
     border-radius: 2px;
   }
-  
+  .puzzle-cell .input {
+    font-size: inherit;
+  }
   
   #keyboard {
     position: relative;
@@ -657,8 +660,8 @@ input.inline-content-editable:focus {
   .puzzle-cell .input {
     width: 100%;
     position: absolute;
-    margin-top: calc(55% - 0.5em);
-    margin-bottom: calc(45% - 0.5em);
+    margin-top: calc(60% - 0.5em);
+    margin-bottom: calc(40% - 0.5em);
     font-size: inherit;
   }
   
