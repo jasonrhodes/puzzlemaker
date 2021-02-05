@@ -66,7 +66,6 @@ function SuggestionsList({
   setMySuggestions,
   otherSuggestions
 }) {
-  return null;
   const cur_word = ad == "down" ? puzzle.words.down : puzzle.words.across;
   const op_word = ad == "down" ? puzzle.words.across : puzzle.words.down;
   const active_letter = ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
