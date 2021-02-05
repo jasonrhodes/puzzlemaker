@@ -13,7 +13,7 @@ const {
   FileIcon
 } = require("@primer/octicons-react");
 
-
+const { Info, Play, Printer, Download,  } = require("react-feather");
 
 const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   const toggleLock = e => {
@@ -63,7 +63,7 @@ const PuzzleMenu = ({ puzzle }) => {
   return (
     <div class="menu">
       <a>
-        <InfoIcon size={24} />
+        <Info size={24} />
         <span class="pbtip">
           <b>Info</b>
           <br />
