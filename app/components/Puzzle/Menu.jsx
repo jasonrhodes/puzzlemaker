@@ -76,6 +76,8 @@ const PuzzleMenu = ({ puzzle }) => {
           <i>";" or ","</i> to toggle circle
           <br />
           <i>"/" or "-"</i> to toggle shaded square
+          <br />
+          <i>"+" or "="</i> to toggle rebus cell
         </span>
       </a>
       <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
