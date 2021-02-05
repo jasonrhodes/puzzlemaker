@@ -498,7 +498,7 @@ input.inline-content-editable:focus {
     display: flex;
     margin: 0px 0px 14px 0px;
     border-bottom: 1px solid #777;
-    height: 30px;
+    height: 24px;
   }
   
   #mobilemenu a:nth-child(2) {
