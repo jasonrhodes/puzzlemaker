@@ -1,7 +1,15 @@
 module.exports = {
   findAcross,
-  findDown
+  findDown,
 };
+
+function wrapRebusValue(cell) {
+  if (cell.isRebus) {
+    return `(${cell.value})`;
+  } else {
+    return cell.value;
+  }
+}
 
 function findAcross(cellsInActiveRow, activeColumn) {
   // console.log("finding across", { cellsInActiveRow, activeColumn });
@@ -17,7 +25,7 @@ function findAcross(cellsInActiveRow, activeColumn) {
         range.word = "";
       }
       if (!cell.isBlackSquare) {
-        range.word += cell.value.length > 0 ? cell.value : "-";
+        range.word += cell.value.length > 0 ? wrapRebusValue(cell) : "-";
       }
       if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;
@@ -55,7 +63,7 @@ function findDown(rows, activeRow, activeColumn) {
         range.word = "";
       }
       if (!cell.isBlackSquare) {
-        range.word += cell.value.length > 0 ? cell.value : "-";
+        range.word += cell.value.length > 0 ? wrapRebusValue(cell) : "-";
       }
       if (cell.isBlackSquare && range.found) {
         range.end = range.count - 1;
