@@ -16,7 +16,7 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   if (symmetry) {
     return (
       <a class="subicon" onClick={toggleLock}>
-        <Lock size={24} />
+        <Lock size={18} />
         <MirrorIcon size={12} />
         <span class="pbtip">
           <b>Unlock symmetry</b>
@@ -26,7 +26,7 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   } else {
     return (
       <a class="subicon" onClick={toggleLock}>
-        <Unlock size={24} />
+        <Unlock size={18} />
         <MirrorIcon size={12} />
         <span class="pbtip">
           <b>Lock symmetry</b>

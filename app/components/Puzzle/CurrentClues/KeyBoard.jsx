@@ -52,7 +52,7 @@ const KeyBoard = ({ puzzle, mobileView }) => {
       )}
       </div>
       <div class="row3 keyrow">
-        <a class="key toolkey" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'square')}><SquareFillIcon size={24} /></a>
         {row3.map((key, i) => 
           <a class="key" onClick={(e) => hitKey(e,key)}>{key}</a>
         )}
@@ -60,7 +60,7 @@ const KeyBoard = ({ puzzle, mobileView }) => {
       </div>
       <div class="row4 keyrow">
     
-        <a class="key toolkey shadekey" onClick={(e) => hitKey(e,'shaded')}><SquareFillIcon style={{opacity: 0.5}} size={18} /></a>
+        <a class="key toolkey shadekey" onClick={(e) => hitKey(e,'shaded')}><SquareFillIcon style={{opacity: 0.5}} size={24} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><Circle size={18} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><RefreshCw size={18} /></a>
         <a class="key toolkey" onClick={(e) => hitKey(e,'rebus')}><MinusSquare size={18} /></a>
