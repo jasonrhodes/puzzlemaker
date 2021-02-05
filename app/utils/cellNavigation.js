@@ -91,7 +91,6 @@ function getNextAcrossCellCoords(row, column, grid) {
     row++;
     column = 0;
   }
-  console.log("returning next across coords", row, column);
   return [row, column];
 }
 
