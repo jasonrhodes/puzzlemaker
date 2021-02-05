@@ -43,7 +43,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [clues, setClues] = React.useState({ across: {}, down: {} });
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
-  
+
   const setActiveCell = ([row, column]) => {
     if (row >= grid.length) {
       throw new Error(`Cannot set active cell row (${row}) larger than max (${grid.length - 1})`);
@@ -178,6 +178,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (! grid || row === undefined || column === undefined || (!row && row !== 0) || (!column && column !== 0)) {
       return { acrossNumber: "-", downNumber: "-" };
     } else {
+      if (!grid[row] || !grid[row][column]) {
+        throw new Error(`No cell for row: ${row} and column ${column}`);
+      }
       const { clue } = grid[row][column];
       return {
         downNumber: clue.downClueNumber || "-",
@@ -246,6 +249,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     setGrid(newGrid);
   };
+
+  const toggleRebus = (row, column) => {
+    const newGrid = [...grid];
+    newGrid[row][column].isRebus = !newGrid[row][column].isRebus;
+    setGrid(newGrid);
+  }
 
   const nextAcrossCell = () => {
     const [row, column] = activeCell;
@@ -430,6 +439,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     toggleBlackSquare,
     toggleCircle,
     toggleShaded,
+    toggleRebus,
     nextAcrossCell,
     nextAcrossClue,
     prevAcrossCell,

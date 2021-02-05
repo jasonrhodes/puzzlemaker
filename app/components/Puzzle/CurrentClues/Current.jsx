@@ -1,6 +1,6 @@
 const React = require("react");
 const OneLookLink = require("./OneLookLink");
-const { EyeIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octicons-react");
+const { Filter } = require("react-feather");
 const ClueInput = require("./ClueInput");
 
 const Current = ({ clueNumber, word, filterWord, showNonCrosses, direction }) => {
@@ -15,7 +15,7 @@ const Current = ({ clueNumber, word, filterWord, showNonCrosses, direction }) =>
         <OneLookLink word={word} />
         {filterWord ? (
           <a onClick={e => showNonCrosses(e, "across")}>
-            <EyeIcon size={20} />
+            <Filter size={20} />
             <span class="pbtip">
               <b>Unfilter Across crosses</b>
             </span>

@@ -3,17 +3,9 @@ const { Link } = require("react-router-dom");
 const { convertPuzzleToJSON, PuzWriter } = require("../../utils/export");
 const PDFLink = require("../PDF/Link");
 
-const {
-  DesktopDownloadIcon,
-  UnlockIcon,
-  LockIcon,
-  MirrorIcon,
-  PlayIcon,
-  InfoIcon,
-  FileIcon
-} = require("@primer/octicons-react");
+const { MirrorIcon } = require("@primer/octicons-react");
 
-const { Info, Play, Printer, Download,  } = require("react-feather");
+const { Info, Play, Printer, Download, Lock, Unlock } = require("react-feather");
 
 const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   const toggleLock = e => {
@@ -24,7 +16,7 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   if (symmetry) {
     return (
       <a class="subicon" onClick={toggleLock}>
-        <LockIcon size={24} />
+        <Lock size={24} />
         <MirrorIcon size={12} />
         <span class="pbtip">
           <b>Unlock symmetry</b>
@@ -34,7 +26,7 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   } else {
     return (
       <a class="subicon" onClick={toggleLock}>
-        <UnlockIcon size={24} />
+        <Unlock size={24} />
         <MirrorIcon size={12} />
         <span class="pbtip">
           <b>Lock symmetry</b>
@@ -87,19 +79,19 @@ const PuzzleMenu = ({ puzzle }) => {
         </span>
       </a>
       <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
-        <PlayIcon size={24} />
+        <Play size={24} />
         <span class="pbtip stip">
           <b>Play</b>
         </span>
       </Link>
       <PDFLink puzzle={puzzle}>
-        <FileIcon size={24} />
+        <Printer size={24} />
         <span class="pbtip stip">
           <b>PDF</b>
         </span>
       </PDFLink>
       <a onClick={downloadFile}>
-        <DesktopDownloadIcon size={24} />
+        <Download size={24} />
         <span class="pbtip">
           <b>Download</b>
           <br />

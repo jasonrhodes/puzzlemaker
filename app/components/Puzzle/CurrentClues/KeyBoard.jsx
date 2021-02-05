@@ -1,5 +1,6 @@
 const React = require("react");
 const { XIcon, ArrowLeftIcon, SquareFillIcon, SyncIcon, CircleIcon, EyeIcon, NoteIcon } = require("@primer/octicons-react");
+const { Delete, RefreshCw, Circle,  } = require("react-feather");
 
 const KeyBoard = ({ puzzle, mobileView }) => {
   const row1 = ['Q','W','E','R','T','Y','U','I','O','P'];

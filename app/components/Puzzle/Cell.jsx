@@ -43,6 +43,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
   const handleKeyDown = e => {
     console.log("KeyDown", e.key);
     const [activeRow, activeColumn] = puzzle.activeCell;
+    const currentCell = puzzle.grid[activeRow][activeColumn];
     e.preventDefault();
     if (e.key === ".") {
       puzzle.clearAll(false);
@@ -81,19 +82,44 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       }
     }
     if (e.key === "Backspace") {
-      if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
+      if (currentCell.isRebus) {
+        puzzle.updateCellValue(activeRow, activeColumn, currentCell.value.slice(0, -1));
+        return;
+      }
+
+      if (currentCell.isBlackSquare) {
+        puzzle.toggleBlackSquare(activeRow, activeColumn);
+      } else {
         puzzle.updateCellValue(activeRow, activeColumn, '');
       }
       puzzle.rewindActiveCell();
     }
     if (e.key === "Delete") {
-      if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
-        puzzle.updateCellValue(activeRow, activeColumn, '');
+      if (currentCell.isRebus) {
+        puzzle.updateCellValue(activeRow, activeColumn, currentCell.value.slice(1));
+        return;
       }
+      if (currentCell.isBlackSquare) {
+        puzzle.toggleBlackSquare(activeRow, activeColumn);
+        return;
+      }
+      // what to do when the current cell is a rebus?
+    }
+    if (e.key === "r" && e.metaKey) {
+      e.preventDefault();
+      if (currentCell.isRebus) {
+        puzzle.updateCellValue(activeRow, activeColumn, "");
+      }
+      puzzle.toggleRebus(activeRow, activeColumn);
+      return;
     }
     if (/^[a-zA-Z0-9]$/.test(e.key)) {
-      puzzle.updateCellValue(activeRow, activeColumn, e.key);
-      puzzle.advanceActiveCell();
+      if (currentCell.isRebus) {
+        puzzle.updateCellValue(activeRow, activeColumn, `${currentCell.value}${e.key}`);
+      } else {
+        puzzle.updateCellValue(activeRow, activeColumn, e.key);
+        puzzle.advanceActiveCell();
+      }
     }
   };
 
