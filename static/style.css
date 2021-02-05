@@ -251,9 +251,14 @@ input.inline-content-editable:focus {
 
 .subicon > svg + svg {
   position: relative;
-  left: -13px;
+  left: -14px;
   top: -5px;
   margin-right: 0px;
+}
+
+.octicon {
+  position: relative;
+  top: -2px;
 }
 
 .noopacity {
@@ -434,12 +439,6 @@ input.inline-content-editable:focus {
   
   body.zoomed {
     overflow-y: hidden !important;
-  }
-  
-  
-  
-  .menu {
-    margin-right: -5px;
   }
   
   .menu a {
