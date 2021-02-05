@@ -43,6 +43,16 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [clues, setClues] = React.useState({ across: {}, down: {} });
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
+
+  const setActiveCell = ([row, column]) => {
+    if (row >= grid.length) {
+      throw new Error(`Cannot set active cell row (${row}) larger than max (${grid.length - 1})`);
+    }
+    if (column >= grid[0].length) {
+      throw new Error(`Cannot set active cell column (${column}) larger than max (${grid[0].length - 1})`);
+    }
+    return _setActiveCell([row, column]);
+  }
   
   const setActiveCell = ([row, column]) => {
     if (row >= grid.length) {
@@ -178,6 +188,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (! grid || row === undefined || column === undefined || (!row && row !== 0) || (!column && column !== 0)) {
       return { acrossNumber: "-", downNumber: "-" };
     } else {
+      if (!grid[row] || !grid[row][column]) {
+        throw new Error(`No cell for row: ${row} and column ${column}`);
+      }
       const { clue } = grid[row][column];
       return {
         downNumber: clue.downClueNumber || "-",

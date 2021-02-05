@@ -1,5 +1,5 @@
 body {
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
     "Droid Sans", "Arial", sans-serif;
 }
 
@@ -64,7 +64,6 @@ select {
   line-height: 0;
   width: 100%;
   align-items: stretch;
-  
 }
 
 .puzzle-cell {
@@ -105,11 +104,11 @@ select {
   z-index: 99;
 }
 
-.puzzle-cell.marked{
-  background-color: #bbb
+.puzzle-cell.marked {
+  background-color: #bbb;
 }
 
-.puzzle-cell.highlighted.marked{
+.puzzle-cell.highlighted.marked {
   background-color: #c1d6d4;
 }
 
@@ -122,17 +121,16 @@ select {
 }
 
 .circle {
-    border: 1px solid black;
-    border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    line-height: 1;
-    text-align: center;
-    display: inline-block;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-  
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  line-height: 1;
+  text-align: center;
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
 }
 
 .pencil {
@@ -153,11 +151,10 @@ select {
   margin-top: 11px;
   position: absolute;
   font-size: 20px;
-  
 }
 
 .title {
-  font-family: 'Laila', serif;
+  font-family: "Laila", serif;
   margin: 0px 0px 10px 0px;
   border-bottom: 1px solid #ddd;
 }
@@ -192,10 +189,11 @@ li > a:hover {
   color: rgb(34, 188, 172);
 }
 
-input.inline-content-editable, .fakeinput {
+input.inline-content-editable,
+.fakeinput {
   font-size: 18px;
   font-weight: bold;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
     "Droid Sans", "Arial", sans-serif;
   padding: 1px 2px;
   min-width: 30px;
@@ -256,7 +254,7 @@ input.inline-content-editable:focus {
 }
 
 .noopacity {
-  opacity: 0; 
+  opacity: 0;
 }
 
 .current-clues {
@@ -286,11 +284,11 @@ input.inline-content-editable:focus {
   letter-spacing: 1px;
   height: 21px;
   margin-bottom: 5px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 .current-clues .current a {
-  margin-left: 4px; 
+  margin-left: 4px;
 }
 
 .current-clues .current svg {
@@ -314,7 +312,7 @@ input.inline-content-editable:focus {
   font-size: 16px;
   color: #777;
   cursor: pointer;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
 }
 
 .current-clues .suggestions .suggestion.highlighted {
@@ -338,10 +336,9 @@ input.inline-content-editable:focus {
   padding-left: 4px;
 }
 
-
 .current-clues .suggestions > div:hover > a {
   display: inline-block;
-} 
+}
 
 .current-clues .suggestions > div > a > svg {
   margin-bottom: 3px;
@@ -358,7 +355,7 @@ input.inline-content-editable:focus {
   left: 3px;
   border: 4px solid rgb(34, 188, 172);
   padding: 6px 8px 8px 8px;
-  background-color: rgba(255,255,255,0.92);
+  background-color: rgba(255, 255, 255, 0.92);
   z-index: 101;
   color: #000;
   min-width: 30px;
@@ -366,7 +363,7 @@ input.inline-content-editable:focus {
   margin-right: -300px;
   font-size: 14px;
   letter-spacing: 0;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica", 
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
     "Droid Sans", "Arial", sans-serif;
 }
 
@@ -374,7 +371,6 @@ input.inline-content-editable:focus {
   left: -10px;
   top: 35px;
 }
-
 
 .current-clues .suggestions *:hover > .pbtip {
   left: -11px;
@@ -387,43 +383,47 @@ input.inline-content-editable:focus {
   text-align: center;
 }
 
-*:hover > .pbtip:after, *:hover > .pbtip:before   {
-	bottom: 100%;
-	left: 14px;
-	border: solid transparent;
-	content: "";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
+*:hover > .pbtip:after,
+*:hover > .pbtip:before {
+  bottom: 100%;
+  left: 14px;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
-*:hover > .pbtip.stip:after, *:hover > .pbtip.stip:before   {
-	left: 50%;
+*:hover > .pbtip.stip:after,
+*:hover > .pbtip.stip:before {
+  left: 50%;
 }
 
-*:hover > .pbtip:after  {
-	border-color: rgba(255, 255, 255, 0);
-	border-bottom-color: #fff;
-	border-width: 10px;
-	margin-left: -10px;
+*:hover > .pbtip:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #fff;
+  border-width: 10px;
+  margin-left: -10px;
 }
 *:hover > .pbtip:before {
-	border-color: rgba(221, 221, 221, 0);
-	border-bottom-color: rgb(34, 188, 172);
-	border-width: 16px;
-	margin-left: -16px;
+  border-color: rgba(221, 221, 221, 0);
+  border-bottom-color: rgb(34, 188, 172);
+  border-width: 16px;
+  margin-left: -16px;
 }
 
 .disable-select {
-    user-select: none; /* supported by Chrome and Opera */
-   -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-   -moz-user-select: none; /* Firefox */
-   -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-#keyboard, #mobilemenu, .cluenav {
+#keyboard,
+#mobilemenu,
+.cluenav {
   display: none;
 }
 
@@ -440,20 +440,20 @@ input.inline-content-editable:focus {
   .menu {
     margin-right: -5px;
   }
-  
+
   .menu a {
     padding: 6.5px;
   }
-  
+
   .menu a.subicon {
     margin-right: 0px;
   }
-  
+
   .container {
     width: 100%;
     margin-bottom: 180px;
   }
-  
+
   .title {
     font-size: 1.5em;
     margin-bottom: 5px;
@@ -470,15 +470,16 @@ input.inline-content-editable:focus {
   .current-clues > div:not(.activemobile) {
     display: none;
   }
-  
+
   .current-clues h3 {
     margin: 0;
     font-size: 16px;
   }
-  input.inline-content-editable, .fakeinput {
-    font-size: 16px
+  input.inline-content-editable,
+  .fakeinput {
+    font-size: 16px;
   }
-  
+
   .current-clues .current {
     font-size: 18px;
     margin: -4px 0 3px 0;
@@ -499,13 +500,13 @@ input.inline-content-editable:focus {
     border-bottom: 1px solid #777;
     height: 30px;
   }
-  
+
   #mobilemenu a:nth-child(2) {
     flex-grow: 1 !important;
     text-align: center;
     min-width: 20px;
   }
-  
+
   #mobilemenu a {
     margin: 0 1px -1px 1px;
     overflow: hidden;
@@ -513,7 +514,7 @@ input.inline-content-editable:focus {
     display: block;
     text-overflow: ellipsis;
   }
-  
+
   #mobilemenu a:not(:first-child):not(:last-child) {
     flex-grow: 4;
     border: 1px solid #333;
@@ -524,21 +525,20 @@ input.inline-content-editable:focus {
     border-bottom: 1px solid #777;
     color: #777;
   }
-  
+
   #mobilemenu > a.activemobile {
     border-bottom: 2px solid #fff !important;
     background-color: #fff !important;
     color: #000 !important;
   }
-  
+
   #mobilemenu a.cluenav {
     display: flex;
     padding: 4px 6px;
     text-align: center;
     border-radius: 2px;
   }
-  
-  
+
   #keyboard {
     position: relative;
     margin: 0px 0px 10px 0px;
@@ -552,11 +552,11 @@ input.inline-content-editable:focus {
   #across, #down {
     margin: 0 40px;
   }
-  
+
   #keyboard > .keyrow {
     display: flex;
   }
-  
+
   #keyboard > .keyrow > .key {
     flex-grow: 1;
     margin: 1px;
@@ -577,7 +577,7 @@ input.inline-content-editable:focus {
   
   #keyboard .row2 {
     margin-left: 10px;
-    margin-right: 10px
+    margin-right: 10px;
   }
   
   #keyboard .toolkey {
@@ -585,7 +585,7 @@ input.inline-content-editable:focus {
     height: 33px;
     background-color: #ddd;
   }
-  
+
   .current-clues {
     position: fixed;
     top: inherit;
@@ -601,12 +601,12 @@ input.inline-content-editable:focus {
     height: 100px;
     margin-bottom: 5px;
   }
-  
+
   .current-clues .suggestions > div > a {
     display: inline-block;
     margin-left: 8px;
-  } 
-  
+  }
+
   .puzzle-row {
     margin-top: 0px;
     display: flex;
@@ -647,13 +647,13 @@ input.inline-content-editable:focus {
     top: 1px;
     left: 1px;
   }
-  
+
   .puzzle-cell {
     width: auto;
     height: auto;
     flex: 1;
   }
-  
+
   .puzzle-cell .input {
     width: 100%;
     position: absolute;
@@ -661,11 +661,11 @@ input.inline-content-editable:focus {
     margin-bottom: calc(45% - 0.5em);
     font-size: inherit;
   }
-  
+
   .puzzle-cell:before {
-    content:'';
-    float:left;
-    padding-top:100%;
+    content: "";
+    float: left;
+    padding-top: 100%;
   }
 
   .puzzle-cell .label {
@@ -679,15 +679,15 @@ input.inline-content-editable:focus {
   .largegrid .puzzle-cell .input {
     font-size: 0.77em;
   }
-  
+
   .smallgrid .puzzle-cell .input {
     font-size: 1.33em;
   }
-  
+
   .xsgrid .puzzle-cell .input {
     font-size: 1.5em;
   }
-  
+
   .largegrid .puzzle-cell .label {
     font-size: 0.38em;
     top: 1px;
@@ -699,18 +699,17 @@ input.inline-content-editable:focus {
     top: 2px;
     left: 2px;
   }
-  
+
   .xsgrid .puzzle-cell .label {
     font-size: 1em;
     top: 2px;
     left: 3px;
   }
-  
-  
+
   .puzzle-cell:before {
-    content:'';
-    float:left;
-    padding-top:100%;
+    content: "";
+    float: left;
+    padding-top: 100%;
   }
   
   .circle {

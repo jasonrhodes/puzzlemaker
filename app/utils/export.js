@@ -1,25 +1,24 @@
-module.exports = {
-  convertPuzzleToJSON,
-  PuzWriter
-};
-
 function convertPuzzleToJSON(puzzle) {
   let puz = {
     author: puzzle.author,
     title: puzzle.title,
     size: {
       rows: puzzle.grid.length,
-      cols: puzzle.grid[0].length
+      cols: puzzle.grid[0].length,
     },
     clues: {
-      across: Object.entries(puzzle.clues.across).map(pair => pair[0] + "|| " + (pair[1] ? pair[1] : "(blank clue)")),
-      down: Object.entries(puzzle.clues.down).map(pair => pair[0] + "|| " + (pair[1] ? pair[1] : "(blank clue)"))
+      across: Object.entries(puzzle.clues.across).map(
+        (pair) => pair[0] + "|| " + (pair[1] ? pair[1] : "(blank clue)")
+      ),
+      down: Object.entries(puzzle.clues.down).map(
+        (pair) => pair[0] + "|| " + (pair[1] ? pair[1] : "(blank clue)")
+      ),
     },
-    grid: []
+    grid: [],
   };
 
   console.log(puz.clues);
-  
+
   for (let i = 0; i < puzzle.grid.length; i++) {
     for (let j = 0; j < puzzle.grid[0].length; j++) {
       puz.grid.push(
@@ -198,3 +197,8 @@ class PuzWriter {
     return new Uint8Array(this.buf);
   }
 }
+
+module.exports = {
+  convertPuzzleToJSON,
+  PuzWriter,
+};
