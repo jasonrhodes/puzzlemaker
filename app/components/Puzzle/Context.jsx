@@ -54,16 +54,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     return _setActiveCell([row, column]);
   }
   
-  const setActiveCell = ([row, column]) => {
-    if (row >= grid.length) {
-      throw new Error(`Cannot set active cell row (${row}) larger than max (${grid.length - 1})`);
-    }
-    if (column >= grid[0].length) {
-      throw new Error(`Cannot set active cell column (${column}) larger than max (${grid[0].length - 1})`);
-    }
-    return _setActiveCell([row, column]);
-  }
-  
   const setClue = (number, direction, clue) => {
     setClues({ ...clues, [direction]: { ...clues[direction], [number]: clue }});
   }
@@ -260,6 +250,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setGrid(newGrid);
   };
 
+  const toggleRebus = (row, column) => {
+    const newGrid = [...grid];
+    newGrid[row][column].isRebus = !newGrid[row][column].isRebus;
+    setGrid(newGrid);
+  }
+
   const nextAcrossCell = () => {
     const [row, column] = activeCell;
     setActiveCell(getNextAcrossCellCoords(row, column, grid));
@@ -443,6 +439,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     toggleBlackSquare,
     toggleCircle,
     toggleShaded,
+    toggleRebus,
     nextAcrossCell,
     nextAcrossClue,
     prevAcrossCell,
