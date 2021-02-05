@@ -105,7 +105,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       }
       // what to do when the current cell is a rebus?
     }
-    if (e.key === "r" && e.metaKey) {
+    if (e.key === "+" || e.key === "=") {
       e.preventDefault();
       if (currentCell.isRebus) {
         puzzle.updateCellValue(activeRow, activeColumn, "");
