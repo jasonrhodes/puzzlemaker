@@ -3,17 +3,9 @@ const { Link } = require("react-router-dom");
 const { convertPuzzleToJSON, PuzWriter } = require("../../utils/export");
 const PDFLink = require("../PDF/Link");
 
-const {
-  DesktopDownloadIcon,
-  UnlockIcon,
-  LockIcon,
-  MirrorIcon,
-  PlayIcon,
-  InfoIcon,
-  FileIcon
-} = require("@primer/octicons-react");
+const { MirrorIcon } = require("@primer/octicons-react");
 
-
+const { Info, Play, Printer, Download, Lock, Unlock } = require("react-feather");
 
 const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   const toggleLock = e => {
@@ -24,8 +16,8 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   if (symmetry) {
     return (
       <a class="subicon" onClick={toggleLock}>
-        <LockIcon size={24} />
-        <MirrorIcon size={12} />
+        <Lock size={18} />
+        <MirrorIcon size={10} />
         <span class="pbtip">
           <b>Unlock symmetry</b>
         </span>
@@ -34,8 +26,8 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   } else {
     return (
       <a class="subicon" onClick={toggleLock}>
-        <UnlockIcon size={24} />
-        <MirrorIcon size={12} />
+        <Unlock size={18} />
+        <MirrorIcon size={10} />
         <span class="pbtip">
           <b>Lock symmetry</b>
         </span>
@@ -63,7 +55,7 @@ const PuzzleMenu = ({ puzzle }) => {
   return (
     <div class="menu">
       <a>
-        <InfoIcon size={24} />
+        <Info size={18} />
         <span class="pbtip">
           <b>Info</b>
           <br />
@@ -87,19 +79,19 @@ const PuzzleMenu = ({ puzzle }) => {
         </span>
       </a>
       <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
-        <PlayIcon size={24} />
+        <Play size={18} />
         <span class="pbtip stip">
           <b>Play</b>
         </span>
       </Link>
       <PDFLink puzzle={puzzle}>
-        <FileIcon size={24} />
+        <Printer size={18} />
         <span class="pbtip stip">
           <b>PDF</b>
         </span>
       </PDFLink>
       <a onClick={downloadFile}>
-        <DesktopDownloadIcon size={24} />
+        <Download size={18} />
         <span class="pbtip">
           <b>Download</b>
           <br />

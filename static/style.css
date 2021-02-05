@@ -249,9 +249,14 @@ input.inline-content-editable:focus {
 
 .subicon > svg + svg {
   position: relative;
-  left: -18px;
-  top: -3px;
+  left: -14px;
+  top: -5px;
   margin-right: 0px;
+}
+
+.octicon {
+  position: relative;
+  top: -2px;
 }
 
 .noopacity {
@@ -438,11 +443,15 @@ input.inline-content-editable:focus {
   body.zoomed {
     overflow-y: hidden !important;
   }
+<<<<<<< HEAD
 
   .menu {
     margin-right: -5px;
   }
 
+=======
+  
+>>>>>>> ea6a1c13745b2c341d43836a122f63fc9f048f18
   .menu a {
     padding: 6.5px;
   }
@@ -499,7 +508,7 @@ input.inline-content-editable:focus {
     display: flex;
     margin: 0px 0px 14px 0px;
     border-bottom: 1px solid #777;
-    height: 30px;
+    height: 24px;
   }
 
   #mobilemenu a:nth-child(2) {

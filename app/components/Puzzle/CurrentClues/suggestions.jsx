@@ -2,7 +2,7 @@ const React = require("react");
 const WordCache = new Map();
 const hasDash = char => char === "-";
 const { focusOnActive } = require("../../../utils/style");
-const { ArrowDownIcon, ArrowRightIcon } = require("@primer/octicons-react");
+const { ArrowDown, ArrowRight } = require("react-feather");
 
 module.exports = {
   getSuggestions,
@@ -219,9 +219,9 @@ function SuggestionsList({
               focusOnActive();
             }}>
             {ad == "down" ? (
-              <ArrowRightIcon size={12} />
+              <ArrowRight size={10} />
             ) : (
-              <ArrowDownIcon size={12} />
+              <ArrowDown size={10} />
             )}
             <span class="pbtip">
               <b>

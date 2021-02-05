@@ -1,6 +1,6 @@
 const React = require("react");
 const { Link } = require("react-router-dom");
-const { TrashIcon } = require("@primer/octicons-react");
+const { Trash } = require("react-feather");
 
 module.exports = function SavedPuzzleList() {
   const [puzzles, setPuzzles] = React.useState([]);

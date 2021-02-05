@@ -1,6 +1,5 @@
 const React = require("react");
-const { TypographyIcon, TriangleLeftIcon, TriangleRightIcon } = require("@primer/octicons-react");
-
+const { Type, ChevronLeft, ChevronRight } = require("react-feather");
 
 module.exports = function MobileMenu({
   mobileView,
@@ -30,10 +29,10 @@ module.exports = function MobileMenu({
   return (
     <div id="mobilemenu">
       <a class="cluenav prev key" onClick={handlePrevClueClick}>
-        <TriangleLeftIcon size={20} />
+        <ChevronLeft size={16} />
       </a>
       <a class={mobileView == "keyboard" ? "activemobile" : ""}onClick={e => keyBoardSwitch(e, "keyboard")}>
-        <TypographyIcon size={20} />
+        <Type size={16} />
       </a>
       <a
         class={mobileView == "across" ? "activemobile" : ""}
@@ -48,7 +47,7 @@ module.exports = function MobileMenu({
         {downNumber !== '-' ? downNumber + 'd: ' + downWord : '-' }
       </a>
       <a class="cluenav next key" onClick={handleNextClueClick}>
-        <TriangleRightIcon size={20} />
+        <ChevronRight size={16} />
       </a>
     </div>
   );

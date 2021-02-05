@@ -1,5 +1,6 @@
 const React = require("react");
-const { XIcon, ArrowLeftIcon, SquareFillIcon, SyncIcon, CircleIcon, EyeIcon, NoteIcon } = require("@primer/octicons-react");
+const { SquareFillIcon } = require("@primer/octicons-react");
+const { Delete, RefreshCw, Circle, ZoomIn, ZoomOut, MinusSquare } = require("react-feather");
 
 const KeyBoard = ({ puzzle, mobileView }) => {
   const row1 = ['Q','W','E','R','T','Y','U','I','O','P'];
@@ -55,14 +56,15 @@ const KeyBoard = ({ puzzle, mobileView }) => {
         {row3.map((key, i) => 
           <a class="key" onClick={(e) => hitKey(e,key)}>{key}</a>
         )}
-        <a class="key toolkey" onClick={(e) => hitKey(e,'backspace')}><ArrowLeftIcon size={16} /><XIcon size={16} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'backspace')}><Delete size={18} /></a>
       </div>
       <div class="row4 keyrow">
-        <a class="key toolkey" onClick={(e) => hitKey(e,'rebus')}><NoteIcon size={24} /></a>
+    
         <a class="key toolkey shadekey" onClick={(e) => hitKey(e,'shaded')}><SquareFillIcon style={{opacity: 0.5}} size={24} /></a>
-        <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><CircleIcon size={24} /></a>
-        <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><SyncIcon size={24} /></a>
-        <a class="key toolkey" onClick={(e) => hitKey(e,'zoom')}><EyeIcon size={24} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'circle')}><Circle size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'rotate')}><RefreshCw size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'rebus')}><MinusSquare size={18} /></a>
+        <a class="key toolkey" onClick={(e) => hitKey(e,'zoom')}>{puzzle.zoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} /> }</a>
         <a class="keyspacer"></a>
       </div>
     </div>
