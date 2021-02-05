@@ -251,8 +251,8 @@ input.inline-content-editable:focus {
 
 .subicon > svg + svg {
   position: relative;
-  left: -18px;
-  top: -3px;
+  left: -13px;
+  top: -5px;
   margin-right: 0px;
 }
 
