@@ -27,7 +27,7 @@
     "react-router-dom": "^5.0.0",
     "react-tooltip": "^4.2.13",
     "uuid": "^8.3.2",
-    "webpack": "^4.30.0",
+    "webpack": "^4.46.0",
     "webpack-cli": "^3.3.0"
   },
   "engines": {
