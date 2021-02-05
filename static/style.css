@@ -542,18 +542,21 @@ input.inline-content-editable:focus {
     font-size: inherit;
   }
   
+  pre {
+    display: none;
+  }
   #keyboard {
     position: relative;
     margin: 0px 0px 10px 0px;
     padding: 0px 2px 0px 2px;
   }
   
-  pre {
-    display: none;
+  #across, #down {
+    margin: 0px 10px 10px 10px;
   }
   
-  #across, #down {
-    margin: 0 40px;
+  #across > div, #down > div {
+    padding: 0px 30px;
   }
   
   #keyboard > .keyrow {
@@ -563,7 +566,7 @@ input.inline-content-editable:focus {
   #keyboard > .keyrow > .key {
     flex-grow: 1;
     margin: 1px;
-    height: 27px;
+    height: 25px;
     padding-top: 6px;
   }
   .key {
