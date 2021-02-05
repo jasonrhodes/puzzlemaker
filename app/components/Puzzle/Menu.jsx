@@ -55,7 +55,7 @@ const PuzzleMenu = ({ puzzle }) => {
   return (
     <div class="menu">
       <a>
-        <Info size={24} />
+        <Info size={18} />
         <span class="pbtip">
           <b>Info</b>
           <br />
@@ -79,19 +79,19 @@ const PuzzleMenu = ({ puzzle }) => {
         </span>
       </a>
       <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
-        <Play size={24} />
+        <Play size={18} />
         <span class="pbtip stip">
           <b>Play</b>
         </span>
       </Link>
       <PDFLink puzzle={puzzle}>
-        <Printer size={24} />
+        <Printer size={18} />
         <span class="pbtip stip">
           <b>PDF</b>
         </span>
       </PDFLink>
       <a onClick={downloadFile}>
-        <Download size={24} />
+        <Download size={18} />
         <span class="pbtip">
           <b>Download</b>
           <br />
