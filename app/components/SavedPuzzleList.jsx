@@ -14,7 +14,7 @@ module.exports = function SavedPuzzleList() {
       }
     }));
   }, []);
-  
+
   const storageDelete = (e) => {
     e.preventDefault();
     window.localStorage.removeItem(e.currentTarget.id.replace('del',''));
@@ -25,7 +25,7 @@ module.exports = function SavedPuzzleList() {
       <ul className="saved-puzzle-list">
         {puzzles.map(({ id, title, author }) => (
           <li key={id}>
-            <Link to={"/edit/" + id}>{title} by {author}</Link> <a id={'del' + id} onClick={(e) => storageDelete(e) }><Trash /></a>
+            <Link to={"/edit/" + id}>{title} by {author}</Link> <a id={'del' + id} onClick={(e) => storageDelete(e) }><Trash size={18} /></a>
           </li>
         ))}
       </ul>

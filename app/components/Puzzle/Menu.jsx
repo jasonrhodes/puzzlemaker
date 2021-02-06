@@ -12,7 +12,7 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
     toggleSymmetry();
     e.stopPropagation();
   };
-  
+
   if (symmetry) {
     return (
       <a class="subicon" onClick={toggleLock}>
@@ -54,6 +54,26 @@ const PuzzleMenu = ({ puzzle }) => {
 
   return (
     <div class="menu">
+      <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
+        <Play size={18} />
+        <span class="pbtip stip">
+          <b>Play</b>
+        </span>
+      </Link>
+      <PDFLink puzzle={puzzle}>
+        <Printer size={18} />
+        <span class="pbtip stip">
+          <b>PDF</b>
+        </span>
+      </PDFLink>
+      <a onClick={downloadFile}>
+        <Download size={18} />
+        <span class="pbtip">
+          <b>Download</b>
+          <br />
+          ...as .puz file
+        </span>
+      </a>
       <a>
         <Info size={18} />
         <span class="pbtip">
@@ -78,26 +98,6 @@ const PuzzleMenu = ({ puzzle }) => {
           <i>"/" or "-"</i> to toggle shaded square
           <br />
           <i>"+" or "="</i> to toggle rebus cell
-        </span>
-      </a>
-      <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
-        <Play size={18} />
-        <span class="pbtip stip">
-          <b>Play</b>
-        </span>
-      </Link>
-      <PDFLink puzzle={puzzle}>
-        <Printer size={18} />
-        <span class="pbtip stip">
-          <b>PDF</b>
-        </span>
-      </PDFLink>
-      <a onClick={downloadFile}>
-        <Download size={18} />
-        <span class="pbtip">
-          <b>Download</b>
-          <br />
-          ...as .puz file
         </span>
       </a>
       <SymmetryToggle symmetry={puzzle.symmetry} toggleSymmetry={puzzle.toggleSymmetry} />

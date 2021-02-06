@@ -1,3 +1,5 @@
+/* General Styling Rules */
+
 body {
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
     "Droid Sans", "Arial", sans-serif;
@@ -30,24 +32,223 @@ select {
   display: inline-block;
 }
 
+.noopacity {
+  opacity: 0;
+}
+
+.subicon > svg + svg {
+  position: relative;
+  left: -14px;
+  top: -5px;
+  margin-right: 0px;
+}
+
+.octicon {
+  position: relative;
+  top: -2px;
+}
+
+/* end General Styling */
+
+/* Tooltips  */
+
+.pbtip {
+  display: none;
+}
+
+*:hover > .pbtip {
+  display: inline-block;
+  position: absolute;
+  top: 39px;
+  right: 0;
+  border: 4px solid rgb(34, 188, 172);
+  padding: 6px 8px 8px 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 101;
+  color: #000;
+  min-width: 30px;
+  width: auto;
+  max-width: 250px;
+  margin-left: -250px;
+  font-size: 14px;
+  letter-spacing: 0;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
+    "Droid Sans", "Arial", sans-serif;
+}
+
+.subicon:hover > .pbtip {
+  right: 8px;
+}
+
+*:hover > .pbtip.stip {
+  width: 40px;
+  right: -14px;
+  text-align: center;
+}
+
+*:hover > .pbtip.stip {
+  width: 40px;
+  right: -14px;
+  text-align: center;
+}
+
+*:hover > .pbtip:after,
+*:hover > .pbtip:before {
+  bottom: 100%;
+  right: 14px;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+*:hover > .pbtip.stip:after,
+*:hover > .pbtip.stip:before {
+  right: 50%;
+}
+
+*:hover > .pbtip:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #fff;
+  border-width: 10px;
+  margin-right: -10px;
+}
+*:hover > .pbtip:before {
+  border-color: rgba(221, 221, 221, 0);
+  border-bottom-color: rgb(34, 188, 172);
+  border-width: 16px;
+  margin-right: -16px;
+}
+
+/* end Tooltips */
+
+/* Front page */
+
+ul.saved-puzzle-list {
+  padding-inline-start: 0;
+  margin-block-start: 0;
+}
+
+.saved-puzzle-list li {
+  list-style: none;
+  margin-bottom: 5px;
+}
+
+.saved-puzzle-list li a {
+  text-decoration: none;
+}
+
+li > a:hover {
+  color: rgb(34, 188, 172);
+}
+
+/* end Front Page */
+
+/* Containers */
+
 .container {
   display: inline-block;
   position: relative;
   max-width: 1400px;
 }
 
+.puzzle-container {
+  position: relative;
+  clear: both;
+  display: flex;
+  align-items: start;
+}
+
+/* end Containers */
+
+/* Title, Info, Menu */
+
+.title {
+  font-family: "Laila", serif;
+  margin: 0px 0px 10px 0px;
+  border-bottom: 1px solid #ddd;
+}
+
+.title a {
+  text-decoration: none;
+}
+
+.accent-text {
+  color: rgb(34, 188, 172);
+}
+
+.accent-text-alt {
+  color: #6a59b9;
+}
+
 .infoblock {
   margin-top: -5px;
 }
 
-.puzzle-container {
-  position: relative;
-  clear: both;
+input.inline-content-editable,
+.fakeinput {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
+    "Droid Sans", "Arial", sans-serif;
+  padding: 1px 2px;
+  min-width: 30px;
+  border: 0px;
+  border-bottom: 4px solid transparent;
 }
+
+input.inline-content-editable:focus {
+  border-bottom-color: rgb(34, 188, 172);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.puzzle-info {
+  margin: 10px 0 5px 0;
+}
+
+.puzzle-info > * {
+  float: left;
+  margin-top: 3px;
+}
+
+.puzzle-info > span {
+  padding-top: 3px;
+  margin-bottom: 5px;
+  padding-right: 3px;
+}
+
+.menu {
+  float: right;
+  width: auto;
+  margin: 5px -10px 0 5px;
+}
+
+.menu a {
+  padding: 8.5px;
+  text-decoration: none;
+  position: relative;
+}
+
+.menu a:hover {
+  color: rgb(34, 188, 172);
+}
+
+/* end Title, Info, Menu */
+
+/* Grid */
 
 .puzzle-grid {
   border: 1px solid black;
-  border-bottom-width: 2px;
+  margin-bottom: 2px;
+  flex: 0 0 auto;
 }
 
 .puzzle-row {
@@ -55,6 +256,10 @@ select {
   line-height: 0;
   width: 100%;
   align-items: stretch;
+}
+
+.puzzle-row:last-child {
+  margin-bottom: 0px;
 }
 
 .puzzle-cell {
@@ -133,10 +338,6 @@ select {
   top: 0px;
 }
 
-.pencil {
-  opacity: 0.5;
-}
-
 .puzzle-cell .label {
   font-size: 10px;
   border: 0;
@@ -154,138 +355,44 @@ select {
   font-size: 20px;
 }
 
-.puzzle-cell .input.rebus {
+.pencil {
+  opacity: 0.5;
+}
 
+
+.puzzle-cell .input.rebus {
   font-size: 12px;
   word-break: break-all;
   display: inline-block;
   margin: auto;
-  top: 50%;
+  top: 60%;
   left: 2px;
   right: 2px;
   width: calc(100% - 4px);
-  transform: translateY(-50%);
+  transform: translateY(-60%);
 }
 
-.title {
-  font-family: "Laila", serif;
-  margin: 0px 0px 10px 0px;
-  border-bottom: 1px solid #ddd;
+.disable-select {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
-.title a {
-  text-decoration: none;
-}
+/* end Grid */
 
-.accent-text {
-  color: rgb(34, 188, 172);
-}
-
-.accent-text-alt {
-  color: #6a59b9;
-}
-
-ul.saved-puzzle-list {
-  padding-inline-start: 0;
-  margin-block-start: 0;
-}
-
-.saved-puzzle-list li {
-  list-style: none;
-  margin-bottom: 5px;
-}
-
-.saved-puzzle-list li a {
-  text-decoration: none;
-}
-
-li > a:hover {
-  color: rgb(34, 188, 172);
-}
-
-input.inline-content-editable,
-.fakeinput {
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
-    "Droid Sans", "Arial", sans-serif;
-  padding: 1px 2px;
-  min-width: 30px;
-  border: 0px;
-  border-bottom: 4px solid transparent;
-}
-
-input.inline-content-editable:focus {
-  border-bottom-color: rgb(34, 188, 172);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  box-shadow: none;
-  outline: none;
-}
-
-.puzzle-info {
-  margin: 10px 0 5px 0;
-}
-
-.puzzle-info > * {
-  float: left;
-  margin-top: 3px;
-}
-
-.puzzle-info > span {
-  padding-top: 3px;
-  margin-bottom: 5px;
-  padding-right: 3px;
-}
-
-.menu {
-  position: relative;
-  float: right;
-  width: auto;
-  margin-top: 5px;
-  margin-right: -15px;
-  margin-bottom: 5px;
-}
-
-.menu a {
-  padding: 8.5px;
-  text-decoration: none;
-  position: relative;
-}
-
-.menu a:hover {
-  color: rgb(34, 188, 172);
-}
-
-.subicon > svg + svg {
-  position: relative;
-  left: -14px;
-  top: -5px;
-  margin-right: 0px;
-}
-
-.octicon {
-  position: relative;
-  top: -2px;
-}
-
-.noopacity {
-  opacity: 0;
-}
+/* Current Clues and Suggestions */
 
 .current-clues {
-  position: absolute;
-  top: 0;
-  right: -360px;
-  width: 340px;
+  min-width: 350px;
+  margin-left: 30px;
+  margin-right: 30px;
+  flex: 0 0 auto;
 }
 
 .current-clues h3 {
-  margin: 5px 0;
-  margin-right: 0.3em;
+  margin: 5px 0.3em 5px 0;;
 }
 
 .current-clues img {
@@ -319,12 +426,10 @@ input.inline-content-editable:focus {
 }
 
 .current-clues .suggestions {
-  position: relative;
   overflow-y: scroll;
   height: 250px;
   border: 1px solid #777;
-  border-left: 0;
-  border-right: 0;
+  border-width: 1px 0;
 }
 
 .current-clues .suggestions .suggestion {
@@ -363,82 +468,17 @@ input.inline-content-editable:focus {
   margin-bottom: 3px;
 }
 
-.pbtip {
-  display: none;
-}
-
-*:hover > .pbtip {
-  display: inline-block;
-  position: absolute;
-  top: 39px;
-  left: 3px;
-  border: 4px solid rgb(34, 188, 172);
-  padding: 6px 8px 8px 8px;
-  background-color: rgba(255, 255, 255, 0.92);
-  z-index: 101;
-  color: #000;
-  min-width: 30px;
-  width: auto;
-  margin-right: -300px;
-  font-size: 14px;
-  letter-spacing: 0;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
-    "Droid Sans", "Arial", sans-serif;
-}
 
 .current-clues .current *:hover > .pbtip {
-  left: -10px;
+  right: -10px;
   top: 35px;
 }
 
 .current-clues .suggestions *:hover > .pbtip {
-  left: -11px;
+  right: -12px;
   top: 30px;
 }
-
-*:hover > .pbtip.stip {
-  width: 40px;
-  left: -10px;
-  text-align: center;
-}
-
-*:hover > .pbtip:after,
-*:hover > .pbtip:before {
-  bottom: 100%;
-  left: 14px;
-  border: solid transparent;
-  content: "";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-*:hover > .pbtip.stip:after,
-*:hover > .pbtip.stip:before {
-  left: 50%;
-}
-
-*:hover > .pbtip:after {
-  border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: #fff;
-  border-width: 10px;
-  margin-left: -10px;
-}
-*:hover > .pbtip:before {
-  border-color: rgba(221, 221, 221, 0);
-  border-bottom-color: rgb(34, 188, 172);
-  border-width: 16px;
-  margin-left: -16px;
-}
-
-.disable-select {
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-}
+/* Hide mobile stuff on non-mobile */
 
 #keyboard,
 #mobilemenu,
@@ -446,9 +486,15 @@ input.inline-content-editable:focus {
   display: none;
 }
 
+/* end non-mobile */
+
+/* Mobile only */
+
 @media only screen and (max-width: 636px) {
-  html,
-  body {
+
+  /* General mobile */
+
+  html, body {
     width: auto !important;
     overflow-x: hidden !important;
   }
@@ -456,15 +502,39 @@ input.inline-content-editable:focus {
   body.zoomed {
     overflow-y: hidden !important;
   }
-<<<<<<< HEAD
 
+  pre {
+    display: none;
+  }
+
+  /* end General Mobile */
+
+  /* Mobile Containers */
+
+  .container {
+    width: 100%;
+    margin-bottom: 180px;
+  }
+
+  .puzzle-container {
+    display: block;
+  }
+
+  /* end Mobile Containers */
+
+  /* Mobile Title, Menu, Info */
+
+  .title {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+  body.zoomed .title {
+    display: none;
+  }
   .menu {
     margin-right: -5px;
   }
 
-=======
-
->>>>>>> ea6a1c13745b2c341d43836a122f63fc9f048f18
   .menu a {
     padding: 6.5px;
   }
@@ -473,23 +543,151 @@ input.inline-content-editable:focus {
     margin-right: 0px;
   }
 
-  .container {
-    width: 100%;
-    margin-bottom: 180px;
-  }
-
-  .title {
-    font-size: 1.5em;
-    margin-bottom: 5px;
-  }
-
   .infomenublock {
     max-width: 100% !important;
   }
 
-  body.zoomed .title {
-    display: none;
+  input.inline-content-editable,
+  .fakeinput {
+    font-size: 16px;
   }
+
+  /* end Mobile Title, Info, Menu */
+
+  /* Mobile grid */
+
+  .puzzle-grid {
+    margin: 0 0px 0 0px;
+    border: 0;
+  }
+
+  .puzzle-grid.zoomed {
+    overflow: scroll;
+    max-width: 100%;
+    border-top: 1px solid #ooo;
+    height: auto;
+    padding-bottom: 100%;
+  }
+
+  .puzzle-grid.zoomed .puzzle-row {
+    width: 200%;
+  }
+
+  .puzzle-grid.zoomed .puzzle-row:last-child {
+    margin-bottom: -350px;
+  }
+
+  .puzzle-grid .puzzle-cell {
+    font-size: 16px;
+  }
+
+  .puzzle-grid.zoomed .puzzle-cell {
+    font-size: 32px;
+  }
+
+  .puzzle-row {
+    margin-top: 0px;
+    display: flex;
+  }
+
+  .puzzle-cell {
+    width: auto;
+    height: auto;
+    flex: 1;
+  }
+
+  .puzzle-cell .label {
+    font-size: 0.44em;
+    border: 0;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+  }
+
+  .puzzle-cell .input {
+    width: 100%;
+    position: absolute;
+    margin-top: calc(60% - 0.5em);
+    margin-bottom: calc(40% - 0.5em);
+    font-size: inherit;
+  }
+  .puzzle-cell .input {
+    font-size: inherit;
+  }
+
+  .puzzle-cell:before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+  }
+
+  .puzzle-cell .label {
+    font-size: 0.5em;
+    border: 0;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+  }
+
+  .puzzle-cell .input.rebus {
+    font-size: 0.6em;
+  }
+
+  .largegrid .puzzle-cell .input {
+    font-size: 0.77em;
+  }
+
+  .largegrid .puzzle-cell .input.rebus {
+    font-size: 0.39em;
+  }
+
+  .smallgrid .puzzle-cell .input {
+    font-size: 1.33em;
+  }
+
+  .smallgrid .puzzle-cell .input.rebus {
+    font-size: .68em;
+  }
+
+  .xsgrid .puzzle-cell .input {
+    font-size: 1.5em;
+  }
+  .xsgrid .puzzle-cell .input.rebus {
+    font-size: .75em;
+  }
+
+  .largegrid .puzzle-cell .label {
+    font-size: 0.38em;
+    top: 1px;
+    left: 0px;
+  }
+
+  .smallgrid .puzzle-cell .label {
+    font-size: 0.67em;
+    top: 2px;
+    left: 2px;
+  }
+
+  .xsgrid .puzzle-cell .label {
+    font-size: 1em;
+    top: 2px;
+    left: 3px;
+  }
+
+  .puzzle-cell:before {
+    content: "";
+    float: left;
+    padding-top: 100%;
+  }
+
+  .circle {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+  }
+
+  /* end Mobile Grid */
+
+  /* Mobile Current Clues */
 
   .current-clues > div:not(.activemobile) {
     display: none;
@@ -499,9 +697,19 @@ input.inline-content-editable:focus {
     margin: 0;
     font-size: 16px;
   }
-  input.inline-content-editable,
-  .fakeinput {
-    font-size: 16px;
+
+  .current-clues {
+    position: fixed;
+    top: inherit;
+    right: inherit;
+    left: 0px;
+    z-index: 101;
+    bottom: 0px;
+    background-color: #fff;
+    transform-origin: bottom left;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .current-clues .current {
@@ -511,10 +719,6 @@ input.inline-content-editable:focus {
 
   .current-clues > div {
     height: 150px;
-  }
-
-  #keyboard.activemobile {
-    display: block;
   }
 
   .current-clues #mobilemenu {
@@ -561,13 +765,11 @@ input.inline-content-editable:focus {
     text-align: center;
     border-radius: 2px;
   }
-  .puzzle-cell .input {
-    font-size: inherit;
+
+  #keyboard.activemobile {
+    display: block;
   }
 
-  pre {
-    display: none;
-  }
   #keyboard {
     position: relative;
     margin: 0px 0px 10px 0px;
@@ -617,17 +819,6 @@ input.inline-content-editable:focus {
     background-color: #ddd;
   }
 
-  .current-clues {
-    position: fixed;
-    top: inherit;
-    right: inherit;
-    left: 0px;
-    z-index: 101;
-    bottom: 0px;
-    background-color: #fff;
-    transform-origin: bottom left;
-    width: 100%;
-  }
   .current-clues .suggestions {
     height: 100px;
     margin-bottom: 5px;
@@ -638,145 +829,7 @@ input.inline-content-editable:focus {
     margin-left: 8px;
   }
 
-  .puzzle-row {
-    margin-top: 0px;
-    display: flex;
-  }
-
-  .puzzle-grid {
-    margin: 0 0px 0 0px;
-    border: 0;
-  }
-
-  .puzzle-grid.zoomed {
-    overflow: scroll;
-    max-width: 100%;
-    border-top: 1px solid #ooo;
-    height: auto;
-    padding-bottom: 100%;
-  }
-
-  .puzzle-grid.zoomed .puzzle-row {
-    width: 200%;
-  }
-
-  .puzzle-grid .puzzle-cell {
-    font-size: 16px;
-  }
-  .puzzle-grid.zoomed .puzzle-cell {
-    font-size: 32px;
-  }
-
-  .puzzle-grid.zoomed .puzzle-row:last-child {
-    margin-bottom: -350px;
-  }
-
-  .puzzle-cell .label {
-    font-size: 0.44em;
-    border: 0;
-    position: absolute;
-    top: 1px;
-    left: 1px;
-  }
-
-  .puzzle-cell {
-    width: auto;
-    height: auto;
-    flex: 1;
-  }
-
-  .puzzle-cell .input {
-    width: 100%;
-    position: absolute;
-    margin-top: calc(60% - 0.5em);
-    margin-bottom: calc(40% - 0.5em);
-    font-size: inherit;
-  }
-
-  .puzzle-cell:before {
-    content: "";
-    float: left;
-    padding-top: 100%;
-  }
-
-  .puzzle-cell .label {
-    font-size: 0.5em;
-    border: 0;
-    position: absolute;
-    top: 1px;
-    left: 1px;
-  }
-
-  .largegrid .puzzle-cell .input {
-    font-size: 0.77em;
-  }
-
-  .smallgrid .puzzle-cell .input {
-    font-size: 1.33em;
-  }
-
-  .xsgrid .puzzle-cell .input {
-    font-size: 1.5em;
-  }
-
-  .largegrid .puzzle-cell .label {
-    font-size: 0.38em;
-    top: 1px;
-    left: 0px;
-  }
-
-  .smallgrid .puzzle-cell .label {
-    font-size: 0.67em;
-    top: 2px;
-    left: 2px;
-  }
-
-  .xsgrid .puzzle-cell .label {
-    font-size: 1em;
-    top: 2px;
-    left: 3px;
-  }
-
-  .puzzle-cell:before {
-    content: "";
-    float: left;
-    padding-top: 100%;
-  }
-
-  .circle {
-    width: 100%;
-    height: 100%;
-  }
+  /* end Mobile Current Clues */
 }
 
-@media print {
-  .menu,
-  .current-clues,
-  pre,
-  .input {
-    display: none;
-  }
-
-  .page {
-    column-width: 290px;
-    column-count: 2;
-  }
-
-  .puzzle-grid {
-    border: 0;
-  }
-
-  .puzzle-cell.highlighted {
-    border-color: #000;
-    background-color: #fff;
-  }
-
-  .puzzle-cell.active {
-    border-color: #000;
-    box-shadow: none;
-  }
-
-  .cluedata {
-    padding-top: 70px;
-  }
-}
+/* end Mobile */
