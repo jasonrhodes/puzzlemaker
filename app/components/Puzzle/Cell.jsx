@@ -14,7 +14,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     circled: cell.style === 'circled',
     "disable-select": true
   });
-  
+
   const { grid, getNextClueNumber } = puzzle;
   const currentCell = grid[row][column];
   const clue = currentCell.clue || {};
@@ -129,9 +129,9 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex="0"
-    > 
+    >
       <input class="puzzlefocus" readonly="readonly" />
-      <div class={"input"}>{cell.value.toUpperCase()}</div>
+      <div class={"input " + (currentCell.isRebus ? "rebus" : "")}>{cell.value.toUpperCase()}</div>
       {cell.style === 'circled' ? <div class="circle"/>: null}
       {cell.pencil ? <div class="input pencil">{cell.pencil}</div>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
