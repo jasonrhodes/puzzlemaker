@@ -17,10 +17,6 @@ select {
   border-bottom: 2px solid rgb(34, 188, 172);
 }
 
-.infoblock {
-  margin-top: -5px;
-}
-
 .btn {
   background-color: rgba(34, 188, 172);
   padding: 6px 8px;
@@ -40,13 +36,8 @@ select {
   max-width: 1400px;
 }
 
-.puzzlefocus {
-  opacity: 0;
-  width: 0px;
-  height: 1px;
-  position: absolute;
-  font-size: 30px;
-  pointer-events: none;
+.infoblock {
+  margin-top: -5px;
 }
 
 .puzzle-container {
@@ -68,7 +59,7 @@ select {
 
 .puzzle-cell {
   font-size: 20px;
-  border: 1px solid black;
+  border: 1px solid #777;
   width: 40px;
   height: 40px;
   line-height: 1;
@@ -120,6 +111,15 @@ select {
   background-color: #ddd;
 }
 
+.puzzlefocus {
+  opacity: 0;
+  width: 0px;
+  height: 1px;
+  position: absolute;
+  font-size: 30px;
+  pointer-events: none;
+}
+
 .circle {
   border: 1px solid black;
   border-radius: 50%;
@@ -152,6 +152,19 @@ select {
   margin-bottom: calc(40% - 0.5em);
   position: absolute;
   font-size: 20px;
+}
+
+.puzzle-cell .input.rebus {
+
+  font-size: 12px;
+  word-break: break-all;
+  display: inline-block;
+  margin: auto;
+  top: 50%;
+  left: 2px;
+  right: 2px;
+  width: calc(100% - 4px);
+  transform: translateY(-50%);
 }
 
 .title {
@@ -450,7 +463,7 @@ input.inline-content-editable:focus {
   }
 
 =======
-  
+
 >>>>>>> ea6a1c13745b2c341d43836a122f63fc9f048f18
   .menu a {
     padding: 6.5px;
