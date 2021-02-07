@@ -95,38 +95,22 @@ function getNextAcrossCellCoords(row, column, grid) {
 }
 
 function getNextAcrossClueStart(row, column, grid) {
-  const currentCell = grid[row][column];
-  let lastCellBlack = currentCell.isBlackSquare;
+  const activeCell = grid[row][column];
   while (true) {
     const [nextRow, nextColumn] = getNextAcrossCellCoords(row, column, grid);
     const nextCell = grid[nextRow][nextColumn];
-    if (nextRow === row && nextColumn === column) {
-      // next cell is the same as the current cell
-      break;
-    }
-    if (
-      nextRow !== row &&
-      !nextCell.isBlackSquare &&
-      nextCell.clue.acrossClueNumber
-    ) {
-      // we dropped to the next row and the first cell isn't a
-      // black square, we found the next clue
-      row = nextRow;
-      column = nextColumn;
-      break;
-    }
-    // change cell
     row = nextRow;
     column = nextColumn;
     if (
-      !nextCell.isBlackSquare &&
-      lastCellBlack &&
-      nextCell.clue.acrossClueNumber
+      nextCell.clue &&
+      (!activeCell.clue ||
+        activeCell.clue.acrossClueNumber !== nextCell.clue.acrossClueNumber) &&
+      nextCell.clue.acrossClueNumber &&
+      nextCell.clue.isAcrossStart
     ) {
-      // previous cell was a black square, new cell is not, we found our clue start cell
+      // we found the next down clue
       break;
     }
-    lastCellBlack = nextCell.isBlackSquare;
   }
   return [row, column];
 }
@@ -147,41 +131,22 @@ function getPrevAcrossCellCoords(row, column, grid) {
 }
 
 function getPrevAcrossClueStart(row, column, grid) {
-  const currentCell = grid[row][column];
-  let lastCellBlack = currentCell.isBlackSquare;
+  const activeCell = grid[row][column];
   while (true) {
     const [prevRow, prevColumn] = getPrevAcrossCellCoords(row, column, grid);
-    if (prevRow === row && prevColumn === column) {
-      // next cell is the same as the current cell
-      break;
-    }
     const prevCell = grid[prevRow][prevColumn];
-    if (
-      prevRow < row &&
-      !prevCell.isBlackSquare &&
-      prevCell.clue.acrossClueNumber
-    ) {
-      // we moved up to the prev row and it's not a black square,
-      // so we found a new clue, so we need to get the starting cell
-      column = findClueStartColumn(prevCell, grid[prevRow]);
-      row = prevRow;
-      break;
-    }
-    // change cell
     row = prevRow;
     column = prevColumn;
     if (
-      !prevCell.isBlackSquare &&
-      lastCellBlack &&
-      prevCell.clue.acrossClueNumber
+      prevCell.clue &&
+      (!activeCell.clue ||
+        activeCell.clue.acrossClueNumber !== prevCell.clue.acrossClueNumber) &&
+      prevCell.clue.acrossClueNumber &&
+      prevCell.clue.isAcrossStart
     ) {
-      // if the cell we are evaluationg is not a black square but
-      // the last cell we evaluated was a black square, we have
-      // a new clue and we need the start of that clue
-      column = findClueStartColumn(prevCell, grid[row]);
+      // we found the next down clue
       break;
     }
-    lastCellBlack = prevCell.isBlackSquare;
   }
   return [row, column];
 }

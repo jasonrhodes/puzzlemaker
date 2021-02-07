@@ -14,7 +14,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     circled: cell.style === 'circled',
     "disable-select": true
   });
-  
+
   const { grid, getNextClueNumber } = puzzle;
   const currentCell = grid[row][column];
   const clue = currentCell.clue || {};
@@ -39,6 +39,11 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     }
     e.stopPropagation();
   };
+  
+  const inputClasses = classnames({
+    input: true,
+    rebus: currentCell.isRebus
+  });
 
   const handleKeyDown = e => {
     console.log("KeyDown", e.key);
@@ -125,13 +130,13 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
 
   return (
     <div
-      class={classes}
+      className={classes}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex="0"
-    > 
-      <input class="puzzlefocus" readonly="readonly" />
-      <div class={"input"}>{cell.value.toUpperCase()}</div>
+    >
+      <input class="puzzlefocus" readOnly="readonly" />
+      <div class={inputClasses}>{cell.value.toUpperCase()}</div>
       {cell.style === 'circled' ? <div class="circle"/>: null}
       {cell.pencil ? <div class="input pencil">{cell.pencil}</div>: null}
       {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}

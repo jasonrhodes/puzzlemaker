@@ -7,7 +7,7 @@ const PuzzleRow = ({
   columns
 }) => {
   return (
-    <div class="puzzle-row">
+    <div className="puzzle-row">
       <PuzzleContext.Consumer>
         {puzzle => columns.map((cell, i) => (
           <Cell

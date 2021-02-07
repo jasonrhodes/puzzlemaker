@@ -30,7 +30,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
   };
   
   return (
-    <div class="current-clues" id="current-clues">
+    <div className="current-clues" id="current-clues">
       <MobileMenu
         mobileView={mobileView}
         setMobileView={setMobileView}
@@ -40,7 +40,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
         downWord={down.word.toUpperCase()}
         puzzle={puzzle}
       />
-      <div id="across" class={mobileView == "across" ? "activemobile" : ""}>
+      <div id="across" className={mobileView == "across" ? "activemobile" : ""}>
         {acrossNumber !== "-" ? (
           <React.Fragment>
             <Current clueNumber={acrossNumber} word={across.word} filterWord={puzzle.acrossFilter[0]} showNonCrosses={showAcrossNonCrosses} direction="across" />
@@ -59,7 +59,7 @@ const CurrentClues = ({ across, down, puzzle }) => {
           </React.Fragment>
         ) : null}
       </div>
-        <div id="down" class={mobileView == "down" ? "activemobile" : ""}>
+        <div id="down" className={mobileView == "down" ? "activemobile" : ""}>
           {downNumber !== "-" ? (
           <React.Fragment>
             <Current clueNumber={downNumber} word={down.word} filterWord={puzzle.downFilter[0]} showNonCrosses={showDownNonCrosses} direction="down" />

@@ -28,25 +28,25 @@ module.exports = function MobileMenu({
 
   return (
     <div id="mobilemenu">
-      <a class="cluenav prev key" onClick={handlePrevClueClick}>
+      <a className="cluenav prev key" onClick={handlePrevClueClick}>
         <ChevronLeft size={16} />
       </a>
-      <a class={mobileView == "keyboard" ? "activemobile" : ""}onClick={e => keyBoardSwitch(e, "keyboard")}>
+      <a className={mobileView == "keyboard" ? "activemobile" : ""}onClick={e => keyBoardSwitch(e, "keyboard")}>
         <Type size={16} />
       </a>
       <a
-        class={mobileView == "across" ? "activemobile" : ""}
+        className={mobileView == "across" ? "activemobile" : ""}
         onClick={e => keyBoardSwitch(e, "across")}
       >
         {acrossNumber !== '-' ? acrossNumber + 'a: ' + acrossWord : '-' }
       </a>
       <a
-        class={mobileView == "down" ? "activemobile" : ""}
+        className={mobileView == "down" ? "activemobile" : ""}
         onClick={e => keyBoardSwitch(e, "down")}
       >
         {downNumber !== '-' ? downNumber + 'd: ' + downWord : '-' }
       </a>
-      <a class="cluenav next key" onClick={handleNextClueClick}>
+      <a className="cluenav next key" onClick={handleNextClueClick}>
         <ChevronRight size={16} />
       </a>
     </div>
