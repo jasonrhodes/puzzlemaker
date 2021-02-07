@@ -15,20 +15,20 @@ const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
 
   if (symmetry) {
     return (
-      <a class="subicon" onClick={toggleLock}>
+      <a className="subicon" onClick={toggleLock}>
         <Lock size={18} />
         <MirrorIcon size={10} />
-        <span class="pbtip">
+        <span className="pbtip">
           <b>Unlock symmetry</b>
         </span>
       </a>
     );
   } else {
     return (
-      <a class="subicon" onClick={toggleLock}>
+      <a className="subicon" onClick={toggleLock}>
         <Unlock size={18} />
         <MirrorIcon size={10} />
-        <span class="pbtip">
+        <span className="pbtip">
           <b>Lock symmetry</b>
         </span>
       </a>
@@ -53,22 +53,22 @@ const PuzzleMenu = ({ puzzle }) => {
   };
 
   return (
-    <div class="menu">
+    <div className="menu">
       <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
         <Play size={18} />
-        <span class="pbtip stip">
+        <span className="pbtip stip">
           <b>Play</b>
         </span>
       </Link>
       <PDFLink puzzle={puzzle}>
         <Printer size={18} />
-        <span class="pbtip stip">
+        <span className="pbtip stip">
           <b>PDF</b>
         </span>
       </PDFLink>
       <a onClick={downloadFile}>
         <Download size={18} />
-        <span class="pbtip">
+        <span className="pbtip">
           <b>Download</b>
           <br />
           ...as .puz file
@@ -76,7 +76,7 @@ const PuzzleMenu = ({ puzzle }) => {
       </a>
       <a>
         <Info size={18} />
-        <span class="pbtip">
+        <span className="pbtip">
           <b>Info</b>
           <br />
           <i>Ctrl+click</i> to toggle black square
