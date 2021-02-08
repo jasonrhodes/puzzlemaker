@@ -9,7 +9,7 @@ const CreateLink = ({ rows, columns }) => {
     return null;
   }
   return (
-    <Link class="btn" to={{ pathname: "/edit/" + id, state: { rows, columns }}}>Create {rows} x {columns} puzzle</Link>
+    <Link className="btn" to={{ pathname: "/edit/" + id, state: { rows, columns }}}>Create {rows} x {columns} puzzle</Link>
   );
 }
 
@@ -18,13 +18,13 @@ module.exports = () => {
   const handleChange = e => {
     setGridSize(e.target.value);
   }
-  
+
   const [rows, columns] = (gridSize ? gridSize.split(" x ") : []);
   return (
     <React.Fragment>
-      <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
+      <h1 className="title">Puzzle<span className="accent-text">maker</span></h1>
       <h3>Create a New Puzzle</h3>
-      <div class="inline">
+      <div className="inline">
         <select onChange={handleChange}>
           <option disabled={true} selected={true}>-- Choose a grid size --</option>
           <option value="15 x 15">15 x 15 (standard NYT, Mon-Sat)</option>
@@ -52,5 +52,5 @@ module.exports = () => {
         <SavedPuzzleList />
       </div>
     </React.Fragment>
-  )
-}
+  );
+};

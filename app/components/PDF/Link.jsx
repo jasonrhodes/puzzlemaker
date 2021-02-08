@@ -4,8 +4,8 @@ const PDFPuzzleDocument = require("./PuzzleDocument");
 
 module.exports = function PDFLink({ puzzle, children }) {
   return (
-    <PDFDownloadLink document={<PDFPuzzleDocument author={puzzle.author} title={puzzle.title} />} fileName={`${puzzle.title}.pdf`}>
+    <PDFDownloadLink document={<PDFPuzzleDocument puzzle={puzzle} />} fileName={`${puzzle.title}.pdf`} >
       {children}
     </PDFDownloadLink>
   );
-};
+}

@@ -143,7 +143,7 @@ function SuggestionsList({
     setOtherHighlight(null);
     focusOnActive();
   };
-  
+
   const pencilInSuggestion = (suggestion) => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
@@ -157,7 +157,7 @@ function SuggestionsList({
     }
     puzzle.setGrid(newGrid);
   }
-  
+
   /*const pencilOut = () => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
@@ -169,7 +169,7 @@ function SuggestionsList({
     }
     puzzle.setGrid(newGrid);
   }*/
-  
+
   const handleMouseEnter = (e, suggestion, type) => {
     if (!type) {
       highlightCrosses(e, ad);
@@ -178,7 +178,7 @@ function SuggestionsList({
       pencilInSuggestion(suggestion);
     }
   }
-  
+
   const handleMouseOut = (e, type) => {
     if (!type) {
       unHighlightCrosses(e);
@@ -189,13 +189,13 @@ function SuggestionsList({
   }
 
   return (
-    <div class="suggestions">
+    <div className="suggestions">
       {filterSuggestions(mySuggestions).map((x, i) => (
-        <div class="inline">
+        <div className="inline">
           <div
             onMouseEnter={e => handleMouseEnter(e, x)}
             onMouseLeave={e => handleMouseOut(e)}
-            class={
+            className={
               myHighlight == x[position] ||
               x == otherFilter[0]
                 ? "suggestion highlighted"
@@ -210,7 +210,7 @@ function SuggestionsList({
           >
             {x}
           </div>
-          <a 
+          <a
             onMouseEnter={e => handleMouseEnter(e, x, "arrow")}
             onMouseLeave={e => handleMouseOut(e, "arrow")}
             onClick={e => {
@@ -222,7 +222,7 @@ function SuggestionsList({
             ) : (
               <ArrowDown size={10} />
             )}
-            <span class="pbtip">
+            <span className="pbtip">
               <b>
                 {x == myFilter[0]
                   ? "Unfilter " +
@@ -237,7 +237,7 @@ function SuggestionsList({
               style={{ width: "12px" }}
               src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
             />
-            <span class="pbtip">
+            <span className="pbtip">
               <b>Open in OneLook</b>
             </span>
           </a>
