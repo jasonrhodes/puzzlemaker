@@ -7,6 +7,7 @@ module.exports = {
   getNextDownClueStart,
   getPrevDownCellCoords,
   getPrevDownClueStart,
+  findClueStartCell
 };
 
 // find the last row index and last column index, or in
@@ -221,4 +222,17 @@ function getPrevDownClueStart(row, column, grid) {
     }
   }
   return [row, column];
+}
+
+function findClueStartCell(grid, number, direction) {
+  for (let row = 0; row < grid.length; row++) {
+    for (let col = 0; col < grid[0].length; col++) {
+      if (direction === "across" && grid[row][col].clue.isAcrossStart && grid[row][col].clue.acrossClueNumber === parseInt(number)){
+        return [row, col];
+      } else if (direction === "down" && grid[row][col].clue.isDownStart && grid[row][col].clue.downClueNumber === parseInt(number)) {
+        return [row, col];
+      } 
+    }
+  }
+  return [];
 }
