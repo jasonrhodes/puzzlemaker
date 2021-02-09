@@ -135,11 +135,11 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       onKeyDown={handleKeyDown}
       tabIndex="0"
     >
-      <input class="puzzlefocus" readOnly="readonly" />
-      <div class={inputClasses}>{cell.value.toUpperCase()}</div>
-      {cell.style === 'circled' ? <div class="circle"/>: null}
-      {cell.pencil ? <div class="input pencil">{cell.pencil}</div>: null}
-      {!cell.isBlackSquare && label ? <div class="label">{label}</div> : null}
+      <input className="puzzlefocus" readOnly="readonly" />
+      <div className={inputClasses}>{cell.value.toUpperCase()}</div>
+      {cell.style === 'circled' ? <div className="circle"/>: null}
+      {cell.pencil ? <div className="input pencil">{cell.pencil}</div>: null}
+      {!cell.isBlackSquare && label ? <div className="label">{label}</div> : null}
     </div>
   );
 };
