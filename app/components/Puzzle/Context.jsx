@@ -11,8 +11,7 @@ const {
   getNextDownCellCoords,
   getNextDownClueStart,
   getPrevDownCellCoords,
-  getPrevDownClueStart,
-  findClueStartCell
+  getPrevDownClueStart
 } = require("../../utils/cellNavigation");
 
 function getSavedPuzzle(id) {
@@ -308,14 +307,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const nextDownClue = () => {
-    const [activeRow, activeColumn] = activeCell;
-    let row = activeRow;
-    let column = activeColumn;
-    
-    if (grid[activeRow][activeColumn].clue.downClueNumber && !grid[activeRow][activeColumn].clue.isDownStart){
-      [row, column] = findClueStartCell(grid, grid[activeRow][activeColumn].clue.downClueNumber, "down");
-    } 
-    
+    const [row, column] = activeCell;
     const [nextRow, nextColumn] = getNextDownClueStart(row, column, grid);
     if (nextRow < row && nextColumn < column) {
       toggleDirection();
@@ -329,14 +321,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const prevDownClue = () => {
-    const [activeRow, activeColumn] = activeCell;
-    let row = activeRow;
-    let column = activeColumn;
-    
-    if (grid[activeRow][activeColumn].clue.downClueNumber && !grid[activeRow][activeColumn].clue.isDownStart){
-      [row, column] = findClueStartCell(grid, grid[activeRow][activeColumn].clue.downClueNumber, "down");
-    }     
-    
+    const [row, column] = activeCell;
     let [prevRow, prevColumn] = getPrevDownClueStart(row, column, grid);
     if (prevRow > row && prevColumn > column) {
       toggleDirection();
