@@ -12,6 +12,7 @@ const {
   getNextDownClueStart,
   getPrevDownCellCoords,
   getPrevDownClueStart,
+  findClueStartCell
 } = require("../../utils/cellNavigation");
 
 function getSavedPuzzle(id) {
@@ -75,12 +76,18 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         if (grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !== grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber){
             clearAll(true);
         } else {
+            if (downFilter && downFilter[0] !== null && downFilter[0] !== undefined){
+              setDownFilter([downFilter[0],downFilter[0][activeCell[1]-words.across.range[0]]]);
+            }
             pencilHandling(prevCell[1], "across", activeCell[1] > prevCell[1]);
         }
       } else if (activeCell[1] === prevCell[1]){
         if (grid[activeCell[0]][activeCell[1]].clue.downClueNumber !== grid[prevCell[0]][prevCell[1]].clue.downClueNumber){
             clearAll(true);
         } else {
+            if (acrossFilter && acrossFilter[0] !== null && acrossFilter[0] !== undefined){
+              setAcrossFilter([acrossFilter[0],acrossFilter[0][activeCell[0]-words.down.range[0]]]);
+            }
             pencilHandling(prevCell[0], "down", activeCell[0] > prevCell[0]);
         }
       } else {
@@ -301,7 +308,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const nextDownClue = () => {
-    const [row, column] = activeCell;
+    const [activeRow, activeColumn] = activeCell;
+    let row = activeRow;
+    let column = activeColumn;
+    
+    if (grid[activeRow][activeColumn].clue.downClueNumber && !grid[activeRow][activeColumn].clue.isDownStart){
+      [row, column] = findClueStartCell(grid, grid[activeRow][activeColumn].clue.downClueNumber, "down");
+    } 
+    
     const [nextRow, nextColumn] = getNextDownClueStart(row, column, grid);
     if (nextRow < row && nextColumn < column) {
       toggleDirection();
@@ -315,7 +329,14 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const prevDownClue = () => {
-    const [row, column] = activeCell;
+    const [activeRow, activeColumn] = activeCell;
+    let row = activeRow;
+    let column = activeColumn;
+    
+    if (grid[activeRow][activeColumn].clue.downClueNumber && !grid[activeRow][activeColumn].clue.isDownStart){
+      [row, column] = findClueStartCell(grid, grid[activeRow][activeColumn].clue.downClueNumber, "down");
+    }     
+    
     let [prevRow, prevColumn] = getPrevDownClueStart(row, column, grid);
     if (prevRow > row && prevColumn > column) {
       toggleDirection();
