@@ -2,8 +2,6 @@ const React = require("react");
 const { Document, Page, Text, View, StyleSheet, Font } = require("@react-pdf/renderer");
 const PrintGrid = require("./PrintGrid");
 
-const font = 'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxP.ttf';
-
 // Register font
 Font.register({ family: 'Roboto', src: 'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxP.ttf', format: 'truetype' });
 Font.register({ family: 'RobotoBold', src: 'https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfBBc9.ttf', format: 'truetype' });
