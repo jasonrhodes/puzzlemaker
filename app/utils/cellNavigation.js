@@ -168,6 +168,9 @@ function getNextDownCellCoords(row, column, grid) {
 }
 
 function getNextDownClueStart(row, column, grid) {
+  if (grid[row][column].clue.downClueNumber && !grid[row][column].clue.isDownStart){
+      [row, column] = findClueStartCell(grid, grid[row][column].clue.downClueNumber, "down");
+  } 
   const activeCell = grid[row][column];
   while (true) {
     const [nextRow, nextColumn] = getNextAcrossCellCoords(row, column, grid);
@@ -204,6 +207,9 @@ function getPrevDownCellCoords(row, column, grid) {
 }
 
 function getPrevDownClueStart(row, column, grid) {
+  if (grid[row][column].clue.downClueNumber && !grid[row][column].clue.isDownStart){
+    [row, column] = findClueStartCell(grid, grid[row][column].clue.downClueNumber, "down");
+  }
   const activeCell = grid[row][column];
   while (true) {
     const [prevRow, prevColumn] = getPrevAcrossCellCoords(row, column, grid);
