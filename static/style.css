@@ -385,7 +385,7 @@ input.inline-content-editable:focus {
 /* Current Clues and Suggestions */
 
 .current-clues {
-  min-width: 350px;
+  min-width: 250px;
   margin-left: 30px;
   margin-right: 30px;
   flex: 0 0 auto;

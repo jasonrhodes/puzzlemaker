@@ -1,12 +1,15 @@
 const React = require("react");
 
 module.exports = function OneLookLink({ word }) {
+  if (!word || typeof word !== "string") {
+    return null;
+  }
   return (
     <a
       target="_blank"
       href={
         "http://onelook.com/?w=" +
-        word.toUpperCase().replaceAll("-", "?")
+        word.toUpperCase().replace(/\-/g, "?")
       }
     >
       <img
