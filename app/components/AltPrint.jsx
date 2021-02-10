@@ -7,9 +7,9 @@ const initGrid = require("../utils/initGrid");
 const AltPrint = function({ location, match }) {
   const { rows, columns } = location.state || {};
   const grid = initGrid({ rows: rows || 15, columns: columns || 15 });
-  
-  
-  
+
+
+
   return (
     <PuzzleContextProvider initialGrid={grid} puzzleId={match.params.puzzleId}>
       <PuzzleContext.Consumer>

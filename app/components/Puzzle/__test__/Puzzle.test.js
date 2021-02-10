@@ -9,16 +9,16 @@ const { MemoryRouter } = require("react-router-dom");
 
 const Passthrough = ({ children }) => children;
 
-jest.mock("@react-pdf/renderer", () => ({
-  PDFDownloadLink: Passthrough,
-  Document: Passthrough,
-  Page: Passthrough,
-  Text: Passthrough,
-  View: Passthrough,
-  StyleSheet: {
-    create: (s) => s,
-  },
-}));
+// jest.mock("@react-pdf/renderer", () => ({
+//   PDFDownloadLink: Passthrough,
+//   Document: Passthrough,
+//   Page: Passthrough,
+//   Text: Passthrough,
+//   View: Passthrough,
+//   StyleSheet: {
+//     create: (s) => s,
+//   },
+// }));
 
 const WrappedPuzzle = ({ rows = 15, columns = 15 }) => (
   <MemoryRouter>

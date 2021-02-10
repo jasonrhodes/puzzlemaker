@@ -60,7 +60,7 @@ const PuzzleMenu = ({ puzzle }) => {
           <b>Play</b>
         </span>
       </Link>
-      <PDFLink puzzle={puzzle}>
+      <PDFLink puzzle={puzzle} >
         <Printer size={18} />
         <span className="pbtip stip">
           <b>PDF</b>

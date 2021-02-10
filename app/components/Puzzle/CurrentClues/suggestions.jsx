@@ -143,7 +143,7 @@ function SuggestionsList({
     setOtherHighlight(null);
     focusOnActive();
   };
-  
+
   const pencilInSuggestion = (suggestion) => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
@@ -157,7 +157,7 @@ function SuggestionsList({
     }
     puzzle.setGrid(newGrid);
   }
-  
+
   /*const pencilOut = () => {
     const newGrid = [...puzzle.grid];
     for (let letter of emptyLetters) {
@@ -169,7 +169,7 @@ function SuggestionsList({
     }
     puzzle.setGrid(newGrid);
   }*/
-  
+
   const handleMouseEnter = (e, suggestion, type) => {
     if (!type) {
       highlightCrosses(e, ad);
@@ -178,7 +178,7 @@ function SuggestionsList({
       pencilInSuggestion(suggestion);
     }
   }
-  
+
   const handleMouseOut = (e, type) => {
     if (!type) {
       unHighlightCrosses(e);
@@ -210,7 +210,7 @@ function SuggestionsList({
           >
             {x}
           </div>
-          <a 
+          <a
             onMouseEnter={e => handleMouseEnter(e, x, "arrow")}
             onMouseLeave={e => handleMouseOut(e, "arrow")}
             onClick={e => {

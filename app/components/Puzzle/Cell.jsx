@@ -39,7 +39,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     }
     e.stopPropagation();
   };
-  
+
   const inputClasses = classnames({
     input: true,
     rebus: currentCell.isRebus

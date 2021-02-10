@@ -53,7 +53,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     return _setActiveCell([row, column]);
   }
-  
+
   const setClue = (number, direction, clue) => {
     setClues({ ...clues, [direction]: { ...clues[direction], [number]: clue }});
   }
@@ -64,10 +64,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         ref.current = value;
       });
   return ref.current;
-  } 
-  
+  }
+
   const prevCell = usePrevious(activeCell);
-  
+
   // all pencil/locked suggestions are updated after a change to the activeCell
   React.useEffect(() => {
     if (activeCell.length && prevCell.length && activeCell[0] !== undefined && prevCell[0] !== undefined && activeCell !== prevCell) {
@@ -102,16 +102,16 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 	}
 	
   }, [activeCell]);
-  
+
   React.useEffect(() => {
     setWords(calculateCurrentWords());
   }, [grid, setWords, activeCell]);
-  
+
   // auto save the whole puzzle when main parts change
   React.useEffect(() => {
     savedPuzzleId && savePuzzle(savedPuzzleId);
   }, [grid, words, author, title, clues, savedPuzzleId]);
-  
+
   // Update clues when the grid changes
   React.useEffect(() => {
     const newClues = grid
@@ -157,9 +157,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setDirection(direction === "across" ? "down" : "across");
 
   const toggleSymmetry = () => setSymmetry(!symmetry);
-  
+
   const toggleZoom = () => {
-    if (zoomed == 'zoomed') { 
+    if (zoomed == 'zoomed') {
       setZoomed("");
       document.body.classList.remove("zoomed");
     } else {
@@ -207,8 +207,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (!grid[row][column].isBlackSquare) {
       const newGrid = [...grid];
       newGrid[row][column].value = value.toUpperCase();
-      
-      // new block for proper pencil behaviour during typing/deleting letters 
+
+      // new block for proper pencil behaviour during typing/deleting letters
       if (newGrid[row][column].pencil === value.toUpperCase()){
         newGrid[row][column].pencil = "";
       } else if (newGrid[row][column].pencil) {
@@ -219,7 +219,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       } else if (!value && acrossFilter.length) {
         newGrid[row][column].pencil = acrossFilter[0][activeCell[0] - words.down.range[0]];
       }
-        
+
       setGrid(newGrid);
     }
   };
@@ -276,7 +276,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     const [row, column] = activeCell;
     setActiveCell(getNextAcrossCellCoords(row, column, grid));
   };
-  
+
   const nextAcrossClue = () => {
     const [row, column] = activeCell;
     const [nextRow, nextColumn] = getNextAcrossClueStart(row, column, grid);
@@ -337,15 +337,15 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const rewindActiveCell = () => {
     direction === "across" ? prevAcrossCell() : prevDownCell();
   };
-  
+
   const advanceActiveClue = () => {
     direction === "across" ? nextAcrossClue() : nextDownClue();
   }
-  
+
   const rewindActiveClue = () => {
     direction === "across" ? prevAcrossClue() : prevDownClue();
   }
-  
+
   const pencilHandling = (field, dir, forward) => {
     let otherDir;
     let filter;
@@ -408,15 +408,15 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const savePuzzle = id => {
     window.localStorage.setItem(id, JSON.stringify(value));
   };
-  
+
   const clearAll = (prev_flag) => {
     pencilOut("down", false, prev_flag);
     pencilOut("across", false, prev_flag);
     setDownFilter([]);
     setAcrossFilter([]);
   }
-  
-  const pencilOut = (direction, skip_flag, prev_flag) => { 
+
+  const pencilOut = (direction, skip_flag, prev_flag) => {
     const cell = (prev_flag ? prevCell : activeCell);
     if (cell.length){
         const newGrid = [...grid];
@@ -469,7 +469,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setAuthor,
     setClue,
     pencilOut,
-    downFilter, 
+    downFilter,
     setDownFilter,
     acrossFilter,
     setAcrossFilter,

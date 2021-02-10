@@ -18,7 +18,7 @@ module.exports = () => {
   const handleChange = e => {
     setGridSize(e.target.value);
   }
-  
+
   const [rows, columns] = (gridSize ? gridSize.split(" x ") : []);
   return (
     <React.Fragment>
@@ -52,5 +52,5 @@ module.exports = () => {
         <SavedPuzzleList />
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
