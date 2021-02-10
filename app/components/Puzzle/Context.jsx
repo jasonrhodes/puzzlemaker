@@ -11,7 +11,7 @@ const {
   getNextDownCellCoords,
   getNextDownClueStart,
   getPrevDownCellCoords,
-  getPrevDownClueStart,
+  getPrevDownClueStart
 } = require("../../utils/cellNavigation");
 
 function getSavedPuzzle(id) {
@@ -75,18 +75,32 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         if (grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !== grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber){
             clearAll(true);
         } else {
+            if (downFilter && downFilter[0] !== null && downFilter[0] !== undefined){
+              setDownFilter([downFilter[0],downFilter[0][activeCell[1]-words.across.range[0]]]);
+            }
             pencilHandling(prevCell[1], "across", activeCell[1] > prevCell[1]);
         }
       } else if (activeCell[1] === prevCell[1]){
         if (grid[activeCell[0]][activeCell[1]].clue.downClueNumber !== grid[prevCell[0]][prevCell[1]].clue.downClueNumber){
             clearAll(true);
         } else {
+            if (acrossFilter && acrossFilter[0] !== null && acrossFilter[0] !== undefined){
+              setAcrossFilter([acrossFilter[0],acrossFilter[0][activeCell[0]-words.down.range[0]]]);
+            }
             pencilHandling(prevCell[0], "down", activeCell[0] > prevCell[0]);
         }
       } else {
         clearAll(true);
       }
-    }
+      if (prevCell[0] && prevCell[0] !== undefined && grid[prevCell[0]][prevCell[1]].isRebus && grid[prevCell[0]][prevCell[1]].value.length <= 1){
+		grid[prevCell[0]][prevCell[1]].isRebus = false;
+	  }
+    } else if (prevCell && prevCell.length && prevCell[0] !== undefined) {
+	  if (grid[prevCell[0]][prevCell[1]].isRebus && grid[prevCell[0]][prevCell[1]].value.length <= 1){
+		grid[prevCell[0]][prevCell[1]].isRebus = false;
+	  }
+	}
+	
   }, [activeCell]);
 
   React.useEffect(() => {
@@ -463,7 +477,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     prevCell,
     clearAll,
     zoomed,
-    setZoomed
+    setZoomed,
+    setDirection
   };
 
   return (

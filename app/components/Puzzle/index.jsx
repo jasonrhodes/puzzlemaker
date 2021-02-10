@@ -4,6 +4,7 @@ const Menu = require("./Menu");
 const { PuzzleContext } = require("./Context");
 const Title = require("./Title");
 const CurrentClues = require("./CurrentClues");
+const AllClues = require("./AllClues");
 
 const Puzzle = () => {
   const gridSizeDesc = (length) => {
@@ -42,6 +43,11 @@ const Puzzle = () => {
               ))}
             </div>
             <CurrentClues
+              across={puzzle.words.across}
+              down={puzzle.words.down}
+              puzzle={puzzle}
+            />
+            <AllClues
               across={puzzle.words.across}
               down={puzzle.words.down}
               puzzle={puzzle}
