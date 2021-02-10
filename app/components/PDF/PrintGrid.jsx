@@ -1,12 +1,12 @@
 const React = require("react");
-const { Document, Page, Text, View, StyleSheet, Canvas } = require("@react-pdf/renderer");
+const { Text, View, StyleSheet } = require("@react-pdf/renderer");
 
 module.exports = function PrintGrid({ puzzle, styles }) {
   const { grid, getNextClueNumber } = puzzle;
   return (
     <View style={styles.grid}>
       {grid.map((columns, row) => (
-        <View style={styles.row}>
+        <View key={'row' + row} style={styles.row}>
           {columns.map((cell, i) => {
             const currentCell = grid[row][i];
             const clue = currentCell.clue || {};
@@ -17,11 +17,11 @@ module.exports = function PrintGrid({ puzzle, styles }) {
             if (row === grid.length - 1) { cellStyle.push(styles.lastRow); }
             if (i === columns.length - 1) { cellStyle.push(styles.lastColumn); }
             return (
-              <View>
+              <View key={'cell' + row + '_' + i}>
                 <Text style={cellStyle}>{label}</Text>
               </View>
-          )
-        })}
+            )
+          })}
         </View>
       ))}
     </View>

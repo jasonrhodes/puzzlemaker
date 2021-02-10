@@ -209,14 +209,14 @@ class PuzWriter {
     var c_part = this.checksumStrings(0);
     this.setMaskedChecksum(3, 0x45, 0x44, c_part);
   }
-  
+
   computeRebusChecksums() {
     var rebusCksum = this.checksumRegion(this.rebusStart, this.w * this.h, 0);
     this.setShort(this.rebusChecksumLoc, rebusCksum);
     var rtblCksum = this.checksumRegion(this.rtblStart, this.rtbl_length, 0);
     this.setShort(this.rtblChecksumLoc, rtblCksum);
   }
-  
+
   writeRebus(json) {
     const rebus = json.rebus;
     this.writeString("GRBS", true);
@@ -233,7 +233,7 @@ class PuzWriter {
       }
     }
     this.buf.push(0);
-    
+
     this.rtbl_length = json.rebus_string.length
     this.writeString("RTBL", true);
     this.writeShort(this.rtbl_length);
@@ -242,12 +242,12 @@ class PuzWriter {
     this.rtblStart = this.buf.length;
     this.writeString(json.rebus_string);
   }
-  
+
   computeGextChecksum() {
     var gextCksum = this.checksumRegion(this.gextStart, this.w * this.h, 0);
     this.setShort(this.gextChecksumLoc, gextCksum);
   }
-  
+
   writeGext(json) {
     const gext = json.gext;
     this.writeString("GEXT", true);
