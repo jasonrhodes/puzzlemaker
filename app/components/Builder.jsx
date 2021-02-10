@@ -18,8 +18,8 @@ const Builder = function({ location, match }) {
     <PuzzleContextProvider initialGrid={grid} puzzleId={match.params.puzzleId}>
       <PuzzleContext.Consumer>
         {puzzle => (
-          <div class="container" onClick={()=>handleClick(puzzle)}>
-            <h1 class="title"><Link to="/">Puzzle<span class="accent-text">maker</span></Link></h1>
+          <div className="container" onClick={()=>handleClick(puzzle)}>
+            <h1 className="title"><Link to="/">Puzzle<span className="accent-text">maker</span></Link></h1>
             <Puzzle initialGrid={grid} />
           </div>
         )}
