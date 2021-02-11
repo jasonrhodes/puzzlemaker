@@ -14,6 +14,8 @@ const {
   getPrevDownClueStart,
 } = require("../../utils/cellNavigation");
 
+let a;
+
 function getSavedPuzzle(id) {
   if (!id) {
     return undefined;
