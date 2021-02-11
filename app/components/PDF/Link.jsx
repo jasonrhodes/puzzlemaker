@@ -6,7 +6,7 @@ const PDFPuzzleDocument = require("./PuzzleDocument");
 
 const Download = ({ url, fileName, onFinish }) => {
   React.useEffect(() => {
-    var link = document.createElement('a');
+    var link = document.createElement("a");
     document.body.appendChild(link); // required in FF, optional for Chrome
     link.href = url;
     link.download = fileName;
@@ -15,11 +15,16 @@ const Download = ({ url, fileName, onFinish }) => {
     onFinish();
   }, []);
   return null;
-}
+};
 
 const WithDownload = ({ loading, url, children, fileName, onFinish }) => (
   <React.Fragment>
-    <Download loading={loading} url={url} fileName={fileName} onFinish={onFinish} />
+    <Download
+      loading={loading}
+      url={url}
+      fileName={fileName}
+      onFinish={onFinish}
+    />
     {children}
   </React.Fragment>
 );
@@ -37,7 +42,19 @@ module.exports = function PDFLink({ puzzle, children }) {
   }
   return (
     <BlobProvider document={<PDFPuzzleDocument puzzle={puzzle} />}>
-      {({ loading, url }) => loading ? children : (<WithDownload loading={loading} url={url} children={children} fileName={`${puzzle.title}.pdf`} onFinish={() => setLoading(false)} />)}
+      {({ loading, url }) =>
+        loading ? (
+          children
+        ) : (
+          <WithDownload
+            loading={loading}
+            url={url}
+            children={children}
+            fileName={`${puzzle.title}.pdf`}
+            onFinish={() => setLoading(false)}
+          />
+        )
+      }
     </BlobProvider>
   );
-}
+};

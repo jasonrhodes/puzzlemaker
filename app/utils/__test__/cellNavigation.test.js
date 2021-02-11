@@ -3,10 +3,6 @@ const {
   getNextAcrossClueStart,
   getPrevAcrossCellCoords,
   getPrevAcrossClueStart,
-  getNextDownCellCoords,
-  getNextDownClueStart,
-  getPrevDownCellCoords,
-  getPrevDownClueStart,
 } = require("../cellNavigation");
 
 const gridMock = require("./gridMock");

@@ -1,5 +1,6 @@
+/* eslint-disable jest/no-standalone-expect */
 const React = require("react");
-const { render, screen } = require("@testing-library/react");
+const { render } = require("@testing-library/react");
 const userEvent = require("@testing-library/user-event").default;
 const PuzzleComponent = require("..");
 const { PuzzleContextProvider } = require("../Context");

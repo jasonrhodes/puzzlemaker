@@ -11,9 +11,14 @@ module.exports = function ClueInput({ direction, number }) {
         return (
           <input
             className="inline-content-editable"
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             onChange={handleChange}
-            style={{ width: ((value && value.length > 15) ? measureMyInputText(value) : measureMyInputText("(Enter clue here)"))+ "px" }}
+            style={{
+              width:
+                (value && value.length > 15
+                  ? measureMyInputText(value)
+                  : measureMyInputText("(Enter clue here)")) + "px",
+            }}
             value={value}
             type="text"
             placeholder="(Enter clue here)"
@@ -22,4 +27,4 @@ module.exports = function ClueInput({ direction, number }) {
       }}
     </PuzzleContext.Consumer>
   );
-}
+};

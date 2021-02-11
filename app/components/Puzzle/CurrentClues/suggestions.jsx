@@ -1,12 +1,12 @@
 const React = require("react");
 const WordCache = new Map();
-const hasDash = char => char === "-";
+const hasDash = (char) => char === "-";
 const { focusOnActive } = require("../../../utils/style");
 const { ArrowDown, ArrowRight } = require("react-feather");
 
 module.exports = {
   getSuggestions,
-  SuggestionsList
+  SuggestionsList,
 };
 
 const getMatches = (response, len) => {
@@ -21,7 +21,7 @@ const getMatches = (response, len) => {
     ) {
       result.push({
         text: word.toUpperCase(),
-        score: entry.tags[0].replace("f:", "")
+        score: entry.tags[0].replace("f:", ""),
       });
     }
   }
@@ -64,28 +64,30 @@ function SuggestionsList({
   setOtherFilter,
   mySuggestions,
   setMySuggestions,
-  otherSuggestions
+  otherSuggestions,
 }) {
   const cur_word = ad == "down" ? puzzle.words.down : puzzle.words.across;
   const op_word = ad == "down" ? puzzle.words.across : puzzle.words.down;
-  const active_letter = ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
-  const op_active_letter = ad == "down" ? puzzle.activeCell[1] : puzzle.activeCell[0];
+  const active_letter =
+    ad == "down" ? puzzle.activeCell[0] : puzzle.activeCell[1];
+  const op_active_letter =
+    ad == "down" ? puzzle.activeCell[1] : puzzle.activeCell[0];
   const position = active_letter - cur_word.range[0];
   const op_position = op_active_letter - op_word.range[0];
   const emptyLetters = [];
-  for (let i=0; i < cur_word.word.length; i++) {
+  for (let i = 0; i < cur_word.word.length; i++) {
     if (cur_word.word[i] === "-") emptyLetters.push(i);
   }
 
   React.useEffect(() => {
     getSuggestions(cur_word.word.toLowerCase(), setMySuggestions);
-  },[cur_word]);
+  }, [cur_word]);
 
-  const highlightCrosses = e => {
+  const highlightCrosses = (e) => {
     setOtherHighlight(e.currentTarget.textContent[position]);
   };
 
-  const unHighlightCrosses = e => {
+  const unHighlightCrosses = () => {
     setOtherHighlight(null);
   };
 
@@ -98,16 +100,16 @@ function SuggestionsList({
       pencilInSuggestion(e.currentTarget.previousSibling.textContent);
       setOtherFilter([
         e.currentTarget.previousSibling.textContent,
-        e.currentTarget.previousSibling.textContent[position]
+        e.currentTarget.previousSibling.textContent[position],
       ]);
     }
   };
 
-  const filterSuggestions = suggestions => {
+  const filterSuggestions = (suggestions) => {
     var filter = myFilter[1];
     let finalresult = [];
 
-    suggestions.sort(function(a, b) {
+    suggestions.sort(function (a, b) {
       return parseFloat(b.score) - parseFloat(a.score);
     });
 
@@ -156,7 +158,7 @@ function SuggestionsList({
       }
     }
     puzzle.setGrid(newGrid);
-  }
+  };
 
   /*const pencilOut = () => {
     const newGrid = [...puzzle.grid];
@@ -174,54 +176,50 @@ function SuggestionsList({
     if (!type) {
       highlightCrosses(e, ad);
     }
-    if (!otherFilter[0]){
+    if (!otherFilter[0]) {
       pencilInSuggestion(suggestion);
     }
-  }
+  };
 
   const handleMouseOut = (e, type) => {
     if (!type) {
       unHighlightCrosses(e);
     }
-    if (!otherFilter[0]){
+    if (!otherFilter[0]) {
       myFilter[0] ? puzzle.pencilOut(ad, true) : puzzle.pencilOut(ad, false);
     }
-  }
+  };
 
   return (
     <div className="suggestions">
       {filterSuggestions(mySuggestions).map((x, i) => (
-        <div className="inline">
+        <div key={i} className="inline">
           <div
-            onMouseEnter={e => handleMouseEnter(e, x)}
-            onMouseLeave={e => handleMouseOut(e)}
+            onMouseEnter={(e) => handleMouseEnter(e, x)}
+            onMouseLeave={(e) => handleMouseOut(e)}
             className={
-              myHighlight == x[position] ||
-              x == otherFilter[0]
+              myHighlight == x[position] || x == otherFilter[0]
                 ? "suggestion highlighted"
                 : !otherSuggestions.length ||
                   otherSuggestions
-                    .map(s => s.text[op_position])
+                    .map((s) => s.text[op_position])
                     .includes(x[position])
                 ? "suggestion"
                 : "suggestion unmatched"
             }
-            onClick={e => fillWithSuggestion(e, x, ad)}
+            onClick={(e) => fillWithSuggestion(e, x, ad)}
           >
             {x}
           </div>
           <a
-            onMouseEnter={e => handleMouseEnter(e, x, "arrow")}
-            onMouseLeave={e => handleMouseOut(e, "arrow")}
-            onClick={e => {
+            onMouseEnter={(e) => handleMouseEnter(e, x, "arrow")}
+            onMouseLeave={(e) => handleMouseOut(e, "arrow")}
+            onClick={(e) => {
               hideNonCrosses(e, ad);
               focusOnActive();
-            }}>
-            {ad == "down" ? (
-              <ArrowRight size={10} />
-            ) : (
-              <ArrowDown size={10} />
-            )}
+            }}
+          >
+            {ad == "down" ? <ArrowRight size={10} /> : <ArrowDown size={10} />}
             <span className="pbtip">
               <b>
                 {x == myFilter[0]
@@ -232,7 +230,7 @@ function SuggestionsList({
               </b>
             </span>
           </a>
-          <a target="_blank" href={"http://onelook.com/?w=" + x}>
+          <a target="_blank" rel="noreferrer" href={"http://onelook.com/?w=" + x}>
             <img
               style={{ width: "12px" }}
               src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
