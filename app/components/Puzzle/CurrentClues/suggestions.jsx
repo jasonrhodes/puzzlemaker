@@ -87,7 +87,7 @@ function SuggestionsList({
     setOtherHighlight(e.currentTarget.textContent[position]);
   };
 
-  const unHighlightCrosses = (e) => {
+  const unHighlightCrosses = () => {
     setOtherHighlight(null);
   };
 
@@ -193,7 +193,7 @@ function SuggestionsList({
   return (
     <div className="suggestions">
       {filterSuggestions(mySuggestions).map((x, i) => (
-        <div className="inline">
+        <div key={i} className="inline">
           <div
             onMouseEnter={(e) => handleMouseEnter(e, x)}
             onMouseLeave={(e) => handleMouseOut(e)}
@@ -230,7 +230,7 @@ function SuggestionsList({
               </b>
             </span>
           </a>
-          <a target="_blank" href={"http://onelook.com/?w=" + x}>
+          <a target="_blank" rel="noreferrer" href={"http://onelook.com/?w=" + x}>
             <img
               style={{ width: "12px" }}
               src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"

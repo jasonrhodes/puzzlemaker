@@ -98,13 +98,13 @@ const PuzzleMenu = ({ puzzle }) => {
           <br />
           <i>Shift+Tab</i> to move back
           <br />
-          <i>"."</i> to toggle black square
+          <i>&quot;.&quot;</i> to toggle black square
           <br />
-          <i>";" or ","</i> to toggle circle
+          <i>&quot;;&quot; or &quot;,&quot;</i> to toggle circle
           <br />
-          <i>"/" or "-"</i> to toggle shaded square
+          <i>&quot;/&quot; or &quot;-&quot;</i> to toggle shaded square
           <br />
-          <i>"+" or "="</i> to toggle rebus cell
+          <i>&quot;+&quot; or &quot;=&quot;</i> to toggle rebus cell
         </span>
       </a>
       <SymmetryToggle

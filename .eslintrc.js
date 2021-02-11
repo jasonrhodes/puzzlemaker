@@ -22,6 +22,7 @@ module.exports = {
   rules: {
     "jest/expect-expect": "off",
     "react/prop-types": "off",
+    "react/no-children-prop": "off",
   },
   settings: {
     react: {

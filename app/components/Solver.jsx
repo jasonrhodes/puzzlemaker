@@ -10,7 +10,7 @@ const Solver = function ({ location, match }) {
   return (
     <PuzzleContextProvider initialGrid={grid} puzzleId={match.params.puzzleId}>
       <PuzzleContext.Consumer>
-        {(puzzle) => (
+        {() => (
           <div className="container">
             <h1 className="title">
               Puzzle<span className="accent-text-alt">solver</span>

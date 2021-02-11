@@ -7,7 +7,8 @@ module.exports = function OneLookLink({ word }) {
   return (
     <a
       target="_blank"
-      href={"http://onelook.com/?w=" + word.toUpperCase().replace(/\-/g, "?")}
+      rel="noreferrer"
+      href={"http://onelook.com/?w=" + word.toUpperCase().replace(/-/g, "?")}
     >
       <img
         style={{ width: "16px" }}

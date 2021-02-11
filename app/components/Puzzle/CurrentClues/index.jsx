@@ -1,7 +1,4 @@
 const React = require("react");
-const { measureMyInputText } = require("../../../utils/style");
-const { Link } = require("react-router-dom");
-const { EyeIcon } = require("@primer/octicons-react");
 const KeyBoard = require("./KeyBoard");
 const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");

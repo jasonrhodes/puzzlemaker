@@ -18,7 +18,7 @@ const CreateLink = ({ rows, columns }) => {
   );
 };
 
-module.exports = () => {
+module.exports = function Home() {
   const [gridSize, setGridSize] = React.useState(false);
   const handleChange = (e) => {
     setGridSize(e.target.value);

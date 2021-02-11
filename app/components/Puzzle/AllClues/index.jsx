@@ -1,5 +1,4 @@
 const React = require("react");
-const { measureMyInputText } = require("../../../utils/style");
 //const { Link } = require("react-router-dom");
 //const { EyeIcon } = require("@primer/octicons-react");
 //const KeyBoard = require("../CurrentClues/KeyBoard");
@@ -7,7 +6,7 @@ const { measureMyInputText } = require("../../../utils/style");
 //const { SuggestionsList } = require("./suggestions");
 const ClueListAll = require("./ClueListAll");
 
-const AllClues = ({ across, down, puzzle }) => {
+const AllClues = ({ puzzle }) => {
   //const [row, column] = puzzle.activeCell;
   //const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
   //const [mobileView, setMobileView] = React.useState("keyboard");

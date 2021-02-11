@@ -9,11 +9,11 @@ function ClueListAll({ ad, puzzle }) {
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
   const number = ad === "across" ? acrossNumber : downNumber;
 
-  const handleMouseEnter = (e, clue) => {
+  const handleMouseEnter = () => {
     null;
   };
 
-  const handleMouseOut = (e) => {
+  const handleMouseOut = () => {
     null;
   };
 

@@ -14,7 +14,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     "disable-select": true,
   });
 
-  const { grid, getNextClueNumber } = puzzle;
+  const { grid } = puzzle;
   const currentCell = grid[row][column];
   const clue = currentCell.clue || {};
   const label =

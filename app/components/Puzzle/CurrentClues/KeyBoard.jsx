@@ -54,14 +54,14 @@ const KeyBoard = ({ puzzle, mobileView }) => {
       className={mobileView == "keyboard" ? "activemobile" : ""}
     >
       <div className="row1 keyrow">
-        {row1.map((key, i) => (
+        {row1.map((key) => (
           <a className="key" key={key} onClick={(e) => hitKey(e, key)}>
             {key}
           </a>
         ))}
       </div>
       <div className="row2 keyrow">
-        {row2.map((key, i) => (
+        {row2.map((key) => (
           <a className="key" key={key} onClick={(e) => hitKey(e, key)}>
             {key}
           </a>
@@ -71,7 +71,7 @@ const KeyBoard = ({ puzzle, mobileView }) => {
         <a className="key toolkey" onClick={(e) => hitKey(e, "square")}>
           <SquareFillIcon size={24} />
         </a>
-        {row3.map((key, i) => (
+        {row3.map((key) => (
           <a className="key" key={key} onClick={(e) => hitKey(e, key)}>
             {key}
           </a>

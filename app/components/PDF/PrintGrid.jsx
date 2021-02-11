@@ -1,8 +1,8 @@
 const React = require("react");
-const { Text, View, StyleSheet } = require("@react-pdf/renderer");
+const { Text, View } = require("@react-pdf/renderer");
 
 module.exports = function PrintGrid({ puzzle, styles }) {
-  const { grid, getNextClueNumber } = puzzle;
+  const { grid } = puzzle;
   return (
     <View style={styles.grid}>
       {grid.map((columns, row) => (
