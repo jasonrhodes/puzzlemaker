@@ -9,21 +9,24 @@ const AllClues = require("./AllClues");
 const Puzzle = () => {
   const gridSizeDesc = (length) => {
     if (length > 16) {
-     return "largegrid";
+      return "largegrid";
     } else if (length > 12) {
-     return "mediumgrid";
+      return "mediumgrid";
     } else if (length > 8) {
-     return "smallgrid";
+      return "smallgrid";
     } else {
-     return "xsgrid";
+      return "xsgrid";
     }
   };
-  
+
   return (
     <PuzzleContext.Consumer>
-      {puzzle => (
+      {(puzzle) => (
         <div>
-          <div className="infomenublock" style={{'maxWidth': ((puzzle.grid[0].length * 40) + 15 )+ 'px'}}>
+          <div
+            className="infomenublock"
+            style={{ maxWidth: puzzle.grid[0].length * 40 + 15 + "px" }}
+          >
             <Title
               titleWidth={puzzle.titleWidth}
               authorWidth={puzzle.authorWidth}
@@ -37,7 +40,14 @@ const Puzzle = () => {
             <Menu puzzle={puzzle} />
           </div>
           <div className="puzzle-container">
-            <div className={"puzzle-grid " + gridSizeDesc(puzzle.grid[0].length) + " " + puzzle.zoomed}>
+            <div
+              className={
+                "puzzle-grid " +
+                gridSizeDesc(puzzle.grid[0].length) +
+                " " +
+                puzzle.zoomed
+              }
+            >
               {puzzle.grid.map((columns, i) => (
                 <Row key={`row-${i}`} row={i} columns={columns} />
               ))}
