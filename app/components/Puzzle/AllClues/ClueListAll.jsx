@@ -8,19 +8,19 @@ function ClueListAll({
   ad,
   puzzle
 }) {
-  
+
   const [row, column] = puzzle.activeCell;
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
   const number = (ad === "across" ? acrossNumber : downNumber);
-  
+
   const handleMouseEnter = (e, clue) => {
     null
   }
-  
+
   const handleMouseOut = (e) => {
     null
   }
-  
+
   const jumpToClue = (e, clue) => {
     puzzle.setActiveCell(findClueStartCell(puzzle.grid, clue, ad));
     puzzle.setDirection(ad);
@@ -30,7 +30,7 @@ function ClueListAll({
   return (
     <div className="suggestions">
       {Object.entries(puzzle.clues[ad]).map((pair) => (
-        <div className="inline">
+        <div key={ad + pair[0] + pair[1]} className="inline">
           <div
             onMouseEnter={e => handleMouseEnter(e, pair[0])}
             onMouseLeave={e => handleMouseOut(e)}

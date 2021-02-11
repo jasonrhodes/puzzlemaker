@@ -94,14 +94,14 @@ const styles = StyleSheet.create({
   }
 });
 
-const PrintClue = ({ dir, num, clue }) => {
+const PrintClue = ({ num, clue }) => {
   if (num == 'across' || num == 'down') {
     return (
-      <Text key={dir + num} style={[styles.clueHeader, { marginTop: (num == 'down' ? '10' : '0')}]}>{clue}</Text>
+      <Text style={[styles.clueHeader, { marginTop: (num == 'down' ? '10' : '0')}]}>{clue}</Text>
     )
   } else {
     return (
-      <Text key={dir + num} style={styles.clue}><Text style={{fontFamily: 'RobotoBold'}}>{num}</Text> {clue || '(Blank Clue)'}</Text>
+      <Text style={styles.clue}><Text style={{fontFamily: 'RobotoBold'}}>{num}</Text> {clue || '(Blank Clue)'}</Text>
     )
   }
 }
@@ -140,7 +140,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                 let curClue = allClues.shift();
                 usedClueHeight += clueHeight(curClue[2]);
                 return (
-                  <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                  <PrintClue key={curClue[0]+curClue[1]} num={curClue[1]} clue={curClue[2]} />
                 )
               }
             })}
@@ -154,7 +154,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                     let curClue = allClues.shift();
                     usedClueHeight += clueHeight(curClue[2]);
                     return (
-                      <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                      <PrintClue key={curClue[0]+curClue[1]} num={curClue[1]} clue={curClue[2]} />
                     )
                   }
                 })}
@@ -165,7 +165,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                   let curClue = allClues.shift();
                   usedClueHeight += clueHeight(curClue[2]);
                   return (
-                    <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                    <PrintClue key={curClue[0]+curClue[1]} num={curClue[1]} clue={curClue[2]} />
                   )
                 }
               })}
@@ -176,7 +176,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                   let curClue = allClues.shift();
                   usedClueHeight += clueHeight(curClue[2]);
                   return (
-                    <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                    <PrintClue key={curClue[0]+curClue[1]} num={curClue[1]} clue={curClue[2]} />
                   )
                 }
               })}

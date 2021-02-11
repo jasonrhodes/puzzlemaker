@@ -93,14 +93,13 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         clearAll(true);
       }
       if (prevCell[0] && prevCell[0] !== undefined && grid[prevCell[0]][prevCell[1]].isRebus && grid[prevCell[0]][prevCell[1]].value.length <= 1){
-		grid[prevCell[0]][prevCell[1]].isRebus = false;
+        grid[prevCell[0]][prevCell[1]].isRebus = false;
+      }
+    } else if (prevCell && prevCell.length && prevCell[0] != undefined) {
+	     if (grid[prevCell[0]][prevCell[1]].isRebus && grid[prevCell[0]][prevCell[1]].value.length <= 1){
+         grid[prevCell[0]][prevCell[1]].isRebus = false;
+       }
 	  }
-    } else if (prevCell && prevCell.length && prevCell[0] !== undefined) {
-	  if (grid[prevCell[0]][prevCell[1]].isRebus && grid[prevCell[0]][prevCell[1]].value.length <= 1){
-		grid[prevCell[0]][prevCell[1]].isRebus = false;
-	  }
-	}
-	
   }, [activeCell]);
 
   React.useEffect(() => {

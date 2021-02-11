@@ -7,14 +7,14 @@ const ClueList = ({
     <div className="cluedata">
       <b>Across</b>
       {Object.keys(clues.across).map(key => (
-        <div className="listclue">
+        <div key={'acd' + key} className="listclue">
           <b>{key}</b> {clues.across[key]}
         </div>
       ))}
       <br/>
       <b>Down</b>
       {Object.keys(clues.down).map(key => (
-        <div className="listclue">
+        <div {'aca' + key} className="listclue">
           <b>{key}</b> {clues.down[key]}
         </div>
       ))}
