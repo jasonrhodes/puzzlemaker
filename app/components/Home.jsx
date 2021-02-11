@@ -32,8 +32,8 @@ module.exports = function Home() {
       </h1>
       <h3>Create a New Puzzle</h3>
       <div className="inline">
-        <select onChange={handleChange}>
-          <option disabled={true} selected={true}>
+        <select onChange={handleChange} defaultValue="">
+          <option disabled={true} value="">
             -- Choose a grid size --
           </option>
           <option value="15 x 15">15 x 15 (standard NYT, Mon-Sat)</option>
@@ -53,7 +53,7 @@ module.exports = function Home() {
           <option value="19 x 19">19 x 19</option>
           <option value="20 x 20">20 x 20</option>
         </select>
-        <div style={{ "margin-top": "10px" }}>
+        <div style={{ "marginTop": "10px" }}>
           {gridSize ? <CreateLink rows={rows} columns={columns} /> : null}
         </div>
       </div>
