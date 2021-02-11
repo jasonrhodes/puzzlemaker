@@ -7,7 +7,6 @@ const MobileMenu = require("./MobileMenu");
 const { SuggestionsList } = require("./suggestions");
 const Current = require("./Current");
 
-
 const CurrentClues = ({ across, down, puzzle }) => {
   const [row, column] = puzzle.activeCell;
   const { acrossNumber, downNumber } = puzzle.getCluesForCell(row, column);
@@ -22,13 +21,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
     puzzle.setDownFilter([]);
     puzzle.pencilOut("across");
   };
-  
+
   const showAcrossNonCrosses = (e) => {
     e.stopPropagation();
     puzzle.setAcrossFilter([]);
     puzzle.pencilOut("down");
   };
-  
+
   return (
     <div className="current-clues" id="current-clues">
       <MobileMenu
@@ -43,7 +42,13 @@ const CurrentClues = ({ across, down, puzzle }) => {
       <div id="across" className={mobileView == "across" ? "activemobile" : ""}>
         {acrossNumber !== "-" ? (
           <React.Fragment>
-            <Current clueNumber={acrossNumber} word={across.word} filterWord={puzzle.acrossFilter[0]} showNonCrosses={showAcrossNonCrosses} direction="across" />
+            <Current
+              clueNumber={acrossNumber}
+              word={across.word}
+              filterWord={puzzle.acrossFilter[0]}
+              showNonCrosses={showAcrossNonCrosses}
+              direction="across"
+            />
             <SuggestionsList
               ad="across"
               puzzle={puzzle}
@@ -59,10 +64,16 @@ const CurrentClues = ({ across, down, puzzle }) => {
           </React.Fragment>
         ) : null}
       </div>
-        <div id="down" className={mobileView == "down" ? "activemobile" : ""}>
-          {downNumber !== "-" ? (
+      <div id="down" className={mobileView == "down" ? "activemobile" : ""}>
+        {downNumber !== "-" ? (
           <React.Fragment>
-            <Current clueNumber={downNumber} word={down.word} filterWord={puzzle.downFilter[0]} showNonCrosses={showDownNonCrosses} direction="down" />
+            <Current
+              clueNumber={downNumber}
+              word={down.word}
+              filterWord={puzzle.downFilter[0]}
+              showNonCrosses={showDownNonCrosses}
+              direction="down"
+            />
             <SuggestionsList
               ad="down"
               puzzle={puzzle}

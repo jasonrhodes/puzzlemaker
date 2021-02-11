@@ -1,6 +1,6 @@
 module.exports = {
   measureMyInputText,
-  focusOnActive
+  focusOnActive,
 };
 
 function measureMyInputText(value) {
@@ -14,5 +14,8 @@ function measureMyInputText(value) {
 }
 
 function focusOnActive() {
-  var active = document.querySelector('.active').querySelector('.puzzlefocus').focus();
+  var active = document
+    .querySelector(".active")
+    .querySelector(".puzzlefocus")
+    .focus();
 }

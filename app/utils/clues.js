@@ -1,6 +1,6 @@
 module.exports = {
   getCellClue,
-  assignClueNumbersToGrid
+  assignClueNumbersToGrid,
 };
 
 function isStart({ index, prevCell, nextCell }) {
@@ -37,13 +37,13 @@ function getCellClue({ grid, getNextClueNumber, row, column }) {
     isAcrossStart: isStart({
       index: column,
       prevCell: prevAcrossCell,
-      nextCell: nextAcrossCell
+      nextCell: nextAcrossCell,
     }),
     isDownStart: isStart({
       index: row,
       prevCell: prevDownCell,
-      nextCell: nextDownCell
-    })
+      nextCell: nextDownCell,
+    }),
   };
 
   const newClueNumber =
@@ -71,7 +71,7 @@ function assignClueNumbersToGrid(grid) {
         grid: newGrid,
         getNextClueNumber,
         row,
-        column
+        column,
       });
       newGrid[row][column].clue = clue;
     }

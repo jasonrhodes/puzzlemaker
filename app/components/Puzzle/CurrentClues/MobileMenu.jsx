@@ -8,20 +8,19 @@ module.exports = function MobileMenu({
   acrossWord,
   downNumber,
   downWord,
-  puzzle
+  puzzle,
 }) {
-  
   const keyBoardSwitch = (e, view) => {
     e.stopPropagation();
     setMobileView(view);
   };
 
-  const handlePrevClueClick = e => {
+  const handlePrevClueClick = (e) => {
     e.stopPropagation();
     puzzle.rewindActiveClue();
   };
-  
-  const handleNextClueClick = e => {
+
+  const handleNextClueClick = (e) => {
     e.stopPropagation();
     puzzle.advanceActiveClue();
   };
@@ -31,20 +30,23 @@ module.exports = function MobileMenu({
       <a className="cluenav prev key" onClick={handlePrevClueClick}>
         <ChevronLeft size={16} />
       </a>
-      <a className={mobileView == "keyboard" ? "activemobile" : ""}onClick={e => keyBoardSwitch(e, "keyboard")}>
+      <a
+        className={mobileView == "keyboard" ? "activemobile" : ""}
+        onClick={(e) => keyBoardSwitch(e, "keyboard")}
+      >
         <Type size={16} />
       </a>
       <a
         className={mobileView == "across" ? "activemobile" : ""}
-        onClick={e => keyBoardSwitch(e, "across")}
+        onClick={(e) => keyBoardSwitch(e, "across")}
       >
-        {acrossNumber !== '-' ? acrossNumber + 'a: ' + acrossWord : '-' }
+        {acrossNumber !== "-" ? acrossNumber + "a: " + acrossWord : "-"}
       </a>
       <a
         className={mobileView == "down" ? "activemobile" : ""}
-        onClick={e => keyBoardSwitch(e, "down")}
+        onClick={(e) => keyBoardSwitch(e, "down")}
       >
-        {downNumber !== '-' ? downNumber + 'd: ' + downWord : '-' }
+        {downNumber !== "-" ? downNumber + "d: " + downWord : "-"}
       </a>
       <a className="cluenav next key" onClick={handleNextClueClick}>
         <ChevronRight size={16} />
