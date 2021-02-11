@@ -67,9 +67,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,css,md}": [
-      "prettier --write app",
-      "eslint --fix-dry-run"
-    ]
+    "*.{js,jsx}": "eslint --cache --fix",
+    "*.{js,jsx,css,md}": "prettier --write"
   }
 }
