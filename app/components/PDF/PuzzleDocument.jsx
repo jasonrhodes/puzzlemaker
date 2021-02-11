@@ -140,7 +140,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                 let curClue = allClues.shift();
                 usedClueHeight += clueHeight(curClue[2]);
                 return (
-                  <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                  <PrintClue key={i} dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
                 )
               }
             })}
@@ -154,7 +154,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                     let curClue = allClues.shift();
                     usedClueHeight += clueHeight(curClue[2]);
                     return (
-                      <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                      <PrintClue key={i} dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
                     )
                   }
                 })}
@@ -165,7 +165,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                   let curClue = allClues.shift();
                   usedClueHeight += clueHeight(curClue[2]);
                   return (
-                    <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                    <PrintClue key={i} dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
                   )
                 }
               })}
@@ -176,7 +176,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
                   let curClue = allClues.shift();
                   usedClueHeight += clueHeight(curClue[2]);
                   return (
-                    <PrintClue dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
+                    <PrintClue key={i} dir={curClue[0]} num={curClue[1]} clue={curClue[2]} />
                   )
                 }
               })}
