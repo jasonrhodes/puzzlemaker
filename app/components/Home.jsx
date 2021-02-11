@@ -9,24 +9,33 @@ const CreateLink = ({ rows, columns }) => {
     return null;
   }
   return (
-    <Link class="btn" to={{ pathname: "/edit/" + id, state: { rows, columns }}}>Create {rows} x {columns} puzzle</Link>
+    <Link
+      className="btn"
+      to={{ pathname: "/edit/" + id, state: { rows, columns } }}
+    >
+      Create {rows} x {columns} puzzle
+    </Link>
   );
-}
+};
 
-module.exports = () => {
+module.exports = function Home() {
   const [gridSize, setGridSize] = React.useState(false);
-  const handleChange = e => {
+  const handleChange = (e) => {
     setGridSize(e.target.value);
-  }
-  
-  const [rows, columns] = (gridSize ? gridSize.split(" x ") : []);
+  };
+
+  const [rows, columns] = gridSize ? gridSize.split(" x ") : [];
   return (
     <React.Fragment>
-      <h1 class="title">Puzzle<span class="accent-text">maker</span></h1>
+      <h1 className="title">
+        Puzzle<span className="accent-text">maker</span>
+      </h1>
       <h3>Create a New Puzzle</h3>
-      <div class="inline">
-        <select onChange={handleChange}>
-          <option disabled={true} selected={true}>-- Choose a grid size --</option>
+      <div className="inline">
+        <select onChange={handleChange} defaultValue="">
+          <option disabled={true} value="">
+            -- Choose a grid size --
+          </option>
           <option value="15 x 15">15 x 15 (standard NYT, Mon-Sat)</option>
           <option value="21 x 21">21 x 21 (standard NYT, Sun)</option>
           <option value="5 x 5">5 x 5 (standard NYT Mini, Mon-Fri)</option>
@@ -44,13 +53,15 @@ module.exports = () => {
           <option value="19 x 19">19 x 19</option>
           <option value="20 x 20">20 x 20</option>
         </select>
-        <div style={{'margin-top': '10px'}}>{gridSize ? <CreateLink rows={rows} columns={columns} /> : null}</div>
+        <div style={{ "marginTop": "10px" }}>
+          {gridSize ? <CreateLink rows={rows} columns={columns} /> : null}
+        </div>
       </div>
-      <br/>
+      <br />
       <div>
         <h3>Load a Saved Puzzle</h3>
         <SavedPuzzleList />
       </div>
     </React.Fragment>
-  )
-}
+  );
+};

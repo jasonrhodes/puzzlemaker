@@ -4,22 +4,26 @@ const Puzzle = require("./Puzzle");
 const { PuzzleContextProvider, PuzzleContext } = require("./Puzzle/Context");
 const initGrid = require("../utils/initGrid");
 
-const Builder = function({ location, match }) {
+const Builder = function ({ location, match }) {
   const { rows, columns } = location.state || {};
   const grid = initGrid({ rows: rows || 15, columns: columns || 15 });
-  
+
   const handleClick = (puzzle) => {
     if (puzzle.activeCell.length && puzzle.activeCell[0] !== undefined) {
       puzzle.setActiveCell([]); // TODO: this also makes the clues on the right go away, do we want that?
     }
-  }
-  
+  };
+
   return (
     <PuzzleContextProvider initialGrid={grid} puzzleId={match.params.puzzleId}>
       <PuzzleContext.Consumer>
-        {puzzle => (
-          <div class="container" onClick={()=>handleClick(puzzle)}>
-            <h1 class="title"><Link to="/">Puzzle<span class="accent-text">maker</span></Link></h1>
+        {(puzzle) => (
+          <div className="container" onClick={() => handleClick(puzzle)}>
+            <h1 className="title">
+              <Link to="/">
+                Puzzle<span className="accent-text">maker</span>
+              </Link>
+            </h1>
             <Puzzle initialGrid={grid} />
           </div>
         )}

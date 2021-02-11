@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 function convertPuzzleToJSON(puzzle) {
   let puz = {
     author: puzzle.author,
@@ -18,7 +19,7 @@ function convertPuzzleToJSON(puzzle) {
     rebus: [],
     rebus_string: "",
     gext: [],
-    has_extras: false
+    has_extras: false,
   };
 
   console.log(puz.clues);
@@ -37,11 +38,19 @@ function convertPuzzleToJSON(puzzle) {
       if (puzzle.grid[i][j].isRebus && puzzle.grid[i][j].value.length > 1) {
         rebusCount += 1;
         puz.rebus.push(rebusCount.toString());
-        puz.rebus_string += (rebusCount < 11 ? " " : "") + (rebusCount-1).toString() + ":" + puzzle.grid[i][j].value.toUpperCase() + ";"
+        puz.rebus_string +=
+          (rebusCount < 11 ? " " : "") +
+          (rebusCount - 1).toString() +
+          ":" +
+          puzzle.grid[i][j].value.toUpperCase() +
+          ";";
       } else {
         puz.rebus.push("0");
       }
-      if (puzzle.grid[i][j].style === 'circled' || puzzle.grid[i][j].style === 'marked') {
+      if (
+        puzzle.grid[i][j].style === "circled" ||
+        puzzle.grid[i][j].style === "marked"
+      ) {
         puz.has_extras = true;
         puz.gext.push(0x80);
       } else {
@@ -88,7 +97,7 @@ class PuzWriter {
       }
       if (cp >= 0x10000) i++; // advance by one codepoint
     }
-    if (!no_nul){
+    if (!no_nul) {
       this.buf.push(0);
     }
   }
@@ -209,14 +218,14 @@ class PuzWriter {
     var c_part = this.checksumStrings(0);
     this.setMaskedChecksum(3, 0x45, 0x44, c_part);
   }
-  
+
   computeRebusChecksums() {
     var rebusCksum = this.checksumRegion(this.rebusStart, this.w * this.h, 0);
     this.setShort(this.rebusChecksumLoc, rebusCksum);
     var rtblCksum = this.checksumRegion(this.rtblStart, this.rtbl_length, 0);
     this.setShort(this.rtblChecksumLoc, rtblCksum);
   }
-  
+
   writeRebus(json) {
     const rebus = json.rebus;
     this.writeString("GRBS", true);
@@ -226,15 +235,15 @@ class PuzWriter {
     this.rebusStart = this.buf.length;
     for (var i = 0; i < rebus.length; i++) {
       if (rebus[i] === "0") {
-        this.buf.push(0)
+        this.buf.push(0);
       } else {
         var cp = Number(rebus[i]);
         this.buf.push(cp);
       }
     }
     this.buf.push(0);
-    
-    this.rtbl_length = json.rebus_string.length
+
+    this.rtbl_length = json.rebus_string.length;
     this.writeString("RTBL", true);
     this.writeShort(this.rtbl_length);
     this.rtblChecksumLoc = this.buf.length;
@@ -242,12 +251,12 @@ class PuzWriter {
     this.rtblStart = this.buf.length;
     this.writeString(json.rebus_string);
   }
-  
+
   computeGextChecksum() {
     var gextCksum = this.checksumRegion(this.gextStart, this.w * this.h, 0);
     this.setShort(this.gextChecksumLoc, gextCksum);
   }
-  
+
   writeGext(json) {
     const gext = json.gext;
     this.writeString("GEXT", true);
@@ -257,7 +266,7 @@ class PuzWriter {
     this.gextStart = this.buf.length;
     for (var i = 0; i < gext.length; i++) {
       if (gext[i] === "0") {
-        this.buf.push(0)
+        this.buf.push(0);
       } else {
         this.buf.push(0x80);
       }

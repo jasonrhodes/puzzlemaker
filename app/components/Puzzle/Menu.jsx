@@ -5,10 +5,17 @@ const PDFLink = require("../PDF/Link");
 
 const { MirrorIcon } = require("@primer/octicons-react");
 
-const { Info, Play, Printer, Download, Lock, Unlock } = require("react-feather");
+const {
+  Info,
+  Play,
+  Printer,
+  Download,
+  Lock,
+  Unlock,
+} = require("react-feather");
 
 const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
-  const toggleLock = e => {
+  const toggleLock = (e) => {
     toggleSymmetry();
     e.stopPropagation();
   };
@@ -41,10 +48,10 @@ const PuzzleMenu = ({ puzzle }) => {
     const element = document.createElement("a");
     //const file = new Blob(["test"],
     //             {type: 'text/plain;charset=utf-8'});
-    let filename = puzzle.title ? puzzle.title+'.puz' : 'myPuz.puz';
+    let filename = puzzle.title ? puzzle.title + ".puz" : "myPuz.puz";
     let serialized = convertPuzzleToJSON(puzzle);
     let fileContents = new PuzWriter().toPuz(serialized);
-    let file = new Blob([fileContents], {type: 'application/octet-stream'});
+    let file = new Blob([fileContents], { type: "application/octet-stream" });
 
     element.href = URL.createObjectURL(file);
     element.download = filename;
@@ -54,7 +61,7 @@ const PuzzleMenu = ({ puzzle }) => {
 
   return (
     <div className="menu">
-      <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId}}>
+      <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId }}>
         <Play size={18} />
         <span className="pbtip stip">
           <b>Play</b>
@@ -91,16 +98,19 @@ const PuzzleMenu = ({ puzzle }) => {
           <br />
           <i>Shift+Tab</i> to move back
           <br />
-          <i>"."</i> to toggle black square
+          <i>&quot;.&quot;</i> to toggle black square
           <br />
-          <i>";" or ","</i> to toggle circle
+          <i>&quot;;&quot; or &quot;,&quot;</i> to toggle circle
           <br />
-          <i>"/" or "-"</i> to toggle shaded square
+          <i>&quot;/&quot; or &quot;-&quot;</i> to toggle shaded square
           <br />
-          <i>"+" or "="</i> to toggle rebus cell
+          <i>&quot;+&quot; or &quot;=&quot;</i> to toggle rebus cell
         </span>
       </a>
-      <SymmetryToggle symmetry={puzzle.symmetry} toggleSymmetry={puzzle.toggleSymmetry} />
+      <SymmetryToggle
+        symmetry={puzzle.symmetry}
+        toggleSymmetry={puzzle.toggleSymmetry}
+      />
     </div>
   );
 };

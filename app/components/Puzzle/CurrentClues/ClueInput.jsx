@@ -10,10 +10,15 @@ module.exports = function ClueInput({ direction, number }) {
         const handleChange = (e) => setClue(number, direction, e.target.value);
         return (
           <input
-            class="inline-content-editable"
-            onClick={e => e.stopPropagation()}
+            className="inline-content-editable"
+            onClick={(e) => e.stopPropagation()}
             onChange={handleChange}
-            style={{ width: ((value && value.length > 15) ? measureMyInputText(value) : measureMyInputText("(Enter clue here)"))+ "px" }}
+            style={{
+              width:
+                (value && value.length > 15
+                  ? measureMyInputText(value)
+                  : measureMyInputText("(Enter clue here)")) + "px",
+            }}
             value={value}
             type="text"
             placeholder="(Enter clue here)"
@@ -22,4 +27,4 @@ module.exports = function ClueInput({ direction, number }) {
       }}
     </PuzzleContext.Consumer>
   );
-}
+};
