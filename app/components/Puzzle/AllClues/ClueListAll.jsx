@@ -29,8 +29,8 @@ function ClueListAll({
 
   return (
     <div className="suggestions">
-      {Object.entries(puzzle.clues[ad]).map((pair) => (
-        <div className="inline">
+      {Object.entries(puzzle.clues[ad]).map((pair, i) => (
+        <div key={i} className="inline">
           <div
             onMouseEnter={e => handleMouseEnter(e, pair[0])}
             onMouseLeave={e => handleMouseOut(e)}

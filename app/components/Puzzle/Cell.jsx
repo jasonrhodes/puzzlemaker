@@ -1,6 +1,5 @@
 const React = require("react");
 const classnames = require("classnames");
-const { getCellClue } = require("../../utils/clues");
 
 const PuzzleCell = ({ cell, row, column, puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
@@ -46,7 +45,6 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
   });
 
   const handleKeyDown = e => {
-    console.log("KeyDown", e.key);
     const [activeRow, activeColumn] = puzzle.activeCell;
     const currentCell = puzzle.grid[activeRow][activeColumn];
     e.preventDefault();

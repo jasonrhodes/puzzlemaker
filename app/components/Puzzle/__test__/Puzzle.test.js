@@ -1,74 +1,80 @@
 const React = require("react");
-require("@testing-library/jest-dom/extend-expect");
-const { render, screen } = require("@testing-library/react");
-const userEvent = require("@testing-library/user-event").default;
-const Puzzle = require("../");
-const { PuzzleContextProvider } = require("../Context");
-const initGrid = require("../../../utils/initGrid");
-const { MemoryRouter } = require("react-router-dom");
-
-const Passthrough = ({ children }) => children;
-
-// jest.mock("@react-pdf/renderer", () => ({
-//   PDFDownloadLink: Passthrough,
-//   Document: Passthrough,
-//   Page: Passthrough,
-//   Text: Passthrough,
-//   View: Passthrough,
-//   StyleSheet: {
-//     create: (s) => s,
-//   },
-// }));
-
-const WrappedPuzzle = ({ rows = 15, columns = 15 }) => (
-  <MemoryRouter>
-    <PuzzleContextProvider initialGrid={initGrid({ rows, columns })}>
-      <Puzzle />
-    </PuzzleContextProvider>
-  </MemoryRouter>
-);
-
-function getPuzzleCell({ container, row, column }) {
-  const rows = container.querySelectorAll(".puzzle-row");
-  if (!rows[row]) {
-    throw new Error(`Invalid row ${row}, not found`);
-  }
-  const cells = rows[row].querySelectorAll(".puzzle-cell");
-  if (!cells[column]) {
-    throw new Error(`Invalid column ${column}, not found`);
-  }
-  return cells[column];
-}
-
-function getActiveCell({ container }) {
-  try {
-    const active = container.querySelector(".puzzle-cell.active");
-    if (!active) {
-      throw new Error("No active element returned");
-    }
-    return active;
-  } catch (err) {
-    throw new Error(`No active cell found, ${err.message}`);
-  }
-}
+// require("@testing-library/jest-dom/extend-expect");
+const TestPuzzle = require("./TestPuzzle");
 
 test("Can we load the Puzzle without any errors", () => {
-  render(<WrappedPuzzle />);
+  new TestPuzzle();
 });
 
 test("Clicking on a cell to make it active", () => {
-  const { container } = render(<WrappedPuzzle />);
-  expect(() => getActiveCell({ container })).toThrow();
+  const puzzle = new TestPuzzle();
+  puzzle.expectNoActiveCell();
 
-  const firstCell = getPuzzleCell({ container, row: 0, column: 0 });
-  userEvent.click(firstCell);
-  const active = getActiveCell({ container });
-  expect(active).toEqual(firstCell);
+  puzzle.clickCell(0, 0);
+  puzzle.expectActiveCellToBe(0, 0);
 
-  const anotherCell = getPuzzleCell({ container, row: 8, column: 11 });
-  userEvent.click(anotherCell);
-  const active2 = getActiveCell({ container });
-  expect(anotherCell).not.toEqual(firstCell);
-  expect(active2).not.toEqual(firstCell);
-  expect(active2).toEqual(anotherCell);
+  puzzle.clickCell(8, 11);
+  puzzle.expectActiveCellToBe(8, 11);
+});
+
+describe("Navigating cells by arrow keys", () => {
+  let puzzle;
+
+  beforeEach(() => {
+    puzzle = new TestPuzzle();
+  });
+
+  test("right and left arrows move between columns", () => {
+    puzzle.clickCell(0, 0);
+    puzzle.expectActiveCellToBe(0, 0);
+    puzzle.type("{arrowright}");
+    puzzle.expectActiveCellToBe(0, 1);
+    puzzle.type("{arrowleft}");
+    puzzle.expectActiveCellToBe(0, 0);
+  });
+
+  test("left arrow from 0,0 wraps to bottom right cell", () => {
+    puzzle.clickCell(0, 0);
+    puzzle.expectActiveCellToBe(0, 0);
+    puzzle.type("{arrowleft}");
+    puzzle.expectActiveCellToBe(puzzle.lastRow(), puzzle.lastCol());
+  });
+
+  test("right arrow from last,last wraps to 0,0", () => {
+    puzzle.clickCell(puzzle.lastRow(), puzzle.lastCol());
+    puzzle.type("{arrowright}");
+    puzzle.expectActiveCellToBe(0, 0);
+  });
+
+  test("wrapping around to next and previous rows", () => {
+    puzzle.clickCell(5, 1);
+    puzzle.type("{arrowleft}{arrowleft}{arrowleft}");
+    puzzle.expectActiveCellToBe(4, puzzle.lastCol() - 1);
+    puzzle.type("{arrowright}{arrowright}{arrowright}{arrowright}");
+    puzzle.expectActiveCellToBe(5, 2);
+  });
+
+  test("up and down arrows move between rows", () => {
+    puzzle.clickCell(6, 8);
+    puzzle.type("{arrowdown}");
+    puzzle.expectActiveCellToBe(7, 8);
+    puzzle.type("{arrowup}");
+    puzzle.expectActiveCellToBe(6, 8);
+  });
+
+  test("up arrow from 0,0 wraps to bottom right", () => {
+    puzzle.clickCell(0, 0);
+    puzzle.type("{arrowup}");
+    puzzle.expectActiveCellToBe(puzzle.lastRow(), puzzle.lastCol());
+  });
+
+  test("down arrow from last,last wraps to 0,0", () => {
+    puzzle.clickCell(puzzle.lastRow(), puzzle.lastCol());
+    puzzle.type("{arrowdown}");
+    puzzle.expectActiveCellToBe(0, 0);
+  });
+});
+
+test("Navigating across clues by tab and shift tab", () => {
+  // TODO
 });
