@@ -1,4 +1,3 @@
-const React = require("react");
 // require("@testing-library/jest-dom/extend-expect");
 const TestPuzzle = require("./TestPuzzle");
 

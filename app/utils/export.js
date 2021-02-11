@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 function convertPuzzleToJSON(puzzle) {
   let puz = {
     author: puzzle.author,

@@ -1,3 +1,5 @@
+/* eslint-disable no-constant-condition */
+
 module.exports = {
   getNextAcrossCellCoords,
   getNextAcrossClueStart,
@@ -14,70 +16,6 @@ module.exports = {
 // other words, the coords of the bottom right cell
 function getBottomRightCoords(grid) {
   return [grid.length - 1, grid[0].length - 1];
-}
-
-function isBottomRightCell(row, column, grid) {
-  const [lastRow, lastColumn] = getBottomRightCoords(grid);
-  return row === lastRow && column === lastColumn;
-}
-
-// Given a cell and the cells in that row, find the starting
-// column number for the given cell's across clue number
-function findClueStartColumn(currentCell, cellsInRow) {
-  if (!currentCell.clue.acrossClueNumber) {
-    throw new Error("Trying to find a a clue start for a black square");
-  }
-  const startCell = cellsInRow.reduce(
-    (state, cell) => {
-      if (state.found !== false) {
-        return state;
-      }
-      if (
-        cell.clue &&
-        cell.clue.acrossClueNumber === currentCell.clue.acrossClueNumber
-      ) {
-        return { ...state, found: true };
-      }
-      state.index++;
-      return state;
-    },
-    { found: false, index: 0 }
-  );
-
-  return startCell.index;
-}
-
-// Given a cell, a column index, and the grid, find the starting
-// row number for the given cell's down clue number
-function findClueStartRow(currentCell, column, grid) {
-  if (currentCell.isBlackSquare) {
-    throw new Error("Trying to find a a clue start for a black square");
-  }
-  const columnCells = grid.map((row) => row[column]);
-  const startCell = columnCells.reduce(
-    (state, cell) => {
-      if (state.found !== false) {
-        return state;
-      }
-      if (
-        cell.clue &&
-        cell.clue.downClueNumber === currentCell.clue.downClueNumber
-      ) {
-        return { ...state, found: true };
-      }
-      state.index++;
-      return state;
-    },
-    { found: false, index: 0 }
-  );
-
-  if (startCell.index >= columnCells.length) {
-    throw new Error(
-      `No start cell found for ${currentCell.clue.downClueNumber} down`
-    );
-  }
-
-  return startCell.index;
 }
 
 function getNextAcrossCellCoords(row, column, grid) {
