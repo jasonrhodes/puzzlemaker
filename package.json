@@ -12,6 +12,7 @@
     "test-watch": "jest --watch",
     "lint": "eslint --ext .js --ext .jsx app",
     "format": "prettier --write app",
+    "lint-staged": "lint-staged",
     "postinstall": "husky install"
   },
   "dependencies": {
