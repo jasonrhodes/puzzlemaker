@@ -3,6 +3,8 @@ const { Link } = require("react-router-dom");
 const { v4: uuidv4 } = require("uuid");
 const SavedPuzzleList = require("./SavedPuzzleList");
 
+const a = x => null;
+
 const CreateLink = ({ rows, columns }) => {
   const [id] = React.useState(uuidv4());
   if (!rows || !columns) {
