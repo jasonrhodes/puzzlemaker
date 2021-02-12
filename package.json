@@ -60,11 +60,6 @@
     "glitch",
     "express"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"HOLA DE HUSKY\" && exit 255"
-    }
-  },
   "lint-staged": {
     "*.{js,jsx}": [
       "eslint --cache --fix",
