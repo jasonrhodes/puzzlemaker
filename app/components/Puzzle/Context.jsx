@@ -80,39 +80,77 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const prevCell = usePrevious(activeCell);
 
   // all pencil/locked suggestions are updated after a change to the activeCell
-  // React.useEffect(() => {
-  //   if (activeCell.length && prevCell.length && activeCell[0] !== undefined && prevCell[0] !== undefined && activeCell !== prevCell) {
-  //     if (activeCell[0] === prevCell[0]){
-  //       if (grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !== grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber){
-  //           clearAll(true);
-  //       } else {
-  //           if (downFilter && downFilter[0] !== null && downFilter[0] !== undefined){
-  //             setDownFilter([downFilter[0],downFilter[0][activeCell[1]-words.across.range[0]]]);
-  //           }
-  //           pencilHandling(prevCell[1], "across", activeCell[1] > prevCell[1]);
-  //       }
-  //     } else if (activeCell[1] === prevCell[1]){
-  //       if (grid[activeCell[0]][activeCell[1]].clue.downClueNumber !== grid[prevCell[0]][prevCell[1]].clue.downClueNumber){
-  //           clearAll(true);
-  //       } else {
-  //           if (acrossFilter && acrossFilter[0] !== null && acrossFilter[0] !== undefined){
-  //             setAcrossFilter([acrossFilter[0],acrossFilter[0][activeCell[0]-words.down.range[0]]]);
-  //           }
-  //           pencilHandling(prevCell[0], "down", activeCell[0] > prevCell[0]);
-  //       }
-  //     } else {
-  //       clearAll(true);
-  //     }
-  //     if (prevCell[0] && prevCell[0] !== undefined && grid[prevCell[0]][prevCell[1]].isRebus && grid[prevCell[0]][prevCell[1]].value.length <= 1){
-  // 	grid[prevCell[0]][prevCell[1]].isRebus = false;
-  //   }
-  //   } else if (prevCell && prevCell.length && prevCell[0] !== undefined) {
-  //   if (grid[prevCell[0]][prevCell[1]].isRebus && grid[prevCell[0]][prevCell[1]].value.length <= 1){
-  // 	grid[prevCell[0]][prevCell[1]].isRebus = false;
-  //   }
-  // }
-
-  // }, [activeCell]);
+  React.useEffect(() => {
+    if (
+      activeCell.length &&
+      prevCell.length &&
+      activeCell[0] !== undefined &&
+      prevCell[0] !== undefined &&
+      activeCell !== prevCell
+    ) {
+      if (activeCell[0] === prevCell[0]) {
+        if (
+          grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !==
+          grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber
+        ) {
+          clearAll(true);
+        } else {
+          if (
+            downFilter &&
+            downFilter[0] !== null &&
+            downFilter[0] !== undefined
+          ) {
+            setDownFilter([
+              downFilter[0],
+              downFilter[0][activeCell[1] - words.across.range[0]],
+            ]);
+          }
+          pencilHandling(prevCell[1], "across", activeCell[1] > prevCell[1]);
+        }
+      } else if (activeCell[1] === prevCell[1]) {
+        if (
+          grid[activeCell[0]][activeCell[1]].clue.downClueNumber !==
+          grid[prevCell[0]][prevCell[1]].clue.downClueNumber
+        ) {
+          clearAll(true);
+        } else {
+          if (
+            acrossFilter &&
+            acrossFilter[0] !== null &&
+            acrossFilter[0] !== undefined
+          ) {
+            setAcrossFilter([
+              acrossFilter[0],
+              acrossFilter[0][activeCell[0] - words.down.range[0]],
+            ]);
+          }
+          pencilHandling(prevCell[0], "down", activeCell[0] > prevCell[0]);
+        }
+      } else {
+        clearAll(true);
+      }
+      if (
+        prevCell[0] &&
+        prevCell[0] !== undefined &&
+        grid[prevCell[0]][prevCell[1]].isRebus &&
+        grid[prevCell[0]][prevCell[1]].value.length <= 1
+      ) {
+        grid[prevCell[0]][prevCell[1]].isRebus = false;
+      }
+    } else if (
+      prevCell &&
+      prevCell.length &&
+      prevCell[0] !== undefined &&
+      prevCell[0] !== null
+    ) {
+      if (
+        grid[prevCell[0]][prevCell[1]].isRebus &&
+        grid[prevCell[0]][prevCell[1]].value.length <= 1
+      ) {
+        grid[prevCell[0]][prevCell[1]].isRebus = false;
+      }
+    }
+  }, [activeCell]);
 
   React.useEffect(() => {
     setWords(calculateCurrentWords());
@@ -365,33 +403,30 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     direction === "across" ? prevAcrossClue() : prevDownClue();
   };
 
-  // const pencilHandling = (field, dir, forward) => {
-  //   let otherDir;
-  //   let filter;
-  //   let setFilter;
-  //   let otherFilter;
-  //   let setOtherFilter;
-  //   const index = forward ? 1 : 0;
-  //   if (dir === "down") {
-  //     otherDir = "across";
-  //     filter = downFilter;
-  //     setFilter = setDownFilter;
-  //     otherFilter = acrossFilter;
-  //     setOtherFilter = setAcrossFilter;
-  //   } else {
-  //     otherDir = "down";
-  //     filter = acrossFilter;
-  //     setFilter = setAcrossFilter;
-  //     otherFilter = downFilter;
-  //     setOtherFilter = setDownFilter;
-  //   }
-  //   pencilOut(otherDir, otherFilter.length > 0, true);
-  //   setFilter([]);
-  //   if (field === words[dir].range[index]) {
-  //     pencilOut(dir, false, true);
-  //     setOtherFilter([]);
-  //   }
-  // };
+  const pencilHandling = (field, dir, forward) => {
+    let otherDir;
+    let setFilter;
+    let otherFilter;
+    let setOtherFilter;
+    const index = forward ? 1 : 0;
+    if (dir === "down") {
+      otherDir = "across";
+      setFilter = setDownFilter;
+      otherFilter = acrossFilter;
+      setOtherFilter = setAcrossFilter;
+    } else {
+      otherDir = "down";
+      setFilter = setAcrossFilter;
+      otherFilter = downFilter;
+      setOtherFilter = setDownFilter;
+    }
+    pencilOut(otherDir, otherFilter.length > 0, true);
+    setFilter([]);
+    if (field === words[dir].range[index]) {
+      pencilOut(dir, false, true);
+      setOtherFilter([]);
+    }
+  };
 
   let clueNumber = 0;
   const getNextClueNumber = () => {
