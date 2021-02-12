@@ -17,7 +17,7 @@ module.exports = function PrintGrid({ puzzle, styles }) {
             if (cell.isBlackSquare) {
               cellStyle.push(styles.blackCell);
             }
-            if (cell.style === "shaded") {
+            if (cell.style === "marked") {
               cellStyle.push(styles.markedCell);
             }
             if (row === grid.length - 1) {
@@ -26,11 +26,20 @@ module.exports = function PrintGrid({ puzzle, styles }) {
             if (i === columns.length - 1) {
               cellStyle.push(styles.lastColumn);
             }
-            return (
-              <View key={"cell" + row + "_" + i}>
-                <Text style={cellStyle}>{label}</Text>
-              </View>
-            );
+            if (cell.style === "circled") {
+              return (
+                <View key={"cell" + row + "_" + i}>
+                  <Text style={cellStyle}>{label}</Text>
+                  <Text style={styles.circle}></Text>
+                </View>
+              );
+            } else {
+              return (
+                <View key={"cell" + row + "_" + i}>
+                  <Text style={cellStyle}>{label}</Text>
+                </View>
+              );
+            }
           })}
         </View>
       ))}
