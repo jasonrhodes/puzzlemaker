@@ -53,7 +53,7 @@ module.exports = function Home() {
           <option value="19 x 19">19 x 19</option>
           <option value="20 x 20">20 x 20</option>
         </select>
-        <div style={{ "marginTop": "10px" }}>
+        <div style={{ marginTop: "10px" }}>
           {gridSize ? <CreateLink rows={rows} columns={columns} /> : null}
         </div>
       </div>
