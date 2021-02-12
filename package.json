@@ -1,10 +1,7 @@
 {
-  "//1": "describes your app and its dependencies",
-  "//2": "https://docs.npmjs.com/files/package.json",
-  "//3": "updating this file will download and update your packages",
-  "name": "starter-react-router",
+  "name": "puzzlemaker",
   "version": "0.0.1",
-  "description": "Get started using React Router for client-side routing",
+  "description": "Dynamic crossword puzzle maker",
   "main": "server.js",
   "scripts": {
     "build": "webpack",
@@ -12,8 +9,10 @@
     "start": "webpack && node server.js",
     "serve": "node server.js",
     "test": "jest",
-    "lint": "eslint --ext .js --ext .jsx app",
     "test-watch": "jest --watch",
+    "lint": "eslint --ext .js --ext .jsx app",
+    "format": "prettier --write app",
+    "lint-staged": "lint-staged",
     "postinstall": "husky install"
   },
   "dependencies": {
@@ -50,24 +49,23 @@
     "webpack-cli": "^3.3.0"
   },
   "engines": {
-    "node": "8.x"
+    "node": "15.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/starter-react-router"
+    "url": "https://github.com/jasonrhodes/puzzlemaker"
   },
   "license": "MIT",
   "keywords": [
     "node",
-    "glitch",
-    "express"
+    "express",
+    "crossword",
+    "puzzles",
+    "react"
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
-    "*.{js,jsx}": "eslint --cache --fix",
-    "*.{js,jsx,css,md}": "prettier --write"
+    "*.{js,jsx}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ]
   }
 }

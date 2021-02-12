@@ -18,7 +18,7 @@ module.exports = function PrintGrid({ puzzle, styles }) {
               cellStyle.push(styles.blackCell);
             }
             if (cell.style === "shaded") {
-              cellStyle.push(styles.markedCell);
+              cellStyle.push(styles.blackCell);
             }
             if (row === grid.length - 1) {
               cellStyle.push(styles.lastRow);
