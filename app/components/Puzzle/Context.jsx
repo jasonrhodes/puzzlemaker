@@ -29,6 +29,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const emptyWord = { range: [], word: "" };
   const [savedPuzzleId, setSavedPuzzleId] = React.useState(null);
   const [activeCell, _setActiveCell] = React.useState([]);
+  const [prevActiveCell, setPrevActiveCell] = React.useState([]);
   const [direction, setDirection] = React.useState("across");
   const [words, setWords] = React.useState({
     across: emptyWord,
@@ -59,6 +60,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         })`
       );
     }
+    setPrevActiveCell(activeCell);
     return _setActiveCell([row, column]);
   };
 
@@ -69,86 +71,89 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     });
   };
 
-  function usePrevious(value) {
-    const ref = React.useRef();
-    React.useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
+  // my attempt to recreate pencil handling useEffect
+
+  function isValidTuple(range, type0, type1 = type0) {
+    return (
+      Array.isArray(range) &&
+      range.length === 2 &&
+      typeof range[0] === type0 &&
+      typeof range[1] === type1
+    );
   }
 
-  const prevCell = usePrevious(activeCell);
+  function updateDownFilter(activeColumn) {
+    if (!isValidTuple(downFilter, "string")) {
+      return;
+    }
+    const [filterString] = downFilter;
+    const [acrossStart] = words.across.range;
+    setDownFilter([filterString, filterString[activeColumn - acrossStart]]);
+  }
 
-  // all pencil/locked suggestions are updated after a change to the activeCell
+  function updateAcrossFilter(activeRow) {
+    if (!isValidTuple(acrossFilter, "string")) {
+      return;
+    }
+    const [filterString] = acrossFilter;
+    const [downStart] = words.down.range;
+    setAcrossFilter([filterString, filterString[activeRow - downStart]]);
+  }
+
+  function getActiveCell() {
+    if (!isValidTuple(activeCell, "number")) {
+      return {};
+    }
+    const [row, column] = activeCell;
+    return { row, column, ...grid[row][column] };
+  }
+
+  function getPreviousActiveCell() {
+    if (!isValidTuple(prevActiveCell, "number")) {
+      return {};
+    }
+    const [row, column] = prevActiveCell;
+    return { row, column, ...grid[row][column] };
+  }
+
   React.useEffect(() => {
-    if (
-      activeCell.length &&
-      prevCell.length &&
-      activeCell[0] !== undefined &&
-      prevCell[0] !== undefined &&
-      activeCell !== prevCell
-    ) {
-      if (activeCell[0] === prevCell[0]) {
-        if (
-          grid[activeCell[0]][activeCell[1]].clue.acrossClueNumber !==
-          grid[prevCell[0]][prevCell[1]].clue.acrossClueNumber
-        ) {
-          clearAll(true);
-        } else {
-          if (
-            downFilter &&
-            downFilter[0] !== null &&
-            downFilter[0] !== undefined
-          ) {
-            setDownFilter([
-              downFilter[0],
-              downFilter[0][activeCell[1] - words.across.range[0]],
-            ]);
-          }
-          pencilHandling(prevCell[1], "across", activeCell[1] > prevCell[1]);
-        }
-      } else if (activeCell[1] === prevCell[1]) {
-        if (
-          grid[activeCell[0]][activeCell[1]].clue.downClueNumber !==
-          grid[prevCell[0]][prevCell[1]].clue.downClueNumber
-        ) {
-          clearAll(true);
-        } else {
-          if (
-            acrossFilter &&
-            acrossFilter[0] !== null &&
-            acrossFilter[0] !== undefined
-          ) {
-            setAcrossFilter([
-              acrossFilter[0],
-              acrossFilter[0][activeCell[0] - words.down.range[0]],
-            ]);
-          }
-          pencilHandling(prevCell[0], "down", activeCell[0] > prevCell[0]);
-        }
-      } else {
-        clearAll(true);
-      }
-      if (
-        prevCell[0] &&
-        prevCell[0] !== undefined &&
-        grid[prevCell[0]][prevCell[1]].isRebus &&
-        grid[prevCell[0]][prevCell[1]].value.length <= 1
-      ) {
-        grid[prevCell[0]][prevCell[1]].isRebus = false;
-      }
-    } else if (
-      prevCell &&
-      prevCell.length &&
-      prevCell[0] !== undefined &&
-      prevCell[0] !== null
-    ) {
-      if (
-        grid[prevCell[0]][prevCell[1]].isRebus &&
-        grid[prevCell[0]][prevCell[1]].value.length <= 1
-      ) {
-        grid[prevCell[0]][prevCell[1]].isRebus = false;
-      }
+    const active = getActiveCell();
+    const prev = getPreviousActiveCell();
+
+    if (!active.clue || !prev.clue) {
+      // TODO: Do we need to clearAll in this branch?
+      return;
+    }
+
+    // Moving horizontally
+    if (active.clue.acrossClueNumber === prev.clue.acrossClueNumber) {
+      updateDownFilter(active.column);
+      pencilOut("down", downFilter.length > 0, true);
+      setAcrossFilter([]);
+      return;
+    }
+
+    // Moving vertically
+    if (active.clue.downClueNumber === prev.clue.downClueNumber) {
+      updateAcrossFilter(active.row);
+      pencilOut("across", acrossFilter.length > 0, true);
+      setDownFilter([]);
+      return;
+    }
+
+    clearAll(true);
+  }, [activeCell]);
+
+  // update previous cell rebus state
+  React.useEffect(() => {
+    const { row, column, isRebus, value } = getPreviousActiveCell();
+
+    if (isRebus && value.length <= 1) {
+      // TODO: I think we need to use setGrid for this?
+      // cell.isRebus = false;
+      const newGrid = { ...grid };
+      newGrid[row][column].isRebus = false;
+      setGrid(newGrid);
     }
   }, [activeCell]);
 
@@ -403,31 +408,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     direction === "across" ? prevAcrossClue() : prevDownClue();
   };
 
-  const pencilHandling = (field, dir, forward) => {
-    let otherDir;
-    let setFilter;
-    let otherFilter;
-    let setOtherFilter;
-    const index = forward ? 1 : 0;
-    if (dir === "down") {
-      otherDir = "across";
-      setFilter = setDownFilter;
-      otherFilter = acrossFilter;
-      setOtherFilter = setAcrossFilter;
-    } else {
-      otherDir = "down";
-      setFilter = setAcrossFilter;
-      otherFilter = downFilter;
-      setOtherFilter = setDownFilter;
-    }
-    pencilOut(otherDir, otherFilter.length > 0, true);
-    setFilter([]);
-    if (field === words[dir].range[index]) {
-      pencilOut(dir, false, true);
-      setOtherFilter([]);
-    }
-  };
-
   let clueNumber = 0;
   const getNextClueNumber = () => {
     return (clueNumber += 1);
@@ -471,28 +451,27 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const pencilOut = (direction, skip_flag, prev_flag) => {
-    const cell = prev_flag ? prevCell : activeCell;
-    if (cell.length) {
-      const newGrid = [...grid];
-      for (
-        let i = words[direction].range[0];
-        i <= words[direction].range[1];
-        i++
-      ) {
-        if (direction == "down") {
-          if (skip_flag && i === cell[0]) continue;
-          newGrid[i][cell[1]].pencil = "";
-        } else {
-          if (skip_flag && i === cell[1]) continue;
-          newGrid[cell[0]][i].pencil = "";
-        }
-      }
-      setGrid(newGrid);
+    const [row, column] = prev_flag ? prevActiveCell : activeCell;
+    if (!isValidTuple([row, column], "number")) {
+      return;
     }
+    const newGrid = [...grid];
+    const [rangeStart, rangeEnd] = words[direction].range;
+    for (let i = rangeStart; i <= rangeEnd; i++) {
+      if (direction == "down") {
+        if (skip_flag && i === row) continue;
+        newGrid[i][column].pencil = "";
+      } else {
+        if (skip_flag && i === column) continue;
+        newGrid[row][i].pencil = "";
+      }
+    }
+    setGrid(newGrid);
   };
 
   const value = {
     activeCell,
+    prevActiveCell,
     direction,
     words,
     grid,
@@ -500,6 +479,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     symmetry,
     title,
     author,
+    downFilter,
+    acrossFilter,
+    savedPuzzleId,
+    zoomed,
     setActiveCell,
     setGrid,
     toggleDirection,
@@ -527,14 +510,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setAuthor,
     setClue,
     pencilOut,
-    downFilter,
     setDownFilter,
-    acrossFilter,
     setAcrossFilter,
-    savedPuzzleId,
-    prevCell,
     clearAll,
-    zoomed,
     setZoomed,
     setDirection,
   };
@@ -545,6 +523,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       <br />
       <br />
       <pre>
+        <code>downFilter: {JSON.stringify(downFilter)}</code>
+        <br />
+        <code>acrossFilter: {JSON.stringify(acrossFilter)}</code>
+        <br />
         <code>
           {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
         </code>
