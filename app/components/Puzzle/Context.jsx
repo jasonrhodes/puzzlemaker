@@ -13,6 +13,7 @@ const {
   getPrevDownCellCoords,
   getPrevDownClueStart,
 } = require("../../utils/cellNavigation");
+const { isValidTuple, updateFilter } = require("./context-utils");
 
 function getSavedPuzzle(id) {
   if (!id) {
@@ -46,6 +47,12 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [acrossFilter, setAcrossFilter] = React.useState([]);
 
   const setActiveCell = ([row, column]) => {
+    const [currentRow, currentColumn] = activeCell;
+    if (row === currentRow && column === currentColumn) {
+      // no update, bail
+      return;
+    }
+
     if (row >= grid.length) {
       throw new Error(
         `Cannot set active cell row (${row}) larger than max (${
@@ -60,6 +67,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
         })`
       );
     }
+
     setPrevActiveCell(activeCell);
     return _setActiveCell([row, column]);
   };
@@ -71,33 +79,22 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     });
   };
 
-  // my attempt to recreate pencil handling useEffect
-
-  function isValidTuple(range, type0, type1 = type0) {
-    return (
-      Array.isArray(range) &&
-      range.length === 2 &&
-      typeof range[0] === type0 &&
-      typeof range[1] === type1
-    );
-  }
-
   function updateDownFilter(activeColumn) {
-    if (!isValidTuple(downFilter, "string")) {
-      return;
-    }
-    const [filterString] = downFilter;
-    const [acrossStart] = words.across.range;
-    setDownFilter([filterString, filterString[activeColumn - acrossStart]]);
+    updateFilter({
+      filter: downFilter,
+      setFilter: setDownFilter,
+      wordRange: words.across.range,
+      activeIndex: activeColumn,
+    });
   }
 
   function updateAcrossFilter(activeRow) {
-    if (!isValidTuple(acrossFilter, "string")) {
-      return;
-    }
-    const [filterString] = acrossFilter;
-    const [downStart] = words.down.range;
-    setAcrossFilter([filterString, filterString[activeRow - downStart]]);
+    updateFilter({
+      filter: acrossFilter,
+      setFilter: setAcrossFilter,
+      wordRange: words.down.range,
+      activeIndex: activeRow,
+    });
   }
 
   function getActiveCell() {
@@ -116,12 +113,13 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     return { row, column, ...grid[row][column] };
   }
 
+  // Handle pencil filter state on activeCell change
   React.useEffect(() => {
     const active = getActiveCell();
     const prev = getPreviousActiveCell();
 
     if (!active.clue || !prev.clue) {
-      // TODO: Do we need to clearAll in this branch?
+      clearAllPencils();
       return;
     }
 
@@ -141,21 +139,19 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       return;
     }
 
-    clearAll(true);
+    clearAllPencils(true);
   }, [activeCell]);
 
-  // update previous cell rebus state
+  // Handle previous active cell's rebus state on previous active cell change
   React.useEffect(() => {
     const { row, column, isRebus, value } = getPreviousActiveCell();
 
     if (isRebus && value.length <= 1) {
-      // TODO: I think we need to use setGrid for this?
-      // cell.isRebus = false;
       const newGrid = { ...grid };
       newGrid[row][column].isRebus = false;
       setGrid(newGrid);
     }
-  }, [activeCell]);
+  }, [prevActiveCell]);
 
   React.useEffect(() => {
     setWords(calculateCurrentWords());
@@ -202,6 +198,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
       setSavedPuzzleId(puzzleId);
+      clearAllPencils();
     } else {
       setSavedPuzzleId(puzzleId);
     }
@@ -272,7 +269,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       if (newGrid[row][column].pencil === value.toUpperCase()) {
         newGrid[row][column].pencil = "";
       } else if (newGrid[row][column].pencil) {
-        clearAll(false);
+        clearAllPencils(false);
       }
       if (!value && downFilter.length) {
         newGrid[row][column].pencil =
@@ -443,7 +440,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     window.localStorage.setItem(id, JSON.stringify(value));
   };
 
-  const clearAll = (prev_flag) => {
+  const clearAllPencils = (prev_flag) => {
     pencilOut("down", false, prev_flag);
     pencilOut("across", false, prev_flag);
     setDownFilter([]);
@@ -512,7 +509,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     pencilOut,
     setDownFilter,
     setAcrossFilter,
-    clearAll,
+    clearAllPencils,
     setZoomed,
     setDirection,
   };
