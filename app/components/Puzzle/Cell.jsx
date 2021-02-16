@@ -115,6 +115,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       if (currentCell.isBlackSquare) {
         puzzle.toggleBlackSquare(activeRow, activeColumn);
         return;
+      } else {
+        puzzle.updateCellValue(activeRow, activeColumn, "");
       }
       // what to do when the current cell is a rebus?
     }
