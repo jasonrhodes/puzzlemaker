@@ -51,7 +51,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     const currentCell = puzzle.grid[activeRow][activeColumn];
     e.preventDefault();
     if (e.key === ".") {
-      puzzle.clearAll(false);
+      puzzle.clearAllPencils(false);
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
