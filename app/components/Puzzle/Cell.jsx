@@ -51,7 +51,11 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     const currentCell = puzzle.grid[activeRow][activeColumn];
     e.preventDefault();
     if (e.key === ".") {
+<<<<<<< HEAD
       puzzle.clearActiveCellPencils();
+=======
+      puzzle.clearAllPencils(false);
+>>>>>>> Fixes clearAll v clearAllPencils rename bugs
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
