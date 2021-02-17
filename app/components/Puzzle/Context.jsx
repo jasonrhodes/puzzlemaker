@@ -119,7 +119,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     const prev = getPreviousActiveCell();
 
     if (!active.clue || !prev.clue) {
-      clearAllPencils();
+      clearPreviousActiveCellPencils();
       return;
     }
 
@@ -139,7 +139,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       return;
     }
 
-    clearAllPencils(true);
+    clearPreviousActiveCellPencils();
   }, [activeCell]);
 
   // Handle previous active cell's rebus state on previous active cell change
@@ -198,7 +198,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
       setSavedPuzzleId(puzzleId);
-      clearAllPencils();
+      clearActiveCellPencils();
     } else {
       setSavedPuzzleId(puzzleId);
     }
@@ -269,7 +269,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       if (newGrid[row][column].pencil === value.toUpperCase()) {
         newGrid[row][column].pencil = "";
       } else if (newGrid[row][column].pencil) {
-        clearAllPencils(false);
+        clearActiveCellPencils();
       }
       if (!value && downFilter.length) {
         newGrid[row][column].pencil =
@@ -440,18 +440,25 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     window.localStorage.setItem(id, JSON.stringify(value));
   };
 
-  const clearAllPencils = (prev_flag) => {
-    pencilOut("down", false, prev_flag);
-    pencilOut("across", false, prev_flag);
+  const clearPreviousActiveCellPencils = () => {
+    pencilOut("down", false, true);
+    pencilOut("across", false, true);
+    setDownFilter([]);
+    setAcrossFilter([]);
+  };
+  const clearActiveCellPencils = () => {
+    pencilOut("down", false, false);
+    pencilOut("across", false, false);
     setDownFilter([]);
     setAcrossFilter([]);
   };
 
   const pencilOut = (direction, skip_flag, prev_flag) => {
-    const [row, column] = prev_flag ? prevActiveCell : activeCell;
-    if (!isValidTuple([row, column], "number")) {
+    const cell = prev_flag ? prevActiveCell : activeCell;
+    if (!isValidTuple(cell, "number")) {
       return;
     }
+    const [row, column] = cell;
     const newGrid = [...grid];
     const [rangeStart, rangeEnd] = words[direction].range;
     for (let i = rangeStart; i <= rangeEnd; i++) {
@@ -509,7 +516,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     pencilOut,
     setDownFilter,
     setAcrossFilter,
-    clearAllPencils,
+    clearActiveCellPencils,
+    clearPreviousActiveCellPencils,
     setZoomed,
     setDirection,
   };
