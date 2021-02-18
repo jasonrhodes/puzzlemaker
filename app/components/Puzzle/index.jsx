@@ -21,50 +21,52 @@ const Puzzle = () => {
 
   return (
     <PuzzleContext.Consumer>
-      {(puzzle) => (
-        <div>
-          <div
-            className="infomenublock"
-            style={{ maxWidth: puzzle.grid[0].length * 40 + 15 + "px" }}
-          >
-            <Title
-              titleWidth={puzzle.titleWidth}
-              authorWidth={puzzle.authorWidth}
-              setTitleWidth={puzzle.setTitleWidth}
-              setAuthorWidth={puzzle.setAuthorWidth}
-              title={puzzle.title}
-              author={puzzle.author}
-              setTitle={puzzle.setTitle}
-              setAuthor={puzzle.setAuthor}
-            />
-            <Menu puzzle={puzzle} />
-          </div>
-          <div className="puzzle-container">
+      {(puzzle) =>
+        !puzzle.ready ? null : (
+          <div>
             <div
-              className={
-                "puzzle-grid " +
-                gridSizeDesc(puzzle.grid[0].length) +
-                " " +
-                puzzle.zoomed
-              }
+              className="infomenublock"
+              style={{ maxWidth: puzzle.grid[0].length * 40 + 15 + "px" }}
             >
-              {puzzle.grid.map((columns, i) => (
-                <Row key={`row-${i}`} row={i} columns={columns} />
-              ))}
+              <Title
+                titleWidth={puzzle.titleWidth}
+                authorWidth={puzzle.authorWidth}
+                setTitleWidth={puzzle.setTitleWidth}
+                setAuthorWidth={puzzle.setAuthorWidth}
+                title={puzzle.title}
+                author={puzzle.author}
+                setTitle={puzzle.setTitle}
+                setAuthor={puzzle.setAuthor}
+              />
+              <Menu puzzle={puzzle} />
             </div>
-            <CurrentClues
-              across={puzzle.words.across}
-              down={puzzle.words.down}
-              puzzle={puzzle}
-            />
-            <AllClues
-              across={puzzle.words.across}
-              down={puzzle.words.down}
-              puzzle={puzzle}
-            />
+            <div className="puzzle-container">
+              <div
+                className={
+                  "puzzle-grid " +
+                  gridSizeDesc(puzzle.grid[0].length) +
+                  " " +
+                  puzzle.zoomed
+                }
+              >
+                {puzzle.grid.map((columns, i) => (
+                  <Row key={`row-${i}`} row={i} columns={columns} />
+                ))}
+              </div>
+              <CurrentClues
+                across={puzzle.words.across}
+                down={puzzle.words.down}
+                puzzle={puzzle}
+              />
+              <AllClues
+                across={puzzle.words.across}
+                down={puzzle.words.down}
+                puzzle={puzzle}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
     </PuzzleContext.Consumer>
   );
 };

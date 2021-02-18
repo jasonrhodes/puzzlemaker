@@ -28,6 +28,7 @@ function getSavedPuzzle(id) {
 
 const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const emptyWord = { range: [], word: "" };
+  const [ready, setReady] = React.useState(false);
   const [savedPuzzleId, setSavedPuzzleId] = React.useState(null);
   const [activeCell, _setActiveCell] = React.useState([]);
   const [prevActiveCell, setPrevActiveCell] = React.useState([]);
@@ -186,6 +187,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   // Initial instantiation of the saved puzzle and/or the saved puzzle
   // id used to save the puzzle going forward
   React.useEffect(() => {
+    setReady(false);
     const savedPuzzle = getSavedPuzzle(puzzleId);
     if (savedPuzzle) {
       setTitle(savedPuzzle.title);
@@ -193,15 +195,13 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       const numberedGrid = assignClueNumbersToGrid(savedPuzzle.grid);
       setGrid(numberedGrid);
       setClues(savedPuzzle.clues);
-      setActiveCell(savedPuzzle.activeCell);
-      setDirection(savedPuzzle.direction);
-      setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
       setSavedPuzzleId(puzzleId);
       clearActiveCellPencils();
     } else {
       setSavedPuzzleId(puzzleId);
     }
+    setReady(true);
   }, [puzzleId]);
 
   const toggleDirection = () =>
@@ -480,6 +480,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     words,
     grid,
     clues,
+    ready,
     symmetry,
     title,
     author,
