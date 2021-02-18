@@ -195,9 +195,6 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       const numberedGrid = assignClueNumbersToGrid(savedPuzzle.grid);
       setGrid(numberedGrid);
       setClues(savedPuzzle.clues);
-      setActiveCell(savedPuzzle.activeCell);
-      setDirection(savedPuzzle.direction);
-      setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
       setSavedPuzzleId(puzzleId);
       clearActiveCellPencils();
