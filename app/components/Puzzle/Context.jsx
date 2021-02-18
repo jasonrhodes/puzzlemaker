@@ -522,25 +522,11 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setDirection,
   };
 
+  // TODO: Remove this
+  console.log("DEBUG", value);
+
   return (
-    <PuzzleContext.Provider value={value}>
-      {children}
-      <br />
-      <br />
-      <pre>
-        <code>downFilter: {JSON.stringify(downFilter)}</code>
-        <br />
-        <code>acrossFilter: {JSON.stringify(acrossFilter)}</code>
-        <br />
-        <code>
-          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
-        </code>
-        <br />
-        <code>{JSON.stringify({ clues })}</code>
-        <br />
-        <code>{JSON.stringify(value, null, 2)}</code>
-      </pre>
-    </PuzzleContext.Provider>
+    <PuzzleContext.Provider value={value}>{children}</PuzzleContext.Provider>
   );
 };
 
