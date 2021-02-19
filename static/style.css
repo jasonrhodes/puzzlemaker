@@ -60,7 +60,6 @@ select {
   display: inline-block;
   position: absolute;
   top: 39px;
-  right: 0;
   border: 4px solid rgb(34, 188, 172);
   padding: 6px 8px 8px 8px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -69,11 +68,20 @@ select {
   min-width: 30px;
   width: auto;
   max-width: 250px;
-  margin-left: -250px;
   font-size: 14px;
   letter-spacing: 0;
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
     "Droid Sans", "Arial", sans-serif;
+}
+
+*:hover > .pbtip:not(.pbr) {
+  right: 0;
+  margin-left: -250px;
+}
+
+*:hover > .pbtip.pbr {
+  left: 0;
+  margin-right: -250px;
 }
 
 .subicon:hover > .pbtip {
@@ -95,13 +103,22 @@ select {
 *:hover > .pbtip:after,
 *:hover > .pbtip:before {
   bottom: 100%;
-  right: 14px;
   border: solid transparent;
   content: "";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
+}
+
+*:hover > .pbtip:not(.pbr):after,
+*:hover > .pbtip:not(.pbr):before {
+  right: 14px;
+}
+
+*:hover > .pbtip.pbr:after,
+*:hover > .pbtip.pbr:before {
+  left: 14px;
 }
 
 *:hover > .pbtip.stip:after,
@@ -113,13 +130,25 @@ select {
   border-color: rgba(255, 255, 255, 0);
   border-bottom-color: #fff;
   border-width: 10px;
-  margin-right: -10px;
 }
 *:hover > .pbtip:before {
   border-color: rgba(221, 221, 221, 0);
   border-bottom-color: rgb(34, 188, 172);
   border-width: 16px;
+}
+
+*:hover > .pbtip:not(.pbr):after {
+  margin-right: -10px;
+}
+*:hover > .pbtip:not(.pbr):before {
   margin-right: -16px;
+}
+
+*:hover > .pbtip.pbr:after {
+  margin-left: -14px;
+}
+*:hover > .pbtip.pbr:before {
+  margin-left: -20px;
 }
 
 /* end Tooltips */
@@ -440,6 +469,7 @@ input.inline-content-editable:focus {
   height: 250px;
   border: 1px solid #777;
   border-width: 1px 0;
+  overflow-x: visible;
 }
 
 .current-clues .suggestions .suggestion {
@@ -485,7 +515,6 @@ input.inline-content-editable:focus {
 }
 
 .current-clues .suggestions *:hover > .pbtip {
-  right: -12px;
   top: 30px;
 }
 /* Hide mobile stuff on non-mobile */
