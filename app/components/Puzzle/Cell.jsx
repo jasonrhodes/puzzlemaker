@@ -53,6 +53,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     if (e.key === ".") {
       puzzle.clearActiveCellPencils();
       puzzle.toggleBlackSquare(activeRow, activeColumn);
+      puzzle.advanceActiveCell();
       return;
     }
     if (e.key === ";" || e.key === ",") {
@@ -61,6 +62,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     }
     if (e.key === "/" || e.key === "-") {
       puzzle.toggleShaded(activeRow, activeColumn);
+      puzzle.advanceActiveCell();
       return;
     }
     if (e.key === "Enter") {

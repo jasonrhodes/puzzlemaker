@@ -9,7 +9,10 @@ const InfoTab = require("./InfoTab");
 const SidebarMenu = require("./SidebarMenu");
 
 const Puzzle = () => {
-  const [desktopView, setDesktopView] = React.useState("info");
+  const [desktopView, setDesktopView] = React.useState(
+    window.innerWidth < 636 ? "current" : "info"
+  );
+
   const gridSizeDesc = (length) => {
     if (length > 16) {
       return "largegrid";

@@ -420,6 +420,11 @@ input.inline-content-editable:focus {
   transform: translateY(-60%);
 }
 
+.puzzle-cell.active .input.rebus:empty:after {
+  content: '( )';
+  opacity: 0.5;
+}
+
 .disable-select {
   user-select: none; /* supported by Chrome and Opera */
   -webkit-user-select: none; /* Safari */
@@ -818,7 +823,7 @@ input.inline-content-editable:focus {
 
   /* Mobile Current Clues */
 
-  .current-clues > div:not(.activemobile) {
+  .current-clues > div:not(.activemobile), .sb-menu {
     display: none;
   }
 
