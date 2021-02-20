@@ -148,7 +148,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     const { row, column, isRebus, value } = getPreviousActiveCell();
 
     if (isRebus && value.length <= 1) {
-      const newGrid = { ...grid };
+      const newGrid = [...grid];
       newGrid[row][column].isRebus = false;
       setGrid(newGrid);
     }
