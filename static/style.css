@@ -446,7 +446,11 @@ input.inline-content-editable:focus {
   display: flex;
   flex-direction: row;
   margin: -32px 0 10px 5px;
+<<<<<<< HEAD
   border-bottom: 1px solid #ccc;
+=======
+  border-bottom: 1px solid #999;
+>>>>>>> 48287f3e0afe8e65b7128d1954f18fd5c532c870
 }
 
 .sb-menu > .sb-menu-item {
