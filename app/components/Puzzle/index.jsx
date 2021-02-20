@@ -5,8 +5,14 @@ const { PuzzleContext } = require("./Context");
 const Title = require("./Title");
 const CurrentClues = require("./CurrentClues");
 const AllClues = require("./AllClues");
+const InfoTab = require("./InfoTab");
+const SidebarMenu = require("./SidebarMenu");
 
 const Puzzle = () => {
+  const [desktopView, setDesktopView] = React.useState(
+    window.innerWidth < 636 ? "current" : "info"
+  );
+
   const gridSizeDesc = (length) => {
     if (length > 16) {
       return "largegrid";
@@ -18,7 +24,6 @@ const Puzzle = () => {
       return "xsgrid";
     }
   };
-
   return (
     <PuzzleContext.Consumer>
       {(puzzle) =>
@@ -53,16 +58,27 @@ const Puzzle = () => {
                   <Row key={`row-${i}`} row={i} columns={columns} />
                 ))}
               </div>
-              <CurrentClues
-                across={puzzle.words.across}
-                down={puzzle.words.down}
-                puzzle={puzzle}
-              />
-              <AllClues
-                across={puzzle.words.across}
-                down={puzzle.words.down}
-                puzzle={puzzle}
-              />
+              <div className="sb">
+                <SidebarMenu
+                  desktopView={desktopView}
+                  setDesktopView={setDesktopView}
+                />
+                {desktopView == "info" ? (
+                  <InfoTab puzzle={puzzle} />
+                ) : desktopView == "current" ? (
+                  <CurrentClues
+                    across={puzzle.words.across}
+                    down={puzzle.words.down}
+                    puzzle={puzzle}
+                  />
+                ) : (
+                  <AllClues
+                    across={puzzle.words.across}
+                    down={puzzle.words.down}
+                    puzzle={puzzle}
+                  />
+                )}
+              </div>
             </div>
           </div>
         )

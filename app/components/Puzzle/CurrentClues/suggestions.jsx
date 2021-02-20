@@ -220,7 +220,7 @@ function SuggestionsList({
             }}
           >
             {ad == "down" ? <ArrowRight size={10} /> : <ArrowDown size={10} />}
-            <span className="pbtip">
+            <span className="pbtip pbr">
               <b>
                 {x == myFilter[0]
                   ? "Unfilter " +
@@ -239,7 +239,7 @@ function SuggestionsList({
               style={{ width: "12px" }}
               src="https://cdn.glitch.com/7a2e2b2d-f058-4f81-950d-8b81f72c14fc%2Fonelook.png?v=1611800262010"
             />
-            <span className="pbtip">
+            <span className="pbtip pbr">
               <b>Open in OneLook</b>
             </span>
           </a>

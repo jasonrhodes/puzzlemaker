@@ -2,7 +2,7 @@ const React = require("react");
 const { measureMyInputText } = require("../../../utils/style");
 const { PuzzleContext } = require("../Context");
 
-module.exports = function ClueInput({ direction, number }) {
+module.exports = function ClueInput({ direction, number, jumpToClue }) {
   return (
     <PuzzleContext.Consumer>
       {({ clues, setClue }) => {
@@ -11,7 +11,11 @@ module.exports = function ClueInput({ direction, number }) {
         return (
           <input
             className="inline-content-editable"
-            onClick={(e) => e.stopPropagation()}
+            onFocus={(e) =>
+              typeof jumpToClue === "function"
+                ? jumpToClue(e, number, direction)
+                : ""
+            }
             onChange={handleChange}
             style={{
               width:

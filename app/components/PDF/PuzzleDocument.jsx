@@ -28,25 +28,28 @@ const styles = StyleSheet.create({
   },
   title: {
     flexDirection: "column",
-    margin: 10,
-    padding: 10,
+    marginLeft: "5%",
+    marginTop: 20,
+    marginBottom: 20,
     fontFamily: "RobotoBold",
     fontSize: "14pt",
   },
   grid: {
-    marginBottom: 5,
+    marginBottom: 10,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   gridrow: {
     display: "flex",
     flexDirection: "row",
-    width: "100%",
-    marginLeft: 10,
-    paddingLeft: 10,
+    width: "90%",
+    marginLeft: "5%",
   },
   column: {
     display: "flex",
     flexDirection: "column",
-    paddingLeft: 5,
+    flexWrap: "wrap",
+    paddingRight: "10",
   },
   column20: {
     flex: 1,
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     width: "auto",
   },
   column80: {
-    flex: 2,
+    flex: 3,
     flexBasis: "80%",
     width: "auto",
   },
@@ -145,7 +148,9 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
   const lineCharacters = columnCount == 4 ? 20 : 30;
   const allClues = [["across", "across", "ACROSS"]];
   const clueHeight = (clue) => {
-    return clue == "DOWN" ? 2 : Math.ceil((clue.length || 10) / lineCharacters);
+    return clue == "DOWN"
+      ? 2
+      : Math.ceil((clue.length + 3 || 10) / lineCharacters);
   };
   for (const key of Object.keys(puzzle.clues.across)) {
     totalClueHeight += clueHeight(puzzle.clues.across[key]);
@@ -156,7 +161,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
     totalClueHeight += clueHeight(puzzle.clues.down[key]);
     allClues.push(["across", key, puzzle.clues.down[key]]);
   }
-  const wantLength =
+  var wantLength =
     (totalClueHeight + (columnCount - 1) * puzzle.grid.length * lnsPerSqr) /
     columnCount;
 
@@ -165,7 +170,7 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
       <Page size="A4" style={styles.page}>
         <View style={styles.title}>
           <Text>
-            {puzzle.title} by {puzzle.author}
+            {puzzle.title || "Untitled"} by {puzzle.author || "Author"}
           </Text>
         </View>
         <View style={styles.gridrow}>
@@ -178,6 +183,9 @@ module.exports = function PDFPuzzleDoc({ puzzle }) {
             {[...Array(allClues.length)].map((key, i) => {
               if (usedClueHeight < wantLength) {
                 let curClue = allClues.shift();
+                if (wantLength - usedClueHeight < 3 && curClue[1] == "down") {
+                  wantLength = wantLength + 2;
+                }
                 usedClueHeight += clueHeight(curClue[2]);
                 return <PrintClue key={i} num={curClue[1]} clue={curClue[2]} />;
               }

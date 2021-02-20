@@ -13,6 +13,9 @@ module.exports = function MobileMenu({
   const keyBoardSwitch = (e, view) => {
     e.stopPropagation();
     setMobileView(view);
+    if (view === "across" || view === "down") {
+      puzzle.setDirection(view);
+    }
   };
 
   const handlePrevClueClick = (e) => {

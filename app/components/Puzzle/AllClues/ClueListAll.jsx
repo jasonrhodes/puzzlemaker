@@ -1,5 +1,6 @@
 const React = require("react");
 const { findClueStartCell } = require("../../../utils/cellNavigation");
+const ClueInput = require("./../CurrentClues/ClueInput");
 //const OneLookLink = require("./OneLookLink");
 //const { Filter } = require("react-feather");
 //const ClueInput = require("./ClueInput");
@@ -37,7 +38,12 @@ function ClueListAll({ ad, puzzle }) {
             }
             onClick={(e) => jumpToClue(e, pair[0], ad)}
           >
-            {pair[0]}: {pair[1]}
+            {pair[0]}:{" "}
+            <ClueInput
+              direction={ad}
+              number={pair[0]}
+              jumpToClue={jumpToClue}
+            />
           </div>
         </div>
       ))}

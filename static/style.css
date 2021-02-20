@@ -48,6 +48,15 @@ select {
   top: -2px;
 }
 
+.key {
+  border: 1px solid #777;
+  border-radius: 1px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 1px;
+  padding-top: 6px;
+}
+
 /* end General Styling */
 
 /* Tooltips  */
@@ -60,20 +69,28 @@ select {
   display: inline-block;
   position: absolute;
   top: 39px;
-  right: 0;
   border: 4px solid rgb(34, 188, 172);
   padding: 6px 8px 8px 8px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   z-index: 101;
   color: #000;
   min-width: 30px;
   width: auto;
   max-width: 250px;
-  margin-left: -250px;
   font-size: 14px;
   letter-spacing: 0;
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica",
     "Droid Sans", "Arial", sans-serif;
+}
+
+*:hover > .pbtip:not(.pbr) {
+  right: 0;
+  margin-left: -250px;
+}
+
+*:hover > .pbtip.pbr {
+  left: 0;
+  margin-right: -250px;
 }
 
 .subicon:hover > .pbtip {
@@ -95,13 +112,22 @@ select {
 *:hover > .pbtip:after,
 *:hover > .pbtip:before {
   bottom: 100%;
-  right: 14px;
   border: solid transparent;
   content: "";
   height: 0;
   width: 0;
   position: absolute;
   pointer-events: none;
+}
+
+*:hover > .pbtip:not(.pbr):after,
+*:hover > .pbtip:not(.pbr):before {
+  right: 14px;
+}
+
+*:hover > .pbtip.pbr:after,
+*:hover > .pbtip.pbr:before {
+  left: 14px;
 }
 
 *:hover > .pbtip.stip:after,
@@ -113,13 +139,25 @@ select {
   border-color: rgba(255, 255, 255, 0);
   border-bottom-color: #fff;
   border-width: 10px;
-  margin-right: -10px;
 }
 *:hover > .pbtip:before {
   border-color: rgba(221, 221, 221, 0);
   border-bottom-color: rgb(34, 188, 172);
   border-width: 16px;
+}
+
+*:hover > .pbtip:not(.pbr):after {
+  margin-right: -10px;
+}
+*:hover > .pbtip:not(.pbr):before {
   margin-right: -16px;
+}
+
+*:hover > .pbtip.pbr:after {
+  margin-left: -14px;
+}
+*:hover > .pbtip.pbr:before {
+  margin-left: -20px;
 }
 
 /* end Tooltips */
@@ -151,7 +189,7 @@ li > a:hover {
 .container {
   display: inline-block;
   position: relative;
-  max-width: 1400px;
+  width: 100%;
 }
 
 .puzzle-container {
@@ -159,6 +197,7 @@ li > a:hover {
   clear: both;
   display: flex;
   align-items: start;
+  width: 100%;
 }
 
 /* end Containers */
@@ -168,7 +207,6 @@ li > a:hover {
 .title {
   font-family: "Laila", serif;
   margin: 0px 0px 10px 0px;
-  border-bottom: 1px solid #ddd;
 }
 
 .title a {
@@ -382,6 +420,11 @@ input.inline-content-editable:focus {
   transform: translateY(-60%);
 }
 
+.puzzle-cell.active .input.rebus:empty:after {
+  content: '( )';
+  opacity: 0.5;
+}
+
 .disable-select {
   user-select: none; /* supported by Chrome and Opera */
   -webkit-user-select: none; /* Safari */
@@ -394,9 +437,77 @@ input.inline-content-editable:focus {
 
 /* Current Clues and Suggestions */
 
+.sb {
+  width: 100%;
+  min-width: 340px;
+}
+
+.sb-menu {
+  display: flex;
+  flex-direction: row;
+  margin: -32px 0 10px 5px;
+  border-bottom: 1px solid #999;
+}
+
+.sb-menu > .sb-menu-item {
+  padding: 6px 12px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #999;
+  color: #777;
+  margin: 0 3px -1px 3px;
+  cursor: pointer;
+}
+
+.sb-menu > .sb-menu-item:first-child {
+  margin-left: 15px;
+}
+
+.sb-menu > .sb-menu-item:hover {
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #999;
+  cursor: pointer;
+}
+
+.sb-menu > .sb-menu-item.active-tab {
+  border: 1px solid #777;
+  background-color: #fff;
+  border-bottom: 2px solid #fff ;
+  color: #333 !important;
+}
+
+.sb-menu-item svg {
+  margin-bottom: -3px;
+}
+
+.info-tab {
+  line-height: 2;
+}
+
+.info-tab .key {
+  width: 30px;
+  height: 28px;
+  padding-top: 4px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.info-tab .shadekey svg {
+  opacity: 0.5;
+}
+
+.rebustext {
+  font-size: 8px;
+  top: -6px;
+  position: relative;
+}
+
 .current-clues {
-  min-width: 250px;
-  margin-left: 30px;
+  min-width: 240px;
+  margin-left: 20px;
   margin-right: 30px;
   flex: 0 0 auto;
 }
@@ -437,9 +548,10 @@ input.inline-content-editable:focus {
 
 .current-clues .suggestions {
   overflow-y: scroll;
-  height: 250px;
+  height: 242px;
   border: 1px solid #777;
   border-width: 1px 0;
+  overflow-x: visible;
 }
 
 .current-clues .suggestions .suggestion {
@@ -485,9 +597,21 @@ input.inline-content-editable:focus {
 }
 
 .current-clues .suggestions *:hover > .pbtip {
-  right: -12px;
   top: 30px;
 }
+
+#all-clues.current-clues input {
+  font-size: 16px;
+}
+
+#all-clues.current-clues .suggestions .suggestion {
+  font-family: 'Roboto';
+}
+
+#all-clues.current-clues .suggestions {
+  height: 270px;
+}
+
 /* Hide mobile stuff on non-mobile */
 
 #keyboard,
@@ -699,7 +823,7 @@ input.inline-content-editable:focus {
 
   /* Mobile Current Clues */
 
-  .current-clues > div:not(.activemobile) {
+  .current-clues > div:not(.activemobile), .sb-menu {
     display: none;
   }
 
@@ -802,16 +926,8 @@ input.inline-content-editable:focus {
 
   #keyboard > .keyrow > .key {
     flex-grow: 1;
-    margin: 1px;
-    height: 25px;
-    padding-top: 6px;
-  }
-  .key {
-    border: 1px solid #777;
-    border-radius: 1px;
-    text-align: center;
-    vertical-align: middle;
     display: table-cell;
+    height: 25px;
   }
 
   .shadekey > svg {
@@ -824,8 +940,6 @@ input.inline-content-editable:focus {
   }
 
   #keyboard .toolkey {
-    width: 47px;
-    height: 33px;
     background-color: #ddd;
   }
 
