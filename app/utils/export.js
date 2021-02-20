@@ -47,10 +47,7 @@ function convertPuzzleToJSON(puzzle) {
       } else {
         puz.rebus.push("0");
       }
-      if (
-        puzzle.grid[i][j].style === "circled" ||
-        puzzle.grid[i][j].style === "marked"
-      ) {
+      if (puzzle.grid[i][j].isCircle || puzzle.grid[i][j].isShaded) {
         puz.has_extras = true;
         puz.gext.push(0x80);
       } else {

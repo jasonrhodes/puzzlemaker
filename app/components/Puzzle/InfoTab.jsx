@@ -1,6 +1,7 @@
 const React = require("react");
 const { SquareFillIcon } = require("@primer/octicons-react");
 const { RefreshCw, Circle } = require("react-feather");
+const { focusOnActive } = require("../../utils/style");
 
 const InfoTab = ({ puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
@@ -14,24 +15,21 @@ const InfoTab = ({ puzzle }) => {
     if (key == "square") {
       puzzle.clearActiveCellPencils();
       puzzle.toggleBlackSquare(activeRow, activeColumn);
-      return;
     } else if (key == "circle") {
       puzzle.toggleCircle(activeRow, activeColumn);
-      return;
     } else if (key == "shaded") {
       puzzle.toggleShaded(activeRow, activeColumn);
-      return;
     } else if (key == "rebus") {
       e.preventDefault();
       if (currentCell.isRebus) {
         puzzle.updateCellValue(activeRow, activeColumn, "");
       }
       puzzle.toggleRebus(activeRow, activeColumn);
-      return;
     } else if (key == "rotate") {
       puzzle.toggleDirection();
-      return;
     }
+    focusOnActive();
+    return;
   }
 
   return (
