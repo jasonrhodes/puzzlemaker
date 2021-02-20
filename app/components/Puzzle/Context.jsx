@@ -116,10 +116,15 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
 
   // Handle pencil filter state on activeCell change
   React.useEffect(() => {
+    if (savedPuzzleId == null) {
+      return;
+    }
+
     const active = getActiveCell();
     const prev = getPreviousActiveCell();
 
     if (!active.clue || !prev.clue) {
+      clearActiveCellPencils();
       clearPreviousActiveCellPencils();
       return;
     }
@@ -197,7 +202,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setClues(savedPuzzle.clues);
       setSymmetry(savedPuzzle.symmetry);
       setSavedPuzzleId(puzzleId);
-      clearActiveCellPencils();
+      setWords(savedPuzzle.words);
+      setActiveCell(savedPuzzle.activeCell);
     } else {
       setSavedPuzzleId(puzzleId);
     }
