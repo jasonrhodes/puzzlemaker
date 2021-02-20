@@ -48,6 +48,15 @@ select {
   top: -2px;
 }
 
+.key {
+  border: 1px solid #777;
+  border-radius: 1px;
+  text-align: center;
+  vertical-align: middle;
+  margin: 1px;
+  padding-top: 6px;
+}
+
 /* end General Styling */
 
 /* Tooltips  */
@@ -62,7 +71,7 @@ select {
   top: 39px;
   border: 4px solid rgb(34, 188, 172);
   padding: 6px 8px 8px 8px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.95);
   z-index: 101;
   color: #000;
   min-width: 30px;
@@ -180,7 +189,7 @@ li > a:hover {
 .container {
   display: inline-block;
   position: relative;
-  max-width: 1400px;
+  width: 100%;
 }
 
 .puzzle-container {
@@ -188,6 +197,7 @@ li > a:hover {
   clear: both;
   display: flex;
   align-items: start;
+  width: 100%;
 }
 
 /* end Containers */
@@ -197,7 +207,6 @@ li > a:hover {
 .title {
   font-family: "Laila", serif;
   margin: 0px 0px 10px 0px;
-  border-bottom: 1px solid #ddd;
 }
 
 .title a {
@@ -423,9 +432,77 @@ input.inline-content-editable:focus {
 
 /* Current Clues and Suggestions */
 
+.sb {
+  width: 100%;
+  min-width: 340px;
+}
+
+.sb-menu {
+  display: flex;
+  flex-direction: row;
+  margin: -32px 0 10px 5px;
+  border-bottom: 1px solid #999;
+}
+
+.sb-menu > .sb-menu-item {
+  padding: 6px 12px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #999;
+  color: #777;
+  margin: 0 3px -1px 3px;
+  cursor: pointer;
+}
+
+.sb-menu > .sb-menu-item:first-child {
+  margin-left: 15px;
+}
+
+.sb-menu > .sb-menu-item:hover {
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #999;
+  cursor: pointer;
+}
+
+.sb-menu > .sb-menu-item.active-tab {
+  border: 1px solid #777;
+  background-color: #fff;
+  border-bottom: 2px solid #fff ;
+  color: #333 !important;
+}
+
+.sb-menu-item svg {
+  margin-bottom: -3px;
+}
+
+.info-tab {
+  line-height: 2;
+}
+
+.info-tab .key {
+  width: 30px;
+  height: 28px;
+  padding-top: 4px;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.info-tab .shadekey svg {
+  opacity: 0.5;
+}
+
+.rebustext {
+  font-size: 8px;
+  top: -6px;
+  position: relative;
+}
+
 .current-clues {
-  min-width: 250px;
-  margin-left: 30px;
+  min-width: 240px;
+  margin-left: 20px;
   margin-right: 30px;
   flex: 0 0 auto;
 }
@@ -831,16 +908,8 @@ input.inline-content-editable:focus {
 
   #keyboard > .keyrow > .key {
     flex-grow: 1;
-    margin: 1px;
-    height: 25px;
-    padding-top: 6px;
-  }
-  .key {
-    border: 1px solid #777;
-    border-radius: 1px;
-    text-align: center;
-    vertical-align: middle;
     display: table-cell;
+    height: 25px;
   }
 
   .shadekey > svg {
@@ -853,8 +922,6 @@ input.inline-content-editable:focus {
   }
 
   #keyboard .toolkey {
-    width: 47px;
-    height: 33px;
     background-color: #ddd;
   }
 

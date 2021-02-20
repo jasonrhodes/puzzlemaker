@@ -18,6 +18,7 @@ const KeyBoard = ({ puzzle, mobileView }) => {
 
   function hitKey(e, key) {
     e.stopPropagation();
+    const currentCell = puzzle.grid[activeRow][activeColumn];
     if (key == "square") {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
@@ -28,7 +29,10 @@ const KeyBoard = ({ puzzle, mobileView }) => {
       puzzle.toggleShaded(activeRow, activeColumn);
       return;
     } else if (key == "rebus") {
-      // Rebus support here
+      if (currentCell.isRebus) {
+        puzzle.updateCellValue(activeRow, activeColumn, "");
+      }
+      puzzle.toggleRebus(activeRow, activeColumn);
       return;
     } else if (key == "rotate") {
       puzzle.toggleDirection();
