@@ -8,6 +8,7 @@ const {
   ZoomOut,
   MinusSquare,
 } = require("react-feather");
+const { focusOnActive } = require("../../../utils/style");
 
 const KeyBoard = ({ puzzle, mobileView }) => {
   const row1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
@@ -18,25 +19,23 @@ const KeyBoard = ({ puzzle, mobileView }) => {
 
   function hitKey(e, key) {
     e.stopPropagation();
+    if (!activeRow && !activeColumn) {
+      return false;
+    }
     const currentCell = puzzle.grid[activeRow][activeColumn];
     if (key == "square") {
       puzzle.toggleBlackSquare(activeRow, activeColumn);
-      return;
     } else if (key == "circle") {
       puzzle.toggleCircle(activeRow, activeColumn);
-      return;
     } else if (key == "shaded") {
       puzzle.toggleShaded(activeRow, activeColumn);
-      return;
     } else if (key == "rebus") {
       if (currentCell.isRebus) {
         puzzle.updateCellValue(activeRow, activeColumn, "");
       }
       puzzle.toggleRebus(activeRow, activeColumn);
-      return;
     } else if (key == "rotate") {
       puzzle.toggleDirection();
-      return;
     } else if (key == "zoom") {
       puzzle.toggleZoom();
     } else if (key == "backspace") {
@@ -44,12 +43,12 @@ const KeyBoard = ({ puzzle, mobileView }) => {
         puzzle.updateCellValue(activeRow, activeColumn, "");
       }
       puzzle.rewindActiveCell();
-      return;
     } else {
       puzzle.updateCellValue(activeRow, activeColumn, key);
       puzzle.advanceActiveCell();
-      return;
     }
+    focusOnActive();
+    return;
   }
 
   return (

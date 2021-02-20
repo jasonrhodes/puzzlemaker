@@ -9,8 +9,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     "puzzle-cell-x": cell.isBlackSquare,
     active: activeRow === row && activeColumn === column,
     highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column),
-    marked: cell.style === "marked",
-    circled: cell.style === "circled",
+    marked: cell.isShaded,
+    circled: cell.isCircle,
     "disable-select": true,
   });
 
@@ -153,7 +153,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     >
       <input className="puzzlefocus" readOnly="readonly" />
       <div className={inputClasses}>{cell.value.toUpperCase()}</div>
-      {cell.style === "circled" ? <div className="circle" /> : null}
+      {cell.isCircle ? <div className="circle" /> : null}
       {cell.pencil ? <div className="input pencil">{cell.pencil}</div> : null}
       {!cell.isBlackSquare && label ? (
         <div className="label">{label}</div>

@@ -133,7 +133,15 @@ const PrintClue = ({ num, clue }) => {
   } else {
     return (
       <Text style={styles.clue}>
-        <Text style={{ fontFamily: "RobotoBold" }}>{num}</Text>{" "}
+        <Text
+          style={{
+            fontFamily: "RobotoBold",
+            display: "inline-block",
+            width: "30pt",
+          }}
+        >
+          {num}
+        </Text>{" "}
         {clue || "(Blank Clue)"}
       </Text>
     );

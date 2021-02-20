@@ -294,40 +294,34 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     const newGrid = [...grid];
     newGrid[row][column].isBlackSquare = !currentValue;
     newGrid[row][column].value = "";
-    newGrid[row][column].style = null;
     newGrid[row][column].pencil = "";
-    newGrid[row][column].isRebus = false;
+    newGrid[row][column].isShaded = false;
+    newGrid[row][column].isCircle = false;
+
     if (symmetry) {
       const [symRow, symCol] = getSymmetricalCell(grid, row, column);
       newGrid[symRow][symCol].isBlackSquare = !currentValue;
       newGrid[symRow][symCol].value = "";
-      newGrid[symRow][symCol].style = null;
       newGrid[symRow][symCol].pencil = "";
       newGrid[symRow][symCol].isRebus = false;
+      newGrid[row][column].isShaded = false;
+      newGrid[row][column].isCircle = false;
     }
     const numberedGrid = assignClueNumbersToGrid(newGrid);
     setGrid(numberedGrid);
   };
 
   const toggleCircle = (row, column) => {
-    const currentValue = grid[row][column].style;
+    const currentValue = grid[row][column].isCircle;
     const newGrid = [...grid];
-    if (!currentValue) {
-      newGrid[row][column].style = "circled";
-    } else {
-      newGrid[row][column].style = null;
-    }
+    grid[row][column].isCircle = !currentValue;
     setGrid(newGrid);
   };
 
   const toggleShaded = (row, column) => {
-    const currentValue = grid[row][column].style;
+    const currentValue = grid[row][column].isShaded;
     const newGrid = [...grid];
-    if (!currentValue) {
-      newGrid[row][column].style = "marked";
-    } else {
-      newGrid[row][column].style = null;
-    }
+    grid[row][column].isShaded = !currentValue;
     setGrid(newGrid);
   };
 
