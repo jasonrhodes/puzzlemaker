@@ -543,7 +543,7 @@ input.inline-content-editable:focus {
 
 .current-clues .suggestions {
   overflow-y: scroll;
-  height: 250px;
+  height: 242px;
   border: 1px solid #777;
   border-width: 1px 0;
   overflow-x: visible;
@@ -594,6 +594,19 @@ input.inline-content-editable:focus {
 .current-clues .suggestions *:hover > .pbtip {
   top: 30px;
 }
+
+#all-clues.current-clues input {
+  font-size: 16px;
+}
+
+#all-clues.current-clues .suggestions .suggestion {
+  font-family: 'Roboto';
+}
+
+#all-clues.current-clues .suggestions {
+  height: 270px;
+}
+
 /* Hide mobile stuff on non-mobile */
 
 #keyboard,

@@ -31,18 +31,6 @@ const InfoTab = ({ puzzle }) => {
     } else if (key == "rotate") {
       puzzle.toggleDirection();
       return;
-    } else if (key == "zoom") {
-      puzzle.toggleZoom();
-    } else if (key == "backspace") {
-      if (puzzle.grid[activeRow][activeColumn].isBlackSquare === false) {
-        puzzle.updateCellValue(activeRow, activeColumn, "");
-      }
-      puzzle.rewindActiveCell();
-      return;
-    } else {
-      puzzle.updateCellValue(activeRow, activeColumn, key);
-      puzzle.advanceActiveCell();
-      return;
     }
   }
 
@@ -66,7 +54,7 @@ const InfoTab = ({ puzzle }) => {
       <a className="key" onClick={(e) => hitKey(e, "rotate")}>
         <RefreshCw size={18} />
       </a>
-      <i>Press Enter</i>
+      <i>Click or press Enter</i>
       <br />
       <a className="key" onClick={(e) => hitKey(e, "rebus")}>
         <span className="rebustext">REBUS</span>
