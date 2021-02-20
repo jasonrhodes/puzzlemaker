@@ -46,6 +46,9 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [clues, setClues] = React.useState({ across: {}, down: {} });
   const [downFilter, setDownFilter] = React.useState([]);
   const [acrossFilter, setAcrossFilter] = React.useState([]);
+  const [desktopView, setDesktopView] = React.useState(
+    window.innerWidth < 636 ? "current" : "info"
+  );
 
   const setActiveCell = ([row, column]) => {
     const [currentRow, currentColumn] = activeCell;
@@ -166,7 +169,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   // auto save the whole puzzle when main parts change
   React.useEffect(() => {
     savedPuzzleId && savePuzzle(savedPuzzleId);
-  }, [grid, words, author, title, clues, savedPuzzleId]);
+  }, [grid, words, author, title, clues, savedPuzzleId, desktopView]);
 
   // Update clues when the grid changes
   React.useEffect(() => {
@@ -204,6 +207,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setSavedPuzzleId(puzzleId);
       setWords(savedPuzzle.words);
       setActiveCell(savedPuzzle.activeCell);
+      setDesktopView(savedPuzzle.desktopView || "info");
     } else {
       setSavedPuzzleId(puzzleId);
     }
@@ -521,6 +525,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     clearPreviousActiveCellPencils,
     setZoomed,
     setDirection,
+    desktopView,
+    setDesktopView,
   };
 
   // TODO: Remove this

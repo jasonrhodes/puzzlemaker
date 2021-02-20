@@ -9,10 +9,6 @@ const InfoTab = require("./InfoTab");
 const SidebarMenu = require("./SidebarMenu");
 
 const Puzzle = () => {
-  const [desktopView, setDesktopView] = React.useState(
-    window.innerWidth < 636 ? "current" : "info"
-  );
-
   const gridSizeDesc = (length) => {
     if (length > 16) {
       return "largegrid";
@@ -60,12 +56,12 @@ const Puzzle = () => {
               </div>
               <div className="sb">
                 <SidebarMenu
-                  desktopView={desktopView}
-                  setDesktopView={setDesktopView}
+                  desktopView={puzzle.desktopView}
+                  setDesktopView={puzzle.setDesktopView}
                 />
-                {desktopView == "info" ? (
+                {puzzle.desktopView == "info" ? (
                   <InfoTab puzzle={puzzle} />
-                ) : desktopView == "current" ? (
+                ) : puzzle.desktopView == "current" ? (
                   <CurrentClues
                     across={puzzle.words.across}
                     down={puzzle.words.down}
