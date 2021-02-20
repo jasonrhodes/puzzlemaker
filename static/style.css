@@ -446,7 +446,7 @@ input.inline-content-editable:focus {
   display: flex;
   flex-direction: row;
   margin: -32px 0 10px 5px;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #ccc;
 }
 
 .sb-menu > .sb-menu-item {
@@ -455,7 +455,7 @@ input.inline-content-editable:focus {
   border-top-right-radius: 4px;
   background-color: #ccc;
   border: 1px solid #ccc;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #ccc;
   color: #777;
   margin: 0 3px -1px 3px;
   cursor: pointer;
@@ -468,12 +468,12 @@ input.inline-content-editable:focus {
 .sb-menu > .sb-menu-item:hover {
   background-color: #ddd;
   border: 1px solid #ddd;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #ddd;
   cursor: pointer;
 }
 
 .sb-menu > .sb-menu-item.active-tab {
-  border: 1px solid #777;
+  border: 1px solid #ccc;
   background-color: #fff;
   border-bottom: 2px solid #fff ;
   color: #333 !important;

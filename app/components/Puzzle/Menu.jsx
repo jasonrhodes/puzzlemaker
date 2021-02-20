@@ -1,11 +1,10 @@
 const React = require("react");
-const { Link } = require("react-router-dom");
 const { convertPuzzleToJSON, PuzWriter } = require("../../utils/export");
 const PDFLink = require("../PDF/Link");
 
 const { MirrorIcon } = require("@primer/octicons-react");
 
-const { Play, Printer, Download, Lock, Unlock } = require("react-feather");
+const { Printer, Download, Lock, Unlock } = require("react-feather");
 
 const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   const toggleLock = (e) => {
@@ -54,12 +53,6 @@ const PuzzleMenu = ({ puzzle }) => {
 
   return (
     <div className="menu">
-      <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId }}>
-        <Play size={18} />
-        <span className="pbtip stip">
-          <b>Play</b>
-        </span>
-      </Link>
       <PDFLink puzzle={puzzle}>
         <Printer size={18} />
         <span className="pbtip stip">
