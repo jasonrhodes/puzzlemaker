@@ -14,7 +14,7 @@ const SidebarMenu = ({ desktopView, setDesktopView }) => {
         }
         onClick={(e) => tabSwitch(e, "info")}
       >
-        <Info size={18} /> Info
+        <Info size={18} /> Controls
       </div>
       <div
         className={
