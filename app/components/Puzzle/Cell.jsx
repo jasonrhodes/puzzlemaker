@@ -29,7 +29,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       puzzle.setActiveCell([row, column]);
     }
     if (e.metaKey || e.ctrlKey) {
-      puzzle.clearAll(false);
+      puzzle.clearActiveCellPencils();
       puzzle.toggleBlackSquare(row, column);
     }
     if (e.altKey) {
@@ -51,7 +51,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     const currentCell = puzzle.grid[activeRow][activeColumn];
     e.preventDefault();
     if (e.key === ".") {
-      puzzle.clearAll(false);
+      puzzle.clearActiveCellPencils();
       puzzle.toggleBlackSquare(activeRow, activeColumn);
       return;
     }
@@ -115,6 +115,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       if (currentCell.isBlackSquare) {
         puzzle.toggleBlackSquare(activeRow, activeColumn);
         return;
+      } else {
+        puzzle.updateCellValue(activeRow, activeColumn, "");
       }
       // what to do when the current cell is a rebus?
     }

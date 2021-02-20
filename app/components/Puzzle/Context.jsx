@@ -28,6 +28,7 @@ function getSavedPuzzle(id) {
 
 const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const emptyWord = { range: [], word: "" };
+  const [ready, setReady] = React.useState(false);
   const [savedPuzzleId, setSavedPuzzleId] = React.useState(null);
   const [activeCell, _setActiveCell] = React.useState([]);
   const [prevActiveCell, setPrevActiveCell] = React.useState([]);
@@ -119,7 +120,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     const prev = getPreviousActiveCell();
 
     if (!active.clue || !prev.clue) {
-      clearAllPencils();
+      clearPreviousActiveCellPencils();
       return;
     }
 
@@ -139,7 +140,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       return;
     }
 
-    clearAllPencils(true);
+    clearPreviousActiveCellPencils();
   }, [activeCell]);
 
   // Handle previous active cell's rebus state on previous active cell change
@@ -186,6 +187,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   // Initial instantiation of the saved puzzle and/or the saved puzzle
   // id used to save the puzzle going forward
   React.useEffect(() => {
+    setReady(false);
     const savedPuzzle = getSavedPuzzle(puzzleId);
     if (savedPuzzle) {
       setTitle(savedPuzzle.title);
@@ -193,15 +195,13 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       const numberedGrid = assignClueNumbersToGrid(savedPuzzle.grid);
       setGrid(numberedGrid);
       setClues(savedPuzzle.clues);
-      setActiveCell(savedPuzzle.activeCell);
-      setDirection(savedPuzzle.direction);
-      setWords(savedPuzzle.words);
       setSymmetry(savedPuzzle.symmetry);
       setSavedPuzzleId(puzzleId);
-      clearAllPencils();
+      clearActiveCellPencils();
     } else {
       setSavedPuzzleId(puzzleId);
     }
+    setReady(true);
   }, [puzzleId]);
 
   const toggleDirection = () =>
@@ -269,7 +269,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       if (newGrid[row][column].pencil === value.toUpperCase()) {
         newGrid[row][column].pencil = "";
       } else if (newGrid[row][column].pencil) {
-        clearAllPencils(false);
+        clearActiveCellPencils();
       }
       if (!value && downFilter.length) {
         newGrid[row][column].pencil =
@@ -440,18 +440,25 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     window.localStorage.setItem(id, JSON.stringify(value));
   };
 
-  const clearAllPencils = (prev_flag) => {
-    pencilOut("down", false, prev_flag);
-    pencilOut("across", false, prev_flag);
+  const clearPreviousActiveCellPencils = () => {
+    pencilOut("down", false, true);
+    pencilOut("across", false, true);
+    setDownFilter([]);
+    setAcrossFilter([]);
+  };
+  const clearActiveCellPencils = () => {
+    pencilOut("down", false, false);
+    pencilOut("across", false, false);
     setDownFilter([]);
     setAcrossFilter([]);
   };
 
   const pencilOut = (direction, skip_flag, prev_flag) => {
-    const [row, column] = prev_flag ? prevActiveCell : activeCell;
-    if (!isValidTuple([row, column], "number")) {
+    const cell = prev_flag ? prevActiveCell : activeCell;
+    if (!isValidTuple(cell, "number")) {
       return;
     }
+    const [row, column] = cell;
     const newGrid = [...grid];
     const [rangeStart, rangeEnd] = words[direction].range;
     for (let i = rangeStart; i <= rangeEnd; i++) {
@@ -473,6 +480,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     words,
     grid,
     clues,
+    ready,
     symmetry,
     title,
     author,
@@ -509,30 +517,17 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     pencilOut,
     setDownFilter,
     setAcrossFilter,
-    clearAllPencils,
+    clearActiveCellPencils,
+    clearPreviousActiveCellPencils,
     setZoomed,
     setDirection,
   };
 
+  // TODO: Remove this
+  console.log("DEBUG", value);
+
   return (
-    <PuzzleContext.Provider value={value}>
-      {children}
-      <br />
-      <br />
-      <pre>
-        <code>downFilter: {JSON.stringify(downFilter)}</code>
-        <br />
-        <code>acrossFilter: {JSON.stringify(acrossFilter)}</code>
-        <br />
-        <code>
-          {JSON.stringify(getCluesForCell(activeCell[0], activeCell[1]))}
-        </code>
-        <br />
-        <code>{JSON.stringify({ clues })}</code>
-        <br />
-        <code>{JSON.stringify(value, null, 2)}</code>
-      </pre>
-    </PuzzleContext.Provider>
+    <PuzzleContext.Provider value={value}>{children}</PuzzleContext.Provider>
   );
 };
 
