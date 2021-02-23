@@ -10,7 +10,8 @@ module.exports = function initGrid({ rows, columns }) {
         rowIndex: i,
         columnIndex: j,
         clue: {},
-        style: null,
+        isCircle: false,
+        isShaded: false,
       });
     }
     grid.push(row);

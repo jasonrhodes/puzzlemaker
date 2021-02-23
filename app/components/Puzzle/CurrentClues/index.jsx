@@ -36,6 +36,11 @@ const CurrentClues = ({ across, down, puzzle }) => {
         downWord={down.word.toUpperCase()}
         puzzle={puzzle}
       />
+      {acrossNumber == "-" && downNumber == "-" ? (
+        <i>Select box to view suggestions...</i>
+      ) : (
+        ""
+      )}
       <div id="across" className={mobileView == "across" ? "activemobile" : ""}>
         {acrossNumber !== "-" ? (
           <React.Fragment>

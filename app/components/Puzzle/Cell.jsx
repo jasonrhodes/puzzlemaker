@@ -9,8 +9,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     "puzzle-cell-x": cell.isBlackSquare,
     active: activeRow === row && activeColumn === column,
     highlighted: !cell.isBlackSquare && puzzle.isCellInActiveWord(row, column),
-    marked: cell.style === "marked",
-    circled: cell.style === "circled",
+    marked: cell.isShaded,
+    circled: cell.isCircle,
     "disable-select": true,
   });
 
@@ -29,7 +29,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       puzzle.setActiveCell([row, column]);
     }
     if (e.metaKey || e.ctrlKey) {
-      puzzle.clearAll(false);
+      puzzle.clearActiveCellPencils();
       puzzle.toggleBlackSquare(row, column);
     }
     if (e.altKey) {
@@ -51,8 +51,9 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     const currentCell = puzzle.grid[activeRow][activeColumn];
     e.preventDefault();
     if (e.key === ".") {
-      puzzle.clearAll(false);
+      puzzle.clearActiveCellPencils();
       puzzle.toggleBlackSquare(activeRow, activeColumn);
+      puzzle.advanceActiveCell();
       return;
     }
     if (e.key === ";" || e.key === ",") {
@@ -61,6 +62,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     }
     if (e.key === "/" || e.key === "-") {
       puzzle.toggleShaded(activeRow, activeColumn);
+      puzzle.advanceActiveCell();
       return;
     }
     if (e.key === "Enter") {
@@ -115,6 +117,8 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
       if (currentCell.isBlackSquare) {
         puzzle.toggleBlackSquare(activeRow, activeColumn);
         return;
+      } else {
+        puzzle.updateCellValue(activeRow, activeColumn, "");
       }
       // what to do when the current cell is a rebus?
     }
@@ -149,7 +153,7 @@ const PuzzleCell = ({ cell, row, column, puzzle }) => {
     >
       <input className="puzzlefocus" readOnly="readonly" />
       <div className={inputClasses}>{cell.value.toUpperCase()}</div>
-      {cell.style === "circled" ? <div className="circle" /> : null}
+      {cell.isCircle ? <div className="circle" /> : null}
       {cell.pencil ? <div className="input pencil">{cell.pencil}</div> : null}
       {!cell.isBlackSquare && label ? (
         <div className="label">{label}</div>

@@ -1,18 +1,10 @@
 const React = require("react");
-const { Link } = require("react-router-dom");
 const { convertPuzzleToJSON, PuzWriter } = require("../../utils/export");
 const PDFLink = require("../PDF/Link");
 
 const { MirrorIcon } = require("@primer/octicons-react");
 
-const {
-  Info,
-  Play,
-  Printer,
-  Download,
-  Lock,
-  Unlock,
-} = require("react-feather");
+const { Printer, Download, Lock, Unlock } = require("react-feather");
 
 const SymmetryToggle = ({ symmetry, toggleSymmetry }) => {
   const toggleLock = (e) => {
@@ -61,12 +53,6 @@ const PuzzleMenu = ({ puzzle }) => {
 
   return (
     <div className="menu">
-      <Link to={{ pathname: "/play/" + puzzle.savedPuzzleId }}>
-        <Play size={18} />
-        <span className="pbtip stip">
-          <b>Play</b>
-        </span>
-      </Link>
       <PDFLink puzzle={puzzle}>
         <Printer size={18} />
         <span className="pbtip stip">
@@ -79,32 +65,6 @@ const PuzzleMenu = ({ puzzle }) => {
           <b>Download</b>
           <br />
           ...as .puz file
-        </span>
-      </a>
-      <a>
-        <Info size={18} />
-        <span className="pbtip">
-          <b>Info</b>
-          <br />
-          <i>Ctrl+click</i> to toggle black square
-          <br />
-          <i>Alt+click</i> to toggle circle
-          <br />
-          <i>Shift+click</i> to toggle shaded square
-          <br />
-          <i>Enter</i> to switch directions
-          <br />
-          <i>Tab</i> to move ahead
-          <br />
-          <i>Shift+Tab</i> to move back
-          <br />
-          <i>&quot;.&quot;</i> to toggle black square
-          <br />
-          <i>&quot;;&quot; or &quot;,&quot;</i> to toggle circle
-          <br />
-          <i>&quot;/&quot; or &quot;-&quot;</i> to toggle shaded square
-          <br />
-          <i>&quot;+&quot; or &quot;=&quot;</i> to toggle rebus cell
         </span>
       </a>
       <SymmetryToggle
