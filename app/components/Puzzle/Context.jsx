@@ -40,6 +40,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const numberedInitialGrid = assignClueNumbersToGrid(initialGrid);
   const [grid, setGrid] = React.useState(numberedInitialGrid);
   const [symmetry, setSymmetry] = React.useState(true);
+  const [gridLock, setGridLock] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
   const [zoomed, setZoomed] = React.useState("");
@@ -204,6 +205,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
       setGrid(numberedGrid);
       setClues(savedPuzzle.clues);
       setSymmetry(savedPuzzle.symmetry);
+      setGridLock(savedPuzzle.gridLock);
       setSavedPuzzleId(puzzleId);
       setWords(savedPuzzle.words);
       setActiveCell(savedPuzzle.activeCell);
@@ -218,6 +220,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setDirection(direction === "across" ? "down" : "across");
 
   const toggleSymmetry = () => setSymmetry(!symmetry);
+
+  const toggleGridLock = () => setGridLock(!gridLock);
 
   const toggleZoom = () => {
     if (zoomed == "zoomed") {
@@ -294,6 +298,10 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   };
 
   const toggleBlackSquare = (row, column) => {
+    if (gridLock) {
+      return;
+    }
+
     const currentValue = grid[row][column].isBlackSquare;
     const newGrid = [...grid];
     newGrid[row][column].isBlackSquare = !currentValue;
@@ -486,6 +494,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     clues,
     ready,
     symmetry,
+    gridLock,
     title,
     author,
     downFilter,
@@ -502,6 +511,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     savePuzzle,
     updateCellValue,
     toggleSymmetry,
+    toggleGridLock,
     toggleBlackSquare,
     toggleCircle,
     toggleShaded,
@@ -518,6 +528,7 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     setTitle,
     setAuthor,
     setClue,
+    setClues,
     pencilOut,
     setDownFilter,
     setAcrossFilter,

@@ -1,7 +1,8 @@
 const React = require("react");
 const { SquareFillIcon } = require("@primer/octicons-react");
-const { RefreshCw, Circle } = require("react-feather");
+const { RefreshCw, Circle, Lock, Unlock, Rewind } = require("react-feather");
 const { focusOnActive } = require("../../utils/style");
+const { clearWhiteCells } = require("../../utils/clearWhiteCells");
 
 const InfoTab = ({ puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
@@ -27,6 +28,10 @@ const InfoTab = ({ puzzle }) => {
       puzzle.toggleRebus(activeRow, activeColumn);
     } else if (key == "rotate") {
       puzzle.toggleDirection();
+    } else if (key == "lockGrid") {
+      puzzle.toggleGridLock();
+    } else if (key == "clear") {
+      clearWhiteCells(puzzle);
     }
     focusOnActive();
     return;
@@ -59,9 +64,31 @@ const InfoTab = ({ puzzle }) => {
       </a>
       <i>Press &quot;+&quot; or &quot;=&quot;</i>
       <br />
+      <br />
       <i>Tab</i> to move to next clue
       <br />
       <i>Shift+Tab</i> to move to previous clue
+      <br />
+      <br />
+      <a className="key" onClick={(e) => hitKey(e, "lockGrid")}>
+        {puzzle.gridLock ? (
+          <Lock size={18} style={{ color: "red" }} />
+        ) : (
+          <Unlock size={18} style={{ color: "green" }} />
+        )}
+      </a>
+      <i>
+        {puzzle.gridLock
+          ? "Grid locked (cannot change black cells)"
+          : "Grid unlocked (black cells editable)"}
+      </i>
+      <br />
+      <a className="key" onClick={(e) => hitKey(e, "clear")}>
+        <Rewind size={18} />
+      </a>
+      <i>
+        Clear <b>all</b> white cells and clues
+      </i>
       <br />
     </div>
   );
