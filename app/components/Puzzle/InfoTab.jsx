@@ -6,8 +6,10 @@ const { clearWhiteCells } = require("../../utils/clearWhiteCells");
 
 const InfoTab = ({ puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
+  const [confirmClear, setConfirmClear] = React.useState(false);
 
   function hitKey(e, key) {
+    setConfirmClear(false);
     e.stopPropagation();
     if (!activeRow && !activeColumn) {
       return false;
@@ -28,12 +30,27 @@ const InfoTab = ({ puzzle }) => {
       puzzle.toggleRebus(activeRow, activeColumn);
     } else if (key == "rotate") {
       puzzle.toggleDirection();
-    } else if (key == "lockGrid") {
-      puzzle.toggleGridLock();
-    } else if (key == "clear") {
-      clearWhiteCells(puzzle);
     }
     focusOnActive();
+    return;
+  }
+
+  function generalControl(e, key) {
+    e.stopPropagation();
+    if (key == "lockGrid") {
+      setConfirmClear(false);
+      puzzle.toggleGridLock();
+    } else if (key == "clear") {
+      if (!confirmClear) {
+        setConfirmClear(true);
+      } else {
+        clearWhiteCells(puzzle);
+        setConfirmClear(false);
+      }
+    }
+    if (activeRow && activeColumn) {
+      focusOnActive();
+    }
     return;
   }
 
@@ -70,7 +87,7 @@ const InfoTab = ({ puzzle }) => {
       <i>Shift+Tab</i> to move to previous clue
       <br />
       <br />
-      <a className="key" onClick={(e) => hitKey(e, "lockGrid")}>
+      <a className="key" onClick={(e) => generalControl(e, "lockGrid")}>
         {puzzle.gridLock ? (
           <Lock size={18} style={{ color: "red" }} />
         ) : (
@@ -83,11 +100,20 @@ const InfoTab = ({ puzzle }) => {
           : "Grid unlocked (black cells editable)"}
       </i>
       <br />
-      <a className="key" onClick={(e) => hitKey(e, "clear")}>
+      <a className="key" onClick={(e) => generalControl(e, "clear")}>
         <Rewind size={18} />
       </a>
       <i>
-        Clear <b>all</b> white cells and clues
+        {!confirmClear ? (
+          <span>
+            Clear <b>all</b> white cells and clues
+          </span>
+        ) : (
+          <React.Fragment>
+            <span style={{ color: "red" }}>Confirm deletion </span>
+            <a onClick={() => setConfirmClear(false)}>(Abort)</a>
+          </React.Fragment>
+        )}
       </i>
       <br />
     </div>
