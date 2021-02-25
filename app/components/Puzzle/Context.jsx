@@ -1,6 +1,7 @@
 const React = require("react");
 const PuzzleContext = React.createContext();
 const { assignClueNumbersToGrid } = require("../../utils/clues");
+const { gridScore } = require("../../utils/gridScore");
 const getSymmetricalCell = require("../../utils/getSymmetricalCell");
 const { findAcross, findDown } = require("../../utils/currentWordFinders");
 const {
@@ -43,6 +44,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   const [gridLock, setGridLock] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [author, setAuthor] = React.useState("");
+  const [notes, setNotes] = React.useState("");
+  const [copyright, setCopyright] = React.useState("");
   const [zoomed, setZoomed] = React.useState("");
   const [clues, setClues] = React.useState({ across: {}, down: {} });
   const [downFilter, setDownFilter] = React.useState([]);
@@ -170,7 +173,17 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
   // auto save the whole puzzle when main parts change
   React.useEffect(() => {
     savedPuzzleId && savePuzzle(savedPuzzleId);
-  }, [grid, words, author, title, clues, savedPuzzleId, desktopView]);
+  }, [
+    grid,
+    words,
+    author,
+    notes,
+    copyright,
+    title,
+    clues,
+    savedPuzzleId,
+    desktopView,
+  ]);
 
   // Update clues when the grid changes
   React.useEffect(() => {
@@ -201,6 +214,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     if (savedPuzzle) {
       setTitle(savedPuzzle.title);
       setAuthor(savedPuzzle.author);
+      setNotes(savedPuzzle.notes);
+      setCopyright(savedPuzzle.copyright);
       const numberedGrid = assignClueNumbersToGrid(savedPuzzle.grid);
       setGrid(numberedGrid);
       setClues(savedPuzzle.clues);
@@ -321,6 +336,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     }
     const numberedGrid = assignClueNumbersToGrid(newGrid);
     setGrid(numberedGrid);
+
+    console.log("DEBUG gridScore", gridScore(numberedGrid));
   };
 
   const toggleCircle = (row, column) => {
@@ -497,6 +514,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     gridLock,
     title,
     author,
+    notes,
+    copyright,
     downFilter,
     acrossFilter,
     savedPuzzleId,
@@ -527,6 +546,8 @@ const PuzzleContextProvider = ({ initialGrid, puzzleId, children }) => {
     rewindActiveClue,
     setTitle,
     setAuthor,
+    setNotes,
+    setCopyright,
     setClue,
     setClues,
     pencilOut,

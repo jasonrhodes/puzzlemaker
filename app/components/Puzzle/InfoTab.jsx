@@ -1,15 +1,25 @@
 const React = require("react");
 const { SquareFillIcon } = require("@primer/octicons-react");
-const { RefreshCw, Circle, Lock, Unlock, Rewind } = require("react-feather");
+const {
+  RefreshCw,
+  Circle,
+  Lock,
+  Unlock,
+  Rewind,
+  Zap,
+} = require("react-feather");
 const { focusOnActive } = require("../../utils/style");
-const { clearWhiteCells } = require("../../utils/clearWhiteCells");
+const { clearWhiteCells, checkEmpty } = require("../../utils/clearWhiteCells");
+const { generateGrid } = require("../../utils/gridScore");
 
 const InfoTab = ({ puzzle }) => {
   const [activeRow, activeColumn] = puzzle.activeCell;
   const [confirmClear, setConfirmClear] = React.useState(false);
+  const [confirmGenerate, setConfirmGenerate] = React.useState(false);
 
   function hitKey(e, key) {
     setConfirmClear(false);
+    setConfirmGenerate(false);
     e.stopPropagation();
     if (!activeRow && !activeColumn) {
       return false;
@@ -39,13 +49,21 @@ const InfoTab = ({ puzzle }) => {
     e.stopPropagation();
     if (key == "lockGrid") {
       setConfirmClear(false);
+      setConfirmGenerate(false);
       puzzle.toggleGridLock();
     } else if (key == "clear") {
-      if (!confirmClear) {
+      if (!confirmClear && !checkEmpty(puzzle)) {
         setConfirmClear(true);
       } else {
         clearWhiteCells(puzzle);
         setConfirmClear(false);
+      }
+    } else if (key == "generate" && !puzzle.gridLock) {
+      if (!confirmGenerate && !checkEmpty(puzzle)) {
+        setConfirmGenerate(true);
+      } else {
+        generateGrid(puzzle);
+        setConfirmGenerate(false);
       }
     }
     if (activeRow && activeColumn) {
@@ -116,6 +134,19 @@ const InfoTab = ({ puzzle }) => {
         )}
       </i>
       <br />
+      <a className="key" onClick={(e) => generalControl(e, "generate")}>
+        <Zap size={18} />
+      </a>
+      <i>
+        {!confirmGenerate ? (
+          <span>Generate random grid</span>
+        ) : (
+          <React.Fragment>
+            <span style={{ color: "red" }}>Confirm grid generation </span>
+            <a onClick={() => setConfirmGenerate(false)}>(Abort)</a>
+          </React.Fragment>
+        )}
+      </i>
     </div>
   );
 };
