@@ -3,6 +3,8 @@ function convertPuzzleToJSON(puzzle) {
   let puz = {
     author: puzzle.author,
     title: puzzle.title,
+    notepad: puzzle.notes,
+    copyright: puzzle.copyright,
     size: {
       rows: puzzle.grid.length,
       cols: puzzle.grid[0].length,

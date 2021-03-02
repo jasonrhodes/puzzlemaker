@@ -3,6 +3,7 @@ const Row = require("./Row");
 const Menu = require("./Menu");
 const { PuzzleContext } = require("./Context");
 const Title = require("./Title");
+const Notes = require("./Notes");
 const CurrentClues = require("./CurrentClues");
 const AllClues = require("./AllClues");
 const InfoTab = require("./InfoTab");
@@ -75,6 +76,18 @@ const Puzzle = () => {
                   />
                 )}
               </div>
+            </div>
+
+            <div
+              className="infomenublock"
+              style={{ maxWidth: puzzle.grid[0].length * 40 + 15 + "px" }}
+            >
+              <Notes
+                notes={puzzle.notes}
+                copyright={puzzle.copyright}
+                setNotes={puzzle.setNotes}
+                setCopyright={puzzle.setCopyright}
+              />
             </div>
           </div>
         )
