@@ -24,7 +24,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "classnames": "^2.2.6",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "jsx-loader": "^0.13.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
